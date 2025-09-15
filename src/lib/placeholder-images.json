@@ -1,3 +1,46 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "seeds",
+      "description": "High-yield wheat seeds",
+      "imageUrl": "https://picsum.photos/seed/seeds/400/300",
+      "imageHint": "seeds packet"
+    },
+    {
+      "id": "fertilizer",
+      "description": "Nitrogen-rich fertilizer",
+      "imageUrl": "https://picsum.photos/seed/fertilizer/400/300",
+      "imageHint": "fertilizer bag"
+    },
+    {
+      "id": "pesticide",
+      "description": "Organic pesticide spray",
+      "imageUrl": "https://picsum.photos/seed/pesticide/400/300",
+      "imageHint": "pesticide spray"
+    },
+    {
+      "id": "trowel",
+      "description": "Durable garden trowel",
+      "imageUrl": "https://picsum.photos/seed/trowel/400/300",
+      "imageHint": "garden trowel"
+    },
+    {
+      "id": "wateringcan",
+      "description": "Large watering can",
+      "imageUrl": "https://picsum.photos/seed/wateringcan/400/300",
+      "imageHint": "watering can"
+    },
+    {
+      "id": "gloves",
+      "description": "Protective gardening gloves",
+      "imageUrl": "https://picsum.photos/seed/gloves/400/300",
+      "imageHint": "gardening gloves"
+    },
+    {
+      "id": "hero",
+      "description": "Lush green farm field",
+      "imageUrl": "https://picsum.photos/seed/hero/1200/600",
+      "imageHint": "farm field"
+    }
+  ]
 }
