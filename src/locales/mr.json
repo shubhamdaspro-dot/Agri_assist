@@ -81,7 +81,11 @@
         "results_products": "शिफारस केलेली उत्पादने",
         "share_message": "ऍग्रीअसिस्ट AI शिफारस:\n\nपीक: {crop}\nBegründung: {rationale}\nशिफारस केलेली उत्पादने: {products}",
         "toast_sharing_title": "शिफारस शेअर करत आहे",
-        "toast_sharing_description": "{platform} उघडून शिफारस शेअर करत आहे."
+        "toast_sharing_description": "{platform} उघडून शिफारस शेअर करत आहे.",
+        "toast_phone_missing_title": "फोन नंबर सापडला नाही",
+        "toast_phone_missing_description": "शिफारस शेअर करण्यासाठी तुमचा फोन नंबर सापडला नाही.",
+        "share_sms_title": "SMS द्वारे शेअर करा",
+        "share_whatsapp_title": "WhatsApp द्वारे शेअर करा"
     },
     "products": {
         "page_title": "उत्पादन बाजारपेठ",

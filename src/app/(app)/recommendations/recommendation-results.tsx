@@ -2,11 +2,12 @@
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, ShoppingCart, Share2, MessageSquare, Smartphone } from 'lucide-react';
+import { CheckCircle, ShoppingCart, MessageSquare, Smartphone } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
 import { products } from '@/lib/data';
 import { useLanguage } from '@/hooks/use-language';
 import { useToast } from '@/hooks/use-toast';
+import { useAuth } from '@/hooks/use-auth';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
@@ -16,6 +17,7 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
   const { addToCart } = useCart();
   const { t } = useLanguage();
   const { toast } = useToast();
+  const { user } = useAuth();
   const recommendedProductsList = results.recommendedProducts.split(',').map(p => p.trim());
 
   const handleAddToCart = (productName: string) => {
@@ -43,13 +45,25 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
   });
 
   const handleShare = (platform: 'sms' | 'whatsapp') => {
+    const phoneNumber = user?.phoneNumber;
+    if (!phoneNumber) {
+        toast({
+            variant: 'destructive',
+            title: t('recommendations.toast_phone_missing_title'),
+            description: t('recommendations.toast_phone_missing_description'),
+        });
+        return;
+    }
+
     const encodedMessage = encodeURIComponent(shareMessage);
     let url = '';
     if (platform === 'sms') {
       // Note: This works best on mobile devices
-      url = `sms:?body=${encodedMessage}`;
+      url = `sms:${phoneNumber}?body=${encodedMessage}`;
     } else {
-      url = `https://wa.me/?text=${encodedMessage}`;
+      // The phone number needs to be in international format without '+' or '00'
+      const whatsappNumber = phoneNumber.startsWith('+') ? phoneNumber.substring(1) : phoneNumber;
+      url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     }
     window.open(url, '_blank');
     toast({
@@ -69,12 +83,12 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
             <CardDescription>{t('recommendations.results_subtitle')}</CardDescription>
         </div>
         <div className="flex gap-2">
-            <Button variant="outline" size="icon" onClick={() => handleShare('sms')}>
+            <Button variant="outline" size="icon" onClick={() => handleShare('sms')} title={t('recommendations.share_sms_title')}>
                 <Smartphone className="h-5 w-5" />
                 <span className="sr-only">Share via SMS</span>
             </Button>
-            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')}>
-                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')} title={t('recommendations.share_whatsapp_title')}>
+                 <MessageSquare className="h-5 w-5" />
                  <span className="sr-only">Share via WhatsApp</span>
             </Button>
         </div>

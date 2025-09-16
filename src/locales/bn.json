@@ -81,11 +81,15 @@
         "results_products": "প্রস্তাবিত পণ্য",
         "share_message": "এগ্রিঅ্যাসিস্ট এআই সুপারিশ:\n\nফসল: {crop}\nযুক্তিসঙ্গত কারণ: {rationale}\nপ্রস্তাবিত পণ্য: {products}",
         "toast_sharing_title": "সুপারিশ শেয়ার করা হচ্ছে",
-        "toast_sharing_description": "{platform} খুলে সুপারিশ শেয়ার করা হচ্ছে।"
+        "toast_sharing_description": "{platform} খুলে সুপারিশ শেয়ার করা হচ্ছে।",
+        "toast_phone_missing_title": "ফোন নম্বর পাওয়া যায়নি",
+        "toast_phone_missing_description": "সুপারিশ শেয়ার করার জন্য আপনার ফোন নম্বর পাওয়া যায়নি।",
+        "share_sms_title": "এসএমএস এর মাধ্যমে শেয়ার করুন",
+        "share_whatsapp_title": "হোয়াটসঅ্যাপের মাধ্যমে শেয়ার করুন"
     },
     "products": {
         "page_title": "পণ্য বাজার",
-        "page_subtitle": "আমাদের উচ্চ-মানের কৃষি পণ্যের কিউরেটেড নির্বাচন ব্রাউज করুন।"
+        "page_subtitle": "আমাদের উচ্চ-মানের কৃষি পণ্যের কিউরেটেড নির্বাচন ব্রাউজ করুন।"
     },
     "news": {
         "page_title": "कृষি খবর ও আপডেট",

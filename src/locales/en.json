@@ -81,7 +81,11 @@
         "results_products": "Recommended Products",
         "share_message": "AgriAssist AI Recommendation:\n\nCrop: {crop}\nRationale: {rationale}\nRecommended Products: {products}",
         "toast_sharing_title": "Sharing Recommendation",
-        "toast_sharing_description": "Opening {platform} to share the recommendation."
+        "toast_sharing_description": "Opening {platform} to share the recommendation.",
+        "toast_phone_missing_title": "Phone Number Not Found",
+        "toast_phone_missing_description": "Could not find your phone number to share the recommendation.",
+        "share_sms_title": "Share via SMS",
+        "share_whatsapp_title": "Share via WhatsApp"
     },
     "products": {
         "page_title": "Product Marketplace",

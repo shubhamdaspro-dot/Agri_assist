@@ -81,7 +81,11 @@
         "results_products": "பரிந்துரைக்கப்பட்ட தயாரிப்புகள்",
         "share_message": "அக்ரிஅசிஸ்ட் AI பரிந்துரை:\n\nபயிர்: {crop}\nBegründung: {rationale}\nபரிந்துரைக்கப்பட்ட தயாரிப்புகள்: {products}",
         "toast_sharing_title": "பரிந்துரையைப் பகிர்தல்",
-        "toast_sharing_description": "{platform} ஐத் திறந்து பரிந்துரையைப் பகிர்கிறது."
+        "toast_sharing_description": "{platform} ஐத் திறந்து பரிந்துரையைப் பகிர்கிறது.",
+        "toast_phone_missing_title": "தொலைபேசி எண் கிடைக்கவில்லை",
+        "toast_phone_missing_description": "பரிந்துரையைப் பகிர உங்கள் தொலைபேசி எண் கிடைக்கவில்லை.",
+        "share_sms_title": "SMS மூலம் பகிரவும்",
+        "share_whatsapp_title": "WhatsApp மூலம் பகிரவும்"
     },
     "products": {
         "page_title": "தயாரிப்பு சந்தை",
@@ -141,5 +145,3 @@
         "change_number_button": "தொலைபேசி எண்ணை மாற்றவும்"
     }
 }
-
-    

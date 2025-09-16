@@ -81,7 +81,11 @@
         "results_products": "अनुशंसित उत्पाद",
         "share_message": "एग्रीअसिस्ट AI सिफारिश:\n\nफसल: {crop}\nतर्क: {rationale}\nअनुशंसित उत्पाद: {products}",
         "toast_sharing_title": "सिफारिश साझा करना",
-        "toast_sharing_description": "{platform} खोलकर सिफारिश साझा की जा रही है।"
+        "toast_sharing_description": "{platform} खोलकर सिफारिश साझा की जा रही है।",
+        "toast_phone_missing_title": "फ़ोन नंबर नहीं मिला",
+        "toast_phone_missing_description": "सिफारिश साझा करने के लिए आपका फ़ोन नंबर नहीं मिल सका।",
+        "share_sms_title": "SMS के माध्यम से साझा करें",
+        "share_whatsapp_title": "WhatsApp के माध्यम से साझा करें"
     },
     "products": {
         "page_title": "उत्पाद बाज़ार",
