@@ -1,13 +1,44 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RecommendationForm } from './recommendation-form';
 import { RecommendationResults } from './recommendation-results';
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useToast } from '@/hooks/use-toast';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { MapPin } from 'lucide-react';
 
 export default function RecommendationsPage() {
   const [results, setResults] = useState<GenerateCropRecommendationsOutput | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [locationError, setLocationError] = useState<string | null>(null);
+  const { toast } = useToast();
+
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+          toast({
+            title: "Location Accessed",
+            description: "Your location will be used to auto-fill form details.",
+          })
+        },
+        (error) => {
+          setLocationError("Could not access location. Please enter your details manually.");
+          console.error("Geolocation error:", error);
+        }
+      );
+    } else {
+      setLocationError("Geolocation is not supported by this browser.");
+    }
+  }, [toast]);
+
 
   return (
     <div className="space-y-8">
@@ -18,10 +49,23 @@ export default function RecommendationsPage() {
         </p>
       </div>
 
-      <RecommendationForm setResults={setResults} setIsLoading={setIsLoading} isLoading={isLoading} />
+      {locationError && (
+        <Alert variant="destructive">
+          <MapPin className="h-4 w-4" />
+          <AlertTitle>Location Error</AlertTitle>
+          <AlertDescription>{locationError}</AlertDescription>
+        </Alert>
+      )}
+
+      <RecommendationForm 
+        setResults={setResults} 
+        setIsLoading={setIsLoading} 
+        isLoading={isLoading}
+        location={location}
+      />
 
       {isLoading && <LoadingSkeleton />}
-      {results && <RecommendationResults results={results} />}
+      {results && !isLoading && <RecommendationResults results={results} />}
     </div>
   );
 }
@@ -29,13 +73,55 @@ export default function RecommendationsPage() {
 function LoadingSkeleton() {
   return (
     <div className="mt-8 space-y-6">
-      <Skeleton className="h-10 w-1/3" />
-      <Skeleton className="h-6 w-full" />
-      <Skeleton className="h-6 w-3/4" />
-      <div className="space-y-4 pt-4">
-        <Skeleton className="h-12 w-full" />
-        <Skeleton className="h-12 w-full" />
-      </div>
+        <Card>
+            <CardHeader>
+                <CardTitle>
+                    <Skeleton className="h-8 w-1/4" />
+                </CardTitle>
+                <CardDescription>
+                    <Skeleton className="h-4 w-1/2" />
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+                <div>
+                    <Skeleton className="h-6 w-1/3 mb-2" />
+                    <Skeleton className="h-8 w-1/2" />
+                </div>
+                <div>
+                    <Skeleton className="h-6 w-1/3 mb-2" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-5/6 mt-2" />
+                </div>
+                <div>
+                    <Skeleton className="h-6 w-1/3 mb-2" />
+                    <div className="space-y-2">
+                        <Skeleton className="h-12 w-full" />
+                        <Skeleton className="h-12 w-full" />
+                    </div>
+                </div>
+            </CardContent>
+        </Card>
     </div>
   )
 }
+
+function Card({ children }: { children: React.ReactNode }) {
+    return <div className="border bg-card text-card-foreground shadow-sm rounded-lg">{children}</div>
+}
+
+function CardHeader({ children }: { children: React.ReactNode }) {
+    return <div className="flex flex-col space-y-1.5 p-6">{children}</div>
+}
+
+function CardTitle({ children }: { children: React.ReactNode }) {
+    return <div className="text-2xl font-semibold leading-none tracking-tight">{children}</div>
+}
+
+function CardDescription({ children }: { children: React.ReactNode }) {
+    return <div className="text-sm text-muted-foreground">{children}</div>
+}
+
+function CardContent({ children }: { children: React.ReactNode }) {
+    return <div className="p-6 pt-0">{children}</div>
+}
+

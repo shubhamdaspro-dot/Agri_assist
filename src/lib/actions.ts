@@ -1,6 +1,7 @@
 'use server';
 
 import { generateCropRecommendations, GenerateCropRecommendationsInput, GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
+import { analyzeSoilFromPhoto, AnalyzeSoilFromPhotoInput, AnalyzeSoilFromPhotoOutput } from '@/ai/flows/analyze-soil-from-photo';
 import { ai } from '@/ai/genkit';
 import wav from 'wav';
 import { z } from 'zod';
@@ -17,6 +18,19 @@ export async function getCropRecommendations(
     return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
   }
 }
+
+export async function analyzeSoilFromPhotoAction(
+  input: AnalyzeSoilFromPhotoInput
+): Promise<{ success: boolean; data: AnalyzeSoilFromPhotoOutput | null; error?: string }> {
+  try {
+    const result = await analyzeSoilFromPhoto(input);
+    return { success: true, data: result };
+  } catch (e: any) {
+    console.error(e);
+    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+  }
+}
+
 
 async function toWav(
   pcmData: Buffer,
