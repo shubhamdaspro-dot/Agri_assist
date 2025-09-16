@@ -18,10 +18,14 @@ export default function RecommendationsPage() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const { toast } = useToast();
   const { t } = useLanguage();
-
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (navigator.geolocation) {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (isClient && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLocation({
@@ -38,10 +42,10 @@ export default function RecommendationsPage() {
           console.error(`Geolocation error: ${error.message} (Code: ${error.code})`);
         }
       );
-    } else {
+    } else if (isClient) {
       setLocationError(t('recommendations.location_error_unsupported'));
     }
-  }, [toast, t]);
+  }, [isClient, toast, t]);
 
 
   return (
