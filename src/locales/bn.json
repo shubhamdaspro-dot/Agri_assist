@@ -78,13 +78,16 @@
         "results_crop": "প্রস্তাবিত ফসল",
         "results_rationale": "যুক্তিসঙ্গত কারণ",
         "results_products": "প্রস্তাবিত পণ্য",
+        "share_title": "সুপারিশ শেয়ার করুন",
+        "share_subtitle": "SMS বা WhatsApp এর মাধ্যমে সুপারিশ পাঠাতে একটি ফোন নম্বর লিখুন।",
         "share_message": "এগ্রিঅ্যাসিস্ট এআই সুপারিশ:\n\nফসল: {crop}\nযুক্তিসঙ্গত কারণ: {rationale}\nপ্রস্তাবিত পণ্য: {products}",
-        "toast_sharing_title": "সুপারিশ শেয়ার করা হচ্ছে",
-        "toast_sharing_description": "{platform} খুলে সুপারিশ শেয়ার করা হচ্ছে।",
-        "toast_phone_missing_title": "ফোন নম্বর পাওয়া যায়নি",
-        "toast_phone_missing_description": "সুপারিশ শেয়ার করার জন্য আপনার ফোন নম্বর পাওয়া যায়নি।",
-        "share_sms_title": "এসএমএস এর মাধ্যমে শেয়ার করুন",
-        "share_whatsapp_title": "হোয়াটসঅ্যাপের মাধ্যমে শেয়ার করুন"
+        "toast_sharing_title": "সুপারিশ পাঠানো হয়েছে",
+        "toast_sharing_description": "সুপারিশ {platform}-এ পাঠানো হয়েছে।",
+        "toast_phone_missing_title": "ফোন নম্বর প্রয়োজন",
+        "toast_phone_missing_description": "সুপারিশ শেয়ার করার জন্য অনুগ্রহ করে একটি ফোন নম্বর লিখুন।",
+        "share_sms_title": "এসএমএস এর মাধ্যমে পাঠান",
+        "share_whatsapp_title": "হোয়াটসঅ্যাপের মাধ্যমে পাঠান",
+        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
     },
     "products": {
         "page_title": "পণ্য বাজার",

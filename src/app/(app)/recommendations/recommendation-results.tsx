@@ -1,8 +1,8 @@
 'use client';
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, ShoppingCart, MessageSquare, Smartphone } from 'lucide-react';
+import { CheckCircle, ShoppingCart, MessageSquare, Smartphone, RefreshCw } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
 import { products } from '@/lib/data';
 import { useLanguage } from '@/hooks/use-language';
@@ -12,13 +12,15 @@ import { Input } from '@/components/ui/input';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
+  onNewRecommendation: () => void;
 };
 
-export function RecommendationResults({ results }: RecommendationResultsProps) {
+export function RecommendationResults({ results, onNewRecommendation }: RecommendationResultsProps) {
   const { addToCart } = useCart();
   const { t } = useLanguage();
   const { toast } = useToast();
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [isSent, setIsSent] = useState(false);
 
   const recommendedProductsList = results.recommendedProducts.split(',').map(p => p.trim());
 
@@ -68,6 +70,7 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
       url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     }
     window.open(url, '_blank');
+    setIsSent(true);
     toast({
         title: t('recommendations.toast_sharing_title'),
         description: t('recommendations.toast_sharing_description', { platform: platform.toUpperCase() })
@@ -118,18 +121,28 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               className="max-w-xs"
+              disabled={isSent}
             />
-            <Button variant="outline" size="icon" onClick={() => handleShare('sms')} title={t('recommendations.share_sms_title')}>
+            <Button variant="outline" size="icon" onClick={() => handleShare('sms')} title={t('recommendations.share_sms_title')} disabled={isSent}>
                 <Smartphone className="h-5 w-5" />
                 <span className="sr-only">Share via SMS</span>
             </Button>
-            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')} title={t('recommendations.share_whatsapp_title')}>
+            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')} title={t('recommendations.share_whatsapp_title')} disabled={isSent}>
                  <MessageSquare className="h-5 w-5" />
                  <span className="sr-only">Share via WhatsApp</span>
             </Button>
           </div>
         </div>
       </CardContent>
+      {isSent && (
+        <CardFooter>
+            <Button onClick={onNewRecommendation} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+                <RefreshCw className="mr-2 h-4 w-4" />
+                {t('recommendations.new_recommendation_button')}
+            </Button>
+        </CardFooter>
+      )}
     </Card>
   );
 }
+

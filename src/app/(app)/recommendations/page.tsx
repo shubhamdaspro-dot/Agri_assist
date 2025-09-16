@@ -44,6 +44,9 @@ export default function RecommendationsPage() {
     }
   }, [isClient, toast, t]);
 
+  const handleNewRecommendation = () => {
+    setResults(null);
+  };
 
   return (
     <div className="space-y-8">
@@ -63,17 +66,19 @@ export default function RecommendationsPage() {
       )}
 
       {isClient ? (
-        <RecommendationForm 
-            setResults={setResults} 
-            setIsLoading={setIsLoading} 
-            isLoading={isLoading}
-            location={location}
-        />
+        !results && !isLoading && (
+            <RecommendationForm 
+                setResults={setResults} 
+                setIsLoading={setIsLoading} 
+                isLoading={isLoading}
+                location={location}
+            />
+        )
       ) : (
         <FormSkeleton />
       )}
 
-      {isLoading ? <LoadingSkeleton /> : results ? <RecommendationResults results={results} /> : null}
+      {isLoading ? <LoadingSkeleton /> : results ? <RecommendationResults results={results} onNewRecommendation={handleNewRecommendation} /> : null}
     </div>
   );
 }

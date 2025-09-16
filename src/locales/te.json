@@ -78,13 +78,16 @@
         "results_crop": "సిఫార్సు చేయబడిన పంట",
         "results_rationale": "కారణం",
         "results_products": "సిఫార్సు చేయబడిన ఉత్పత్తులు",
+        "share_title": "సిఫార్సును పంచుకోండి",
+        "share_subtitle": "సిఫార్సును SMS లేదా WhatsApp ద్వారా పంపడానికి ఫోన్ నంబర్‌ను నమోదు చేయండి.",
         "share_message": "అగ్రిఅసిస్ట్ AI సిఫార్సు:\n\nపంట: {crop}\nకారణం: {rationale}\nసిఫార్సు చేయబడిన ఉత్పత్తులు: {products}",
-        "toast_sharing_title": "సిఫార్సును పంచుకోవడం",
-        "toast_sharing_description": "{platform}ని తెరిచి సిఫార్సును పంచుతోంది.",
-        "toast_phone_missing_title": "ఫోన్ నంబర్ కనుగొనబడలేదు",
-        "toast_phone_missing_description": "సిఫార్సును పంచుకోవడానికి మీ ఫోన్ నంబర్ కనుగొనబడలేదు.",
-        "share_sms_title": "SMS ద్వారా పంచుకోండి",
-        "share_whatsapp_title": "WhatsApp ద్వారా పంచుకోండి"
+        "toast_sharing_title": "సిఫార్సు పంపబడింది",
+        "toast_sharing_description": "సిఫార్సు {platform}కు పంపబడింది.",
+        "toast_phone_missing_title": "ఫోన్ నంబర్ అవసరం",
+        "toast_phone_missing_description": "సిఫార్సును పంచుకోవడానికి దయచేసి ఫోన్ నంబర్‌ను నమోదు చేయండి.",
+        "share_sms_title": "SMS ద్వారా పంపండి",
+        "share_whatsapp_title": "WhatsApp ద్వారా పంపండి",
+        "new_recommendation_button": "కొత్త సిఫార్సును ప్రారంభించండి"
     },
     "products": {
         "page_title": "ఉత్పత్తి మార్కెట్‌ప్లేస్",

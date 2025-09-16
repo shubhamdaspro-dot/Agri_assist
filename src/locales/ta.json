@@ -79,13 +79,16 @@
         "results_crop": "பரிந்துரைக்கப்பட்ட பயிர்",
         "results_rationale": "காரணம்",
         "results_products": "பரிந்துரைக்கப்பட்ட தயாரிப்புகள்",
+        "share_title": "பரிந்துரையைப் பகிரவும்",
+        "share_subtitle": "பரிந்துரையை SMS அல்லது WhatsApp மூலம் அனுப்ப தொலைபேசி எண்ணை உள்ளிடவும்.",
         "share_message": "அக்ரிஅசிஸ்ட் AI பரிந்துரை:\n\nபயிர்: {crop}\nகாரணம்: {rationale}\nபரிந்துரைக்கப்பட்ட தயாரிப்புகள்: {products}",
-        "toast_sharing_title": "பரிந்துரையைப் பகிர்தல்",
-        "toast_sharing_description": "{platform} ஐத் திறந்து பரிந்துரையைப் பகிர்கிறது.",
-        "toast_phone_missing_title": "தொலைபேசி எண் கிடைக்கவில்லை",
-        "toast_phone_missing_description": "பரிந்துரையைப் பகிர உங்கள் தொலைபேசி எண் கிடைக்கவில்லை.",
-        "share_sms_title": "SMS மூலம் பகிரவும்",
-        "share_whatsapp_title": "WhatsApp மூலம் பகிரவும்"
+        "toast_sharing_title": "பரிந்துரை அனுப்பப்பட்டது",
+        "toast_sharing_description": "பரிந்துரை {platform} க்கு அனுப்பப்பட்டது.",
+        "toast_phone_missing_title": "தொலைபேசி எண் தேவை",
+        "toast_phone_missing_description": "பரிந்துரையைப் பகிர தொலைபேசி எண்ணை உள்ளிடவும்.",
+        "share_sms_title": "SMS மூலம் அனுப்பு",
+        "share_whatsapp_title": "WhatsApp மூலம் அனுப்பு",
+        "new_recommendation_button": "புதிய பரிந்துரையைத் தொடங்கு"
     },
     "products": {
         "page_title": "தயாரிப்பு சந்தை",
@@ -101,7 +104,8 @@
         "available_schemes": "கிடைக்கும் திட்டங்கள்",
         "eligibility_criteria": "தகுதி வரம்பு",
         "required_documents": "தேவையான ஆவணங்கள்",
-        "application_process": "விண்ணப்ப செயல்முறை"
+        "application_process": "விண்ணப்ப செயல்முறை",
+        "apply_now_button": "இப்போதே விண்ணப்பிக்கவும்"
     },
     "cart": {
         "page_title": "ஷாப்பிங் கார்ட்",
@@ -142,6 +146,8 @@
         "send_otp_button": "OTP அனுப்பு",
         "otp_label": "ஒரு முறை கடவுச்சொல் (OTP)",
         "verify_otp_button": "OTP ஐ சரிபார்த்து உள்நுழைக",
-        "change_number_button": "தொலைபேசி எண்ணை மாற்றவும்"
+        "change_number_button": "தொலைபேசி எண்ணை மாற்றவும்",
+        "signed_out_title": "வெளியேறிவிட்டீர்கள்",
+        "signed_out_description": "நீங்கள் வெற்றிகரமாக வெளியேறிவிட்டீர்கள்."
     }
 }
