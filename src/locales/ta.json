@@ -78,7 +78,10 @@
         "results_subtitle": "நீங்கள் வழங்கிய தரவுகளின் அடிப்படையில், இதோ எங்கள் பரிந்துரை.",
         "results_crop": "பரிந்துரைக்கப்பட்ட பயிர்",
         "results_rationale": "Begründung",
-        "results_products": "பரிந்துரைக்கப்பட்ட தயாரிப்புகள்"
+        "results_products": "பரிந்துரைக்கப்பட்ட தயாரிப்புகள்",
+        "share_message": "அக்ரிஅசிஸ்ட் AI பரிந்துரை:\n\nபயிர்: {crop}\nBegründung: {rationale}\nபரிந்துரைக்கப்பட்ட தயாரிப்புகள்: {products}",
+        "toast_sharing_title": "பரிந்துரையைப் பகிர்தல்",
+        "toast_sharing_description": "{platform} ஐத் திறந்து பரிந்துரையைப் பகிர்கிறது."
     },
     "products": {
         "page_title": "தயாரிப்பு சந்தை",
@@ -138,3 +141,5 @@
         "change_number_button": "தொலைபேசி எண்ணை மாற்றவும்"
     }
 }
+
+    

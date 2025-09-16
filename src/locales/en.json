@@ -78,7 +78,10 @@
         "results_subtitle": "Based on the data you provided, here is our suggestion.",
         "results_crop": "Recommended Crop",
         "results_rationale": "Rationale",
-        "results_products": "Recommended Products"
+        "results_products": "Recommended Products",
+        "share_message": "AgriAssist AI Recommendation:\n\nCrop: {crop}\nRationale: {rationale}\nRecommended Products: {products}",
+        "toast_sharing_title": "Sharing Recommendation",
+        "toast_sharing_description": "Opening {platform} to share the recommendation."
     },
     "products": {
         "page_title": "Product Marketplace",

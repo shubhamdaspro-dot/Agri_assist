@@ -17,7 +17,7 @@
         "tamil": "தமிழ் (Tamil)",
         "telugu": "తెలుగు (Telugu)",
         "marathi": "मराठी (Marathi)",
-        "shopping_cart": "শপিং কার্ট"
+        "shopping_cart": "שপিং কার্ট"
     },
     "dashboard": {
         "welcome_title": "এগ্রিঅ্যাসিস্টে স্বাগতম!",
@@ -78,14 +78,17 @@
         "results_subtitle": "আপনার দেওয়া ডেটার উপর ভিত্তি করে, এখানে আমাদের পরামর্শ।",
         "results_crop": "প্রস্তাবিত ফসল",
         "results_rationale": "যুক্তিসঙ্গত কারণ",
-        "results_products": "প্রস্তাবিত পণ্য"
+        "results_products": "প্রস্তাবিত পণ্য",
+        "share_message": "এগ্রিঅ্যাসিস্ট এআই সুপারিশ:\n\nফসল: {crop}\nযুক্তিসঙ্গত কারণ: {rationale}\nপ্রস্তাবিত পণ্য: {products}",
+        "toast_sharing_title": "সুপারিশ শেয়ার করা হচ্ছে",
+        "toast_sharing_description": "{platform} খুলে সুপারিশ শেয়ার করা হচ্ছে।"
     },
     "products": {
         "page_title": "পণ্য বাজার",
-        "page_subtitle": "আমাদের উচ্চ-মানের কৃষি পণ্যের কিউরেটেড নির্বাচন ব্রাউজ করুন।"
+        "page_subtitle": "আমাদের উচ্চ-মানের কৃষি পণ্যের কিউরেটেড নির্বাচন ব্রাউज করুন।"
     },
     "news": {
-        "page_title": "কৃষি খবর ও আপডেট",
+        "page_title": "कृষি খবর ও আপডেট",
         "page_subtitle": "সর্বশেষ খবর, নীতি এবং বাজারের প্রবণতাগুলির সাথে অবগত থাকুন।"
     },
     "loans": {
@@ -97,7 +100,7 @@
         "application_process": "আবেদন প্রক্রিয়া"
     },
     "cart": {
-        "page_title": "শপিং কার্ট",
+        "page_title": "שপিং কার্ট",
         "page_subtitle": "আপনার কার্টে থাকা আইটেমগুলি পর্যালোচনা এবং পরিচালনা করুন।",
         "empty_title": "আপনার কার্ট খালি",
         "empty_subtitle": "মনে হচ্ছে আপনি এখনও আপনার কার্টে কিছু যোগ করেননি।",
@@ -124,7 +127,7 @@
         "title": "এআই কৃষি সহকারী",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
         "input_placeholder": "আপনার প্রশ্ন টাইপ করুন...",
-        "input_listening": "শুনছি...",
+        "input_listening": "שুনছি...",
         "canned_query": "গরম জলবায়ুতে বালুকাময় মাটির জন্য সেরা ফসল কোনটি?",
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।"
     },

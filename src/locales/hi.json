@@ -78,7 +78,10 @@
         "results_subtitle": "आपके द्वारा प्रदान किए गए डेटा के आधार पर, यहाँ हमारा सुझाव है।",
         "results_crop": "अनुशंसित फसल",
         "results_rationale": "तर्क",
-        "results_products": "अनुशंसित उत्पाद"
+        "results_products": "अनुशंसित उत्पाद",
+        "share_message": "एग्रीअसिस्ट AI सिफारिश:\n\nफसल: {crop}\nतर्क: {rationale}\nअनुशंसित उत्पाद: {products}",
+        "toast_sharing_title": "सिफारिश साझा करना",
+        "toast_sharing_description": "{platform} खोलकर सिफारिश साझा की जा रही है।"
     },
     "products": {
         "page_title": "उत्पाद बाज़ार",
