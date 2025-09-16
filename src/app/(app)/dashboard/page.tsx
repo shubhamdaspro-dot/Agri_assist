@@ -1,26 +1,29 @@
+'use client';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Leaf, Newspaper, ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { news } from "@/lib/data";
 import Image from "next/image";
+import { useLanguage } from "@/hooks/use-language";
 
 export default function DashboardPage() {
+  const { t } = useLanguage();
   const latestNews = news.slice(0, 3);
   return (
     <div className="flex flex-col gap-8">
       <Card className="w-full overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="p-8 md:p-12 flex flex-col justify-center">
-            <h1 className="text-3xl md:text-4xl font-bold font-headline mb-4">Welcome to AgriAssist!</h1>
+            <h1 className="text-3xl md:text-4xl font-bold font-headline mb-4">{t('dashboard.welcome_title')}</h1>
             <p className="text-muted-foreground mb-6 text-lg">
-              Your AI-powered partner for modern farming. Get crop recommendations, buy products, and stay updated with the latest agricultural news.
+              {t('dashboard.welcome_subtitle')}
             </p>
             <div className="flex gap-4">
               <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Link href="/recommendations">
                   <Leaf className="mr-2 h-5 w-5" />
-                  Get Recommendation
+                  {t('dashboard.get_recommendation_button')}
                 </Link>
               </Button>
             </div>
@@ -40,51 +43,51 @@ export default function DashboardPage() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">AI Recommendations</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('dashboard.card_recommendations_title')}</CardTitle>
             <Leaf className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">Smart Farming</div>
+            <div className="text-2xl font-bold">{t('dashboard.card_recommendations_heading')}</div>
             <p className="text-xs text-muted-foreground">
-              Get data-driven crop and product suggestions.
+              {t('dashboard.card_recommendations_subheading')}
             </p>
             <Button asChild variant="link" className="px-0">
                 <Link href="/recommendations">
-                    Start Now <ArrowRight className="ml-2 h-4 w-4" />
+                    {t('dashboard.start_now_button')} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
             </Button>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Marketplace</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('dashboard.card_marketplace_title')}</CardTitle>
             <ShoppingBag className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">Shop Essentials</div>
+            <div className="text-2xl font-bold">{t('dashboard.card_marketplace_heading')}</div>
             <p className="text-xs text-muted-foreground">
-              Buy seeds, fertilizers, and tools directly.
+              {t('dashboard.card_marketplace_subheading')}
             </p>
             <Button asChild variant="link" className="px-0">
                 <Link href="/products">
-                    Browse Products <ArrowRight className="ml-2 h-4 w-4" />
+                    {t('dashboard.browse_products_button')} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
             </Button>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">News & Updates</CardTitle>
+            <CardTitle className="text-sm font-medium">{t('dashboard.card_news_title')}</CardTitle>
             <Newspaper className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">Stay Informed</div>
+            <div className="text-2xl font-bold">{t('dashboard.card_news_heading')}</div>
             <p className="text-xs text-muted-foreground">
-              Latest agricultural news and policies.
+              {t('dashboard.card_news_subheading')}
             </p>
             <Button asChild variant="link" className="px-0">
                 <Link href="/news">
-                    Read News <ArrowRight className="ml-2 h-4 w-4" />
+                    {t('dashboard.read_news_button')} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
             </Button>
           </CardContent>
@@ -92,16 +95,16 @@ export default function DashboardPage() {
       </div>
 
       <div>
-        <h2 className="text-2xl font-bold font-headline mb-4">Latest News</h2>
+        <h2 className="text-2xl font-bold font-headline mb-4">{t('dashboard.latest_news_title')}</h2>
         <div className="grid gap-4 md:grid-cols-3">
             {latestNews.map(article => (
                 <Card key={article.id}>
                     <CardHeader>
-                        <CardTitle className="text-lg">{article.headline}</CardTitle>
+                        <CardTitle className="text-lg">{t(`news.${article.id}.headline`)}</CardTitle>
                         <CardDescription>{article.date} - {article.source}</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-sm text-muted-foreground">{article.summary}</p>
+                        <p className="text-sm text-muted-foreground">{t(`news.${article.id}.summary`)}</p>
                     </CardContent>
                 </Card>
             ))}
