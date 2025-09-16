@@ -40,14 +40,16 @@ export default function AuthPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
-    (window as any).recaptchaVerifier = new RecaptchaVerifier(
-      auth,
-      'recaptcha-container',
-      {
-        size: 'invisible',
-        callback: (response: any) => {},
-      }
-    );
+    if (!(window as any).recaptchaVerifier) {
+      (window as any).recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        'recaptcha-container',
+        {
+          size: 'invisible',
+          callback: (response: any) => {},
+        }
+      );
+    }
   }, []);
 
   const handleSendOtp = async () => {
