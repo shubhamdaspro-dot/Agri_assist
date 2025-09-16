@@ -92,6 +92,24 @@ export const loans_en: LoanScheme[] = [
         documents: ['Project report on the proposed activity.', 'Quotation for machinery/equipment.', 'Land records.', 'Proof of income. '],
         process: ['Prepare a detailed project report (DPR).', 'Approach a commercial or cooperative bank with the DPR and application form.', 'The bank will appraise the project\'s viability and sanction the loan.'],
         link: 'https://www.nabard.org/content.aspx?id=517'
+    },
+    {
+        id: 'loan_4',
+        title: 'Agri-Infra Fund Scheme',
+        description: 'A financing facility for creating post-harvest management infrastructure and community farming assets.',
+        eligibility: ['Primary Agricultural Credit Societies (PACS), FPOs, SHGs, and Joint Liability Groups (JLGs).'],
+        documents: ['Detailed Project Report (DPR).', 'Land records and ownership proof.', 'Bank statements for the last 6 months.', 'Identity and address proofs.'],
+        process: ['Apply online through the national portal (agriinfra.dac.gov.in).', 'The application is forwarded to selected financial institutions for appraisal and sanction.'],
+        link: 'https://agriinfra.dac.gov.in/'
+    },
+    {
+        id: 'loan_5',
+        title: 'PM-KUSUM Scheme',
+        description: 'A scheme to promote the use of solar pumps for irrigation and solarize agricultural feeders.',
+        eligibility: ['Individual farmers, groups of farmers, FPOs, and cooperatives.', 'Applicant must have a valid Aadhaar card and land records.'],
+        documents: ['Land ownership documents.', 'Aadhaar card.', 'Bank account details.', 'Declaration of no existing electricity connection for the pump.'],
+        process: ['Apply through the state nodal agencies or the national portal.', 'The application is verified, and upon approval, the subsidy is disbursed to the vendor.'],
+        link: 'https://pmkusum.mnre.gov.in/'
     }
 ];
 
@@ -122,5 +140,23 @@ export const loans_hi: LoanScheme[] = [
         documents: ['प्रस्तावित गतिविधि पर परियोजना रिपोर्ट।', 'मशीनरी/उपकरण के लिए कोटेशन।', 'भूमि रिकॉर्ड।', 'आय का प्रमाण।'],
         process: ['एक विस्तृत परियोजना रिपोर्ट (DPR) तैयार करें।', 'डीपीआर और आवेदन पत्र के साथ एक वाणिज्यिक या सहकारी बैंक से संपर्क करें।', 'बैंक परियोजना की व्यवहार्यता का मूल्यांकन करेगा और ऋण स्वीकृत करेगा।'],
         link: 'https://www.nabard.org/content.aspx?id=517'
+    },
+    {
+        id: 'loan_4',
+        title: 'एग्री-इन्फ्रा फंड योजना',
+        description: 'फसल कटाई के बाद के प्रबंधन के बुनियादी ढांचे और सामुदायिक कृषि संपत्तियों के निर्माण के लिए एक वित्तपोषण सुविधा।',
+        eligibility: ['प्राथमिक कृषि ऋण समितियाँ (PACS), FPOs, SHGs, और संयुक्त देयता समूह (JLGs)।'],
+        documents: ['विस्तृत परियोजना रिपोर्ट (DPR)।', 'भूमि रिकॉर्ड और स्वामित्व का प्रमाण।', 'पिछले 6 महीनों के बैंक विवरण।', 'पहचान और पते का प्रमाण।'],
+        process: ['राष्ट्रीय पोर्टल (agriinfra.dac.gov.in) के माध्यम से ऑनलाइन आवेदन करें।', 'आवेदन मूल्यांकन और मंजूरी के लिए चयनित वित्तीय संस्थानों को भेजा जाता है।'],
+        link: 'https://agriinfra.dac.gov.in/'
+    },
+    {
+        id: 'loan_5',
+        title: 'पीएम-कुसुम योजना',
+        description: 'सिंचाई के लिए सौर पंपों के उपयोग को बढ़ावा देने और कृषि फीडरों को सौर ऊर्जा से लैस करने की एक योजना।',
+        eligibility: ['व्यक्तिगत किसान, किसानों के समूह, FPOs, और सहकारी समितियाँ।', 'आवेदक के पास वैध आधार कार्ड और भूमि रिकॉर्ड होना चाहिए।'],
+        documents: ['भूमि स्वामित्व के दस्तावेज।', 'आधार कार्ड।', 'बैंक खाते का विवरण।', 'पंप के लिए कोई मौजूदा बिजली कनेक्शन न होने की घोषणा।'],
+        process: ['राज्य नोडल एजेंसियों या राष्ट्रीय पोर्टल के माध्यम से आवेदन करें।', 'आवेदन सत्यापित किया जाता है, और अनुमोदन पर, सब्सिडी विक्रेता को वितरित की जाती है।'],
+        link: 'https://pmkusum.mnre.gov.in/'
     }
 ];
