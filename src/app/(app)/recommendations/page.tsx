@@ -120,9 +120,9 @@ function LoadingSkeleton() {
             <CardTitle>
                 <Skeleton className="h-8 w-1/4" />
             </CardTitle>
-            <CardDescription>
+            <div className="text-sm text-muted-foreground">
                 <Skeleton className="h-4 w-1/2" />
-            </CardDescription>
+            </div>
         </CardHeader>
         <CardContent className="space-y-6">
             <div>
