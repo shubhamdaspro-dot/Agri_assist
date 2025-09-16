@@ -141,6 +141,8 @@
         "send_otp_button": "OTP पाठवा",
         "otp_label": "वन-टाइम पासवर्ड (OTP)",
         "verify_otp_button": "OTP सत्यापित करा आणि लॉग इन करा",
-        "change_number_button": "फोन नंबर बदला"
+        "change_number_button": "फोन नंबर बदला",
+        "signed_out_title": "साइन आउट केले",
+        "signed_out_description": "तुम्ही यशस्वीरित्या साइन आउट केले आहे."
     }
 }

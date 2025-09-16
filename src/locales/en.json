@@ -141,6 +141,8 @@
         "send_otp_button": "Send OTP",
         "otp_label": "One-Time Password (OTP)",
         "verify_otp_button": "Verify OTP & Login",
-        "change_number_button": "Change phone number"
+        "change_number_button": "Change phone number",
+        "signed_out_title": "Signed Out",
+        "signed_out_description": "You have been successfully signed out."
     }
 }

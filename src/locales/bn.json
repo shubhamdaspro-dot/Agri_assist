@@ -130,7 +130,7 @@
         "title": "এআই কৃষি সহকারী",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
         "input_placeholder": "আপনার প্রশ্ন টাইপ করুন...",
-        "input_listening": "שুনছি...",
+        "input_listening": "শুনছি...",
         "canned_query": "গরম জলবায়ুতে বালুকাময় মাটির জন্য সেরা ফসল কোনটি?",
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।"
     },
@@ -141,6 +141,8 @@
         "send_otp_button": "OTP পাঠান",
         "otp_label": "এককালীন পাসওয়ার্ড (OTP)",
         "verify_otp_button": "OTP যাচাই করুন এবং লগইন করুন",
-        "change_number_button": "ফোন নম্বর পরিবর্তন করুন"
+        "change_number_button": "ফোন নম্বর পরিবর্তন করুন",
+        "signed_out_title": "সাইন আউট করেছেন",
+        "signed_out_description": "আপনি সফলভাবে সাইন আউট করেছেন।"
     }
 }

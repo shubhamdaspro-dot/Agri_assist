@@ -11,6 +11,7 @@ import {onAuthStateChanged, signOut as firebaseSignOut} from 'firebase/auth';
 import {auth} from '@/lib/firebase';
 import {useRouter} from 'next/navigation';
 import {useToast}from './use-toast';
+import { useLanguage } from './use-language';
 
 interface AuthContextType {
   user: User | null;
@@ -25,6 +26,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const {toast} = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -39,9 +41,10 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
     try {
       await firebaseSignOut(auth);
       router.push('/auth');
+      // This toast is now safe because `t` is called inside the function scope.
       toast({
-        title: 'Signed Out',
-        description: 'You have been successfully signed out.',
+        title: t('auth.signed_out_title'),
+        description: t('auth.signed_out_description'),
       });
     } catch (error: any) {
       toast({

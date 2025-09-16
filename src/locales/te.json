@@ -141,6 +141,8 @@
         "send_otp_button": "OTP పంపండి",
         "otp_label": "ఒక-సారి పాస్‌వర్డ్ (OTP)",
         "verify_otp_button": "OTPని ధృవీకరించి లాగిన్ చేయండి",
-        "change_number_button": "ఫోన్ నంబర్‌ను మార్చండి"
+        "change_number_button": "ఫోన్ నంబర్‌ను మార్చండి",
+        "signed_out_title": "సైన్ అవుట్ చేసారు",
+        "signed_out_description": "మీరు విజయవంతంగా సైన్ అవుట్ చేసారు."
     }
 }
