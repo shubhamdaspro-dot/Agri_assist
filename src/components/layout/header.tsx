@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
+import { useIsClient } from '@/hooks/use-is-client';
 
 function getTitleKey(path: string): string {
   const pathName = path.split('/').pop() || 'dashboard';
@@ -21,10 +22,11 @@ function getTitleKey(path: string): string {
 
 export default function Header() {
   const pathname = usePathname();
-  const { cartCount, isCartLoaded } = useCart();
+  const { cartCount } = useCart();
   const { t, setLanguage } = useLanguage();
   const titleKey = getTitleKey(pathname);
   const title = t(titleKey);
+  const isClient = useIsClient();
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
@@ -49,7 +51,7 @@ export default function Header() {
         <Button asChild variant="ghost" size="icon" className="relative">
           <Link href="/cart">
             <ShoppingCart className="h-5 w-5" />
-            {isCartLoaded && cartCount > 0 && (
+            {isClient && cartCount > 0 && (
               <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
                 {cartCount}
               </span>

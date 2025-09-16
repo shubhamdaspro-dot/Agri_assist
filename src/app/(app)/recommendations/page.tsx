@@ -9,6 +9,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { MapPin } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
+import { useIsClient } from '@/hooks/use-is-client';
 
 
 export default function RecommendationsPage() {
@@ -18,11 +19,7 @@ export default function RecommendationsPage() {
   const [locationError, setLocationError] = useState<string | null>(null);
   const { toast } = useToast();
   const { t } = useLanguage();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = useIsClient();
 
   useEffect(() => {
     if (isClient && navigator.geolocation) {

@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import type { CartItem, Product } from '@/lib/types';
 import { useToast } from './use-toast';
 import { useLanguage } from './use-language';
+import { useIsClient } from './use-is-client';
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -20,33 +21,33 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isCartLoaded, setIsCartLoaded] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
+  const isClient = useIsClient();
 
   useEffect(() => {
-    try {
-      const items = localStorage.getItem('agriassist_cart');
-      if (items) {
-        setCartItems(JSON.parse(items));
+    if (isClient) {
+      try {
+        const items = localStorage.getItem('agriassist_cart');
+        if (items) {
+          setCartItems(JSON.parse(items));
+        }
+      } catch (error) {
+        console.error("Failed to parse cart items from localStorage", error);
+        setCartItems([]);
       }
-    } catch (error) {
-      console.error("Failed to parse cart items from localStorage", error);
-      setCartItems([]);
-    } finally {
-      setIsCartLoaded(true);
     }
-  }, []);
+  }, [isClient]);
 
   useEffect(() => {
-    if (isCartLoaded) {
+    if (isClient) {
         try {
             localStorage.setItem('agriassist_cart', JSON.stringify(cartItems));
         } catch (error) {
             console.error("Failed to save cart items to localStorage", error);
         }
     }
-  }, [cartItems, isCartLoaded]);
+  }, [cartItems, isClient]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems(prevItems => {
@@ -108,7 +109,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         clearCart,
         cartCount,
         cartTotal,
-        isCartLoaded,
+        isCartLoaded: isClient,
       }}
     >
       {children}
