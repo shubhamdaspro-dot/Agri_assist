@@ -57,7 +57,7 @@ export default function RecommendationsPage() {
         </p>
       </div>
 
-      {locationError && (
+      {isClient && locationError && (
         <Alert variant="destructive">
           <MapPin className="h-4 w-4" />
           <AlertTitle>{t('recommendations.location_error_title')}</AlertTitle>
@@ -65,12 +65,16 @@ export default function RecommendationsPage() {
         </Alert>
       )}
 
-      <RecommendationForm 
-        setResults={setResults} 
-        setIsLoading={setIsLoading} 
-        isLoading={isLoading}
-        location={location}
-      />
+      {isClient ? (
+        <RecommendationForm 
+            setResults={setResults} 
+            setIsLoading={setIsLoading} 
+            isLoading={isLoading}
+            location={location}
+        />
+      ) : (
+        <Skeleton className="h-[500px] w-full" />
+      )}
 
       {isLoading ? <LoadingSkeleton /> : results ? <RecommendationResults results={results} /> : null}
     </div>

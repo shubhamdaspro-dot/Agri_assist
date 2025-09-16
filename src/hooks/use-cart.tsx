@@ -19,11 +19,12 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isHydrated, setIsHydrated] = useState(false);
+  const [isClient, setIsClient] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
 
   useEffect(() => {
+    setIsClient(true);
     try {
       const items = localStorage.getItem('agriassist_cart');
       if (items) {
@@ -33,18 +34,17 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       console.error("Failed to parse cart items from localStorage", error);
       setCartItems([]);
     }
-    setIsHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (isHydrated) {
+    if (isClient) {
         try {
             localStorage.setItem('agriassist_cart', JSON.stringify(cartItems));
         } catch (error) {
             console.error("Failed to save cart items to localStorage", error);
         }
     }
-  }, [cartItems, isHydrated]);
+  }, [cartItems, isClient]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems(prevItems => {
@@ -95,11 +95,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
-  
-  if (!isHydrated) {
-    // Render a loading state or nothing during server-side rendering and initial client-side render
-    return null; 
-  }
 
   return (
     <CartContext.Provider
@@ -109,7 +104,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         updateQuantity,
         clearCart,
-        cartCount,
+        cartCount: isClient ? cartCount : 0, // Return 0 on server / before hydration
         cartTotal,
       }}
     >
