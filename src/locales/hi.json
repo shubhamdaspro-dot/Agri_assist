@@ -11,7 +11,11 @@
     "header": {
         "change_language": "भाषा बदलें",
         "english": "English",
-        "hindi": "हिंदी",
+        "hindi": "हिंदी (Hindi)",
+        "bengali": "বাংলা (Bengali)",
+        "tamil": "தமிழ் (Tamil)",
+        "telugu": "తెలుగు (Telugu)",
+        "marathi": "मराठी (Marathi)",
         "shopping_cart": "शॉपिंग कार्ट"
     },
     "dashboard": {

@@ -15,7 +15,7 @@ export default function NewsPage() {
   useEffect(() => {
     async function loadNews() {
       setLoading(true);
-      const result = await getLatestNews(language as 'en' | 'hi');
+      const result = await getLatestNews(language);
       if (result.success && result.data) {
         setNews(result.data.articles);
       }

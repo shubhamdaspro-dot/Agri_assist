@@ -5,7 +5,8 @@ import { analyzeSoilFromPhoto, AnalyzeSoilFromPhotoInput, AnalyzeSoilFromPhotoOu
 import { ai } from '@/ai/genkit';
 import wav from 'wav';
 import { z } from 'zod';
-import { fetchLatestNews, FetchLatestNewsOutput } from '@/ai/flows/fetch-latest-news';
+import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
+import type { FetchLatestNewsOutput } from './types';
 
 export async function getCropRecommendations(
   input: GenerateCropRecommendationsInput
@@ -101,7 +102,7 @@ export async function answerTextQueryWithVoice(
 }
 
 export async function getLatestNews(
-  language: 'en' | 'hi'
+  language: string
 ): Promise<{ success: boolean; data: FetchLatestNewsOutput | null; error?: string }> {
   try {
     const result = await fetchLatestNews(language);

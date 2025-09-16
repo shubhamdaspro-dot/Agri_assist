@@ -41,6 +41,10 @@ export default function Header() {
           <DropdownMenuContent align="end">
             <DropdownMenuItem onClick={() => setLanguage('en')}>{t('header.english')}</DropdownMenuItem>
             <DropdownMenuItem onClick={() => setLanguage('hi')}>{t('header.hindi')}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLanguage('bn')}>{t('header.bengali')}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLanguage('ta')}>{t('header.tamil')}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLanguage('te')}>{t('header.telugu')}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLanguage('mr')}>{t('header.marathi')}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         <Button asChild variant="ghost" size="icon">

@@ -12,6 +12,10 @@
         "change_language": "Change language",
         "english": "English",
         "hindi": "हिंदी (Hindi)",
+        "bengali": "বাংলা (Bengali)",
+        "tamil": "தமிழ் (Tamil)",
+        "telugu": "తెలుగు (Telugu)",
+        "marathi": "मराठी (Marathi)",
         "shopping_cart": "Shopping Cart"
     },
     "dashboard": {

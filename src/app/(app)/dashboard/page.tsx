@@ -18,7 +18,7 @@ export default function DashboardPage() {
   useEffect(() => {
     async function loadNews() {
       setLoadingNews(true);
-      const result = await getLatestNews(language as 'en' | 'hi');
+      const result = await getLatestNews(language);
       if (result.success && result.data) {
         setLatestNews(result.data.articles.slice(0, 3));
       }

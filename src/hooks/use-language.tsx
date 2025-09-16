@@ -2,14 +2,17 @@
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import en from '@/locales/en.json';
 import hi from '@/locales/hi.json';
-import { set } from 'react-hook-form';
+import bn from '@/locales/bn.json';
+import ta from '@/locales/ta.json';
+import te from '@/locales/te.json';
+import mr from '@/locales/mr.json';
 
-const translations: Record<string, any> = { en, hi };
+const translations: Record<string, any> = { en, hi, bn, ta, te, mr };
 
 type LanguageContextType = {
   language: string;
   setLanguage: (language: string) => void;
-  t: (key: string) => string;
+  t: (key: string, substitutions?: Record<string, string | number>) => string;
 };
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -31,20 +34,36 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const t = useCallback((key: string): string => {
-    const keys = key.split('.');
-    let result = translations[language];
-    for (const k of keys) {
-      result = result?.[k];
-    }
-    if (result) return result;
+  const t = useCallback((key: string, substitutions?: Record<string, string | number>): string => {
+    const getTranslation = (lang: string) => {
+        const keys = key.split('.');
+        let result = translations[lang];
+        for (const k of keys) {
+            result = result?.[k];
+            if (result === undefined) return undefined;
+        }
+        return result;
+    };
+    
+    let translated = getTranslation(language);
 
-    // Fallback to English if translation is missing
-    let fallbackResult = translations['en'];
-    for (const k of keys) {
-        fallbackResult = fallbackResult?.[k];
+    if (translated === undefined) {
+        // Fallback to English if translation is missing
+        translated = getTranslation('en');
     }
-    return fallbackResult || key;
+
+    if (typeof translated !== 'string') {
+        return key;
+    }
+
+    if (substitutions) {
+        Object.keys(substitutions).forEach(subKey => {
+            const regex = new RegExp(`{${subKey}}`, 'g');
+            translated = (translated as string).replace(regex, String(substitutions[subKey]));
+        });
+    }
+
+    return translated;
   }, [language]);
 
   return (

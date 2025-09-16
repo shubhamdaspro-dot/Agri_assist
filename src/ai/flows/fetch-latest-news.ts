@@ -10,7 +10,7 @@ import {z} from 'genkit';
 import type { FetchLatestNewsOutput } from '@/lib/types';
 import { FetchLatestNewsOutputSchema } from '@/lib/types';
 
-export async function fetchLatestNews(language: 'en' | 'hi'): Promise<FetchLatestNewsOutput> {
+export async function fetchLatestNews(language: string): Promise<FetchLatestNewsOutput> {
   return fetchLatestNewsFlow({ language });
 }
 
@@ -18,7 +18,7 @@ const prompt = ai.definePrompt({
   name: 'fetchLatestNewsPrompt',
   input: {
     schema: z.object({
-        language: z.string().describe('The language for the news articles (e.g., en, hi).'),
+        language: z.string().describe('The language for the news articles (e.g., en, hi, bn, ta, te, mr).'),
     }),
   },
   output: {schema: FetchLatestNewsOutputSchema},
