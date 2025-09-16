@@ -21,7 +21,7 @@ function getTitleKey(path: string): string {
 
 export default function Header() {
   const pathname = usePathname();
-  const { cartCount } = useCart();
+  const { cartCount, isCartLoaded } = useCart();
   const { t, setLanguage } = useLanguage();
   const titleKey = getTitleKey(pathname);
   const title = t(titleKey);
@@ -46,10 +46,10 @@ export default function Header() {
             <DropdownMenuItem onClick={() => setLanguage('mr')}>{t('header.marathi')}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button asChild variant="ghost" size="icon">
+        <Button asChild variant="ghost" size="icon" className="relative">
           <Link href="/cart">
             <ShoppingCart className="h-5 w-5" />
-            {cartCount > 0 && (
+            {isCartLoaded && cartCount > 0 && (
               <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
                 {cartCount}
               </span>

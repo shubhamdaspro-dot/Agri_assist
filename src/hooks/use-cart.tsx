@@ -13,18 +13,18 @@ interface CartContextType {
   clearCart: () => void;
   cartCount: number;
   cartTotal: number;
+  isCartLoaded: boolean;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isClient, setIsClient] = useState(false);
+  const [isCartLoaded, setIsCartLoaded] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
 
   useEffect(() => {
-    setIsClient(true);
     try {
       const items = localStorage.getItem('agriassist_cart');
       if (items) {
@@ -33,18 +33,20 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     } catch (error) {
       console.error("Failed to parse cart items from localStorage", error);
       setCartItems([]);
+    } finally {
+      setIsCartLoaded(true);
     }
   }, []);
 
   useEffect(() => {
-    if (isClient) {
+    if (isCartLoaded) {
         try {
             localStorage.setItem('agriassist_cart', JSON.stringify(cartItems));
         } catch (error) {
             console.error("Failed to save cart items to localStorage", error);
         }
     }
-  }, [cartItems, isClient]);
+  }, [cartItems, isCartLoaded]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems(prevItems => {
@@ -104,8 +106,9 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         removeFromCart,
         updateQuantity,
         clearCart,
-        cartCount: isClient ? cartCount : 0, // Return 0 on server / before hydration
+        cartCount,
         cartTotal,
+        isCartLoaded,
       }}
     >
       {children}
