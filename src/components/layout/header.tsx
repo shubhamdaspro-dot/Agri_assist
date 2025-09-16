@@ -31,8 +31,8 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
       <SidebarTrigger className="md:hidden" />
-      <h1 className="text-xl font-semibold">{title}</h1>
-      <div className="ml-auto flex items-center gap-2">
+      <h1 className="text-lg sm:text-xl font-semibold truncate">{title}</h1>
+      <div className="ml-auto flex items-center gap-1 sm:gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
@@ -52,7 +52,7 @@ export default function Header() {
           <Link href="/cart">
             <ShoppingCart className="h-5 w-5" />
             {isClient && cartCount > 0 && (
-              <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+              <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
                 {cartCount}
               </span>
             )}

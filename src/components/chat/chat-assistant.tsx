@@ -101,7 +101,7 @@ export default function ChatAssistant() {
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        <DialogContent className="sm:max-w-[425px] md:max-w-[500px] h-[70vh] flex flex-col p-0 gap-0">
+        <DialogContent className="sm:max-w-[425px] md:max-w-[500px] h-[80vh] sm:h-[70vh] flex flex-col p-0 gap-0">
           <DialogHeader className="p-4 border-b">
             <DialogTitle className="flex items-center gap-2">
               <Bot className="text-primary" /> {t('chat.title')}

@@ -27,49 +27,53 @@ export default function CartContents() {
   }
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
         <div className="lg:col-span-2">
             <Card>
                 <CardHeader>
                     <CardTitle>{t('cart.your_cart')}</CardTitle>
                 </CardHeader>
-                <CardContent>
-                    <Table>
-                    <TableHeader>
-                        <TableRow>
-                        <TableHead className="w-[100px]">{t('cart.table_product')}</TableHead>
-                        <TableHead>{t('cart.table_details')}</TableHead>
-                        <TableHead className="text-center">{t('cart.table_quantity')}</TableHead>
-                        <TableHead className="text-right">{t('cart.table_price')}</TableHead>
-                        <TableHead className="w-[50px]"></TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {cartItems.map(item => (
-                        <TableRow key={item.id}>
-                            <TableCell>
-                            <Image src={item.image} alt={item.name} width={80} height={60} className="rounded-md object-cover" />
-                            </TableCell>
-                            <TableCell className="font-medium">{item.name}</TableCell>
-                            <TableCell className="text-center">
-                                <Input
-                                    type="number"
-                                    min="1"
-                                    value={item.quantity}
-                                    onChange={e => updateQuantity(item.id, parseInt(e.target.value, 10))}
-                                    className="w-20 mx-auto"
-                                />
-                            </TableCell>
-                            <TableCell className="text-right">₹{(item.price * item.quantity).toFixed(2)}</TableCell>
-                            <TableCell>
-                                <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
-                                    <X className="h-4 w-4" />
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                        ))}
-                    </TableBody>
-                    </Table>
+                <CardContent className="p-0">
+                    <div className="overflow-x-auto">
+                        <Table>
+                        <TableHeader>
+                            <TableRow>
+                            <TableHead className="w-[100px] pl-6">{t('cart.table_product')}</TableHead>
+                            <TableHead>{t('cart.table_details')}</TableHead>
+                            <TableHead className="text-center">{t('cart.table_quantity')}</TableHead>
+                            <TableHead className="text-right">{t('cart.table_price')}</TableHead>
+                            <TableHead className="w-[50px] pr-6"></TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {cartItems.map(item => (
+                            <TableRow key={item.id}>
+                                <TableCell className="pl-6">
+                                <Image src={item.image} alt={item.name} width={80} height={60} className="rounded-md object-cover min-w-[80px]" />
+                                </TableCell>
+                                <TableCell className="font-medium">{item.name}</TableCell>
+                                <TableCell>
+                                    <div className="flex justify-center">
+                                        <Input
+                                            type="number"
+                                            min="1"
+                                            value={item.quantity}
+                                            onChange={e => updateQuantity(item.id, parseInt(e.target.value, 10))}
+                                            className="w-20"
+                                        />
+                                    </div>
+                                </TableCell>
+                                <TableCell className="text-right whitespace-nowrap">₹ {(item.price * item.quantity).toFixed(2)}</TableCell>
+                                <TableCell className="pr-6">
+                                    <Button variant="ghost" size="icon" onClick={() => removeFromCart(item.id)}>
+                                        <X className="h-4 w-4" />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                            ))}
+                        </TableBody>
+                        </Table>
+                    </div>
                 </CardContent>
             </Card>
         </div>
