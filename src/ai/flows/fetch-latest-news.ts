@@ -18,7 +18,7 @@ const prompt = ai.definePrompt({
   name: 'fetchLatestNewsPrompt',
   input: {
     schema: z.object({
-        language: z.string().describe('The language for the news articles (e.g., en, hi, bn, ta, te, mr).'),
+        language: z.string().describe('The language for the news articles (e.g., en, hi, bn, te, mr).'),
     }),
   },
   output: {schema: FetchLatestNewsOutputSchema},

@@ -3,11 +3,10 @@ import { createContext, useContext, useState, useEffect, ReactNode, useCallback 
 import en from '@/locales/en.json';
 import hi from '@/locales/hi.json';
 import bn from '@/locales/bn.json';
-import ta from '@/locales/ta.json';
 import te from '@/locales/te.json';
 import mr from '@/locales/mr.json';
 
-const translations: Record<string, any> = { en, hi, bn, ta, te, mr };
+const translations: Record<string, any> = { en, hi, bn, te, mr };
 
 type LanguageContextType = {
   language: string;
