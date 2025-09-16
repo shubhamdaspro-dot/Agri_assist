@@ -2,7 +2,7 @@
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, MessageSquare, Smartphone, RefreshCw, MapPin, ArrowRight } from 'lucide-react';
+import { CheckCircle, Smartphone, RefreshCw, MapPin, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
@@ -28,7 +28,7 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
     rationale: results.rationale
   });
 
-  const handleShare = (platform: 'sms' | 'whatsapp') => {
+  const handleShare = () => {
     if (!phoneNumber) {
         toast({
             variant: 'destructive',
@@ -39,20 +39,13 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
     }
 
     const encodedMessage = encodeURIComponent(shareMessage);
-    let url = '';
-    if (platform === 'sms') {
-      // Note: This works best on mobile devices
-      url = `sms:${phoneNumber}?body=${encodedMessage}`;
-    } else {
-      // The phone number needs to be in international format without '+' or '00'
-      const whatsappNumber = phoneNumber.startsWith('+') ? phoneNumber.substring(1) : phoneNumber;
-      url = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-    }
+    let url = `sms:${phoneNumber}?body=${encodedMessage}`;
+    
     window.open(url, '_blank');
     setIsSent(true);
     toast({
         title: t('recommendations.toast_sharing_title'),
-        description: t('recommendations.toast_sharing_description', { platform: platform.toUpperCase() })
+        description: t('recommendations.toast_sharing_description', { platform: 'SMS' })
     });
   }
 
@@ -109,7 +102,7 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
         </div>
         <div className="space-y-2 pt-4 border-t">
           <h3 className="font-semibold text-lg">{t('recommendations.share_title')}</h3>
-           <p className="text-sm text-muted-foreground">{t('recommendations.share_subtitle')}</p>
+           <p className="text-sm text-muted-foreground">{t('recommendations.share_subtitle_sms')}</p>
           <div className="flex gap-2">
             <Input 
               type="tel"
@@ -119,13 +112,9 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
               className="max-w-xs"
               disabled={isSent}
             />
-            <Button variant="outline" size="icon" onClick={() => handleShare('sms')} title={t('recommendations.share_sms_title')} disabled={isSent}>
+            <Button onClick={handleShare} title={t('recommendations.share_sms_button_title')} disabled={isSent}>
                 <Smartphone className="h-5 w-5" />
-                <span className="sr-only">Share via SMS</span>
-            </Button>
-            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')} title={t('recommendations.share_whatsapp_title')} disabled={isSent}>
-                 <MessageSquare className="h-5 w-5" />
-                 <span className="sr-only">Share via WhatsApp</span>
+                <span>{t('recommendations.share_sms_button')}</span>
             </Button>
           </div>
         </div>

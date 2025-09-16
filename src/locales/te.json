@@ -71,14 +71,14 @@
         "results_products": "సిఫార్సు చేయబడిన ఉత్పత్తులు",
         "results_stores": "ఎక్కడ కొనాలి",
         "share_title": "సిఫార్సును పంచుకోండి",
-        "share_subtitle": "సిఫార్సును SMS లేదా WhatsApp ద్వారా పంపడానికి ఫోన్ నంబర్‌ను నమోదు చేయండి.",
+        "share_subtitle_sms": "సిఫార్సును SMS ద్వారా పంపడానికి ఫోన్ నంబర్‌ను నమోదు చేయండి.",
         "share_message": "అగ్రిఅసిస్ట్ AI సిఫార్సు:\n\nపంట: {crop}\nకారణం: {rationale}\nసిఫార్సు చేయబడిన ఉత్పత్తులు: {products}",
         "toast_sharing_title": "సిఫార్సు పంపబడింది",
         "toast_sharing_description": "సిఫార్సు {platform}కు పంపబడింది.",
         "toast_phone_missing_title": "ఫోన్ నంబర్ అవసరం",
         "toast_phone_missing_description": "సిఫార్సును పంచుకోవడానికి దయచేసి ఫోన్ నంబర్‌ను నమోదు చేయండి.",
-        "share_sms_title": "SMS ద్వారా పంపండి",
-        "share_whatsapp_title": "WhatsApp ద్వారా పంపండి",
+        "share_sms_button": "SMS పంపండి",
+        "share_sms_button_title": "SMS ద్వారా పంపండి",
         "new_recommendation_button": "కొత్త సిఫార్సును ప్రారంభించండి"
     },
     "news": {
@@ -101,5 +101,8 @@
         "input_listening": "వినడం...",
         "canned_query": "వేడి వాతావరణంలో ఇసుక నేలలకు ఉత్తమ పంటలు ఏవి?",
         "default_error": "క్షమించండి, నేను దానిని ప్రాసెస్ చేయలేకపోయాను."
+    },
+    "auth": {
+        "phone_label": "ఫోను నంబరు"
     }
 }

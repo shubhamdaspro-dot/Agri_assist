@@ -72,14 +72,14 @@
         "results_products": "பரிந்துரைக்கப்பட்ட தயாரிப்புகள்",
         "results_stores": "எங்கே வாங்குவது",
         "share_title": "பரிந்துரையைப் பகிரவும்",
-        "share_subtitle": "பரிந்துரையை SMS அல்லது WhatsApp மூலம் அனுப்ப தொலைபேசி எண்ணை உள்ளிடவும்.",
+        "share_subtitle_sms": "பரிந்துரையை SMS மூலம் அனுப்ப தொலைபேசி எண்ணை உள்ளிடவும்.",
         "share_message": "அக்ரிஅசிஸ்ட் AI பரிந்துரை:\n\nபயிர்: {crop}\nகாரணம்: {rationale}\nபரிந்துரைக்கப்பட்ட தயாரிப்புகள்: {products}",
         "toast_sharing_title": "பரிந்துரை அனுப்பப்பட்டது",
         "toast_sharing_description": "பரிந்துரை {platform} க்கு அனுப்பப்பட்டது.",
         "toast_phone_missing_title": "தொலைபேசி எண் தேவை",
         "toast_phone_missing_description": "பரிந்துரையைப் பகிர தொலைபேசி எண்ணை உள்ளிடவும்.",
-        "share_sms_title": "SMS மூலம் அனுப்பு",
-        "share_whatsapp_title": "WhatsApp மூலம் அனுப்பு",
+        "share_sms_button": "SMS அனுப்பு",
+        "share_sms_button_title": "SMS மூலம் அனுப்பு",
         "new_recommendation_button": "புதிய பரிந்துரையைத் தொடங்கு"
     },
     "news": {

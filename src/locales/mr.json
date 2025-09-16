@@ -71,14 +71,14 @@
         "results_products": "शिफारस केलेली उत्पादने",
         "results_stores": "कुठे खरेदी करावी",
         "share_title": "शिफारस शेअर करा",
-        "share_subtitle": "शिफारस SMS किंवा WhatsApp द्वारे पाठवण्यासाठी फोन नंबर प्रविष्ट करा.",
+        "share_subtitle_sms": "शिफारस SMS द्वारे पाठवण्यासाठी फोन नंबर प्रविष्ट करा.",
         "share_message": "ऍग्रीअसिस्ट AI शिफारस:\n\nपीक: {crop}\nकारण: {rationale}\nशिफारस केलेली उत्पादने: {products}",
         "toast_sharing_title": "शिफारस पाठवली",
         "toast_sharing_description": "शिफारस {platform} वर पाठवली आहे.",
         "toast_phone_missing_title": "फोन नंबर आवश्यक आहे",
         "toast_phone_missing_description": "शिफारस शेअर करण्यासाठी कृपया फोन नंबर प्रविष्ट करा.",
-        "share_sms_title": "SMS द्वारे पाठवा",
-        "share_whatsapp_title": "WhatsApp द्वारे पाठवा",
+        "share_sms_button": "SMS पाठवा",
+        "share_sms_button_title": "SMS द्वारे पाठवा",
         "new_recommendation_button": "नवीन शिफारस सुरू करा"
     },
     "news": {
@@ -101,5 +101,8 @@
         "input_listening": "ऐकत आहे...",
         "canned_query": "गरम हवामानात वालुकामय मातीसाठी सर्वोत्तम पिके कोणती आहेत?",
         "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही।"
+    },
+    "auth": {
+        "phone_label": "फोन नंबर"
     }
 }

@@ -71,14 +71,14 @@
         "results_products": "Recommended Products",
         "results_stores": "Where to Buy",
         "share_title": "Share Recommendation",
-        "share_subtitle": "Enter a phone number to send the recommendation via SMS or WhatsApp.",
+        "share_subtitle_sms": "Enter a phone number to send the recommendation via SMS.",
         "share_message": "AgriAssist AI Recommendation:\n\nCrop: {crop}\nRationale: {rationale}\nRecommended Products: {products}",
         "toast_sharing_title": "Recommendation Sent",
         "toast_sharing_description": "The recommendation has been sent to {platform}.",
         "toast_phone_missing_title": "Phone Number Required",
         "toast_phone_missing_description": "Please enter a phone number to share the recommendation.",
-        "share_sms_title": "Send via SMS",
-        "share_whatsapp_title": "Send via WhatsApp",
+        "share_sms_button": "Send SMS",
+        "share_sms_button_title": "Send via SMS",
         "new_recommendation_button": "Start New Recommendation"
     },
     "news": {
@@ -101,5 +101,8 @@
         "input_listening": "Listening...",
         "canned_query": "What are the best crops for sandy soil in a hot climate?",
         "default_error": "Sorry, I couldn't process that."
+    },
+    "auth": {
+        "phone_label": "Phone Number"
     }
 }
