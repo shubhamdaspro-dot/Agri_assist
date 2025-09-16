@@ -40,17 +40,20 @@ export default function AuthPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
+    // Check to avoid re-initializing on every render
     if (!(window as any).recaptchaVerifier) {
       (window as any).recaptchaVerifier = new RecaptchaVerifier(
         auth,
-        'recaptcha-container',
+        'recaptcha-container', // This ID must match an element in the JSX
         {
           size: 'invisible',
-          callback: (response: any) => {},
+          callback: (response: any) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+          },
         }
       );
     }
-  }, []);
+  }, []); // Empty dependency array ensures this runs only once
 
   const handleSendOtp = async () => {
     if (!phoneNumber) {
