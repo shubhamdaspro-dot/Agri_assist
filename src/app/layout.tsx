@@ -26,14 +26,14 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        <LanguageProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <LanguageProvider>
             <CartProvider>
               {children}
               <Toaster />
             </CartProvider>
-          </AuthProvider>
-        </LanguageProvider>
+          </LanguageProvider>
+        </AuthProvider>
       </body>
     </html>
   );

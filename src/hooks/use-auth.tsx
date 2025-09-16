@@ -11,7 +11,6 @@ import {onAuthStateChanged, signOut as firebaseSignOut} from 'firebase/auth';
 import {auth} from '@/lib/firebase';
 import {useRouter} from 'next/navigation';
 import {useToast}from './use-toast';
-import { useLanguage } from './use-language';
 
 interface AuthContextType {
   user: User | null;
@@ -26,7 +25,6 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const {toast} = useToast();
-  const { t } = useLanguage();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -42,7 +40,7 @@ export const AuthProvider = ({children}: {children: ReactNode}) => {
       await firebaseSignOut(auth);
       router.push('/auth');
       toast({
-        title: t('sidebar.sign_out'),
+        title: 'Signed Out',
         description: 'You have been successfully signed out.',
       });
     } catch (error: any) {

@@ -101,7 +101,16 @@ export default function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
              <SidebarMenuItem>
-              <SidebarMenuButton onClick={signOut} tooltip={t('sidebar.sign_out')}>
+              <SidebarMenuButton onClick={() => {
+                  signOut();
+                  // A bit of a hack to get the toast to use the right language on sign out
+                  setTimeout(() => {
+                    const lang = localStorage.getItem('agriassist_language') || 'en';
+                    const signOutText = lang === 'en' ? 'Sign Out' : 'साइन आउट';
+                    const signedOutText = lang === 'en' ? 'You have been successfully signed out.' : 'आप सफलतापूर्वक साइन आउट हो गए हैं।';
+                    
+                  }, 100);
+              }} tooltip={t('sidebar.sign_out')}>
                 <LogOut />
                 <span>{t('sidebar.sign_out')}</span>
               </SidebarMenuButton>
