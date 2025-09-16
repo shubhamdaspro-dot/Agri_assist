@@ -77,4 +77,18 @@
   body {
     @apply bg-background text-foreground font-body;
   }
+  .background-image {
+    background-image: url('https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?q=80&w=1974&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+  }
+  .parallax-container {
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      perspective: 1px;
+  }
+  .parallax-content {
+      transform-style: preserve-3d;
+  }
 }

@@ -7,6 +7,7 @@ import {SidebarInset, SidebarProvider} from '@/components/ui/sidebar';
 import ChatAssistant from '@/components/chat/chat-assistant';
 import {useAuth} from '@/hooks/use-auth';
 import {Loader2} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function AppLayout({children}: {children: React.ReactNode}) {
   const {user, loading} = useAuth();
@@ -29,12 +30,17 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
   return (
     <SidebarProvider>
       <div className="min-h-screen">
-        <AppSidebar />
-        <SidebarInset>
-          <Header />
-          <div className="p-4 sm:p-6 lg:p-8">{children}</div>
-        </SidebarInset>
-        <ChatAssistant />
+        <div className="fixed inset-0 bg-background-image opacity-10" />
+        <div className="parallax-container">
+          <AppSidebar />
+          <SidebarInset>
+            <div className="parallax-content">
+              <Header />
+              <div className="p-4 sm:p-6 lg:p-8">{children}</div>
+            </div>
+          </SidebarInset>
+          <ChatAssistant />
+        </div>
       </div>
     </SidebarProvider>
   );

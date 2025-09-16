@@ -29,14 +29,14 @@ export default function DashboardPage() {
 
   return (
     <div className="flex flex-col gap-8">
-      <Card className="w-full overflow-hidden">
+      <Card className="w-full overflow-hidden animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
         <div className="grid grid-cols-1 md:grid-cols-2">
           <div className="p-8 md:p-12 flex flex-col justify-center">
-            <h1 className="text-3xl md:text-4xl font-bold font-headline mb-4">{t('dashboard.welcome_title')}</h1>
-            <p className="text-muted-foreground mb-6 text-lg">
+            <h1 className="text-3xl md:text-4xl font-bold font-headline mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>{t('dashboard.welcome_title')}</h1>
+            <p className="text-muted-foreground mb-6 text-lg animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
               {t('dashboard.welcome_subtitle')}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
                 <Link href="/recommendations">
                   <Leaf className="mr-2 h-5 w-5" />
@@ -58,7 +58,7 @@ export default function DashboardPage() {
       </Card>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
+        <Card className="animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t('dashboard.card_recommendations_title')}</CardTitle>
             <Leaf className="h-4 w-4 text-muted-foreground" />
@@ -75,7 +75,7 @@ export default function DashboardPage() {
             </Button>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t('dashboard.card_marketplace_title')}</CardTitle>
             <ShoppingBag className="h-4 w-4 text-muted-foreground" />
@@ -92,7 +92,7 @@ export default function DashboardPage() {
             </Button>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t('dashboard.card_news_title')}</CardTitle>
             <Newspaper className="h-4 w-4 text-muted-foreground" />
@@ -111,7 +111,7 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <div>
+      <div className="animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
         <h2 className="text-2xl font-bold font-headline mb-4">{t('dashboard.latest_news_title')}</h2>
         <div className="grid gap-4 md:grid-cols-3">
             {loadingNews ? (
