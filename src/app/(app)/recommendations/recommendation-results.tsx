@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/hooks/use-cart';
 import { products } from '@/lib/data';
+import { useLanguage } from '@/hooks/use-language';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
@@ -12,6 +13,7 @@ type RecommendationResultsProps = {
 
 export function RecommendationResults({ results }: RecommendationResultsProps) {
   const { addToCart } = useCart();
+  const { t } = useLanguage();
   const recommendedProductsList = results.recommendedProducts.split(',').map(p => p.trim());
 
   const handleAddToCart = (productName: string) => {
@@ -25,7 +27,7 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
         id: `custom_${productName.replace(/\s+/g, '_')}`,
         name: productName,
         price: 1499.00, // Default price in INR
-        description: 'AI Recommended Product',
+        description: t('recommendations.ai_recommended_product'),
         image: 'https://picsum.photos/seed/mock/400/300',
         category: 'Fertilizers'
       });
@@ -37,28 +39,28 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-2xl">
           <CheckCircle className="h-8 w-8 text-accent" />
-          AI Recommendation
+          {t('recommendations.results_title')}
         </CardTitle>
-        <CardDescription>Based on the data you provided, here is our suggestion.</CardDescription>
+        <CardDescription>{t('recommendations.results_subtitle')}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
-          <h3 className="font-semibold text-lg">Recommended Crop:</h3>
+          <h3 className="font-semibold text-lg">{t('recommendations.results_crop')}:</h3>
           <p className="text-2xl font-bold text-primary">{results.recommendedCrop}</p>
         </div>
         <div>
-          <h3 className="font-semibold text-lg">Rationale:</h3>
+          <h3 className="font-semibold text-lg">{t('recommendations.results_rationale')}:</h3>
           <p className="text-muted-foreground">{results.rationale}</p>
         </div>
         <div>
-          <h3 className="font-semibold text-lg">Recommended Products:</h3>
+          <h3 className="font-semibold text-lg">{t('recommendations.results_products')}:</h3>
           <ul className="space-y-2 mt-2">
             {recommendedProductsList.map((product, index) => (
               <li key={index} className="flex items-center justify-between p-2 rounded-md bg-background">
                 <span>{product}</span>
                 <Button size="sm" variant="outline" onClick={() => handleAddToCart(product)}>
                   <ShoppingCart className="mr-2 h-4 w-4" />
-                  Add to Cart
+                  {t('cart.add_to_cart_button')}
                 </Button>
               </li>
             ))}

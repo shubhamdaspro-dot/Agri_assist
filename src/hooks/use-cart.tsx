@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import type { CartItem, Product } from '@/lib/types';
 import { useToast } from './use-toast';
+import { useLanguage } from './use-language';
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -19,6 +20,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   useEffect(() => {
     try {
@@ -53,16 +55,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       return [...prevItems, { ...product, quantity }];
     });
     toast({
-      title: "Item Added",
-      description: `${product.name} has been added to your cart.`,
+      title: t('cart.toast_item_added_title'),
+      description: t('cart.toast_item_added_description', { name: product.name }),
     });
   };
 
   const removeFromCart = (productId: string) => {
     setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
     toast({
-        title: "Item Removed",
-        description: `Item has been removed from your cart.`,
+        title: t('cart.toast_item_removed_title'),
+        description: t('cart.toast_item_removed_description'),
         variant: "destructive"
       });
   };

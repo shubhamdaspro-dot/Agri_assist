@@ -1,4 +1,6 @@
-import { loans } from '@/lib/data';
+'use client';
+import { useLanguage } from '@/hooks/use-language';
+import { loans_en, loans_hi } from '@/lib/data';
 import {
   Accordion,
   AccordionContent,
@@ -9,17 +11,20 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Check } from 'lucide-react';
 
 export default function LoansPage() {
+  const { t, language } = useLanguage();
+  const loans = language === 'hi' ? loans_hi : loans_en;
+  
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold font-headline">Agricultural Loan Schemes</h1>
+        <h1 className="text-3xl font-bold font-headline">{t('loans.page_title')}</h1>
         <p className="text-muted-foreground">
-          Information on government-supported loan schemes for farmers.
+          {t('loans.page_subtitle')}
         </p>
       </div>
       <Card>
         <CardHeader>
-            <CardTitle>Available Schemes</CardTitle>
+            <CardTitle>{t('loans.available_schemes')}</CardTitle>
         </CardHeader>
         <CardContent>
             <Accordion type="single" collapsible className="w-full">
@@ -30,7 +35,7 @@ export default function LoansPage() {
                     <p className="text-muted-foreground">{loan.description}</p>
                     
                     <div>
-                        <h4 className="font-semibold mb-2">Eligibility Criteria</h4>
+                        <h4 className="font-semibold mb-2">{t('loans.eligibility_criteria')}</h4>
                         <ul className="space-y-1 list-inside">
                         {loan.eligibility.map((item, index) => (
                             <li key={index} className="flex items-start">
@@ -42,7 +47,7 @@ export default function LoansPage() {
                     </div>
 
                     <div>
-                        <h4 className="font-semibold mb-2">Required Documents</h4>
+                        <h4 className="font-semibold mb-2">{t('loans.required_documents')}</h4>
                          <ul className="space-y-1 list-inside">
                         {loan.documents.map((item, index) => (
                             <li key={index} className="flex items-start">
@@ -54,7 +59,7 @@ export default function LoansPage() {
                     </div>
 
                     <div>
-                        <h4 className="font-semibold mb-2">Application Process</h4>
+                        <h4 className="font-semibold mb-2">{t('loans.application_process')}</h4>
                          <ul className="space-y-1 list-inside">
                         {loan.process.map((item, index) => (
                             <li key={index} className="flex items-start">

@@ -1,4 +1,19 @@
 {
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "recommendations": "Recommendations",
+        "products": "Products",
+        "news": "News",
+        "loans": "Loans",
+        "cart": "Shopping Cart",
+        "help": "Help"
+    },
+    "header": {
+        "change_language": "Change language",
+        "english": "English",
+        "hindi": "हिंदी (Hindi)",
+        "shopping_cart": "Shopping Cart"
+    },
     "dashboard": {
         "welcome_title": "Welcome to AgriAssist!",
         "welcome_subtitle": "Your AI-powered partner for modern farming. Get crop recommendations, buy products, and stay updated with the latest agricultural news.",
@@ -16,5 +31,96 @@
         "card_news_subheading": "Latest agricultural news and policies.",
         "read_news_button": "Read News",
         "latest_news_title": "Latest News"
+    },
+    "recommendations": {
+        "page_title": "AI Crop & Product Recommendations",
+        "page_subtitle": "Fill in the details below to get a personalized recommendation from our AI assistant.",
+        "toast_location_accessed_title": "Location Accessed",
+        "toast_location_accessed_description": "Your location will be used to auto-fill form details.",
+        "location_error_title": "Location Error",
+        "location_error_manual": "Could not access location. Please enter your details manually.",
+        "location_error_unsupported": "Geolocation is not supported by this browser.",
+        "weather_placeholder": "Current weather at {lat}, {long}. Temperature: 28°C, Humidity: 70%, No immediate rain forecasted.",
+        "toast_soil_analysis_complete_title": "Soil Analysis Complete",
+        "toast_soil_analysis_complete_description": "Identified as {soilType}. {analysis}",
+        "toast_soil_analysis_failed_title": "Soil Analysis Failed",
+        "toast_soil_analysis_failed_description": "Could not analyze the soil photo.",
+        "toast_error_title": "Error",
+        "toast_error_description": "Failed to get recommendations.",
+        "form_title": "Enter Your Farm's Details",
+        "form_subtitle": "Provide details about your farm for a personalized AI recommendation.",
+        "form_region_label": "Geographic Region",
+        "form_region_placeholder": "e.g., Punjab, India",
+        "form_weather_label": "Weather Conditions",
+        "form_weather_placeholder": "e.g., 'Hot and humid, 35°C, with chances of rain next week.'",
+        "form_soil_type_label": "Soil Type",
+        "form_soil_type_placeholder": "Upload a photo or enter manually",
+        "form_soil_photo_label": "Soil Photo (Optional)",
+        "form_soil_photo_analyzing_button": "Analyzing...",
+        "form_soil_photo_upload_button": "Upload Soil Photo",
+        "form_soil_photo_description": "Get AI-powered soil type analysis by uploading a photo.",
+        "optional_details_title": "Optional Details",
+        "optional_details_description": "Providing the following details will improve the accuracy of your recommendation.",
+        "form_yields_label": "Historical Yields",
+        "form_yields_placeholder": "e.g., Last year's wheat yield was 2 tons/acre",
+        "form_demand_label": "Market Demand",
+        "form_demand_placeholder": "e.g., High demand for organic vegetables",
+        "form_submit_analyzing_button": "Analyzing...",
+        "form_submit_analyzing_soil_button": "Analyzing Soil...",
+        "form_submit_button": "Get Recommendations",
+        "ai_recommended_product": "AI Recommended Product",
+        "results_title": "AI Recommendation",
+        "results_subtitle": "Based on the data you provided, here is our suggestion.",
+        "results_crop": "Recommended Crop",
+        "results_rationale": "Rationale",
+        "results_products": "Recommended Products"
+    },
+    "products": {
+        "page_title": "Product Marketplace",
+        "page_subtitle": "Browse our curated selection of high-quality agricultural products."
+    },
+    "news": {
+        "page_title": "Agricultural News & Updates",
+        "page_subtitle": "Stay informed with the latest news, policies, and market trends."
+    },
+    "loans": {
+        "page_title": "Agricultural Loan Schemes",
+        "page_subtitle": "Information on government-supported loan schemes for farmers.",
+        "available_schemes": "Available Schemes",
+        "eligibility_criteria": "Eligibility Criteria",
+        "required_documents": "Required Documents",
+        "application_process": "Application Process"
+    },
+    "cart": {
+        "page_title": "Shopping Cart",
+        "page_subtitle": "Review and manage the items in your cart.",
+        "empty_title": "Your cart is empty",
+        "empty_subtitle": "Looks like you haven't added anything to your cart yet.",
+        "start_shopping_button": "Start Shopping",
+        "your_cart": "Your Cart",
+        "table_product": "Product",
+        "table_details": "Details",
+        "table_quantity": "Quantity",
+        "table_price": "Price",
+        "summary_title": "Order Summary",
+        "summary_subtotal": "Subtotal",
+        "summary_shipping": "Shipping",
+        "summary_shipping_cost": "FREE",
+        "summary_total": "Total",
+        "checkout_button": "Proceed to Checkout",
+        "clear_cart_button": "Clear Cart",
+        "add_to_cart_button": "Add to Cart",
+        "toast_item_added_title": "Item Added",
+        "toast_item_added_description": "{name} has been added to your cart.",
+        "toast_item_removed_title": "Item Removed",
+        "toast_item_removed_description": "Item has been removed from your cart."
+    },
+    "chat": {
+        "title": "AI Farming Assistant",
+        "welcome_message": "Ask me anything about farming!",
+        "input_placeholder": "Type your question...",
+        "input_listening": "Listening...",
+        "canned_query": "What are the best crops for sandy soil in a hot climate?",
+        "default_error": "Sorry, I couldn't process that."
     }
 }

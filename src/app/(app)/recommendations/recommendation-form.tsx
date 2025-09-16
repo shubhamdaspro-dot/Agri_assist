@@ -15,6 +15,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { useLanguage } from '@/hooks/use-language';
 
 const formSchema = z.object({
   weatherData: z.string().min(10, 'Please describe the current weather conditions.'),
@@ -34,6 +35,7 @@ type RecommendationFormProps = {
 
 export function RecommendationForm({ setResults, setIsLoading, isLoading, location }: RecommendationFormProps) {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const [soilPhoto, setSoilPhoto] = useState<string | null>(null);
   const [isAnalyzingSoil, setIsAnalyzingSoil] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -53,9 +55,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
     if (location) {
       form.setValue('geographicRegion', `${location.latitude}, ${location.longitude}`);
       // In a real app, you'd use a weather API. For now, we'll use a placeholder.
-      form.setValue('weatherData', `Current weather at ${location.latitude}, ${location.longitude}. Temperature: 28°C, Humidity: 70%, No immediate rain forecasted.`);
+      form.setValue('weatherData', t('recommendations.weather_placeholder', {lat: location.latitude, long: location.longitude}));
     }
-  }, [location, form]);
+  }, [location, form, t]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -69,14 +71,14 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
         if (response.success && response.data) {
           form.setValue('soilType', response.data.soilType);
           toast({
-            title: 'Soil Analysis Complete',
-            description: `Identified as ${response.data.soilType}. ${response.data.analysis}`,
+            title: t('recommendations.toast_soil_analysis_complete_title'),
+            description: t('recommendations.toast_soil_analysis_complete_description', {soilType: response.data.soilType, analysis: response.data.analysis}),
           });
         } else {
           toast({
             variant: 'destructive',
-            title: 'Soil Analysis Failed',
-            description: response.error || 'Could not analyze the soil photo.',
+            title: t('recommendations.toast_soil_analysis_failed_title'),
+            description: response.error || t('recommendations.toast_soil_analysis_failed_description'),
           });
         }
         setIsAnalyzingSoil(false);
@@ -94,8 +96,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
     } else {
       toast({
         variant: 'destructive',
-        title: 'Error',
-        description: response.error || 'Failed to get recommendations.',
+        title: t('recommendations.toast_error_title'),
+        description: response.error || t('recommendations.toast_error_description'),
       });
     }
     setIsLoading(false);
@@ -104,8 +106,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Enter Your Farm's Details</CardTitle>
-        <CardDescription>Provide details about your farm for a personalized AI recommendation.</CardDescription>
+        <CardTitle>{t('recommendations.form_title')}</CardTitle>
+        <CardDescription>{t('recommendations.form_subtitle')}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -116,9 +118,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 name="geographicRegion"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Geographic Region</FormLabel>
+                    <FormLabel>{t('recommendations.form_region_label')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Punjab, India" {...field} disabled={isLoading} />
+                      <Input placeholder={t('recommendations.form_region_placeholder')} {...field} disabled={isLoading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -129,10 +131,10 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 name="weatherData"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Weather Conditions</FormLabel>
+                    <FormLabel>{t('recommendations.form_weather_label')}</FormLabel>
                     <FormControl>
                       <Textarea
-                        placeholder="e.g., 'Hot and humid, 35°C, with chances of rain next week.'"
+                        placeholder={t('recommendations.form_weather_placeholder')}
                         {...field}
                         disabled={isLoading}
                       />
@@ -146,9 +148,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 name="soilType"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Soil Type</FormLabel>
+                    <FormLabel>{t('recommendations.form_soil_type_label')}</FormLabel>
                     <FormControl>
-                        <Input placeholder="Upload a photo or enter manually" {...field} disabled={isLoading || isAnalyzingSoil} />
+                        <Input placeholder={t('recommendations.form_soil_type_placeholder')} {...field} disabled={isLoading || isAnalyzingSoil} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -157,7 +159,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
             </div>
             
             <div>
-              <FormLabel>Soil Photo (Optional)</FormLabel>
+              <FormLabel>{t('recommendations.form_soil_photo_label')}</FormLabel>
               <div className="mt-2">
                 {soilPhoto ? (
                   <div className="relative w-full max-w-xs">
@@ -177,7 +179,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 ) : (
                   <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()} disabled={isLoading || isAnalyzingSoil}>
                     <Upload className="mr-2 h-4 w-4" />
-                    {isAnalyzingSoil ? 'Analyzing...' : 'Upload Soil Photo'}
+                    {isAnalyzingSoil ? t('recommendations.form_soil_photo_analyzing_button') : t('recommendations.form_soil_photo_upload_button')}
                   </Button>
                 )}
                 <Input
@@ -188,15 +190,15 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                   onChange={handleFileChange}
                   disabled={isLoading || isAnalyzingSoil}
                 />
-                <FormDescription className="mt-2">Get AI-powered soil type analysis by uploading a photo.</FormDescription>
+                <FormDescription className="mt-2">{t('recommendations.form_soil_photo_description')}</FormDescription>
               </div>
             </div>
 
             <Alert>
               <Paperclip className="h-4 w-4" />
-              <AlertTitle>Optional Details</AlertTitle>
+              <AlertTitle>{t('recommendations.optional_details_title')}</AlertTitle>
               <AlertDescription>
-                Providing the following details will improve the accuracy of your recommendation.
+                {t('recommendations.optional_details_description')}
               </AlertDescription>
             </Alert>
             
@@ -206,9 +208,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 name="historicalYields"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Historical Yields</FormLabel>
+                    <FormLabel>{t('recommendations.form_yields_label')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., Last year's wheat yield was 2 tons/acre" {...field} disabled={isLoading} />
+                      <Input placeholder={t('recommendations.form_yields_placeholder')} {...field} disabled={isLoading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -219,9 +221,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 name="marketDemand"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Market Demand</FormLabel>
+                    <FormLabel>{t('recommendations.form_demand_label')}</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., High demand for organic vegetables" {...field} disabled={isLoading} />
+                      <Input placeholder={t('recommendations.form_demand_placeholder')} {...field} disabled={isLoading} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -231,7 +233,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
             
             <Button type="submit" disabled={isLoading || isAnalyzingSoil} className="w-full md:w-auto bg-accent hover:bg-accent/90 text-accent-foreground">
               {(isLoading || isAnalyzingSoil) && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {isLoading ? 'Analyzing...' : isAnalyzingSoil ? 'Analyzing Soil...' : 'Get Recommendations'}
+              {isLoading ? t('recommendations.form_submit_analyzing_button') : isAnalyzingSoil ? t('recommendations.form_submit_analyzing_soil_button') : t('recommendations.form_submit_button')}
             </Button>
           </form>
         </Form>

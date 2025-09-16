@@ -1,4 +1,19 @@
 {
+    "sidebar": {
+        "dashboard": "डैशबोर्ड",
+        "recommendations": "सिफारिशें",
+        "products": "उत्पाद",
+        "news": "समाचार",
+        "loans": "ऋण",
+        "cart": "शॉपिंग कार्ट",
+        "help": "मदद"
+    },
+    "header": {
+        "change_language": "भाषा बदलें",
+        "english": "English",
+        "hindi": "हिंदी",
+        "shopping_cart": "शॉपिंग कार्ट"
+    },
     "dashboard": {
         "welcome_title": "एग्रीअसिस्ट में आपका स्वागत है!",
         "welcome_subtitle": "आधुनिक खेती के लिए आपका AI-संचालित भागीदार। फसल सिफारिशें प्राप्त करें, उत्पाद खरीदें, और नवीनतम कृषि समाचारों से अपडेट रहें।",
@@ -16,5 +31,96 @@
         "card_news_subheading": "नवीनतम कृषि समाचार और नीतियां।",
         "read_news_button": "समाचार पढ़ें",
         "latest_news_title": "ताज़ा खबर"
+    },
+    "recommendations": {
+        "page_title": "AI फसल और उत्पाद सिफारिशें",
+        "page_subtitle": "हमारे AI सहायक से व्यक्तिगत सिफारिश प्राप्त करने के लिए नीचे दिए गए विवरण भरें।",
+        "toast_location_accessed_title": "स्थान पहुँचा",
+        "toast_location_accessed_description": "आपके स्थान का उपयोग फ़ॉर्म विवरण को स्वतः भरने के लिए किया जाएगा।",
+        "location_error_title": "स्थान त्रुटि",
+        "location_error_manual": "स्थान तक नहीं पहुँच सका। कृपया अपना विवरण मैन्युअल रूप से दर्ज करें।",
+        "location_error_unsupported": "यह ब्राउज़र जियोलोकेशन का समर्थन नहीं करता है।",
+        "weather_placeholder": "{lat}, {long} पर वर्तमान मौसम। तापमान: 28°C, आर्द्रता: 70%, तत्काल बारिश का कोई पूर्वानुमान नहीं।",
+        "toast_soil_analysis_complete_title": "मृदा विश्लेषण पूर्ण",
+        "toast_soil_analysis_complete_description": "{soilType} के रूप में पहचाना गया। {analysis}",
+        "toast_soil_analysis_failed_title": "मृदा विश्लेषण विफल",
+        "toast_soil_analysis_failed_description": "मृदा की तस्वीर का विश्लेषण नहीं किया जा सका।",
+        "toast_error_title": "त्रुटि",
+        "toast_error_description": "सिफारिशें प्राप्त करने में विफल।",
+        "form_title": "अपने खेत का विवरण दर्ज करें",
+        "form_subtitle": "व्यक्तिगत AI सिफारिश के लिए अपने खेत के बारे में विवरण प्रदान करें।",
+        "form_region_label": "भौगोलिक क्षेत्र",
+        "form_region_placeholder": "जैसे, पंजाब, भारत",
+        "form_weather_label": "मौसम की स्थिति",
+        "form_weather_placeholder": "जैसे, 'गर्म और आर्द्र, 35°C, अगले सप्ताह बारिश की संभावना के साथ।'",
+        "form_soil_type_label": "मिट्टी का प्रकार",
+        "form_soil_type_placeholder": "एक तस्वीर अपलोड करें या मैन्युअल रूप से दर्ज करें",
+        "form_soil_photo_label": "मृदा फोटो (वैकल्पिक)",
+        "form_soil_photo_analyzing_button": "विश्लेषण हो रहा है...",
+        "form_soil_photo_upload_button": "मृदा फोटो अपलोड करें",
+        "form_soil_photo_description": "एक तस्वीर अपलोड करके AI-संचालित मृदा प्रकार विश्लेषण प्राप्त करें।",
+        "optional_details_title": "वैकल्पिक विवरण",
+        "optional_details_description": "निम्नलिखित विवरण प्रदान करने से आपकी सिफारिश की सटीकता में सुधार होगा।",
+        "form_yields_label": "ऐतिहासिक पैदावार",
+        "form_yields_placeholder": "जैसे, पिछले साल गेहूं की पैदावार 2 टन/एकड़ थी",
+        "form_demand_label": "बाजार की मांग",
+        "form_demand_placeholder": "जैसे, जैविक सब्जियों की उच्च मांग",
+        "form_submit_analyzing_button": "विश्लेषण हो रहा है...",
+        "form_submit_analyzing_soil_button": "मृदा का विश्लेषण...",
+        "form_submit_button": "सिफारिशें प्राप्त करें",
+        "ai_recommended_product": "AI अनुशंसित उत्पाद",
+        "results_title": "AI सिफारिश",
+        "results_subtitle": "आपके द्वारा प्रदान किए गए डेटा के आधार पर, यहाँ हमारा सुझाव है।",
+        "results_crop": "अनुशंसित फसल",
+        "results_rationale": "तर्क",
+        "results_products": "अनुशंसित उत्पाद"
+    },
+    "products": {
+        "page_title": "उत्पाद बाज़ार",
+        "page_subtitle": "हमारे उच्च गुणवत्ता वाले कृषि उत्पादों के क्यूरेटेड चयन को ब्राउज़ करें।"
+    },
+    "news": {
+        "page_title": "कृषि समाचार और अपडेट",
+        "page_subtitle": "नवीनतम समाचार, नीतियों और बाजार के रुझानों से सूचित रहें।"
+    },
+    "loans": {
+        "page_title": "कृषि ऋण योजनाएं",
+        "page_subtitle": "किसानों के लिए सरकार समर्थित ऋण योजनाओं की जानकारी।",
+        "available_schemes": "उपलब्ध योजनाएं",
+        "eligibility_criteria": "पात्रता मापदंड",
+        "required_documents": "आवश्यक दस्तावेज़",
+        "application_process": "आवेदन प्रक्रिया"
+    },
+    "cart": {
+        "page_title": "शॉपिंग कार्ट",
+        "page_subtitle": "अपनी कार्ट में वस्तुओं की समीक्षा और प्रबंधन करें।",
+        "empty_title": "आपकी कार्ट खाली है",
+        "empty_subtitle": "लगता है आपने अभी तक अपनी कार्ट में कुछ भी नहीं जोड़ा है।",
+        "start_shopping_button": "खरीदारी शुरू करें",
+        "your_cart": "आपकी कार्ट",
+        "table_product": "उत्पाद",
+        "table_details": "विवरण",
+        "table_quantity": "मात्रा",
+        "table_price": "कीमत",
+        "summary_title": "आदेश सारांश",
+        "summary_subtotal": "उप-योग",
+        "summary_shipping": "शिपिंग",
+        "summary_shipping_cost": "मुफ़्त",
+        "summary_total": "कुल",
+        "checkout_button": "चेकआउट के लिए आगे बढ़ें",
+        "clear_cart_button": "कार्ट साफ़ करें",
+        "add_to_cart_button": "कार्ट में डालें",
+        "toast_item_added_title": "आइटम जोड़ा गया",
+        "toast_item_added_description": "{name} को आपकी कार्ट में जोड़ दिया गया है।",
+        "toast_item_removed_title": "आइटम हटाया गया",
+        "toast_item_removed_description": "आइटम को आपकी कार्ट से हटा दिया गया है।"
+    },
+    "chat": {
+        "title": "AI कृषि सहायक",
+        "welcome_message": "मुझसे खेती के बारे में कुछ भी पूछें!",
+        "input_placeholder": "अपना प्रश्न टाइप करें...",
+        "input_listening": "सुन रहा हूँ...",
+        "canned_query": "गर्म जलवायु में रेतीली मिट्टी के लिए सबसे अच्छी फसलें कौन सी हैं?",
+        "default_error": "क्षमा करें, मैं उसे संसाधित नहीं कर सका।"
     }
 }

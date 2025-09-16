@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useLanguage } from '@/hooks/use-language';
 
 export default function NewsPage() {
-  const { language } = useLanguage();
+  const { t, language } = useLanguage();
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,9 +27,9 @@ export default function NewsPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold font-headline">Agricultural News & Updates</h1>
+        <h1 className="text-3xl font-bold font-headline">{t('news.page_title')}</h1>
         <p className="text-muted-foreground">
-          Stay informed with the latest news, policies, and market trends.
+          {t('news.page_subtitle')}
         </p>
       </div>
       <div className="space-y-6">

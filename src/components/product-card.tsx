@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import { ShoppingCart } from 'lucide-react';
 import type { Product } from '@/lib/types';
 import { useCart } from '@/hooks/use-cart';
+import { useLanguage } from '@/hooks/use-language';
 
 interface ProductCardProps {
   product: Product;
@@ -13,6 +14,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
     const { addToCart } = useCart();
+    const { t } = useLanguage();
   return (
     <Card className="flex flex-col">
       <CardHeader>
@@ -36,7 +38,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <CardFooter>
         <Button className="w-full" onClick={() => addToCart(product)}>
           <ShoppingCart className="mr-2 h-4 w-4" />
-          Add to Cart
+          {t('cart.add_to_cart_button')}
         </Button>
       </CardFooter>
     </Card>

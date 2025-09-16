@@ -14,17 +14,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
 
-function getTitleFromPath(path: string): string {
+function getTitleKey(path: string): string {
   const pathName = path.split('/').pop() || 'dashboard';
-  if (pathName === 'recommendations') return 'AI Recommendations';
-  return pathName.charAt(0).toUpperCase() + pathName.slice(1);
+  return `sidebar.${pathName}`;
 }
 
 export default function Header() {
   const pathname = usePathname();
   const { cartCount } = useCart();
-  const { setLanguage } = useLanguage();
-  const title = getTitleFromPath(pathname);
+  const { t, setLanguage } = useLanguage();
+  const titleKey = getTitleKey(pathname);
+  const title = t(titleKey);
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
@@ -35,12 +35,12 @@ export default function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
               <Languages className="h-5 w-5" />
-              <span className="sr-only">Change language</span>
+              <span className="sr-only">{t('header.change_language')}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => setLanguage('en')}>English</DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setLanguage('hi')}>हिंदी (Hindi)</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLanguage('en')}>{t('header.english')}</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setLanguage('hi')}>{t('header.hindi')}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         <Button asChild variant="ghost" size="icon">
@@ -51,7 +51,7 @@ export default function Header() {
                 {cartCount}
               </span>
             )}
-            <span className="sr-only">Shopping Cart</span>
+            <span className="sr-only">{t('header.shopping_cart')}</span>
           </Link>
         </Button>
       </div>

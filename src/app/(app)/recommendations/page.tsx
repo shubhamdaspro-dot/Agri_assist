@@ -7,6 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { MapPin } from 'lucide-react';
+import { useLanguage } from '@/hooks/use-language';
 
 export default function RecommendationsPage() {
   const [results, setResults] = useState<GenerateCropRecommendationsOutput | null>(null);
@@ -14,6 +15,7 @@ export default function RecommendationsPage() {
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
 
   useEffect(() => {
@@ -25,34 +27,34 @@ export default function RecommendationsPage() {
             longitude: position.coords.longitude,
           });
           toast({
-            title: "Location Accessed",
-            description: "Your location will be used to auto-fill form details.",
+            title: t('recommendations.toast_location_accessed_title'),
+            description: t('recommendations.toast_location_accessed_description'),
           })
         },
         (error) => {
-          setLocationError("Could not access location. Please enter your details manually.");
+          setLocationError(t('recommendations.location_error_manual'));
           console.error("Geolocation error:", error);
         }
       );
     } else {
-      setLocationError("Geolocation is not supported by this browser.");
+      setLocationError(t('recommendations.location_error_unsupported'));
     }
-  }, [toast]);
+  }, [toast, t]);
 
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold font-headline">AI Crop & Product Recommendations</h1>
+        <h1 className="text-3xl font-bold font-headline">{t('recommendations.page_title')}</h1>
         <p className="text-muted-foreground">
-          Fill in the details below to get a personalized recommendation from our AI assistant.
+          {t('recommendations.page_subtitle')}
         </p>
       </div>
 
       {locationError && (
         <Alert variant="destructive">
           <MapPin className="h-4 w-4" />
-          <AlertTitle>Location Error</AlertTitle>
+          <AlertTitle>{t('recommendations.location_error_title')}</AlertTitle>
           <AlertDescription>{locationError}</AlertDescription>
         </Alert>
       )}
@@ -124,4 +126,3 @@ function CardDescription({ children }: { children: React.ReactNode }) {
 function CardContent({ children }: { children: React.ReactNode }) {
     return <div className="p-6 pt-0">{children}</div>
 }
-

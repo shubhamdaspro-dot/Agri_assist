@@ -9,6 +9,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { answerTextQueryWithVoice } from '@/lib/actions';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { cn } from '@/lib/utils';
+import { useLanguage } from '@/hooks/use-language';
 
 type Message = {
   id: number;
@@ -25,6 +26,7 @@ export default function ChatAssistant() {
   const [isProcessing, setIsProcessing] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -72,7 +74,7 @@ export default function ChatAssistant() {
       const errorMessage: Message = {
         id: Date.now() + 1,
         role: 'assistant',
-        text: result.error || "Sorry, I couldn't process that.",
+        text: result.error || t('chat.default_error'),
       };
       setMessages(prev => [...prev, errorMessage]);
     }
@@ -88,7 +90,7 @@ export default function ChatAssistant() {
       setIsProcessing(true);
       // Simulate voice processing and send a canned query
       setTimeout(() => {
-        handleSend("What are the best crops for sandy soil in a hot climate?");
+        handleSend(t('chat.canned_query'));
       }, 1500);
     } else {
       // Start recording
@@ -102,7 +104,7 @@ export default function ChatAssistant() {
         <DialogContent className="sm:max-w-[425px] md:max-w-[500px] h-[70vh] flex flex-col p-0 gap-0">
           <DialogHeader className="p-4 border-b">
             <DialogTitle className="flex items-center gap-2">
-              <Bot className="text-primary" /> AI Farming Assistant
+              <Bot className="text-primary" /> {t('chat.title')}
             </DialogTitle>
           </DialogHeader>
           <ScrollArea className="flex-1" ref={scrollAreaRef}>
@@ -110,7 +112,7 @@ export default function ChatAssistant() {
               {messages.length === 0 && (
                 <div className='text-center text-muted-foreground pt-10'>
                     <MessageCircle className='mx-auto h-10 w-10 mb-2'/>
-                    <p>Ask me anything about farming!</p>
+                    <p>{t('chat.welcome_message')}</p>
                 </div>
               )}
               {messages.map(message => (
@@ -147,7 +149,7 @@ export default function ChatAssistant() {
               <Input
                 value={input}
                 onChange={e => setInput(e.target.value)}
-                placeholder={isRecording ? "Listening..." : "Type your question..."}
+                placeholder={isRecording ? t('chat.input_listening') : t('chat.input_placeholder')}
                 disabled={isProcessing || isRecording}
               />
               <Button type="button" size="icon" variant={isRecording ? "destructive" : "secondary"} onClick={handleMicClick} disabled={isProcessing}>

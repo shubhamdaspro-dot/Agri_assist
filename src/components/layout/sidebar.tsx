@@ -19,13 +19,14 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useLanguage } from '@/hooks/use-language';
 
 const navItems = [
-  { href: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-  { href: '/recommendations', icon: Leaf, label: 'Recommendations' },
-  { href: '/products', icon: ShoppingCart, label: 'Products' },
-  { href: '/news', icon: Newspaper, label: 'News' },
-  { href: '/loans', icon: Landmark, label: 'Loans' },
+  { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
+  { href: '/recommendations', icon: Leaf, labelKey: 'sidebar.recommendations' },
+  { href: '/products', icon: ShoppingCart, labelKey: 'sidebar.products' },
+  { href: '/news', icon: Newspaper, labelKey: 'sidebar.news' },
+  { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];
 
 function AgriAssistLogo() {
@@ -53,6 +54,7 @@ function AgriAssistLogo() {
 
 export default function AppSidebar() {
   const pathname = usePathname();
+  const { t } = useLanguage();
   return (
     <Sidebar>
       <SidebarHeader>
@@ -65,11 +67,11 @@ export default function AppSidebar() {
               <SidebarMenuButton
                 asChild
                 isActive={pathname.startsWith(item.href)}
-                tooltip={item.label}
+                tooltip={t(item.labelKey)}
               >
                 <Link href={item.href}>
                   <item.icon />
-                  <span>{item.label}</span>
+                  <span>{t(item.labelKey)}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -79,10 +81,10 @@ export default function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="Help">
+              <SidebarMenuButton asChild tooltip={t('sidebar.help')}>
                 <Link href="#">
                   <CircleHelp />
-                  <span>Help</span>
+                  <span>{t('sidebar.help')}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

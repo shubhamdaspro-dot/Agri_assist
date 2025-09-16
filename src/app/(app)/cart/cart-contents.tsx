@@ -7,18 +7,20 @@ import { X, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { useLanguage } from '@/hooks/use-language';
 
 export default function CartContents() {
   const { cartItems, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart();
+  const { t } = useLanguage();
 
   if (cartItems.length === 0) {
     return (
       <div className="text-center py-20">
         <ShoppingCart className="mx-auto h-16 w-16 text-muted-foreground" />
-        <h2 className="mt-4 text-2xl font-semibold">Your cart is empty</h2>
-        <p className="mt-2 text-muted-foreground">Looks like you haven't added anything to your cart yet.</p>
+        <h2 className="mt-4 text-2xl font-semibold">{t('cart.empty_title')}</h2>
+        <p className="mt-2 text-muted-foreground">{t('cart.empty_subtitle')}</p>
         <Button asChild className="mt-6">
-          <Link href="/products">Start Shopping</Link>
+          <Link href="/products">{t('cart.start_shopping_button')}</Link>
         </Button>
       </div>
     );
@@ -29,16 +31,16 @@ export default function CartContents() {
         <div className="lg:col-span-2">
             <Card>
                 <CardHeader>
-                    <CardTitle>Your Cart</CardTitle>
+                    <CardTitle>{t('cart.your_cart')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <Table>
                     <TableHeader>
                         <TableRow>
-                        <TableHead className="w-[100px]">Product</TableHead>
-                        <TableHead>Details</TableHead>
-                        <TableHead className="text-center">Quantity</TableHead>
-                        <TableHead className="text-right">Price</TableHead>
+                        <TableHead className="w-[100px]">{t('cart.table_product')}</TableHead>
+                        <TableHead>{t('cart.table_details')}</TableHead>
+                        <TableHead className="text-center">{t('cart.table_quantity')}</TableHead>
+                        <TableHead className="text-right">{t('cart.table_price')}</TableHead>
                         <TableHead className="w-[50px]"></TableHead>
                         </TableRow>
                     </TableHeader>
@@ -74,25 +76,25 @@ export default function CartContents() {
         <div>
             <Card>
                 <CardHeader>
-                    <CardTitle>Order Summary</CardTitle>
+                    <CardTitle>{t('cart.summary_title')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="flex justify-between">
-                        <span>Subtotal</span>
+                        <span>{t('cart.summary_subtotal')}</span>
                         <span>₹{cartTotal.toFixed(2)}</span>
                     </div>
                      <div className="flex justify-between">
-                        <span>Shipping</span>
-                        <span>FREE</span>
+                        <span>{t('cart.summary_shipping')}</span>
+                        <span>{t('cart.summary_shipping_cost')}</span>
                     </div>
                      <div className="flex justify-between font-bold text-lg">
-                        <span>Total</span>
+                        <span>{t('cart.summary_total')}</span>
                         <span>₹{cartTotal.toFixed(2)}</span>
                     </div>
                 </CardContent>
                 <CardFooter className="flex-col gap-2">
-                    <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">Proceed to Checkout</Button>
-                    <Button variant="outline" className="w-full" onClick={clearCart}>Clear Cart</Button>
+                    <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">{t('cart.checkout_button')}</Button>
+                    <Button variant="outline" className="w-full" onClick={clearCart}>{t('cart.clear_cart_button')}</Button>
                 </CardFooter>
             </Card>
         </div>
