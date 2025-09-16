@@ -29,7 +29,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       <CardContent className="flex-grow">
         <CardTitle className="text-lg">{product.name}</CardTitle>
         <CardDescription className="text-primary font-bold text-lg mt-1">
-            ${product.price.toFixed(2)}
+            ₹{product.price.toFixed(2)}
         </CardDescription>
         <p className="text-sm text-muted-foreground mt-2">{product.description}</p>
       </CardContent>
