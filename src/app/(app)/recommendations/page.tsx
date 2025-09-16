@@ -68,8 +68,7 @@ export default function RecommendationsPage() {
         location={location}
       />
 
-      {isLoading && <LoadingSkeleton />}
-      {results && !isLoading && <RecommendationResults results={results} />}
+      {isLoading ? <LoadingSkeleton /> : results ? <RecommendationResults results={results} /> : null}
     </div>
   );
 }
