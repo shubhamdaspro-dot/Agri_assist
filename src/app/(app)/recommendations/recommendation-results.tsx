@@ -24,7 +24,7 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
       addToCart({
         id: `custom_${productName.replace(/\s+/g, '_')}`,
         name: productName,
-        price: 19.99, // Default price
+        price: 1499.00, // Default price in INR
         description: 'AI Recommended Product',
         image: 'https://picsum.photos/seed/mock/400/300',
         category: 'Fertilizers'

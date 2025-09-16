@@ -4,7 +4,7 @@ export const products: Product[] = [
   {
     id: 'prod_1',
     name: 'Premium Wheat Seeds',
-    price: 25.99,
+    price: 1999.00,
     description: 'High-yield, disease-resistant wheat seeds for a bountiful harvest.',
     image: 'https://picsum.photos/seed/seeds/400/300',
     category: 'Seeds',
@@ -12,7 +12,7 @@ export const products: Product[] = [
   {
     id: 'prod_2',
     name: 'All-Purpose Fertilizer',
-    price: 19.50,
+    price: 1499.00,
     description: 'NPK balanced fertilizer for healthy plant growth.',
     image: 'https://picsum.photos/seed/fertilizer/400/300',
     category: 'Fertilizers',
@@ -20,7 +20,7 @@ export const products: Product[] = [
   {
     id: 'prod_3',
     name: 'Organic Pest Control',
-    price: 15.00,
+    price: 999.00,
     description: 'Neem-based organic solution to protect your crops from common pests.',
     image: 'https://picsum.photos/seed/pesticide/400/300',
     category: 'Pesticides',
@@ -28,7 +28,7 @@ export const products: Product[] = [
   {
     id: 'prod_4',
     name: 'Stainless Steel Trowel',
-    price: 12.75,
+    price: 499.00,
     description: 'Ergonomic and durable trowel for all your planting needs.',
     image: 'https://picsum.photos/seed/trowel/400/300',
     category: 'Tools',
@@ -36,7 +36,7 @@ export const products: Product[] = [
   {
     id: 'prod_5',
     name: 'Heavy-Duty Watering Can',
-    price: 22.00,
+    price: 799.00,
     description: '5-gallon capacity watering can, built to last.',
     image: 'https://picsum.photos/seed/wateringcan/400/300',
     category: 'Tools',
@@ -44,7 +44,7 @@ export const products: Product[] = [
     {
     id: 'prod_6',
     name: 'Gardening Gloves',
-    price: 8.99,
+    price: 299.00,
     description: 'Protective and comfortable gloves for all gardening tasks.',
     image: 'https://picsum.photos/seed/gloves/400/300',
     category: 'Tools',
