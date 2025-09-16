@@ -11,7 +11,6 @@ import {
 import {
   LayoutDashboard,
   Leaf,
-  ShoppingCart,
   Newspaper,
   Landmark,
   Github,
@@ -24,7 +23,6 @@ import { useLanguage } from '@/hooks/use-language';
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
   { href: '/recommendations', icon: Leaf, labelKey: 'sidebar.recommendations' },
-  { href: '/products', icon: ShoppingCart, labelKey: 'sidebar.products' },
   { href: '/news', icon: Newspaper, labelKey: 'sidebar.news' },
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];

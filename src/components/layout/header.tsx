@@ -3,9 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { ShoppingCart, Languages } from 'lucide-react';
-import Link from 'next/link';
-import { useCart } from '@/hooks/use-cart';
+import { Languages } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +11,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
-import { useIsClient } from '@/hooks/use-is-client';
 
 function getTitleKey(path: string): string {
   const pathName = path.split('/').pop() || 'dashboard';
@@ -22,11 +19,9 @@ function getTitleKey(path: string): string {
 
 export default function Header() {
   const pathname = usePathname();
-  const { cartCount } = useCart();
   const { t, setLanguage } = useLanguage();
   const titleKey = getTitleKey(pathname);
   const title = t(titleKey);
-  const isClient = useIsClient();
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
@@ -48,17 +43,6 @@ export default function Header() {
             <DropdownMenuItem onClick={() => setLanguage('mr')}>{t('header.marathi')}</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <Button asChild variant="ghost" size="icon" className="relative">
-          <Link href="/cart">
-            <ShoppingCart className="h-5 w-5" />
-            {isClient && cartCount > 0 && (
-              <span className="absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
-                {cartCount}
-              </span>
-            )}
-            <span className="sr-only">{t('header.shopping_cart')}</span>
-          </Link>
-        </Button>
       </div>
     </header>
   );

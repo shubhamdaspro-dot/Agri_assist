@@ -2,12 +2,9 @@
     "sidebar": {
         "dashboard": "डॅशबोर्ड",
         "recommendations": "शिफारसी",
-        "products": "उत्पादने",
         "news": "बातम्या",
         "loans": "कर्ज",
-        "cart": "शॉपिंग कार्ट",
-        "help": "मदत",
-        "sign_out": "साइन आउट करा"
+        "help": "मदत"
     },
     "header": {
         "change_language": "भाषा बदला",
@@ -15,21 +12,16 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)",
-        "shopping_cart": "शॉपिंग कार्ट"
+        "marathi": "मराठी (Marathi)"
     },
     "dashboard": {
         "welcome_title": "ऍग्रीअसिस्टमध्ये आपले स्वागत आहे!",
-        "welcome_subtitle": "आधुनिक शेतीसाठी तुमचा AI-शक्तीचा भागीदार. पीक शिफारसी मिळवा, उत्पादने खरेदी करा आणि नवीनतम कृषी बातम्यांसह अद्ययावत रहा.",
+        "welcome_subtitle": "आधुनिक शेतीसाठी तुमचा AI-शक्तीचा भागीदार. पीक शिफारसी मिळवा आणि नवीनतम कृषी बातम्यांसह अद्ययावत रहा.",
         "get_recommendation_button": "शिफारस मिळवा",
         "card_recommendations_title": "AI शिफारसी",
         "card_recommendations_heading": "स्मार्ट शेती",
         "card_recommendations_subheading": "डेटा-आधारित पीक आणि उत्पादन सूचना मिळवा.",
         "start_now_button": "आता सुरू करा",
-        "card_marketplace_title": "बाजारपेठ",
-        "card_marketplace_heading": "आवश्यक वस्तू खरेदी करा",
-        "card_marketplace_subheading": "बियाणे, खते आणि साधने थेट खरेदी करा.",
-        "browse_products_button": "उत्पादने ब्राउझ करा",
         "card_news_title": "बातम्या आणि अद्यतने",
         "card_news_heading": "माहिती मिळवा",
         "card_news_subheading": "नवीनतम कृषी बातम्या आणि धोरणे.",
@@ -72,12 +64,12 @@
         "form_submit_analyzing_button": "विश्लेषण करत आहे...",
         "form_submit_analyzing_soil_button": "मातीचे विश्लेषण...",
         "form_submit_button": "शिफारसी मिळवा",
-        "ai_recommended_product": "AI शिफारस केलेले उत्पादन",
         "results_title": "AI शिफारस",
         "results_subtitle": "तुम्ही प्रदान केलेल्या डेटावर आधारित, ही आमची सूचना आहे.",
         "results_crop": "शिफारस केलेले पीक",
         "results_rationale": "कारण",
         "results_products": "शिफारस केलेली उत्पादने",
+        "results_stores": "कुठे खरेदी करावी",
         "share_title": "शिफारस शेअर करा",
         "share_subtitle": "शिफारस SMS किंवा WhatsApp द्वारे पाठवण्यासाठी फोन नंबर प्रविष्ट करा.",
         "share_message": "ऍग्रीअसिस्ट AI शिफारस:\n\nपीक: {crop}\nकारण: {rationale}\nशिफारस केलेली उत्पादने: {products}",
@@ -88,10 +80,6 @@
         "share_sms_title": "SMS द्वारे पाठवा",
         "share_whatsapp_title": "WhatsApp द्वारे पाठवा",
         "new_recommendation_button": "नवीन शिफारस सुरू करा"
-    },
-    "products": {
-        "page_title": "उत्पादन बाजारपेठ",
-        "page_subtitle": "आमच्या उच्च-गुणवत्तेच्या कृषी उत्पादनांच्या क्युरेट केलेल्या निवडी ब्राउझ करा."
     },
     "news": {
         "page_title": "कृषी बातम्या आणि अद्यतने",
@@ -106,30 +94,6 @@
         "application_process": "अर्ज प्रक्रिया",
         "apply_now_button": "आता अर्ज करा"
     },
-    "cart": {
-        "page_title": "शॉपिंग कार्ट",
-        "page_subtitle": "तुमच्या कार्टमधील वस्तूंचे पुनरावलोकन करा आणि व्यवस्थापित करा.",
-        "empty_title": "तुमची कार्ट रिकामी आहे",
-        "empty_subtitle": "तुम्ही अजून तुमच्या कार्टमध्ये काहीही जोडलेले नाही.",
-        "start_shopping_button": "खरेदी सुरू करा",
-        "your_cart": "तुमची कार्ट",
-        "table_product": "उत्पादन",
-        "table_details": "तपशील",
-        "table_quantity": "प्रमाण",
-        "table_price": "किंमत",
-        "summary_title": "ऑर्डर सारांश",
-        "summary_subtotal": "उप-एकूण",
-        "summary_shipping": "शिपिंग",
-        "summary_shipping_cost": "विनामूल्य",
-        "summary_total": "एकूण",
-        "checkout_button": "चेकआउटकडे जा",
-        "clear_cart_button": "कार्ट साफ करा",
-        "add_to_cart_button": "कार्टमध्ये जोडा",
-        "toast_item_added_title": "वस्तू जोडली",
-        "toast_item_added_description": "{name} तुमच्या कार्टमध्ये जोडले आहे.",
-        "toast_item_removed_title": "वस्तू काढली",
-        "toast_item_removed_description": "वस्तू तुमच्या कार्टमधून काढली आहे."
-    },
     "chat": {
         "title": "AI शेती सहाय्यक",
         "welcome_message": "शेतीबद्दल मला काहीही विचारा!",
@@ -139,14 +103,6 @@
         "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही।"
     },
     "auth": {
-        "login_title": "ऍग्रीअसिस्टमध्ये लॉग इन करा",
-        "login_subtitle": "वन-टाइम पासवर्ड प्राप्त करण्यासाठी तुमचा फोन नंबर प्रविष्ट करा.",
-        "phone_label": "फोन नंबर",
-        "send_otp_button": "OTP पाठवा",
-        "otp_label": "वन-टाइम पासवर्ड (OTP)",
-        "verify_otp_button": "OTP सत्यापित करा आणि लॉग इन करा",
-        "change_number_button": "फोन नंबर बदला",
-        "signed_out_title": "साइन आउट केले",
-        "signed_out_description": "तुम्ही यशस्वीरित्या साइन आउट केले आहे."
+        "phone_label": "फोन नंबर"
     }
 }

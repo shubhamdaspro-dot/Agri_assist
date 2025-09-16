@@ -2,12 +2,9 @@
     "sidebar": {
         "dashboard": "ড্যাশবোর্ড",
         "recommendations": "সুপারিশ",
-        "products": "পণ্য",
         "news": "খবর",
         "loans": "ঋণ",
-        "cart": "শপিং কার্ট",
-        "help": "সাহায্য",
-        "sign_out": "সাইন আউট"
+        "help": "সাহায্য"
     },
     "header": {
         "change_language": "ভাষা পরিবর্তন করুন",
@@ -15,21 +12,16 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)",
-        "shopping_cart": "শপিং কার্ট"
+        "marathi": "मराठी (Marathi)"
     },
     "dashboard": {
         "welcome_title": "এগ্রিঅ্যাসিস্টে স্বাগতম!",
-        "welcome_subtitle": "আধুনিক চাষের জন্য আপনার এআই-চালিত সঙ্গী। ফসলের সুপারিশ পান, পণ্য কিনুন এবং সর্বশেষ কৃষি খবরের সাথে আপডেট থাকুন।",
+        "welcome_subtitle": "আধুনিক চাষের জন্য আপনার এআই-চালিত সঙ্গী। ফসলের সুপারিশ পান এবং সর্বশেষ কৃষি খবরের সাথে আপডেট থাকুন।",
         "get_recommendation_button": "সুপারিশ পান",
         "card_recommendations_title": "এআই সুপারিশ",
         "card_recommendations_heading": "স্মার্ট চাষ",
         "card_recommendations_subheading": "ডেটা-চালিত ফসল এবং পণ্যের পরামর্শ পান।",
         "start_now_button": "এখনই শুরু করুন",
-        "card_marketplace_title": "বাজার",
-        "card_marketplace_heading": "প্রয়োজনীয় জিনিস কিনুন",
-        "card_marketplace_subheading": "সরাসরি বীজ, সার এবং সরঞ্জাম কিনুন।",
-        "browse_products_button": "পণ্য ব্রাউজ করুন",
         "card_news_title": "খবর ও আপডেট",
         "card_news_heading": "অবগত থাকুন",
         "card_news_subheading": "সর্বশেষ কৃষি সংবাদ এবং নীতি।",
@@ -72,12 +64,12 @@
         "form_submit_analyzing_button": "বিশ্লেষণ করা হচ্ছে...",
         "form_submit_analyzing_soil_button": "মাটি বিশ্লেষণ করা হচ্ছে...",
         "form_submit_button": "সুপারিশ পান",
-        "ai_recommended_product": "এআই প্রস্তাবিত পণ্য",
         "results_title": "এআই সুপারিশ",
         "results_subtitle": "আপনার দেওয়া ডেটার উপর ভিত্তি করে, এখানে আমাদের পরামর্শ।",
         "results_crop": "প্রস্তাবিত ফসল",
         "results_rationale": "যুক্তিসঙ্গত কারণ",
         "results_products": "প্রস্তাবিত পণ্য",
+        "results_stores": "কোথায় কিনবেন",
         "share_title": "সুপারিশ শেয়ার করুন",
         "share_subtitle": "SMS বা WhatsApp এর মাধ্যমে সুপারিশ পাঠাতে একটি ফোন নম্বর লিখুন।",
         "share_message": "এগ্রিঅ্যাসিস্ট এআই সুপারিশ:\n\nফসল: {crop}\nযুক্তিসঙ্গত কারণ: {rationale}\nপ্রস্তাবিত পণ্য: {products}",
@@ -88,10 +80,6 @@
         "share_sms_title": "এসএমএস এর মাধ্যমে পাঠান",
         "share_whatsapp_title": "হোয়াটসঅ্যাপের মাধ্যমে পাঠান",
         "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
-    },
-    "products": {
-        "page_title": "পণ্য বাজার",
-        "page_subtitle": "আমাদের উচ্চ-মানের কৃষি পণ্যের কিউরেটেড নির্বাচন ব্রাউজ করুন।"
     },
     "news": {
         "page_title": "কৃষি খবর ও আপডেট",
@@ -106,30 +94,6 @@
         "application_process": "আবেদন প্রক্রিয়া",
         "apply_now_button": "এখন আবেদন করুন"
     },
-    "cart": {
-        "page_title": "শপিং কার্ট",
-        "page_subtitle": "আপনার কার্টে থাকা আইটেমগুলি পর্যালোচনা এবং পরিচালনা করুন।",
-        "empty_title": "আপনার কার্ট খালি",
-        "empty_subtitle": "মনে হচ্ছে আপনি এখনও আপনার কার্টে কিছু যোগ করেননি।",
-        "start_shopping_button": "কেনাকাটা শুরু করুন",
-        "your_cart": "আপনার কার্ট",
-        "table_product": "পণ্য",
-        "table_details": "বিবরণ",
-        "table_quantity": "পরিমাণ",
-        "table_price": "মূল্য",
-        "summary_title": "অর্ডার সারসংক্ষেপ",
-        "summary_subtotal": "উপমোট",
-        "summary_shipping": "শিপিং",
-        "summary_shipping_cost": "বিনামূল্যে",
-        "summary_total": "মোট",
-        "checkout_button": "চেকআউটের জন্য এগিয়ে যান",
-        "clear_cart_button": "কার্ট খালি করুন",
-        "add_to_cart_button": "কার্টে যোগ করুন",
-        "toast_item_added_title": "আইটেম যোগ করা হয়েছে",
-        "toast_item_added_description": "{name} আপনার কার্টে যোগ করা হয়েছে।",
-        "toast_item_removed_title": "আইটেম সরানো হয়েছে",
-        "toast_item_removed_description": "আইটেমটি আপনার কার্ট থেকে সরানো হয়েছে।"
-    },
     "chat": {
         "title": "এআই কৃষি সহকারী",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
@@ -139,14 +103,6 @@
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।"
     },
     "auth": {
-        "login_title": "এগ্রিঅ্যাসিস্টে লগইন করুন",
-        "login_subtitle": "এককালীন পাসওয়ার্ড পেতে আপনার ফোন নম্বর লিখুন।",
-        "phone_label": "ফোন নম্বর",
-        "send_otp_button": "OTP পাঠান",
-        "otp_label": "এককালীন পাসওয়ার্ড (OTP)",
-        "verify_otp_button": "OTP যাচাই করুন এবং লগইন করুন",
-        "change_number_button": "ফোন নম্বর পরিবর্তন করুন",
-        "signed_out_title": "সাইন আউট করেছেন",
-        "signed_out_description": "আপনি সফলভাবে সাইন আউট করেছেন।"
+        "phone_label": "ফোন নম্বর"
     }
 }

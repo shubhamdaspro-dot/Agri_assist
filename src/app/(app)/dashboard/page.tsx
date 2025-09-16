@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Leaf, Newspaper, ShoppingBag } from "lucide-react";
+import { ArrowRight, Leaf, Newspaper } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/hooks/use-language";
@@ -57,7 +57,7 @@ export default function DashboardPage() {
         </div>
       </Card>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2">
         <Card className="animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">{t('dashboard.card_recommendations_title')}</CardTitle>
@@ -71,23 +71,6 @@ export default function DashboardPage() {
             <Button asChild variant="link" className="px-0">
                 <Link href="/recommendations">
                     {t('dashboard.start_now_button')} <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-            </Button>
-          </CardContent>
-        </Card>
-        <Card className="animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">{t('dashboard.card_marketplace_title')}</CardTitle>
-            <ShoppingBag className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{t('dashboard.card_marketplace_heading')}</div>
-            <p className="text-xs text-muted-foreground">
-              {t('dashboard.card_marketplace_subheading')}
-            </p>
-            <Button asChild variant="link" className="px-0">
-                <Link href="/products">
-                    {t('dashboard.browse_products_button')} <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
             </Button>
           </CardContent>

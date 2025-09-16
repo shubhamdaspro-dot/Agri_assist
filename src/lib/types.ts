@@ -1,19 +1,5 @@
 import { z } from 'zod';
 
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  image: string;
-  imageHint: string;
-  category: 'Seeds' | 'Fertilizers' | 'Pesticides' | 'Tools';
-}
-
-export interface CartItem extends Product {
-  quantity: number;
-}
-
 export const NewsArticleSchema = z.object({
   id: z.string().describe('A unique identifier for the news article'),
   headline: z.string().describe('The headline of the news article.'),

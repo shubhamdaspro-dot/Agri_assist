@@ -2,12 +2,9 @@
     "sidebar": {
         "dashboard": "Dashboard",
         "recommendations": "Recommendations",
-        "products": "Products",
         "news": "News",
         "loans": "Loans",
-        "cart": "Shopping Cart",
-        "help": "Help",
-        "sign_out": "Sign Out"
+        "help": "Help"
     },
     "header": {
         "change_language": "Change language",
@@ -15,21 +12,16 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)",
-        "shopping_cart": "Shopping Cart"
+        "marathi": "मराठी (Marathi)"
     },
     "dashboard": {
         "welcome_title": "Welcome to AgriAssist!",
-        "welcome_subtitle": "Your AI-powered partner for modern farming. Get crop recommendations, buy products, and stay updated with the latest agricultural news.",
+        "welcome_subtitle": "Your AI-powered partner for modern farming. Get crop recommendations and stay updated with the latest agricultural news.",
         "get_recommendation_button": "Get Recommendation",
         "card_recommendations_title": "AI Recommendations",
         "card_recommendations_heading": "Smart Farming",
         "card_recommendations_subheading": "Get data-driven crop and product suggestions.",
         "start_now_button": "Start Now",
-        "card_marketplace_title": "Marketplace",
-        "card_marketplace_heading": "Shop Essentials",
-        "card_marketplace_subheading": "Buy seeds, fertilizers, and tools directly.",
-        "browse_products_button": "Browse Products",
         "card_news_title": "News & Updates",
         "card_news_heading": "Stay Informed",
         "card_news_subheading": "Latest agricultural news and policies.",
@@ -72,12 +64,12 @@
         "form_submit_analyzing_button": "Analyzing...",
         "form_submit_analyzing_soil_button": "Analyzing Soil...",
         "form_submit_button": "Get Recommendations",
-        "ai_recommended_product": "AI Recommended Product",
         "results_title": "AI Recommendation",
         "results_subtitle": "Based on the data you provided, here is our suggestion.",
         "results_crop": "Recommended Crop",
         "results_rationale": "Rationale",
         "results_products": "Recommended Products",
+        "results_stores": "Where to Buy",
         "share_title": "Share Recommendation",
         "share_subtitle": "Enter a phone number to send the recommendation via SMS or WhatsApp.",
         "share_message": "AgriAssist AI Recommendation:\n\nCrop: {crop}\nRationale: {rationale}\nRecommended Products: {products}",
@@ -88,10 +80,6 @@
         "share_sms_title": "Send via SMS",
         "share_whatsapp_title": "Send via WhatsApp",
         "new_recommendation_button": "Start New Recommendation"
-    },
-    "products": {
-        "page_title": "Product Marketplace",
-        "page_subtitle": "Browse our curated selection of high-quality agricultural products."
     },
     "news": {
         "page_title": "Agricultural News & Updates",
@@ -106,30 +94,6 @@
         "application_process": "Application Process",
         "apply_now_button": "Apply Now"
     },
-    "cart": {
-        "page_title": "Shopping Cart",
-        "page_subtitle": "Review and manage the items in your cart.",
-        "empty_title": "Your cart is empty",
-        "empty_subtitle": "Looks like you haven't added anything to your cart yet.",
-        "start_shopping_button": "Start Shopping",
-        "your_cart": "Your Cart",
-        "table_product": "Product",
-        "table_details": "Details",
-        "table_quantity": "Quantity",
-        "table_price": "Price",
-        "summary_title": "Order Summary",
-        "summary_subtotal": "Subtotal",
-        "summary_shipping": "Shipping",
-        "summary_shipping_cost": "FREE",
-        "summary_total": "Total",
-        "checkout_button": "Proceed to Checkout",
-        "clear_cart_button": "Clear Cart",
-        "add_to_cart_button": "Add to Cart",
-        "toast_item_added_title": "Item Added",
-        "toast_item_added_description": "{name} has been added to your cart.",
-        "toast_item_removed_title": "Item Removed",
-        "toast_item_removed_description": "Item has been removed from your cart."
-    },
     "chat": {
         "title": "AI Farming Assistant",
         "welcome_message": "Ask me anything about farming!",
@@ -139,14 +103,6 @@
         "default_error": "Sorry, I couldn't process that."
     },
     "auth": {
-        "login_title": "Login to AgriAssist",
-        "login_subtitle": "Enter your phone number to receive a one-time password.",
-        "phone_label": "Phone Number",
-        "send_otp_button": "Send OTP",
-        "otp_label": "One-Time Password (OTP)",
-        "verify_otp_button": "Verify OTP & Login",
-        "change_number_button": "Change Phone Number",
-        "signed_out_title": "Signed Out",
-        "signed_out_description": "You have been successfully signed out."
+        "phone_label": "Phone Number"
     }
 }

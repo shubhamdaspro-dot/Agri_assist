@@ -2,12 +2,9 @@
     "sidebar": {
         "dashboard": "డాష్‌బోర్డ్",
         "recommendations": "సిఫార్సులు",
-        "products": "ఉత్పత్తులు",
         "news": "వార్తలు",
         "loans": "రుణాలు",
-        "cart": "షాపింగ్ కార్ట్",
-        "help": "సహాయం",
-        "sign_out": "సైన్ అవుట్ చేయండి"
+        "help": "సహాయం"
     },
     "header": {
         "change_language": "భాషను మార్చండి",
@@ -15,21 +12,16 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)",
-        "shopping_cart": "షాపింగ్ కార్ట్"
+        "marathi": "मराठी (Marathi)"
     },
     "dashboard": {
         "welcome_title": "అగ్రిఅసిస్ట్‌కు స్వాగతం!",
-        "welcome_subtitle": "ఆధునిక వ్యవసాయం కోసం మీ AI-ఆధారిత భాగస్వామి. పంట సిఫార్సులను పొందండి, ఉత్పత్తులను కొనండి మరియు తాజా వ్యవసాయ వార్తలతో అప్‌డేట్‌గా ఉండండి.",
+        "welcome_subtitle": "ఆధునిక వ్యవసాయం కోసం మీ AI-ఆధారిత భాగస్వామి. పంట సిఫార్సులను పొందండి మరియు తాజా వ్యవసాయ వార్తలతో అప్‌డేట్‌గా ఉండండి.",
         "get_recommendation_button": "సిఫార్సు పొందండి",
         "card_recommendations_title": "AI సిఫార్సులు",
         "card_recommendations_heading": "స్మార్ట్ వ్యవసాయం",
         "card_recommendations_subheading": "డేటా-ఆధారిత పంట మరియు ఉత్పత్తి సూచనలను పొందండి.",
         "start_now_button": "ఇప్పుడే ప్రారంభించండి",
-        "card_marketplace_title": "మార్కెట్‌ప్లేస్",
-        "card_marketplace_heading": "అవసరమైనవి కొనండి",
-        "card_marketplace_subheading": "విత్తనాలు, ఎరువులు మరియు పనిముట్లను నేరుగా కొనండి.",
-        "browse_products_button": "ఉత్పత్తులను బ్రౌజ్ చేయండి",
         "card_news_title": "వార్తలు & నవీకరణలు",
         "card_news_heading": "సమాచారం తెలుసుకోండి",
         "card_news_subheading": "తాజా వ్యవసాయ వార్తలు మరియు విధానాలు.",
@@ -72,12 +64,12 @@
         "form_submit_analyzing_button": "విశ్లేషిస్తోంది...",
         "form_submit_analyzing_soil_button": "నేల విశ్లేషణ...",
         "form_submit_button": "సిఫార్సులను పొందండి",
-        "ai_recommended_product": "AI సిఫార్సు చేసిన ఉత్పత్తి",
         "results_title": "AI సిఫార్సు",
         "results_subtitle": "మీరు అందించిన డేటా ఆధారంగా, ఇక్కడ మా సూచన ఉంది.",
         "results_crop": "సిఫార్సు చేయబడిన పంట",
         "results_rationale": "కారణం",
         "results_products": "సిఫార్సు చేయబడిన ఉత్పత్తులు",
+        "results_stores": "ఎక్కడ కొనాలి",
         "share_title": "సిఫార్సును పంచుకోండి",
         "share_subtitle": "సిఫార్సును SMS లేదా WhatsApp ద్వారా పంపడానికి ఫోన్ నంబర్‌ను నమోదు చేయండి.",
         "share_message": "అగ్రిఅసిస్ట్ AI సిఫార్సు:\n\nపంట: {crop}\nకారణం: {rationale}\nసిఫార్సు చేయబడిన ఉత్పత్తులు: {products}",
@@ -88,10 +80,6 @@
         "share_sms_title": "SMS ద్వారా పంపండి",
         "share_whatsapp_title": "WhatsApp ద్వారా పంపండి",
         "new_recommendation_button": "కొత్త సిఫార్సును ప్రారంభించండి"
-    },
-    "products": {
-        "page_title": "ఉత్పత్తి మార్కెట్‌ప్లేస్",
-        "page_subtitle": "మా అధిక-నాణ్యత వ్యవసాయ ఉత్పత్తుల యొక్క క్యూరేటెడ్ ఎంపికను బ్రౌజ్ చేయండి."
     },
     "news": {
         "page_title": "వ్యవసాయ వార్తలు & నవీకరణలు",
@@ -106,30 +94,6 @@
         "application_process": "దరఖాస్తు ప్రక్రియ",
         "apply_now_button": "ఇప్పుడే దరఖాస్తు చేసుకోండి"
     },
-    "cart": {
-        "page_title": "షాపింగ్ కార్ట్",
-        "page_subtitle": "మీ కార్ట్‌లోని వస్తువులను సమీక్షించండి మరియు నిర్వహించండి.",
-        "empty_title": "మీ కార్ట్ ఖాళీగా ఉంది",
-        "empty_subtitle": "మీరు ఇంకా మీ కార్ట్‌లో ఏమీ జోడించలేదు.",
-        "start_shopping_button": "షాపింగ్ ప్రారంభించండి",
-        "your_cart": "మీ కార్ట్",
-        "table_product": "ఉత్పత్తి",
-        "table_details": "వివరాలు",
-        "table_quantity": "పరిమాణం",
-        "table_price": "ధర",
-        "summary_title": "ఆర్డర్ సారాంశం",
-        "summary_subtotal": "ఉపమొత్తం",
-        "summary_shipping": "షిప్పింగ్",
-        "summary_shipping_cost": "ఉచితం",
-        "summary_total": "మొత్తం",
-        "checkout_button": "చెకౌట్‌కు వెళ్లండి",
-        "clear_cart_button": "కార్ట్‌ను క్లియర్ చేయండి",
-        "add_to_cart_button": "కార్ట్‌లో చేర్చండి",
-        "toast_item_added_title": "వస్తువు జోడించబడింది",
-        "toast_item_added_description": "{name} మీ కార్ట్‌కు జోడించబడింది.",
-        "toast_item_removed_title": "వస్తువు తీసివేయబడింది",
-        "toast_item_removed_description": "వస్తువు మీ కార్ట్ నుండి తీసివేయబడింది."
-    },
     "chat": {
         "title": "AI వ్యవసాయ సహాయకుడు",
         "welcome_message": "వ్యవసాయం గురించి నన్ను ఏదైనా అడగండి!",
@@ -139,14 +103,6 @@
         "default_error": "క్షమించండి, నేను దానిని ప్రాసెస్ చేయలేకపోయాను."
     },
     "auth": {
-        "login_title": "అగ్రిఅసిస్ట్‌కు లాగిన్ చేయండి",
-        "login_subtitle": "ఒక-సారి పాస్‌వర్డ్‌ను స్వీకరించడానికి మీ ఫోన్ నంబర్‌ను నమోదు చేయండి.",
-        "phone_label": "ఫోను నంబరు",
-        "send_otp_button": "OTP పంపండి",
-        "otp_label": "ఒక-సారి పాస్‌వర్డ్ (OTP)",
-        "verify_otp_button": "OTPని ధృవీకరించి లాగిన్ చేయండి",
-        "change_number_button": "ఫోన్ నంబర్‌ను మార్చండి",
-        "signed_out_title": "సైన్ అవుట్ చేసారు",
-        "signed_out_description": "మీరు విజయవంతంగా సైన్ అవుట్ చేసారు."
+        "phone_label": "ఫోను నంబరు"
     }
 }
