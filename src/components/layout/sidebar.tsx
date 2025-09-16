@@ -16,10 +16,13 @@ import {
   Landmark,
   Github,
   CircleHelp,
+  LogOut,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
+import { useAuth } from '@/hooks/use-auth';
+
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -55,6 +58,7 @@ function AgriAssistLogo() {
 export default function AppSidebar() {
   const pathname = usePathname();
   const { t } = useLanguage();
+  const { signOut } = useAuth();
   return (
     <Sidebar>
       <SidebarHeader>
@@ -94,6 +98,12 @@ export default function AppSidebar() {
                   <Github />
                   <span>GitHub</span>
                 </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+             <SidebarMenuItem>
+              <SidebarMenuButton onClick={signOut} tooltip={t('sidebar.sign_out')}>
+                <LogOut />
+                <span>{t('sidebar.sign_out')}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
         </SidebarMenu>
