@@ -8,6 +8,8 @@ import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { MapPin } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+
 
 export default function RecommendationsPage() {
   const [results, setResults] = useState<GenerateCropRecommendationsOutput | null>(null);
@@ -105,24 +107,4 @@ function LoadingSkeleton() {
         </Card>
     </div>
   )
-}
-
-function Card({ children }: { children: React.ReactNode }) {
-    return <div className="border bg-card text-card-foreground shadow-sm rounded-lg">{children}</div>
-}
-
-function CardHeader({ children }: { children: React.ReactNode }) {
-    return <div className="flex flex-col space-y-1.5 p-6">{children}</div>
-}
-
-function CardTitle({ children }: { children: React.ReactNode }) {
-    return <div className="text-2xl font-semibold leading-none tracking-tight">{children}</div>
-}
-
-function CardDescription({ children }: { children: React.ReactNode }) {
-    return <div className="text-sm text-muted-foreground">{children}</div>
-}
-
-function CardContent({ children }: { children: React.ReactNode }) {
-    return <div className="p-6 pt-0">{children}</div>
 }
