@@ -50,7 +50,7 @@
         "form_weather_label": "Weather Conditions",
         "form_weather_placeholder": "e.g., 'Hot and humid, 35°C, with chances of rain next week.'",
         "form_soil_type_label": "Soil Type",
-        "form_soil_type_placeholder": "Upload a photo or enter manually",
+        "form_soil_type_placeholder": "Select a soil type or upload a photo",
         "form_soil_photo_label": "Soil Photo (Optional)",
         "form_soil_photo_analyzing_button": "Analyzing...",
         "form_soil_photo_upload_button": "Upload Soil Photo",
@@ -101,8 +101,5 @@
         "input_listening": "Listening...",
         "canned_query": "What are the best crops for sandy soil in a hot climate?",
         "default_error": "Sorry, I couldn't process that."
-    },
-    "auth": {
-        "phone_label": "Phone Number"
     }
 }

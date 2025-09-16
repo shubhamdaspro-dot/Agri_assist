@@ -16,6 +16,7 @@ import { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const formSchema = z.object({
   weatherData: z.string().min(10, 'Please describe the current weather conditions.'),
@@ -103,6 +104,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
     setIsLoading(false);
   }
 
+  const soilTypes = ['Sandy', 'Clay', 'Loam', 'Silt', 'Peat', 'Chalky'];
+
   return (
     <Card>
       <CardHeader>
@@ -149,9 +152,18 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t('recommendations.form_soil_type_label')}</FormLabel>
-                    <FormControl>
-                        <Input placeholder={t('recommendations.form_soil_type_placeholder')} {...field} disabled={isLoading || isAnalyzingSoil} />
-                    </FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value} disabled={isLoading || isAnalyzingSoil}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder={t('recommendations.form_soil_type_placeholder')} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {soilTypes.map((type) => (
+                          <SelectItem key={type} value={type}>{type}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}

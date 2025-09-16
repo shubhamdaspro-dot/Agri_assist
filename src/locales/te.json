@@ -50,7 +50,7 @@
         "form_weather_label": "వాతావరణ పరిస్థితులు",
         "form_weather_placeholder": "ఉదా., 'వేడిగా మరియు తేమగా, 35°C, వచ్చే వారం వర్షం కురిసే అవకాశం ఉంది.'",
         "form_soil_type_label": "నేల రకం",
-        "form_soil_type_placeholder": "ఫోటోను అప్‌లోడ్ చేయండి లేదా మాన్యువల్‌గా నమోదు చేయండి",
+        "form_soil_type_placeholder": "నేల రకాన్ని ఎంచుకోండి లేదా ఫోటోను అప్‌లోడ్ చేయండి",
         "form_soil_photo_label": "నేల ఫోటో (ఐచ్ఛికం)",
         "form_soil_photo_analyzing_button": "విశ్లేషిస్తోంది...",
         "form_soil_photo_upload_button": "నేల ఫోటోను అప్‌లోడ్ చేయండి",
@@ -101,8 +101,5 @@
         "input_listening": "వినడం...",
         "canned_query": "వేడి వాతావరణంలో ఇసుక నేలలకు ఉత్తమ పంటలు ఏవి?",
         "default_error": "క్షమించండి, నేను దానిని ప్రాసెస్ చేయలేకపోయాను."
-    },
-    "auth": {
-        "phone_label": "ఫోను నంబరు"
     }
 }

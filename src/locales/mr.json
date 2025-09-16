@@ -50,7 +50,7 @@
         "form_weather_label": "हवामान परिस्थिती",
         "form_weather_placeholder": "उदा., 'गरम आणि दमट, 35°C, पुढील आठवड्यात पावसाच्या शक्यतेसह.'",
         "form_soil_type_label": "मातीचा प्रकार",
-        "form_soil_type_placeholder": "फोटो अपलोड करा किंवा मॅन्युअली प्रविष्ट करा",
+        "form_soil_type_placeholder": "मातीचा प्रकार निवडा किंवा फोटो अपलोड करा",
         "form_soil_photo_label": "मातीचा फोटो (ऐच्छिक)",
         "form_soil_photo_analyzing_button": "विश्लेषण करत आहे...",
         "form_soil_photo_upload_button": "मातीचा फोटो अपलोड करा",
@@ -101,8 +101,5 @@
         "input_listening": "ऐकत आहे...",
         "canned_query": "गरम हवामानात वालुकामय मातीसाठी सर्वोत्तम पिके कोणती आहेत?",
         "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही।"
-    },
-    "auth": {
-        "phone_label": "फोन नंबर"
     }
 }

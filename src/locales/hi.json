@@ -50,7 +50,7 @@
         "form_weather_label": "मौसम की स्थिति",
         "form_weather_placeholder": "जैसे, 'गर्म और आर्द्र, 35°C, अगले सप्ताह बारिश की संभावना के साथ।'",
         "form_soil_type_label": "मिट्टी का प्रकार",
-        "form_soil_type_placeholder": "एक तस्वीर अपलोड करें या मैन्युअल रूप से दर्ज करें",
+        "form_soil_type_placeholder": "मिट्टी का प्रकार चुनें या फोटो अपलोड करें",
         "form_soil_photo_label": "मृदा फोटो (वैकल्पिक)",
         "form_soil_photo_analyzing_button": "विश्लेषण हो रहा है...",
         "form_soil_photo_upload_button": "मृदा फोटो अपलोड करें",
@@ -101,8 +101,5 @@
         "input_listening": "सुन रहा हूँ...",
         "canned_query": "गर्म जलवायु में रेतीली मिट्टी के लिए सबसे अच्छी फसलें कौन सी हैं?",
         "default_error": "क्षमा करें, मैं उसे संसाधित नहीं कर सका।"
-    },
-    "auth": {
-        "phone_label": "फ़ोन नंबर"
     }
 }
