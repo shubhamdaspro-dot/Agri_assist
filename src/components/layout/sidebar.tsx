@@ -15,6 +15,7 @@ import {
   Landmark,
   Github,
   CircleHelp,
+  ShoppingCart,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -40,8 +41,8 @@ function AgriAssistLogo() {
         strokeLinejoin="round"
         className="h-8 w-8 text-primary"
       >
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-        <polyline points="22 4 12 14.01 9 11.01" />
+        <path d="M11 20A7 7 0 0 1 7 6a7 7 0 0 1 4-2 7 7 0 0 1 4 2 7 7 0 0 1-4 14Z" />
+        <path d="M11 20V14" />
       </svg>
       <h1 className="text-2xl font-bold text-primary transition-opacity group-data-[collapsible=icon]:opacity-0">
         AgriAssist
