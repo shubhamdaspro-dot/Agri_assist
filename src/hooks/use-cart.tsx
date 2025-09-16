@@ -24,6 +24,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const { toast } = useToast();
   const { t } = useLanguage();
   const isClient = useIsClient();
+  const [isCartLoaded, setIsCartLoaded] = useState(false);
 
   useEffect(() => {
     if (isClient) {
@@ -36,18 +37,19 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         console.error("Failed to parse cart items from localStorage", error);
         setCartItems([]);
       }
+      setIsCartLoaded(true);
     }
   }, [isClient]);
 
   useEffect(() => {
-    if (isClient) {
+    if (isClient && isCartLoaded) {
         try {
             localStorage.setItem('agriassist_cart', JSON.stringify(cartItems));
         } catch (error) {
             console.error("Failed to save cart items to localStorage", error);
         }
     }
-  }, [cartItems, isClient]);
+  }, [cartItems, isClient, isCartLoaded]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
     setCartItems(prevItems => {
@@ -109,7 +111,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         clearCart,
         cartCount,
         cartTotal,
-        isCartLoaded: isClient,
+        isCartLoaded,
       }}
     >
       {children}
