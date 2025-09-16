@@ -14,7 +14,6 @@
         "english": "English",
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
-        "tamil": "தமிழ் (Tamil)",
         "telugu": "తెలుగు (Telugu)",
         "marathi": "मराठी (Marathi)",
         "shopping_cart": "शॉपिंग कार्ट"
@@ -133,7 +132,7 @@
         "input_placeholder": "तुमचा प्रश्न टाइप करा...",
         "input_listening": "ऐकत आहे...",
         "canned_query": "गरम हवामानात वालुकामय मातीसाठी सर्वोत्तम पिके कोणती आहेत?",
-        "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही."
+        "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही।"
     },
     "auth": {
         "login_title": "ऍग्रीअसिस्टमध्ये लॉग इन करा",

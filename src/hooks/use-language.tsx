@@ -52,6 +52,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (typeof translated !== 'string') {
+        console.warn(`Translation for key '${key}' not found.`);
         return key;
     }
 

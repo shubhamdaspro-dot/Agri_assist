@@ -14,7 +14,6 @@
         "english": "English",
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
-        "tamil": "தமிழ் (Tamil)",
         "telugu": "తెలుగు (Telugu)",
         "marathi": "मराठी (Marathi)",
         "shopping_cart": "শপিং কার্ট"
@@ -57,7 +56,7 @@
         "form_region_label": "ভৌগলিক অঞ্চল",
         "form_region_placeholder": "যেমন, পাঞ্জাব, ভারত",
         "form_weather_label": "আবহাওয়ার অবস্থা",
-        "form_weather_placeholder": "যেমন, 'গরম এবং আর্দ্র, ৩৫°C, अगले सप्ताह বৃষ্টির সম্ভাবনা সহ।'",
+        "form_weather_placeholder": "যেমন, 'গরম এবং আর্দ্র, ৩৫°C, আগামী সপ্তাহে বৃষ্টির সম্ভাবনা সহ।'",
         "form_soil_type_label": "মাটির ধরন",
         "form_soil_type_placeholder": "একটি ছবি আপলোড করুন বা ম্যানুয়ালি লিখুন",
         "form_soil_photo_label": "মাটির ছবি (ঐচ্ছিক)",
@@ -131,7 +130,7 @@
         "title": "এআই কৃষি সহকারী",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
         "input_placeholder": "আপনার প্রশ্ন টাইপ করুন...",
-        "input_listening": "শুনছি...",
+        "input_listening": "שুনছি...",
         "canned_query": "গরম জলবায়ুতে বালুকাময় মাটির জন্য সেরা ফসল কোনটি?",
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।"
     },
