@@ -6,6 +6,7 @@ export interface Product {
   price: number;
   description: string;
   image: string;
+  imageHint: string;
   category: 'Seeds' | 'Fertilizers' | 'Pesticides' | 'Tools';
 }
 

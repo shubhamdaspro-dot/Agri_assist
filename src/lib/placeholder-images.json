@@ -1,46 +1,52 @@
 {
   "placeholderImages": [
     {
-      "id": "seeds",
-      "description": "High-yield wheat seeds",
-      "imageUrl": "https://picsum.photos/seed/seeds/400/300",
-      "imageHint": "seeds packet"
+      "id": "wheat-seeds",
+      "description": "High-yield wheat seeds in a sack",
+      "imageUrl": "https://picsum.photos/seed/wheat-seeds/400/300",
+      "imageHint": "wheat seeds"
     },
     {
-      "id": "fertilizer",
-      "description": "Nitrogen-rich fertilizer",
-      "imageUrl": "https://picsum.photos/seed/fertilizer/400/300",
+      "id": "fertilizer-bag",
+      "description": "A bag of all-purpose NPK fertilizer",
+      "imageUrl": "https://picsum.photos/seed/fertilizer-bag/400/300",
       "imageHint": "fertilizer bag"
     },
     {
-      "id": "pesticide",
-      "description": "Organic pesticide spray",
-      "imageUrl": "https://picsum.photos/seed/pesticide/400/300",
+      "id": "organic-pesticide",
+      "description": "A spray bottle of organic neem-based pesticide",
+      "imageUrl": "https://picsum.photos/seed/organic-pesticide/400/300",
       "imageHint": "pesticide spray"
     },
     {
       "id": "trowel",
-      "description": "Durable garden trowel",
+      "description": "A stainless steel garden trowel with a wooden handle",
       "imageUrl": "https://picsum.photos/seed/trowel/400/300",
       "imageHint": "garden trowel"
     },
     {
-      "id": "wateringcan",
-      "description": "Large watering can",
-      "imageUrl": "https://picsum.photos/seed/wateringcan/400/300",
+      "id": "watering-can",
+      "description": "A large metal watering can",
+      "imageUrl": "https://picsum.photos/seed/watering-can/400/300",
       "imageHint": "watering can"
     },
     {
-      "id": "gloves",
-      "description": "Protective gardening gloves",
-      "imageUrl": "https://picsum.photos/seed/gloves/400/300",
+      "id": "gardening-gloves",
+      "description": "A pair of durable gardening gloves",
+      "imageUrl": "https://picsum.photos/seed/gardening-gloves/400/300",
       "imageHint": "gardening gloves"
     },
     {
       "id": "hero",
-      "description": "Lush green farm field",
+      "description": "Lush green farm field at sunrise",
       "imageUrl": "https://picsum.photos/seed/hero/1200/600",
-      "imageHint": "farm field"
+      "imageHint": "farm sunrise"
+    },
+    {
+      "id": "mock",
+      "description": "A generic product placeholder",
+      "imageUrl": "https://picsum.photos/seed/mock/400/300",
+      "imageHint": "product box"
     }
   ]
 }

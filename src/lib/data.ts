@@ -1,4 +1,12 @@
 import type { Product, LoanScheme } from './types';
+import { PlaceHolderImages } from './placeholder-images';
+
+const getPlaceholderImage = (id: string) => {
+    return PlaceHolderImages.find(img => img.id === id)?.imageUrl || 'https://placehold.co/400x300';
+}
+const getPlaceholderImageHint = (id: string) => {
+    return PlaceHolderImages.find(img => img.id === id)?.imageHint || 'product';
+}
 
 export const products: Product[] = [
   {
@@ -6,7 +14,8 @@ export const products: Product[] = [
     name: 'Premium Wheat Seeds',
     price: 1999.00,
     description: 'High-yield, disease-resistant wheat seeds for a bountiful harvest.',
-    image: 'https://picsum.photos/seed/seeds/400/300',
+    image: getPlaceholderImage('wheat-seeds'),
+    imageHint: getPlaceholderImageHint('wheat-seeds'),
     category: 'Seeds',
   },
   {
@@ -14,7 +23,8 @@ export const products: Product[] = [
     name: 'All-Purpose Fertilizer',
     price: 1499.00,
     description: 'NPK balanced fertilizer for healthy plant growth.',
-    image: 'https://picsum.photos/seed/fertilizer/400/300',
+    image: getPlaceholderImage('fertilizer-bag'),
+    imageHint: getPlaceholderImageHint('fertilizer-bag'),
     category: 'Fertilizers',
   },
   {
@@ -22,7 +32,8 @@ export const products: Product[] = [
     name: 'Organic Pest Control',
     price: 999.00,
     description: 'Neem-based organic solution to protect your crops from common pests.',
-    image: 'https://picsum.photos/seed/pesticide/400/300',
+    image: getPlaceholderImage('organic-pesticide'),
+    imageHint: getPlaceholderImageHint('organic-pesticide'),
     category: 'Pesticides',
   },
   {
@@ -30,7 +41,8 @@ export const products: Product[] = [
     name: 'Stainless Steel Trowel',
     price: 499.00,
     description: 'Ergonomic and durable trowel for all your planting needs.',
-    image: 'https://picsum.photos/seed/trowel/400/300',
+    image: getPlaceholderImage('trowel'),
+    imageHint: getPlaceholderImageHint('trowel'),
     category: 'Tools',
   },
   {
@@ -38,7 +50,8 @@ export const products: Product[] = [
     name: 'Heavy-Duty Watering Can',
     price: 799.00,
     description: '5-gallon capacity watering can, built to last.',
-    image: 'https://picsum.photos/seed/wateringcan/400/300',
+    image: getPlaceholderImage('watering-can'),
+    imageHint: getPlaceholderImageHint('watering-can'),
     category: 'Tools',
   },
     {
@@ -46,7 +59,8 @@ export const products: Product[] = [
     name: 'Gardening Gloves',
     price: 299.00,
     description: 'Protective and comfortable gloves for all gardening tasks.',
-    image: 'https://picsum.photos/seed/gloves/400/300',
+    image: getPlaceholderImage('gardening-gloves'),
+    imageHint: getPlaceholderImageHint('gardening-gloves'),
     category: 'Tools',
   },
 ];

@@ -33,6 +33,7 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
         price: 1499.00, // Default price in INR
         description: t('recommendations.ai_recommended_product'),
         image: 'https://picsum.photos/seed/mock/400/300',
+        imageHint: 'product box',
         category: 'Fertilizers'
       });
     }

@@ -24,7 +24,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 alt={product.name} 
                 fill 
                 className="object-cover" 
-                data-ai-hint={`${product.category} product`}
+                data-ai-hint={product.imageHint}
             />
         </div>
       </CardHeader>
