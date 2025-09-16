@@ -70,12 +70,42 @@ export default function RecommendationsPage() {
             location={location}
         />
       ) : (
-        <Skeleton className="h-[500px] w-full" />
+        <FormSkeleton />
       )}
 
       {isLoading ? <LoadingSkeleton /> : results ? <RecommendationResults results={results} /> : null}
     </div>
   );
+}
+
+function FormSkeleton() {
+  return (
+     <Card>
+      <CardHeader>
+        <Skeleton className="h-7 w-1/2" />
+        <Skeleton className="h-4 w-3/4" />
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-2">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-10 w-full" />
+        </div>
+        <div className="space-y-2">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-20 w-full" />
+        </div>
+         <div className="space-y-2">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-10 w-full" />
+        </div>
+        <div>
+            <Skeleton className="h-4 w-40 mb-2" />
+            <Skeleton className="h-10 w-48" />
+        </div>
+        <Skeleton className="h-10 w-44" />
+      </CardContent>
+    </Card>
+  )
 }
 
 function LoadingSkeleton() {
