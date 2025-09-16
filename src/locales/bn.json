@@ -100,7 +100,8 @@
         "available_schemes": "উপলব্ধ প্রকল্প",
         "eligibility_criteria": "যোগ্যতার মানদণ্ড",
         "required_documents": "প্রয়োজনীয় নথি",
-        "application_process": "আবেদন প্রক্রিয়া"
+        "application_process": "আবেদন প্রক্রিয়া",
+        "apply_now_button": "এখন আবেদন করুন"
     },
     "cart": {
         "page_title": "শপিং কার্ট",

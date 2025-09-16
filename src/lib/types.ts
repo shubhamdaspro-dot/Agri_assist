@@ -38,4 +38,5 @@ export interface LoanScheme {
   eligibility: string[];
   documents: string[];
   process: string[];
+  link?: string;
 }

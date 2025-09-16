@@ -8,7 +8,9 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check } from 'lucide-react';
+import { Check, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function LoansPage() {
   const { t, language } = useLanguage();
@@ -32,7 +34,17 @@ export default function LoansPage() {
                 <AccordionItem value={loan.id} key={loan.id}>
                     <AccordionTrigger className="text-lg font-semibold">{loan.title}</AccordionTrigger>
                     <AccordionContent className="space-y-6 pt-4">
-                    <p className="text-muted-foreground">{loan.description}</p>
+                    <div className="flex justify-between items-start">
+                      <p className="text-muted-foreground max-w-prose">{loan.description}</p>
+                      {loan.link && (
+                        <Button asChild>
+                          <Link href={loan.link} target="_blank">
+                            {t('loans.apply_now_button')}
+                            <ExternalLink className="ml-2 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      )}
+                    </div>
                     
                     <div>
                         <h4 className="font-semibold mb-2">{t('loans.eligibility_criteria')}</h4>

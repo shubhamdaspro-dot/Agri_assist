@@ -72,7 +72,8 @@ export const loans_en: LoanScheme[] = [
         description: 'A scheme to provide farmers with timely access to credit for their cultivation and other needs.',
         eligibility: ['All farmers - individuals/joint borrowers who are owner cultivators.', 'Tenant farmers, oral lessees & sharecroppers.', 'Self Help Groups (SHGs) or Joint Liability Groups (JLGs) of farmers including tenant farmers.'],
         documents: ['Duly filled application form.', 'Identity proof (Aadhaar card, PAN card, Voter ID, driving license, etc.).', 'Address proof (Aadhaar card, utility bill, etc.).', 'Land documents.'],
-        process: ['Visit the nearest bank branch and ask for the KCC application form.', 'Fill the form and submit it with the required documents.', 'The bank will review the application and sanction the credit card upon successful verification.']
+        process: ['Visit the nearest bank branch and ask for the KCC application form.', 'Fill the form and submit it with the required documents.', 'The bank will review the application and sanction the credit card upon successful verification.'],
+        link: 'https://pmkisan.gov.in/KCC/KCC_New.aspx'
     },
     {
         id: 'loan_2',
@@ -80,7 +81,8 @@ export const loans_en: LoanScheme[] = [
         description: 'An insurance service for farmers for their yields.',
         eligibility: ['All farmers including sharecroppers and tenant farmers growing notified crops in the notified areas are eligible for coverage.'],
         documents: ['Land records (RoR, Land possession Certificate).', 'Bank passbook.', 'Aadhaar card.', 'Sowing declaration.'],
-        process: ['Farmers can enroll for the scheme through their nearest bank, Primary Agricultural Credit Society (PACS), or authorized insurance company.', 'The premium is deducted from the loan account for loanee farmers or paid directly by non-loanee farmers.']
+        process: ['Farmers can enroll for the scheme through their nearest bank, Primary Agricultural Credit Society (PACS), or authorized insurance company.', 'The premium is deducted from the loan account for loanee farmers or paid directly by non-loanee farmers.'],
+        link: 'https://pmfby.gov.in/'
     },
     {
         id: 'loan_3',
@@ -88,7 +90,8 @@ export const loans_en: LoanScheme[] = [
         description: 'For purchasing new machinery, equipment, or for other development activities.',
         eligibility: ['Individual farmers or groups of farmers with a clear credit history.', 'Proof of land ownership and farming activity.'],
         documents: ['Project report on the proposed activity.', 'Quotation for machinery/equipment.', 'Land records.', 'Proof of income. '],
-        process: ['Prepare a detailed project report (DPR).', 'Approach a commercial or cooperative bank with the DPR and application form.', 'The bank will appraise the project\'s viability and sanction the loan.']
+        process: ['Prepare a detailed project report (DPR).', 'Approach a commercial or cooperative bank with the DPR and application form.', 'The bank will appraise the project\'s viability and sanction the loan.'],
+        link: 'https://www.nabard.org/content.aspx?id=517'
     }
 ];
 
@@ -99,7 +102,8 @@ export const loans_hi: LoanScheme[] = [
         description: 'किसानों को उनकी खेती और अन्य जरूरतों के लिए समय पर ऋण उपलब्ध कराने की एक योजना।',
         eligibility: ['सभी किसान - व्यक्तिगत/संयुक्त उधारकर्ता जो मालिक कृषक हैं।', 'किराएदार किसान, मौखिक पट्टेदार और बटाईदार।', 'किसानों के स्वयं सहायता समूह (SHG) या संयुक्त देयता समूह (JLG) जिसमें किराएदार किसान भी शामिल हैं।'],
         documents: ['विधिवत भरा हुआ आवेदन पत्र।', 'पहचान प्रमाण (आधार कार्ड, पैन कार्ड, वोटर आईडी, ड्राइविंग लाइसेंस, आदि)।', 'पता प्रमाण (आधार कार्ड, उपयोगिता बिल, आदि)।', 'भूमि दस्तावेज।'],
-        process: ['निकटतम बैंक शाखा में जाएं और केसीसी आवेदन पत्र मांगें।', 'फॉर्म भरें और आवश्यक दस्तावेजों के साथ जमा करें।', 'बैंक आवेदन की समीक्षा करेगा और सफल सत्यापन पर क्रेडिट कार्ड स्वीकृत करेगा।']
+        process: ['निकटतम बैंक शाखा में जाएं और केसीसी आवेदन पत्र मांगें।', 'फॉर्म भरें और आवश्यक दस्तावेजों के साथ जमा करें।', 'बैंक आवेदन की समीक्षा करेगा और सफल सत्यापन पर क्रेडिट कार्ड स्वीकृत करेगा।'],
+        link: 'https://pmkisan.gov.in/KCC/KCC_New.aspx'
     },
     {
         id: 'loan_2',
@@ -107,7 +111,8 @@ export const loans_hi: LoanScheme[] = [
         description: 'किसानों की पैदावार के लिए एक बीमा सेवा।',
         eligibility: ['अधिसूचित क्षेत्रों में अधिसूचित फसलें उगाने वाले बटाईदारों और किराएदार किसानों सहित सभी किसान कवरेज के लिए पात्र हैं।'],
         documents: ['भूमि रिकॉर्ड (RoR, भूमि कब्जा प्रमाण पत्र)।', 'बैंक पासबुक।', 'आधार कार्ड।', 'बुवाई घोषणा।'],
-        process: ['किसान अपने निकटतम बैंक, प्राथमिक कृषि ऋण समिति (PACS), या अधिकृत बीमा कंपनी के माध्यम से योजना के लिए नामांकन कर सकते हैं।', 'ऋणी किसानों के लिए प्रीमियम ऋण खाते से काटा जाता है या गैर-ऋणी किसानों द्वारा सीधे भुगतान किया जाता है।']
+        process: ['किसान अपने निकटतम बैंक, प्राथमिक कृषि ऋण समिति (PACS), या अधिकृत बीमा कंपनी के माध्यम से योजना के लिए नामांकन कर सकते हैं।', 'ऋणी किसानों के लिए प्रीमियम ऋण खाते से काटा जाता है या गैर-ऋणी किसानों द्वारा सीधे भुगतान किया जाता है।'],
+        link: 'https://pmfby.gov.in/'
     },
     {
         id: 'loan_3',
@@ -115,6 +120,7 @@ export const loans_hi: LoanScheme[] = [
         description: 'नई मशीनरी, उपकरण खरीदने या अन्य विकास गतिविधियों के लिए।',
         eligibility: ['स्पष्ट क्रेडिट इतिहास वाले व्यक्तिगत किसान या किसानों के समूह।', 'भूमि के स्वामित्व और खेती की गतिविधि का प्रमाण।'],
         documents: ['प्रस्तावित गतिविधि पर परियोजना रिपोर्ट।', 'मशीनरी/उपकरण के लिए कोटेशन।', 'भूमि रिकॉर्ड।', 'आय का प्रमाण।'],
-        process: ['एक विस्तृत परियोजना रिपोर्ट (DPR) तैयार करें।', 'डीपीआर और आवेदन पत्र के साथ एक वाणिज्यिक या सहकारी बैंक से संपर्क करें।', 'बैंक परियोजना की व्यवहार्यता का मूल्यांकन करेगा और ऋण स्वीकृत करेगा।']
+        process: ['एक विस्तृत परियोजना रिपोर्ट (DPR) तैयार करें।', 'डीपीआर और आवेदन पत्र के साथ एक वाणिज्यिक या सहकारी बैंक से संपर्क करें।', 'बैंक परियोजना की व्यवहार्यता का मूल्यांकन करेगा और ऋण स्वीकृत करेगा।'],
+        link: 'https://www.nabard.org/content.aspx?id=517'
     }
 ];

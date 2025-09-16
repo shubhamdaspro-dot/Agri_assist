@@ -100,7 +100,8 @@
         "available_schemes": "Available Schemes",
         "eligibility_criteria": "Eligibility Criteria",
         "required_documents": "Required Documents",
-        "application_process": "Application Process"
+        "application_process": "Application Process",
+        "apply_now_button": "Apply Now"
     },
     "cart": {
         "page_title": "Shopping Cart",

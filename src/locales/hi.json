@@ -100,7 +100,8 @@
         "available_schemes": "उपलब्ध योजनाएं",
         "eligibility_criteria": "पात्रता मापदंड",
         "required_documents": "आवश्यक दस्तावेज़",
-        "application_process": "आवेदन प्रक्रिया"
+        "application_process": "आवेदन प्रक्रिया",
+        "apply_now_button": "अभी आवेदन करें"
     },
     "cart": {
         "page_title": "शॉपिंग कार्ट",
