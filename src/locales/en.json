@@ -16,19 +16,5 @@
         "card_news_subheading": "Latest agricultural news and policies.",
         "read_news_button": "Read News",
         "latest_news_title": "Latest News"
-    },
-    "news": {
-        "news_1": {
-            "headline": "Government Announces New Subsidy for Drip Irrigation Systems",
-            "summary": "In a major boost to water conservation efforts, the Ministry of Agriculture has announced a 50% subsidy on drip irrigation systems for small and marginal farmers."
-        },
-        "news_2": {
-            "headline": "Weather Advisory: Heatwave Expected to Impact Northern Regions",
-            "summary": "The National Weather Service has issued a heatwave alert for the upcoming week, advising farmers to take precautionary measures to protect their crops and livestock."
-        },
-        "news_3": {
-            "headline": "Market Watch: Tomato Prices Surge Amidst Supply Chain Disruptions",
-            "summary": "Retail prices of tomatoes have seen a sharp increase of over 40% in the last two weeks due to transportation issues and crop damage from unseasonal rains."
-        }
     }
 }

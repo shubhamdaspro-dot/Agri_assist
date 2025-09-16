@@ -4,6 +4,7 @@ import { generateCropRecommendations, GenerateCropRecommendationsInput, Generate
 import { ai } from '@/ai/genkit';
 import wav from 'wav';
 import { z } from 'zod';
+import { fetchLatestNews, FetchLatestNewsOutput } from '@/ai/flows/fetch-latest-news';
 
 export async function getCropRecommendations(
   input: GenerateCropRecommendationsInput
@@ -82,5 +83,17 @@ export async function answerTextQueryWithVoice(
   } catch (e: any) {
     console.error(e);
     return { success: false, error: e.message || 'An unknown error occurred while processing your request.' };
+  }
+}
+
+export async function getLatestNews(
+  language: 'en' | 'hi'
+): Promise<{ success: boolean; data: FetchLatestNewsOutput | null; error?: string }> {
+  try {
+    const result = await fetchLatestNews(language);
+    return { success: true, data: result };
+  } catch (e: any) {
+    console.error(e);
+    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
   }
 }

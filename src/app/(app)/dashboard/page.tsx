@@ -1,15 +1,32 @@
 'use client';
+import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Leaf, Newspaper, ShoppingBag } from "lucide-react";
 import Link from "next/link";
-import { news } from "@/lib/data";
 import Image from "next/image";
 import { useLanguage } from "@/hooks/use-language";
+import { getLatestNews } from '@/lib/actions';
+import type { NewsArticle } from '@/lib/types';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function DashboardPage() {
-  const { t } = useLanguage();
-  const latestNews = news.slice(0, 3);
+  const { t, language } = useLanguage();
+  const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
+  const [loadingNews, setLoadingNews] = useState(true);
+
+  useEffect(() => {
+    async function loadNews() {
+      setLoadingNews(true);
+      const result = await getLatestNews(language as 'en' | 'hi');
+      if (result.success && result.data) {
+        setLatestNews(result.data.articles.slice(0, 3));
+      }
+      setLoadingNews(false);
+    }
+    loadNews();
+  }, [language]);
+
   return (
     <div className="flex flex-col gap-8">
       <Card className="w-full overflow-hidden">
@@ -97,19 +114,42 @@ export default function DashboardPage() {
       <div>
         <h2 className="text-2xl font-bold font-headline mb-4">{t('dashboard.latest_news_title')}</h2>
         <div className="grid gap-4 md:grid-cols-3">
-            {latestNews.map(article => (
-                <Card key={article.id}>
-                    <CardHeader>
-                        <CardTitle className="text-lg">{t(`news.${article.id}.headline`)}</CardTitle>
-                        <CardDescription>{article.date} - {article.source}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <p className="text-sm text-muted-foreground">{t(`news.${article.id}.summary`)}</p>
-                    </CardContent>
-                </Card>
-            ))}
+            {loadingNews ? (
+              <>
+                <NewsCardSkeleton />
+                <NewsCardSkeleton />
+                <NewsCardSkeleton />
+              </>
+            ) : (
+              latestNews.map(article => (
+                  <Card key={article.id}>
+                      <CardHeader>
+                          <CardTitle className="text-lg">{article.headline}</CardTitle>
+                          <CardDescription>{article.date} - {article.source}</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                          <p className="text-sm text-muted-foreground">{article.summary}</p>
+                      </CardContent>
+                  </Card>
+              ))
+            )}
         </div>
       </div>
     </div>
   );
+}
+
+function NewsCardSkeleton() {
+  return (
+    <Card>
+      <CardHeader>
+        <Skeleton className="h-5 w-3/4 mb-2" />
+        <Skeleton className="h-4 w-1/2" />
+      </CardHeader>
+      <CardContent>
+        <Skeleton className="h-4 w-full mb-2" />
+        <Skeleton className="h-4 w-5/6" />
+      </CardContent>
+    </Card>
+  )
 }

@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export interface Product {
   id: string;
   name: string;
@@ -11,14 +13,22 @@ export interface CartItem extends Product {
   quantity: number;
 }
 
-export interface NewsArticle {
-  id: string;
-  headline: string;
-  summary: string;
-  fullStory: string;
-  date: string;
-  source: string;
-}
+export const NewsArticleSchema = z.object({
+  id: z.string().describe('A unique identifier for the news article'),
+  headline: z.string().describe('The headline of the news article.'),
+  summary: z.string().describe('A brief summary of the news article.'),
+  fullStory: z.string().describe('The full story of the news article.'),
+  date: z.string().describe('The date of publication of the news article in YYYY-MM-DD format.'),
+  source: z.string().describe('The source of the news article.'),
+});
+
+export const FetchLatestNewsOutputSchema = z.object({
+  articles: z.array(NewsArticleSchema),
+});
+
+export type NewsArticle = z.infer<typeof NewsArticleSchema>;
+export type FetchLatestNewsOutput = z.infer<typeof FetchLatestNewsOutputSchema>;
+
 
 export interface LoanScheme {
   id: string;

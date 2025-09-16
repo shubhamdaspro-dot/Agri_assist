@@ -51,33 +51,6 @@ export const products: Product[] = [
   },
 ];
 
-export const news: NewsArticle[] = [
-    {
-        id: 'news_1',
-        headline: 'Government Announces New Subsidy for Drip Irrigation Systems',
-        summary: 'In a major boost to water conservation efforts, the Ministry of Agriculture has announced a 50% subsidy on drip irrigation systems for small and marginal farmers.',
-        fullStory: 'The Ministry of Agriculture unveiled a new scheme today aimed at promoting water-efficient farming practices. Under this scheme, small and marginal farmers will be eligible for a 50% subsidy on the purchase and installation of drip irrigation systems. Officials state this move is expected to reduce water consumption in agriculture by up to 60% and improve crop yields. Applications will be accepted online starting next month.',
-        date: '2024-07-28',
-        source: 'Ministry of Agriculture Press Release'
-    },
-    {
-        id: 'news_2',
-        headline: 'Weather Advisory: Heatwave Expected to Impact Northern Regions',
-        summary: 'The National Weather Service has issued a heatwave alert for the upcoming week, advising farmers to take precautionary measures to protect their crops and livestock.',
-        fullStory: 'Farmers in the northern states are advised to prepare for a severe heatwave projected to last from August 5th to August 12th. Temperatures are expected to soar 5-7 degrees above normal. The advisory recommends ensuring adequate irrigation, using shade nets for sensitive crops, and providing sufficient water and shelter for livestock. Farmers are encouraged to monitor weather updates closely.',
-        date: '2024-07-27',
-        source: 'National Weather Service'
-    },
-    {
-        id: 'news_3',
-        headline: 'Market Watch: Tomato Prices Surge Amidst Supply Chain Disruptions',
-        summary: 'Retail prices of tomatoes have seen a sharp increase of over 40% in the last two weeks due to transportation issues and crop damage from unseasonal rains.',
-        fullStory: 'A combination of factors, including recent unseasonal rains in key growing areas and logistical bottlenecks, has led to a significant surge in tomato prices across the country. Experts predict that prices will remain high for the next few weeks until the supply chain stabilizes. The government is reportedly considering importing tomatoes to curb the price rise.',
-        date: '2024-07-26',
-        source: 'Agri-Market Today'
-    }
-];
-
 export const loans: LoanScheme[] = [
     {
         id: 'loan_1',
