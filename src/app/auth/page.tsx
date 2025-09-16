@@ -39,22 +39,6 @@ export default function AuthPage() {
     }
   }, [user, authLoading, router]);
 
-  useEffect(() => {
-    // Check to avoid re-initializing on every render
-    if (!(window as any).recaptchaVerifier) {
-      (window as any).recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        'recaptcha-container', // This ID must match an element in the JSX
-        {
-          size: 'invisible',
-          callback: (response: any) => {
-            // reCAPTCHA solved, allow signInWithPhoneNumber.
-          },
-        }
-      );
-    }
-  }, []); // Empty dependency array ensures this runs only once
-
   const handleSendOtp = async () => {
     if (!phoneNumber) {
       toast({
@@ -66,8 +50,13 @@ export default function AuthPage() {
     }
     setLoading(true);
     try {
-      const appVerifier = (window as any).recaptchaVerifier;
-      const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+      const recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+        size: 'invisible',
+        callback: () => {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+        },
+      });
+      const result = await signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
       setConfirmationResult(result);
       toast({
         title: 'OTP Sent',
