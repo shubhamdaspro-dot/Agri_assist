@@ -33,7 +33,7 @@ export default function RecommendationsPage() {
         },
         (error) => {
           setLocationError(t('recommendations.location_error_manual'));
-          console.error("Geolocation error:", error);
+          console.error(`Geolocation error: ${error.message} (Code: ${error.code})`);
         }
       );
     } else {
