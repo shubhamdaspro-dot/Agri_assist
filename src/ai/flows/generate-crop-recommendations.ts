@@ -23,7 +23,10 @@ const GenerateCropRecommendationsOutputSchema = z.object({
   recommendedCrop: z.string().describe('The most suitable crop to plant.'),
   recommendedProducts: z.string().describe('Specific pesticides, manures, and fertilizers needed to cultivate the recommended crop successfully.'),
   rationale: z.string().describe('Explanation of why the crop was recommended'),
-  nearestStores: z.string().describe('A suggestion of where to buy the recommended products, like "local agricultural co-operatives or large retailers in nearby towns".'),
+  nearestStores: z.array(z.object({
+    name: z.string().describe('The name of the store.'),
+    address: z.string().describe('The full, searchable address of the store.'),
+  })).describe('A list of nearby stores where the recommended products can be purchased.'),
 });
 export type GenerateCropRecommendationsOutput = z.infer<typeof GenerateCropRecommendationsOutputSchema>;
 
@@ -35,7 +38,7 @@ const prompt = ai.definePrompt({
   name: 'generateCropRecommendationsPrompt',
   input: {schema: GenerateCropRecommendationsInputSchema},
   output: {schema: GenerateCropRecommendationsOutputSchema},
-  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation for the most suitable crop to plant, the specific products needed, your rationale, and a general suggestion for where to buy the products.\n\nWeather Data: {{{weatherData}}}\nSoil Type: {{{soilType}}}\nGeographic Region: {{{geographicRegion}}}\nHistorical Yields (if available): {{{historicalYields}}}\nMarket Demand (if available): {{{marketDemand}}}\n\nBased on this information, recommend a crop, the products needed (pesticides, fertilizers, etc.), your rationale, and a generic pointer to where such products can be purchased locally (e.g., "local agricultural supply stores or farmer co-operatives").`, 
+  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation for the most suitable crop to plant, the specific products needed, your rationale, and a list of 2-3 fictional but realistic local stores with full, searchable addresses where the products can be purchased based on the geographic region.\n\nWeather Data: {{{weatherData}}}\nSoil Type: {{{soilType}}}\nGeographic Region: {{{geographicRegion}}}\nHistorical Yields (if available): {{{historicalYields}}}\nMarket Demand (if available): {{{marketDemand}}}\n\nBased on this information, recommend a crop, the products needed (pesticides, fertilizers, etc.), your rationale, and a list of nearby stores with their names and addresses.`,
 });
 
 const generateCropRecommendationsFlow = ai.defineFlow(

@@ -116,32 +116,37 @@ function FormSkeleton() {
 function LoadingSkeleton() {
   return (
     <Card className="mt-8">
-        <CardHeader>
-            <CardTitle>
-                <Skeleton className="h-8 w-1/4" />
-            </CardTitle>
-            <div className="text-sm text-muted-foreground">
-                <Skeleton className="h-4 w-1/2" />
-            </div>
-        </CardHeader>
-        <CardContent className="space-y-6">
-            <div>
-                <Skeleton className="h-6 w-1/3 mb-2" />
-                <Skeleton className="h-8 w-1/2" />
-            </div>
-            <div>
-                <Skeleton className="h-6 w-1/3 mb-2" />
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-5/6 mt-2" />
-            </div>
-            <div>
-                <Skeleton className="h-6 w-1/3 mb-2" />
-                <div className="space-y-2">
-                    <Skeleton className="h-12 w-full" />
-                    <Skeleton className="h-12 w-full" />
-                </div>
-            </div>
-        </CardContent>
+      <CardHeader>
+        <Skeleton className="h-8 w-1/4 mb-2" />
+        <div className="text-sm text-muted-foreground">
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div>
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <Skeleton className="h-8 w-1/2" />
+        </div>
+        <div>
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-5/6 mt-2" />
+        </div>
+        <div>
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <div className="space-y-2">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        </div>
+        <div>
+          <Skeleton className="h-6 w-1/3 mb-2" />
+          <div className="space-y-2">
+            <Skeleton className="h-12 w-full" />
+            <Skeleton className="h-12 w-full" />
+          </div>
+        </div>
+      </CardContent>
     </Card>
-  )
+  );
 }

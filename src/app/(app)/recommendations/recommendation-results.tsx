@@ -2,11 +2,12 @@
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, MessageSquare, Smartphone, RefreshCw, MapPin } from 'lucide-react';
+import { CheckCircle, MessageSquare, Smartphone, RefreshCw, MapPin, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
 import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
@@ -90,7 +91,21 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
             <MapPin className="h-5 w-5" />
             {t('recommendations.results_stores')}:
           </h3>
-          <p className="text-muted-foreground">{results.nearestStores}</p>
+          <ul className="space-y-2 mt-2">
+             {results.nearestStores.map((store, index) => (
+              <li key={index} className="flex items-center justify-between p-3 rounded-md bg-background hover:bg-muted/50 transition-colors">
+                <div>
+                    <p className="font-medium">{store.name}</p>
+                    <p className="text-sm text-muted-foreground">{store.address}</p>
+                </div>
+                <Button asChild variant="ghost" size="icon">
+                    <Link href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.address)}`} target="_blank">
+                        <ArrowRight className="h-5 w-5" />
+                    </Link>
+                </Button>
+              </li>
+            ))}
+          </ul>
         </div>
         <div className="space-y-2 pt-4 border-t">
           <h3 className="font-semibold text-lg">{t('recommendations.share_title')}</h3>
