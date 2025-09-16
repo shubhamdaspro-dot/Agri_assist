@@ -7,7 +7,8 @@ import { useCart } from '@/hooks/use-cart';
 import { products } from '@/lib/data';
 import { useLanguage } from '@/hooks/use-language';
 import { useToast } from '@/hooks/use-toast';
-import { useAuth } from '@/hooks/use-auth';
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
@@ -17,7 +18,8 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
   const { addToCart } = useCart();
   const { t } = useLanguage();
   const { toast } = useToast();
-  const { user } = useAuth();
+  const [phoneNumber, setPhoneNumber] = useState('');
+
   const recommendedProductsList = results.recommendedProducts.split(',').map(p => p.trim());
 
   const handleAddToCart = (productName: string) => {
@@ -46,7 +48,6 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
   });
 
   const handleShare = (platform: 'sms' | 'whatsapp') => {
-    const phoneNumber = user?.phoneNumber;
     if (!phoneNumber) {
         toast({
             variant: 'destructive',
@@ -83,16 +84,6 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
             </CardTitle>
             <CardDescription>{t('recommendations.results_subtitle')}</CardDescription>
         </div>
-        <div className="flex gap-2">
-            <Button variant="outline" size="icon" onClick={() => handleShare('sms')} title={t('recommendations.share_sms_title')}>
-                <Smartphone className="h-5 w-5" />
-                <span className="sr-only">Share via SMS</span>
-            </Button>
-            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')} title={t('recommendations.share_whatsapp_title')}>
-                 <MessageSquare className="h-5 w-5" />
-                 <span className="sr-only">Share via WhatsApp</span>
-            </Button>
-        </div>
       </CardHeader>
       <CardContent className="space-y-6">
         <div>
@@ -116,6 +107,27 @@ export function RecommendationResults({ results }: RecommendationResultsProps) {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="space-y-2 pt-4 border-t">
+          <h3 className="font-semibold text-lg">{t('recommendations.share_title')}</h3>
+           <p className="text-sm text-muted-foreground">{t('recommendations.share_subtitle')}</p>
+          <div className="flex gap-2">
+            <Input 
+              type="tel"
+              placeholder={t('auth.phone_label')}
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className="max-w-xs"
+            />
+            <Button variant="outline" size="icon" onClick={() => handleShare('sms')} title={t('recommendations.share_sms_title')}>
+                <Smartphone className="h-5 w-5" />
+                <span className="sr-only">Share via SMS</span>
+            </Button>
+            <Button variant="outline" size="icon" onClick={() => handleShare('whatsapp')} title={t('recommendations.share_whatsapp_title')}>
+                 <MessageSquare className="h-5 w-5" />
+                 <span className="sr-only">Share via WhatsApp</span>
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>

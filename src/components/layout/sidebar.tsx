@@ -16,13 +16,10 @@ import {
   Landmark,
   Github,
   CircleHelp,
-  LogOut,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
-import { useAuth } from '@/hooks/use-auth';
-
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -58,7 +55,6 @@ function AgriAssistLogo() {
 export default function AppSidebar() {
   const pathname = usePathname();
   const { t } = useLanguage();
-  const { signOut } = useAuth();
   return (
     <Sidebar>
       <SidebarHeader>
@@ -98,21 +94,6 @@ export default function AppSidebar() {
                   <Github />
                   <span>GitHub</span>
                 </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-             <SidebarMenuItem>
-              <SidebarMenuButton onClick={() => {
-                  signOut();
-                  // A bit of a hack to get the toast to use the right language on sign out
-                  setTimeout(() => {
-                    const lang = localStorage.getItem('agriassist_language') || 'en';
-                    const signOutText = lang === 'en' ? 'Sign Out' : 'साइन आउट';
-                    const signedOutText = lang === 'en' ? 'You have been successfully signed out.' : 'आप सफलतापूर्वक साइन आउट हो गए हैं।';
-                    
-                  }, 100);
-              }} tooltip={t('sidebar.sign_out')}>
-                <LogOut />
-                <span>{t('sidebar.sign_out')}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
         </SidebarMenu>

@@ -3,7 +3,6 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { CartProvider } from '@/hooks/use-cart';
 import { LanguageProvider } from '@/hooks/use-language';
-import { AuthProvider } from '@/hooks/use-auth';
 
 export const metadata: Metadata = {
   title: 'AgriAssist',
@@ -27,12 +26,10 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <LanguageProvider>
-          <AuthProvider>
             <CartProvider>
               {children}
               <Toaster />
             </CartProvider>
-          </AuthProvider>
         </LanguageProvider>
       </body>
     </html>
