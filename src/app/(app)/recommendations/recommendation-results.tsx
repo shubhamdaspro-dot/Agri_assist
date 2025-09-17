@@ -8,6 +8,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
@@ -119,14 +120,12 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
           </div>
         </div>
       </CardContent>
-      {isSent && (
-        <CardFooter>
-            <Button onClick={onNewRecommendation} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
-                <RefreshCw className="mr-2 h-4 w-4" />
-                {t('recommendations.new_recommendation_button')}
-            </Button>
-        </CardFooter>
-      )}
+      <CardFooter className={cn(!isSent && "hidden")}>
+          <Button onClick={onNewRecommendation} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+              <RefreshCw className="mr-2 h-4 w-4" />
+              {t('recommendations.new_recommendation_button')}
+          </Button>
+      </CardFooter>
     </Card>
   );
 }

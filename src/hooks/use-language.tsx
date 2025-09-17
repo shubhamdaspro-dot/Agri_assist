@@ -6,7 +6,6 @@ import bn from '@/locales/bn.json';
 import te from '@/locales/te.json';
 import mr from '@/locales/mr.json';
 import ta from '@/locales/ta.json';
-import { useIsClient } from './use-is-client';
 
 const translations: Record<string, any> = { en, hi, bn, te, mr, ta };
 
@@ -20,28 +19,20 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState('en');
-  const isClient = useIsClient();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (isClient) {
-      const savedLanguage = localStorage.getItem('agriassist_language');
-      if (savedLanguage && translations[savedLanguage]) {
-        setLanguageState(savedLanguage);
-      }
+    const savedLanguage = localStorage.getItem('agriassist_language');
+    if (savedLanguage && translations[savedLanguage]) {
+      setLanguageState(savedLanguage);
     }
-  }, [isClient]);
+  }, []);
 
   const setLanguage = (lang: string) => {
     if (translations[lang]) {
       setLanguageState(lang);
-      if (isClient) {
-        localStorage.setItem('agriassist_language', lang);
-      }
+      localStorage.setItem('agriassist_language', lang);
     }
   };
 
@@ -78,12 +69,19 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     return translated;
   }, [language]);
   
+  const value = {
+    language,
+    setLanguage,
+    t,
+  };
+
+  // Prevent flash of untranslated content
   if (!isMounted) {
     return null;
   }
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
