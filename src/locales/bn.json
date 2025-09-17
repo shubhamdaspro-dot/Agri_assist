@@ -82,7 +82,7 @@
         "toast_phone_missing_description": "সুপারিশ শেয়ার করার জন্য অনুগ্রহ করে একটি ফোন নম্বর লিখুন।",
         "share_sms_button": "এসএমএস পাঠান",
         "share_sms_button_title": "এসএমএস এর মাধ্যমে পাঠান",
-        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
+        "new_recommendation_button": "নতুন সুপারিশ شروع করুন"
     },
     "news": {
         "page_title": "কৃষি খবর ও আপডেট",
@@ -99,11 +99,16 @@
     },
     "chat": {
         "title": "এআই কৃষি সহকারী",
+        "description": "সব কৃষি প্রশ্নের জন্য আপনার বন্ধুত্বপূর্ণ এআই সঙ্গী।",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
         "input_placeholder": "আপনার প্রশ্ন টাইপ করুন...",
         "input_listening": "শুনছি...",
         "canned_query": "গরম জলবায়ুতে বালুকাময় মাটির জন্য সেরা ফসল কোনটি?",
-        "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।"
+        "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।",
+        "voice_label": "এআই ভয়েস",
+        "voice_placeholder": "একটি ভয়েস নির্বাচন করুন",
+        "voice_female": "মহিলা",
+        "voice_male": "পুরুষ"
     },
     "auth": {
         "login_title": "লগইন",

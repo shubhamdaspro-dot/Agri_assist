@@ -88,12 +88,17 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(10px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+         glow: {
+          '0%, 100%': { boxShadow: '0 0 10px hsl(var(--primary))' },
+          '50%': { boxShadow: '0 0 20px hsl(var(--primary))' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.3s ease-out',
         'accordion-up': 'accordion-up 0.3s ease-out',
         'fade-in': 'fade-in 0.5s ease-in-out forwards',
         'fade-in-up': 'fade-in-up 0.5s ease-in-out forwards',
+        glow: 'glow 3s ease-in-out infinite',
       },
     },
   },

@@ -99,11 +99,16 @@
     },
     "chat": {
         "title": "AI Farming Assistant",
+        "description": "Your friendly AI partner for all farming questions.",
         "welcome_message": "Ask me anything about farming!",
         "input_placeholder": "Type your question...",
         "input_listening": "Listening...",
         "canned_query": "What are the best crops for sandy soil in a hot climate?",
-        "default_error": "Sorry, I couldn't process that."
+        "default_error": "Sorry, I couldn't process that.",
+        "voice_label": "AI Voice",
+        "voice_placeholder": "Select a voice",
+        "voice_female": "Female",
+        "voice_male": "Male"
     },
     "auth": {
         "login_title": "Login",

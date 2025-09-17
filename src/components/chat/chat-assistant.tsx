@@ -2,15 +2,17 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { MessageCircle, Mic, Send, Bot, User, X, Loader2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { answerTextQueryWithVoice } from '@/lib/actions';
-import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { Avatar, AvatarFallback } from '../ui/avatar';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/use-language';
 import { useChat } from '@/hooks/use-chat';
+import { Label } from '../ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 type Message = {
   id: number;
@@ -19,12 +21,15 @@ type Message = {
   audioUri?: string;
 };
 
+type VoiceOption = 'Algenib' | 'Achernar';
+
 export default function ChatAssistant() {
   const { isOpen, setIsOpen } = useChat();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [voice, setVoice] = useState<VoiceOption>('Algenib');
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const { t } = useLanguage();
@@ -58,7 +63,7 @@ export default function ChatAssistant() {
     setInput('');
     setIsProcessing(true);
 
-    const result = await answerTextQueryWithVoice(userQuery);
+    const result = await answerTextQueryWithVoice(userQuery, voice);
 
     if (result.success && result.textResponse) {
       const newAssistantMessage: Message = {
@@ -107,6 +112,7 @@ export default function ChatAssistant() {
             <DialogTitle className="flex items-center gap-2">
               <Bot className="text-primary" /> {t('chat.title')}
             </DialogTitle>
+            <DialogDescription>{t('chat.description')}</DialogDescription>
           </DialogHeader>
           <ScrollArea className="flex-1" ref={scrollAreaRef}>
             <div className="p-4 space-y-4">
@@ -145,8 +151,20 @@ export default function ChatAssistant() {
               )}
             </div>
           </ScrollArea>
-          <div className="p-4 border-t">
-            <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex items-center gap-2">
+           <DialogFooter className="p-4 border-t flex-col sm:flex-col sm:space-x-0 gap-4">
+             <div className="grid w-full items-center gap-1.5">
+                <Label htmlFor="voice">{t('chat.voice_label')}</Label>
+                <Select value={voice} onValueChange={(value: VoiceOption) => setVoice(value)}>
+                    <SelectTrigger id="voice" className="w-full">
+                        <SelectValue placeholder={t('chat.voice_placeholder')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="Algenib">{t('chat.voice_female')}</SelectItem>
+                        <SelectItem value="Achernar">{t('chat.voice_male')}</SelectItem>
+                    </SelectContent>
+                </Select>
+            </div>
+            <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex items-center gap-2 w-full">
               <Input
                 value={input}
                 onChange={e => setInput(e.target.value)}
@@ -160,16 +178,16 @@ export default function ChatAssistant() {
                 {isProcessing ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
               </Button>
             </form>
-          </div>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
       
       <Button
-        className="fixed bottom-6 right-6 h-16 w-16 rounded-full shadow-lg bg-primary hover:bg-primary/90"
+        className="fixed bottom-6 right-6 h-20 w-20 rounded-full shadow-lg bg-primary hover:bg-primary/90 animate-glow"
         size="icon"
         onClick={() => setIsOpen(true)}
       >
-        <MessageCircle className="h-8 w-8 text-primary-foreground" />
+        <MessageCircle className="h-10 w-10 text-primary-foreground" />
       </Button>
 
       <audio ref={audioRef} className="hidden" />

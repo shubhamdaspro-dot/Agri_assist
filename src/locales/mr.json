@@ -99,11 +99,16 @@
     },
     "chat": {
         "title": "AI शेती सहाय्यक",
+        "description": "सर्व शेती प्रश्नांसाठी तुमचा मैत्रीपूर्ण AI भागीदार.",
         "welcome_message": "शेतीबद्दल मला काहीही विचारा!",
         "input_placeholder": "तुमचा प्रश्न टाइप करा...",
         "input_listening": "ऐकत आहे...",
         "canned_query": "गरम हवामानात वालुकामय मातीसाठी सर्वोत्तम पिके कोणती आहेत?",
-        "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही।"
+        "default_error": "क्षमस्व, मी ते प्रक्रिया करू शकलो नाही。",
+        "voice_label": "AI आवाज",
+        "voice_placeholder": "एक आवाज निवडा",
+        "voice_female": "स्त्री",
+        "voice_male": "पुरुष"
     },
     "auth": {
         "login_title": "लॉगिन",

@@ -61,12 +61,13 @@ async function toWav(
 }
 
 export async function answerTextQueryWithVoice(
-  query: string
+  query: string,
+  voice: 'Algenib' | 'Achernar' = 'Algenib'
 ): Promise<{ success: boolean; textResponse?: string; spokenResponseDataUri?: string; error?: string }> {
   try {
     // 1. Get text response from LLM
     const { text: textResponse } = await ai.generate({
-      prompt: `You are an expert AI assistant for farmers. You are friendly, helpful, and provide concise answers. Answer the following question: ${query}`,
+      prompt: `You are an expert AI assistant for farmers. You are friendly, helpful, and provide concise, accurate answers. Answer the following question: ${query}`,
     });
 
     if (!textResponse) {
@@ -80,7 +81,7 @@ export async function answerTextQueryWithVoice(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: 'Algenib' },
+            prebuiltVoiceConfig: { voiceName: voice },
           },
         },
       },
