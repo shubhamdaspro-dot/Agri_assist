@@ -92,6 +92,13 @@ export default {
           '0%, 100%': { boxShadow: '0 0 10px hsl(var(--primary))' },
           '50%': { boxShadow: '0 0 20px hsl(var(--primary))' },
         },
+        'float-around': {
+          '0%': { transform: 'translate(0px, 0px)' },
+          '25%': { transform: 'translate(5px, 10px)' },
+          '50%': { transform: 'translate(-5px, 5px)' },
+          '75%': { transform: 'translate(5px, -5px)' },
+          '100%': { transform: 'translate(0px, 0px)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.3s ease-out',
@@ -99,6 +106,7 @@ export default {
         'fade-in': 'fade-in 0.5s ease-in-out forwards',
         'fade-in-up': 'fade-in-up 0.5s ease-in-out forwards',
         glow: 'glow 3s ease-in-out infinite',
+        'float-around': 'float-around 8s ease-in-out infinite',
       },
     },
   },

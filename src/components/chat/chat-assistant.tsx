@@ -183,7 +183,7 @@ export default function ChatAssistant() {
       </Dialog>
       
       <Button
-        className="fixed bottom-6 right-6 h-20 w-20 rounded-full shadow-lg bg-primary hover:bg-primary/90 animate-glow"
+        className="fixed bottom-6 right-6 h-20 w-20 rounded-full shadow-lg bg-primary hover:bg-primary/90 animate-glow animate-float-around"
         size="icon"
         onClick={() => setIsOpen(true)}
       >
