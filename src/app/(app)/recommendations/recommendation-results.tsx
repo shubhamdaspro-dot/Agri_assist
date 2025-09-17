@@ -120,7 +120,7 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
           </div>
         </div>
       </CardContent>
-      <CardFooter className={cn(!isSent && "hidden")}>
+      <CardFooter>
           <Button onClick={onNewRecommendation} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
               <RefreshCw className="mr-2 h-4 w-4" />
               {t('recommendations.new_recommendation_button')}

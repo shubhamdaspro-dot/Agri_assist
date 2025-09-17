@@ -46,8 +46,8 @@ export default function DashboardPage() {
           </div>
         </Card>
         <div className="grid gap-6 md:grid-cols-2">
-          <Card><CardContent className="p-6"><Skeleton className="h-24 w-full" /></CardContent></Card>
-          <Card><CardContent className="p-6"><Skeleton className="h-24 w-full" /></CardContent></Card>
+          <Card><CardHeader><Skeleton className="h-5 w-1/2" /></CardHeader><CardContent className="p-6 pt-0"><Skeleton className="h-12 w-full" /></CardContent></Card>
+          <Card><CardHeader><Skeleton className="h-5 w-1/2" /></CardHeader><CardContent className="p-6 pt-0"><Skeleton className="h-12 w-full" /></CardContent></Card>
         </div>
         <div>
           <Skeleton className="h-8 w-1/4 mb-4" />

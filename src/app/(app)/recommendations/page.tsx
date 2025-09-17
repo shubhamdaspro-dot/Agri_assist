@@ -57,7 +57,7 @@ export default function RecommendationsPage() {
         </p>
       </div>
 
-      {locationError && (
+      {locationError && !location && (
         <Alert variant="destructive">
           <MapPin className="h-4 w-4" />
           <AlertTitle>{t('recommendations.location_error_title')}</AlertTitle>
