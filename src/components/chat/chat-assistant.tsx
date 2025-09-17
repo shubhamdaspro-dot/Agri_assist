@@ -47,6 +47,13 @@ export default function ChatAssistant() {
     }
   }, [messages]);
 
+  useEffect(() => {
+    if (!isOpen && audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+    }
+  }, [isOpen]);
+
   const playAudio = (audioUri: string) => {
     if (audioRef.current) {
       audioRef.current.src = audioUri;
