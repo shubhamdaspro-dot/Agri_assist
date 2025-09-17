@@ -19,17 +19,47 @@ export default function DashboardPage() {
 
   useEffect(() => {
     async function loadNews() {
-      if (isClient) {
-        setLoadingNews(true);
-        const result = await getLatestNews(language);
-        if (result.success && result.data) {
-          setLatestNews(result.data.articles.slice(0, 3));
-        }
-        setLoadingNews(false);
+      setLoadingNews(true);
+      const result = await getLatestNews(language);
+      if (result.success && result.data) {
+        setLatestNews(result.data.articles.slice(0, 3));
       }
+      setLoadingNews(false);
     }
-    loadNews();
+    if (isClient) {
+      loadNews();
+    }
   }, [language, isClient]);
+
+  if (!isClient) {
+    return (
+      <div className="flex flex-col gap-8">
+        <Card className="w-full overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="p-8 md:p-12 flex flex-col justify-center">
+              <Skeleton className="h-10 w-3/4 mb-4" />
+              <Skeleton className="h-6 w-full mb-2" />
+              <Skeleton className="h-6 w-5/6 mb-6" />
+              <Skeleton className="h-12 w-48" />
+            </div>
+            <div className="relative h-64 md:h-full min-h-[250px] bg-muted"></div>
+          </div>
+        </Card>
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card><CardContent className="p-6"><Skeleton className="h-24 w-full" /></CardContent></Card>
+          <Card><CardContent className="p-6"><Skeleton className="h-24 w-full" /></CardContent></Card>
+        </div>
+        <div>
+          <Skeleton className="h-8 w-1/4 mb-4" />
+          <div className="grid gap-4 md:grid-cols-3">
+            <NewsCardSkeleton />
+            <NewsCardSkeleton />
+            <NewsCardSkeleton />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-8">

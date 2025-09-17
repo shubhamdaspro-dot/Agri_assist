@@ -21,8 +21,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState('en');
   const isClient = useIsClient();
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     if (isClient) {
       const savedLanguage = localStorage.getItem('agriassist_language');
       if (savedLanguage && translations[savedLanguage]) {
@@ -54,12 +56,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     let translated = getTranslation(language);
 
     if (translated === undefined) {
-        // Fallback to English if translation is missing
         translated = getTranslation('en');
     }
 
     if (typeof translated !== 'string') {
-        console.warn(`Translation for key '${key}' not found.`);
         return key;
     }
 
@@ -78,8 +78,8 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     setLanguage,
     t,
   };
-
-  if (!isClient) {
+  
+  if (!isMounted) {
     return null;
   }
 
