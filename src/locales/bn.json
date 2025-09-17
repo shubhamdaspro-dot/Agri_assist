@@ -75,14 +75,20 @@
         "results_stores": "কোথায় কিনবেন",
         "share_title": "সুপারিশ শেয়ার করুন",
         "share_subtitle_sms": "SMS এর মাধ্যমে সুপারিশ পাঠাতে একটি ফোন নম্বর লিখুন।",
-        "share_message": "এগ্রিঅ্যাসিস্ট এআই সুপারিশ:\n\nফসল: {crop}\nযুক্তিসঙ্গত কারণ: {rationale}\nপ্রস্তাবিত পণ্য: {products}",
+        "share_message": "এগ্রিঅ্যাসিস্ট এআই সুপারিশ:\n\nফসল: {crop}\nসাধারণ যুক্তি: {rationale}\nপ্রস্তাবিত পণ্য: {products}",
         "toast_sharing_title": "সুপারিশ পাঠানো হয়েছে",
         "toast_sharing_description": "সুপারিশ {platform}-এ পাঠানো হয়েছে।",
         "toast_phone_missing_title": "ফোন নম্বর প্রয়োজন",
         "toast_phone_missing_description": "সুপারিশ শেয়ার করার জন্য অনুগ্রহ করে একটি ফোন নম্বর লিখুন।",
         "share_sms_button": "এসএমএস পাঠান",
         "share_sms_button_title": "এসএমএস এর মাধ্যমে পাঠান",
-        "new_recommendation_button": "নতুন সুপারিশ شروع করুন"
+        "share_whatsapp_button": "হোয়াটসঅ্যাপে শেয়ার করুন",
+        "download_jpg_button": "JPG হিসাবে ডাউনলোড করুন",
+        "downloading_button": "ডাউনলোড করা হচ্ছে...",
+        "toast_download_success_title": "ডাউনলোড শুরু হয়েছে",
+        "toast_download_error_title": "ডাউনলোড ব্যর্থ হয়েছে",
+        "toast_download_error_description": "ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
     },
     "news": {
         "page_title": "কৃষি খবর ও আপডেট",

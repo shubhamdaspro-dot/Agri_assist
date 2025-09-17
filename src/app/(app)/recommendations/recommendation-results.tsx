@@ -2,12 +2,13 @@
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Smartphone, RefreshCw, MapPin, ArrowRight, Leaf } from 'lucide-react';
+import { CheckCircle, Smartphone, RefreshCw, MapPin, ArrowRight, Leaf, Share2, Download, MessageSquare } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
 import { useToast } from '@/hooks/use-toast';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
+import { toJpeg } from 'html-to-image';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
@@ -19,6 +20,9 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
   const { toast } = useToast();
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isSent, setIsSent] = useState(false);
+  const resultCardRef = useRef<HTMLDivElement>(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+
 
   const recommendedProductsList = results.recommendedProducts.split(',').map(p => p.trim());
   const cropsText = results.recommendedCrops.map(c => c.name).join(', ');
@@ -29,7 +33,7 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
     rationale: results.rationale
   });
 
-  const handleShare = () => {
+  const handleShareSMS = () => {
     if (!phoneNumber) {
         toast({
             variant: 'destructive',
@@ -50,9 +54,50 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
     });
   }
 
+  const handleShareWhatsApp = () => {
+    const encodedMessage = encodeURIComponent(shareMessage);
+    const url = `https://wa.me/?text=${encodedMessage}`;
+    window.open(url, '_blank');
+     toast({
+        title: t('recommendations.toast_sharing_title'),
+        description: t('recommendations.toast_sharing_description', { platform: 'WhatsApp' })
+    });
+  }
+
+  const handleDownloadImage = async () => {
+    if (!resultCardRef.current) {
+        toast({
+            variant: 'destructive',
+            title: t('recommendations.toast_download_error_title'),
+            description: t('recommendations.toast_download_error_description'),
+        });
+        return;
+    }
+    setIsDownloading(true);
+    try {
+        const dataUrl = await toJpeg(resultCardRef.current, { quality: 0.95, backgroundColor: '#ffffff' });
+        const link = document.createElement('a');
+        link.download = 'agriassist-recommendation.jpg';
+        link.href = dataUrl;
+        link.click();
+        toast({
+            title: t('recommendations.toast_download_success_title'),
+        });
+    } catch(err) {
+        console.error(err);
+        toast({
+            variant: 'destructive',
+            title: t('recommendations.toast_download_error_title'),
+            description: t('recommendations.toast_download_error_description'),
+        });
+    } finally {
+        setIsDownloading(false);
+    }
+  };
+
   return (
     <div className="mt-8 space-y-8">
-        <Card className="bg-secondary/50">
+        <Card className="bg-secondary/50" ref={resultCardRef}>
             <CardHeader className="flex-row items-center justify-between">
                 <div>
                     <CardTitle className="flex items-center gap-2 text-2xl">
@@ -110,10 +155,19 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
                     ))}
                 </ul>
                 </div>
-                 <div className="space-y-2 pt-4 border-t">
-                    <h3 className="font-semibold text-lg">{t('recommendations.share_title')}</h3>
-                    <p className="text-sm text-muted-foreground">{t('recommendations.share_subtitle_sms')}</p>
-                    <div className="flex gap-2">
+            </CardContent>
+        </Card>
+        <Card>
+            <CardHeader>
+                 <CardTitle className="flex items-center gap-2">
+                    <Share2 className="h-6 w-6" />
+                    {t('recommendations.share_title')}
+                    </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                 <div>
+                    <h3 className="font-semibold">{t('recommendations.share_subtitle_sms')}</h3>
+                    <div className="flex gap-2 mt-2">
                         <Input 
                         type="tel"
                         placeholder={t('auth.phone_label')}
@@ -122,11 +176,21 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
                         className="max-w-xs"
                         disabled={isSent}
                         />
-                        <Button onClick={handleShare} title={t('recommendations.share_sms_button_title')} disabled={isSent}>
+                        <Button onClick={handleShareSMS} title={t('recommendations.share_sms_button_title')} disabled={isSent}>
                             <Smartphone className="h-5 w-5" />
                             <span>{t('recommendations.share_sms_button')}</span>
                         </Button>
                     </div>
+                </div>
+                 <div className='flex items-center gap-4'>
+                    <Button onClick={handleShareWhatsApp} variant="outline">
+                        <MessageSquare className="h-5 w-5" />
+                        {t('recommendations.share_whatsapp_button')}
+                    </Button>
+                    <Button onClick={handleDownloadImage} variant="outline" disabled={isDownloading}>
+                        <Download className="h-5 w-5" />
+                        {isDownloading ? t('recommendations.downloading_button') : t('recommendations.download_jpg_button')}
+                    </Button>
                 </div>
             </CardContent>
         </Card>
