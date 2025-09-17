@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowRight, Leaf, Newspaper } from "lucide-react";
+import { ArrowRight, Leaf, MessageCircle, Newspaper } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLanguage } from "@/hooks/use-language";
@@ -10,9 +10,11 @@ import { getLatestNews } from '@/lib/actions';
 import type { NewsArticle } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useIsClient } from '@/hooks/use-is-client';
+import { useChat } from '@/hooks/use-chat';
 
 export default function DashboardPage() {
   const { t, language } = useLanguage();
+  const { setIsOpen } = useChat();
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const [loadingNews, setLoadingNews] = useState(true);
   const isClient = useIsClient();
@@ -102,11 +104,16 @@ export default function DashboardPage() {
             <p className="text-xs text-muted-foreground">
               {t('dashboard.card_recommendations_subheading')}
             </p>
-            <Button asChild variant="link" className="px-0">
-                <Link href="/recommendations">
-                    {t('dashboard.start_now_button')} <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-            </Button>
+            <div className='flex items-center gap-4'>
+                <Button asChild variant="link" className="px-0">
+                    <Link href="/recommendations">
+                        {t('dashboard.start_now_button')} <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                </Button>
+                 <Button variant="link" className="px-0" onClick={() => setIsOpen(true)}>
+                    {t('sidebar.ai_assistant')} <MessageCircle className="ml-2 h-4 w-4" />
+                </Button>
+            </div>
           </CardContent>
         </Card>
         <Card className="animate-fade-in-up" style={{ animationDelay: '0.7s' }}>
