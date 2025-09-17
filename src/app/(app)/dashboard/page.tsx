@@ -47,7 +47,7 @@ export default function DashboardPage() {
           </div>
           <div className="relative h-64 md:h-full min-h-[250px]">
             <Image
-              src="https://picsum.photos/seed/agriculture/1200/600"
+              src="https://images.unsplash.com/photo-1505471768190-275e2ad7b3f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmYXJtZXJ8ZW58MHx8fHwxNzU4MTA5NTY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
               alt="Farmer working in a lush green field"
               fill
               className="object-cover"
