@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { LanguageProvider } from '@/hooks/use-language';
-import { CartProvider } from '@/hooks/use-cart';
 
 export const metadata: Metadata = {
   title: 'AgriAssist',
@@ -26,10 +25,8 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         <LanguageProvider>
-          <CartProvider>
-            {children}
-            <Toaster />
-          </CartProvider>
+          {children}
+          <Toaster />
         </LanguageProvider>
       </body>
     </html>

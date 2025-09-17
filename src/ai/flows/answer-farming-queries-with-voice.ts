@@ -36,14 +36,6 @@ export async function answerFarmingQueriesWithVoice(
   return answerFarmingQueriesWithVoiceFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'answerFarmingQueriesWithVoicePrompt',
-  input: {schema: AnswerFarmingQueriesWithVoiceInputSchema},
-  prompt: `You are an expert AI assistant for farmers. You will answer the question in the same language as the spoken language.
-
-  Question: {{{voiceQueryDataUri}}}`,
-});
-
 const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
   {
     name: 'answerFarmingQueriesWithVoiceFlow',

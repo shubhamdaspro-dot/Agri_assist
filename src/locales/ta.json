@@ -112,6 +112,7 @@
         "otp_label": "OTP",
         "verify_otp_button": "OTP ஐ சரிபார்க்கவும்",
         "change_number_button": "எண்ணை மாற்று",
+        "sign_out_button": "வெளியேறு",
         "toast_phone_required_title": "தொலைபேசி எண் தேவை",
         "toast_phone_required_description": "சரியான தொலைபேசி எண்ணை உள்ளிடவும்.",
         "toast_otp_sent_title": "OTP அனுப்பப்பட்டது",
@@ -124,29 +125,5 @@
         "toast_login_success_title": "உள்நுழைவு வெற்றி",
         "toast_login_success_description": "நீங்கள் வெற்றிகரமாக உள்நுழைந்துவிட்டீர்கள்.",
         "toast_invalid_otp_title": "தவறான OTP"
-    },
-    "cart": {
-        "page_title": "உங்கள் வண்டி",
-        "page_subtitle": "நீங்கள் தேர்ந்தெடுத்த பொருட்களை மதிப்பாய்வு செய்து, செக் அவுட் செய்ய தொடரவும்.",
-        "empty_title": "உங்கள் வண்டி காலியாக உள்ளது",
-        "empty_subtitle": "நீங்கள் இன்னும் எதையும் சேர்க்கவில்லை போல் தெரிகிறது.",
-        "start_shopping_button": "ஷாப்பிங் தொடங்கவும்",
-        "your_cart": "உங்கள் வண்டி",
-        "table_product": "தயாரிப்பு",
-        "table_details": "",
-        "table_quantity": "அளவு",
-        "table_price": "விலை",
-        "summary_title": "ஆர்டர் சுருக்கம்",
-        "summary_subtotal": "துணைத்தொகை",
-        "summary_shipping": "கப்பல் போக்குவரத்து",
-        "summary_shipping_cost": "இலவசம்",
-        "summary_total": "மொத்தம்",
-        "checkout_button": "செக் அவுட்",
-        "clear_cart_button": "வண்டியை காலி செய்",
-        "add_to_cart_button": "வண்டியில் சேர்",
-        "toast_item_added_title": "வண்டியில் சேர்க்கப்பட்டது",
-        "toast_item_added_description": "{name} உங்கள் வண்டியில் சேர்க்கப்பட்டது.",
-        "toast_item_removed_title": "பொருள் அகற்றப்பட்டது",
-        "toast_item_removed_description": "{name} உங்கள் வண்டியிலிருந்து அகற்றப்பட்டது."
     }
 }

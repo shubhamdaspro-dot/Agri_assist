@@ -26,3 +26,13 @@ export interface LoanScheme {
   process: string[];
   link?: string;
 }
+
+export interface Product {
+    id: string;
+    name: string;
+    price: number;
+    description: string;
+    image: string;
+    imageHint: string;
+    category: string;
+}

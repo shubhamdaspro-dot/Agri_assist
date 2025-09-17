@@ -15,13 +15,12 @@ import {
   Landmark,
   Github,
   CircleHelp,
-  ShoppingCart,
-  Store,
   LogOut,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
+import { Button } from '../ui/button';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -45,6 +44,8 @@ function AgriAssistLogo() {
       >
         <path d="M11 20A7 7 0 0 1 7 6a7 7 0 0 1 4-2 7 7 0 0 1 4 2 7 7 0 0 1-4 14Z" />
         <path d="M11 20V14" />
+        <path d="m11 4 3 4" />
+        <path d="m8 8 3-4" />
       </svg>
       <h1 className="text-2xl font-bold text-primary transition-opacity group-data-[collapsible=icon]:opacity-0">
         AgriAssist
@@ -56,6 +57,7 @@ function AgriAssistLogo() {
 export default function AppSidebar() {
   const pathname = usePathname();
   const { t } = useLanguage();
+
   return (
     <Sidebar>
       <SidebarHeader>
@@ -96,6 +98,12 @@ export default function AppSidebar() {
                   <span>{t('sidebar.github')}</span>
                 </Link>
               </SidebarMenuButton>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+                <Button variant="ghost" className="w-full justify-start gap-2 p-2 text-sm">
+                    <LogOut />
+                    <span className="transition-opacity group-data-[collapsible=icon]:opacity-0">{t('auth.sign_out_button')}</span>
+                </Button>
             </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
