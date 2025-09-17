@@ -19,14 +19,19 @@ const GenerateCropRecommendationsInputSchema = z.object({
 });
 export type GenerateCropRecommendationsInput = z.infer<typeof GenerateCropRecommendationsInputSchema>;
 
+const RecommendedCropSchema = z.object({
+    name: z.string().describe('The name of a suitable crop to plant.'),
+    rationale: z.string().describe('Explanation of why this crop is recommended.'),
+});
+
 const GenerateCropRecommendationsOutputSchema = z.object({
-  recommendedCrop: z.string().describe('The most suitable crop to plant.'),
-  recommendedProducts: z.string().describe('Specific pesticides, manures, and fertilizers needed to cultivate the recommended crop successfully.'),
-  rationale: z.string().describe('Explanation of why the crop was recommended'),
+  recommendedCrops: z.array(RecommendedCropSchema).describe('A list of the 2-3 most suitable crops to plant.'),
+  recommendedProducts: z.string().describe('A general list of pesticides, manures, and fertilizers needed to cultivate the recommended crops successfully.'),
+  rationale: z.string().describe('A general rationale for why these types of crops are recommended for the given conditions.'),
   nearestStores: z.array(z.object({
     name: z.string().describe('The name of the store.'),
     address: z.string().describe('The full, searchable address of the store.'),
-  })).describe('A list of nearby stores where the recommended products can be purchased.'),
+  })).describe('A list of 2-3 fictional but realistic local stores with full, searchable addresses where the recommended products can be purchased.'),
 });
 export type GenerateCropRecommendationsOutput = z.infer<typeof GenerateCropRecommendationsOutputSchema>;
 
@@ -38,7 +43,7 @@ const prompt = ai.definePrompt({
   name: 'generateCropRecommendationsPrompt',
   input: {schema: GenerateCropRecommendationsInputSchema},
   output: {schema: GenerateCropRecommendationsOutputSchema},
-  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation for the most suitable crop to plant, the specific products needed, your rationale, and a list of 2-3 fictional but realistic local stores with full, searchable addresses where the products can be purchased based on the geographic region.\n\nWeather Data: {{{weatherData}}}\nSoil Type: {{{soilType}}}\nGeographic Region: {{{geographicRegion}}}\nHistorical Yields (if available): {{{historicalYields}}}\nMarket Demand (if available): {{{marketDemand}}}\n\nBased on this information, recommend a crop, the products needed (pesticides, fertilizers, etc.), your rationale, and a list of nearby stores with their names and addresses.`,
+  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation. Generate a list of 2-3 suitable crops to plant, with a specific rationale for each. Also, provide a general list of products needed for these crops, a general rationale covering the crop types, and a list of 2-3 fictional but realistic local stores with full, searchable addresses where the products can be purchased based on the geographic region.\n\nWeather Data: {{{weatherData}}}\nSoil Type: {{{soilType}}}\nGeographic Region: {{{geographicRegion}}}\nHistorical Yields (if available): {{{historicalYields}}}\nMarket Demand (if available): {{{marketDemand}}}\n\nBased on this information, provide your recommendations.`,
 });
 
 const generateCropRecommendationsFlow = ai.defineFlow(
