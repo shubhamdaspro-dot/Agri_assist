@@ -13,7 +13,8 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)"
+        "marathi": "मराठी (Marathi)",
+        "tamil": "தமிழ் (Tamil)"
     },
     "dashboard": {
         "welcome_title": "అగ్రిఅసిస్ట్‌కు స్వాగతం!",
@@ -104,6 +105,48 @@
         "default_error": "క్షమించండి, నేను దానిని ప్రాసెస్ చేయలేకపోయాను."
     },
     "auth": {
-        "phone_label": "ఫోను నంబరు"
+        "login_title": "లాగిన్",
+        "login_subtitle": "కొనసాగడానికి మీ ఫోన్ నంబర్‌తో లాగిన్ చేయండి.",
+        "phone_label": "ఫోను నంబరు",
+        "send_otp_button": "OTP పంపండి",
+        "otp_label": "OTP",
+        "verify_otp_button": "OTPని ధృవీకరించండి",
+        "change_number_button": "నంబర్‌ను మార్చండి",
+        "toast_phone_required_title": "ఫోన్ నంబర్ అవసరం",
+        "toast_phone_required_description": "దయచేసి చెల్లుబాటు అయ్యే ఫోన్ నంబర్‌ను నమోదు చేయండి.",
+        "toast_otp_sent_title": "OTP పంపబడింది",
+        "toast_otp_sent_description": "{phoneNumber}కు ఒక OTP పంపబడింది.",
+        "toast_otp_failed_title": "OTP పంపడంలో విఫలమైంది",
+        "toast_otp_required_title": "OTP అవసరం",
+        "toast_otp_required_description": "దయచేసి మీరు అందుకున్న OTPని నమోదు చేయండి.",
+        "toast_otp_not_sent_title": "OTP పంపబడలేదు",
+        "toast_otp_not_sent_description": "దయచేసి మొదట OTPని అభ్యర్థించండి.",
+        "toast_login_success_title": "లాగిన్ విజయవంతమైంది",
+        "toast_login_success_description": "మీరు విజయవంతంగా లాగిన్ అయ్యారు.",
+        "toast_invalid_otp_title": "చెల్లని OTP"
+    },
+    "cart": {
+        "page_title": "మీ కార్ట్",
+        "page_subtitle": "మీరు ఎంచుకున్న వస్తువులను సమీక్షించండి మరియు చెక్అవుట్ చేయడానికి కొనసాగండి.",
+        "empty_title": "మీ కార్ట్ ఖాళీగా ఉంది",
+        "empty_subtitle": "మీరు ఇంకా ఏమీ జోడించనట్లు కనిపిస్తోంది.",
+        "start_shopping_button": "షాపింగ్ ప్రారంభించండి",
+        "your_cart": "మీ కార్ట్",
+        "table_product": "ఉత్పత్తి",
+        "table_details": "",
+        "table_quantity": "పరిమాణం",
+        "table_price": "ధర",
+        "summary_title": "ఆర్డర్ సారాంశం",
+        "summary_subtotal": "ఉపమొత్తం",
+        "summary_shipping": "షిప్పింగ్",
+        "summary_shipping_cost": "ఉచితం",
+        "summary_total": "మొత్తం",
+        "checkout_button": "చెక్అవుట్",
+        "clear_cart_button": "కార్ట్‌ను క్లియర్ చేయండి",
+        "add_to_cart_button": "కార్ట్‌లో చేర్చు",
+        "toast_item_added_title": "కార్ట్‌లో చేర్చబడింది",
+        "toast_item_added_description": "{name} మీ కార్ట్‌లో చేర్చబడింది.",
+        "toast_item_removed_title": "వస్తువు తీసివేయబడింది",
+        "toast_item_removed_description": "{name} మీ కార్ట్ నుండి తీసివేయబడింది."
     }
 }

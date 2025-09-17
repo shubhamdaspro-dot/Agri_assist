@@ -13,7 +13,8 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)"
+        "marathi": "मराठी (Marathi)",
+        "tamil": "தமிழ் (Tamil)"
     },
     "dashboard": {
         "welcome_title": "एग्रीअसिस्ट में आपका स्वागत है!",
@@ -104,6 +105,48 @@
         "default_error": "क्षमा करें, मैं उसे संसाधित नहीं कर सका।"
     },
     "auth": {
-        "phone_label": "फ़ोन नंबर"
+        "login_title": "लॉग इन करें",
+        "login_subtitle": "जारी रखने के लिए अपने फ़ोन नंबर से लॉग इन करें।",
+        "phone_label": "फ़ोन नंबर",
+        "send_otp_button": "ओटीपी भेजें",
+        "otp_label": "ओटीपी",
+        "verify_otp_button": "ओटीपी सत्यापित करें",
+        "change_number_button": "नंबर बदलें",
+        "toast_phone_required_title": "फ़ोन नंबर आवश्यक है",
+        "toast_phone_required_description": "कृपया एक वैध फ़ोन नंबर दर्ज करें।",
+        "toast_otp_sent_title": "ओटीपी भेजा गया",
+        "toast_otp_sent_description": "एक ओटीपी {phoneNumber} पर भेजा गया है।",
+        "toast_otp_failed_title": "ओटीपी भेजने में विफल",
+        "toast_otp_required_title": "ओटीपी आवश्यक है",
+        "toast_otp_required_description": "कृपया प्राप्त ओटीपी दर्ज करें।",
+        "toast_otp_not_sent_title": "ओटीपी नहीं भेजा गया",
+        "toast_otp_not_sent_description": "कृपया पहले एक ओटीपी का अनुरोध करें।",
+        "toast_login_success_title": "लॉगिन सफल",
+        "toast_login_success_description": "आप सफलतापूर्वक लॉग इन हो गए हैं।",
+        "toast_invalid_otp_title": "अमान्य ओटीपी"
+    },
+    "cart": {
+        "page_title": "आपकी कार्ट",
+        "page_subtitle": "आपके द्वारा चुने गए आइटम की समीक्षा करें और चेकआउट के लिए आगे बढ़ें।",
+        "empty_title": "आपकी कार्ट खाली है",
+        "empty_subtitle": "लगता है आपने अभी तक कुछ नहीं जोड़ा है।",
+        "start_shopping_button": "खरीदारी शुरू करें",
+        "your_cart": "आपकी कार्ट",
+        "table_product": "उत्पाद",
+        "table_details": "",
+        "table_quantity": "मात्रा",
+        "table_price": "कीमत",
+        "summary_title": "आर्डर सारांश",
+        "summary_subtotal": "उप-योग",
+        "summary_shipping": "शिपिंग",
+        "summary_shipping_cost": "निःशुल्क",
+        "summary_total": "कुल",
+        "checkout_button": "चेकआउट",
+        "clear_cart_button": "कार्ट साफ़ करें",
+        "add_to_cart_button": "कार्ट में डालें",
+        "toast_item_added_title": "कार्ट में जोड़ा गया",
+        "toast_item_added_description": "{name} को आपकी कार्ट में जोड़ा गया है।",
+        "toast_item_removed_title": "आइटम हटाया गया",
+        "toast_item_removed_description": "{name} को आपकी कार्ट से हटा दिया गया है।"
     }
 }

@@ -70,10 +70,13 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const removeFromCart = (productId: string) => {
+    const itemToRemove = cartItems.find(item => item.id === productId);
+    if (!itemToRemove) return;
+
     setCartItems(prevItems => prevItems.filter(item => item.id !== productId));
     toast({
         title: t('cart.toast_item_removed_title'),
-        description: t('cart.toast_item_removed_description'),
+        description: t('cart.toast_item_removed_description', { name: itemToRemove.name }),
         variant: "destructive"
       });
   };

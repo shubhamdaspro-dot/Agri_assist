@@ -13,7 +13,8 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)"
+        "marathi": "मराठी (Marathi)",
+        "tamil": "தமிழ் (Tamil)"
     },
     "dashboard": {
         "welcome_title": "Welcome to AgriAssist!",
@@ -104,6 +105,48 @@
         "default_error": "Sorry, I couldn't process that."
     },
     "auth": {
-        "phone_label": "Phone Number"
+        "login_title": "Login",
+        "login_subtitle": "Login with your phone number to continue.",
+        "phone_label": "Phone Number",
+        "send_otp_button": "Send OTP",
+        "otp_label": "OTP",
+        "verify_otp_button": "Verify OTP",
+        "change_number_button": "Change Number",
+        "toast_phone_required_title": "Phone Number Required",
+        "toast_phone_required_description": "Please enter a valid phone number.",
+        "toast_otp_sent_title": "OTP Sent",
+        "toast_otp_sent_description": "An OTP has been sent to {phoneNumber}.",
+        "toast_otp_failed_title": "Failed to Send OTP",
+        "toast_otp_required_title": "OTP Required",
+        "toast_otp_required_description": "Please enter the OTP you received.",
+        "toast_otp_not_sent_title": "OTP Not Sent",
+        "toast_otp_not_sent_description": "Please request an OTP first.",
+        "toast_login_success_title": "Login Successful",
+        "toast_login_success_description": "You have been successfully logged in.",
+        "toast_invalid_otp_title": "Invalid OTP"
+    },
+    "cart": {
+        "page_title": "Your Cart",
+        "page_subtitle": "Review the items you have selected and proceed to checkout.",
+        "empty_title": "Your cart is empty",
+        "empty_subtitle": "Looks like you haven't added anything yet.",
+        "start_shopping_button": "Start Shopping",
+        "your_cart": "Your Cart",
+        "table_product": "Product",
+        "table_details": "",
+        "table_quantity": "Quantity",
+        "table_price": "Price",
+        "summary_title": "Order Summary",
+        "summary_subtotal": "Subtotal",
+        "summary_shipping": "Shipping",
+        "summary_shipping_cost": "Free",
+        "summary_total": "Total",
+        "checkout_button": "Checkout",
+        "clear_cart_button": "Clear Cart",
+        "add_to_cart_button": "Add to Cart",
+        "toast_item_added_title": "Added to Cart",
+        "toast_item_added_description": "{name} has been added to your cart.",
+        "toast_item_removed_title": "Item Removed",
+        "toast_item_removed_description": "{name} has been removed from your cart."
     }
 }

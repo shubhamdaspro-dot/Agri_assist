@@ -54,8 +54,8 @@ export default function AuthPage() {
     if (!phoneNumber) {
       toast({
         variant: 'destructive',
-        title: 'Phone Number Required',
-        description: 'Please enter a valid phone number.',
+        title: t('auth.toast_phone_required_title'),
+        description: t('auth.toast_phone_required_description'),
       });
       return;
     }
@@ -65,13 +65,13 @@ export default function AuthPage() {
       const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
       setConfirmationResult(result);
       toast({
-        title: 'OTP Sent',
-        description: `An OTP has been sent to ${phoneNumber}.`,
+        title: t('auth.toast_otp_sent_title'),
+        description: t('auth.toast_otp_sent_description', {phoneNumber}),
       });
     } catch (error: any) {
       toast({
         variant: 'destructive',
-        title: 'Failed to Send OTP',
+        title: t('auth.toast_otp_failed_title'),
         description: error.message,
       });
     }
@@ -82,16 +82,16 @@ export default function AuthPage() {
     if (!otp) {
       toast({
         variant: 'destructive',
-        title: 'OTP Required',
-        description: 'Please enter the OTP you received.',
+        title: t('auth.toast_otp_required_title'),
+        description: t('auth.toast_otp_required_description'),
       });
       return;
     }
     if (!confirmationResult) {
       toast({
         variant: 'destructive',
-        title: 'OTP Not Sent',
-        description: 'Please request an OTP first.',
+        title: t('auth.toast_otp_not_sent_title'),
+        description: t('auth.toast_otp_not_sent_description'),
       });
       return;
     }
@@ -99,14 +99,14 @@ export default function AuthPage() {
     try {
       await confirmationResult.confirm(otp);
       toast({
-        title: 'Login Successful',
-        description: 'You have been successfully logged in.',
+        title: t('auth.toast_login_success_title'),
+        description: t('auth.toast_login_success_description'),
       });
       router.push('/dashboard');
     } catch (error: any) {
       toast({
         variant: 'destructive',
-        title: 'Invalid OTP',
+        title: t('auth.toast_invalid_otp_title'),
         description: error.message,
       });
     }

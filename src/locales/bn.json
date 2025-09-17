@@ -13,7 +13,8 @@
         "hindi": "हिंदी (Hindi)",
         "bengali": "বাংলা (Bengali)",
         "telugu": "తెలుగు (Telugu)",
-        "marathi": "मराठी (Marathi)"
+        "marathi": "मराठी (Marathi)",
+        "tamil": "தமிழ் (Tamil)"
     },
     "dashboard": {
         "welcome_title": "এগ্রিঅ্যাসিস্টে স্বাগতম!",
@@ -104,6 +105,48 @@
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।"
     },
     "auth": {
-        "phone_label": "ফোন নম্বর"
+        "login_title": "লগইন",
+        "login_subtitle": "চালিয়ে যেতে আপনার ফোন নম্বর দিয়ে লগইন করুন।",
+        "phone_label": "ফোন নম্বর",
+        "send_otp_button": "ওটিপি পাঠান",
+        "otp_label": "ওটিপি",
+        "verify_otp_button": "ওটিপি যাচাই করুন",
+        "change_number_button": "নম্বর পরিবর্তন করুন",
+        "toast_phone_required_title": "ফোন নম্বর आवश्यक",
+        "toast_phone_required_description": "অনুগ্রহ করে একটি বৈধ ফোন নম্বর লিখুন।",
+        "toast_otp_sent_title": "ওটিপি পাঠানো হয়েছে",
+        "toast_otp_sent_description": "একটি ওটিপি {phoneNumber} নম্বরে পাঠানো হয়েছে।",
+        "toast_otp_failed_title": "ওটিপি পাঠাতে ব্যর্থ",
+        "toast_otp_required_title": "ওটিপি প্রয়োজন",
+        "toast_otp_required_description": "অনুগ্রহ করে প্রাপ্ত ওটিপি লিখুন।",
+        "toast_otp_not_sent_title": "ওটিপি পাঠানো হয়নি",
+        "toast_otp_not_sent_description": "প্রথমে একটি ওটিপি অনুরোধ করুন।",
+        "toast_login_success_title": "লগইন সফল",
+        "toast_login_success_description": "আপনি সফলভাবে লগইন করেছেন।",
+        "toast_invalid_otp_title": "অবৈধ ওটিপি"
+    },
+    "cart": {
+        "page_title": "আপনার কার্ট",
+        "page_subtitle": "আপনার নির্বাচিত পণ্য পর্যালোচনা করুন এবং চেকআউট করতে এগিয়ে যান।",
+        "empty_title": "আপনার কার্ট খালি",
+        "empty_subtitle": "মনে হচ্ছে আপনি এখনো কিছু যোগ করেননি।",
+        "start_shopping_button": "কেনাকাটা শুরু করুন",
+        "your_cart": "আপনার কার্ট",
+        "table_product": "পণ্য",
+        "table_details": "",
+        "table_quantity": "পরিমাণ",
+        "table_price": "দাম",
+        "summary_title": "অর্ডার সারসংক্ষেপ",
+        "summary_subtotal": "উপমোট",
+        "summary_shipping": "শিপিং",
+        "summary_shipping_cost": "বিনামূল্যে",
+        "summary_total": "মোট",
+        "checkout_button": "চেকআউট",
+        "clear_cart_button": "কার্ট খালি করুন",
+        "add_to_cart_button": "কার্টে যোগ করুন",
+        "toast_item_added_title": "কার্টে যোগ করা হয়েছে",
+        "toast_item_added_description": "{name} আপনার কার্টে যোগ করা হয়েছে।",
+        "toast_item_removed_title": "আইটেম সরানো হয়েছে",
+        "toast_item_removed_description": "{name} আপনার কার্ট থেকে সরানো হয়েছে।"
     }
 }
