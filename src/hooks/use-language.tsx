@@ -5,9 +5,10 @@ import hi from '@/locales/hi.json';
 import bn from '@/locales/bn.json';
 import te from '@/locales/te.json';
 import mr from '@/locales/mr.json';
+import ta from '@/locales/ta.json';
 import { useIsClient } from './use-is-client';
 
-const translations: Record<string, any> = { en, hi, bn, te, mr };
+const translations: Record<string, any> = { en, hi, bn, te, mr, ta };
 
 type LanguageContextType = {
   language: string;
@@ -20,6 +21,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState('en');
   const isClient = useIsClient();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     if (isClient) {
@@ -71,6 +77,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
     return translated;
   }, [language]);
+  
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, t }}>

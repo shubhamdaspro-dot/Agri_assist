@@ -29,10 +29,6 @@ export default function RecommendationsPage() {
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
-          toast({
-            title: t('recommendations.toast_location_accessed_title'),
-            description: t('recommendations.toast_location_accessed_description'),
-          })
         },
         (error) => {
           setLocationError(t('recommendations.location_error_manual'));
@@ -42,7 +38,7 @@ export default function RecommendationsPage() {
     } else if (isClient) {
       setLocationError(t('recommendations.location_error_unsupported'));
     }
-  }, [isClient, toast, t]);
+  }, [isClient, t]);
 
   const handleNewRecommendation = () => {
     setResults(null);
@@ -66,19 +62,23 @@ export default function RecommendationsPage() {
       )}
 
       {isClient ? (
-        !results && !isLoading && (
-            <RecommendationForm 
-                setResults={setResults} 
-                setIsLoading={setIsLoading} 
-                isLoading={isLoading}
-                location={location}
-            />
-        )
+        <>
+          {!results && !isLoading && (
+              <RecommendationForm 
+                  setResults={setResults} 
+                  setIsLoading={setIsLoading} 
+                  isLoading={isLoading}
+                  location={location}
+              />
+          )}
+
+          {isLoading && <LoadingSkeleton />}
+
+          {results && <RecommendationResults results={results} onNewRecommendation={handleNewRecommendation} />}
+        </>
       ) : (
         <FormSkeleton />
       )}
-
-      {isLoading ? <LoadingSkeleton /> : results ? <RecommendationResults results={results} onNewRecommendation={handleNewRecommendation} /> : null}
     </div>
   );
 }
