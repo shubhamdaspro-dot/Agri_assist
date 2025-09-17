@@ -47,11 +47,11 @@ export default function DashboardPage() {
           </div>
           <div className="relative h-64 md:h-full min-h-[250px]">
             <Image
-              src="https://picsum.photos/seed/hero/1200/600"
-              alt="Lush green farm field"
+              src="https://picsum.photos/seed/farmer-field/1200/600"
+              alt="Farmer working in a lush green field"
               fill
               className="object-cover"
-              data-ai-hint="farm field"
+              data-ai-hint="farmer field"
             />
           </div>
         </div>
