@@ -4,7 +4,8 @@
         "recommendations": "सिफारिशें",
         "news": "समाचार",
         "loans": "ऋण",
-        "help": "मदद"
+        "help": "मदद",
+        "github": "गिटहब"
     },
     "header": {
         "change_language": "भाषा बदलें",

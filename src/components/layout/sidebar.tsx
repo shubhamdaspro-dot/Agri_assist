@@ -15,7 +15,6 @@ import {
   Landmark,
   Github,
   CircleHelp,
-  ShoppingCart,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -88,10 +87,10 @@ export default function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip="GitHub">
+              <SidebarMenuButton asChild tooltip={t('sidebar.github')}>
                 <Link href="https://github.com/firebase/firebase-genkit-samples/tree/main/nextjs-rag-app" target="_blank">
                   <Github />
-                  <span>GitHub</span>
+                  <span>{t('sidebar.github')}</span>
                 </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>

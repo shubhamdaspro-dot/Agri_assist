@@ -4,7 +4,8 @@
         "recommendations": "Recommendations",
         "news": "News",
         "loans": "Loans",
-        "help": "Help"
+        "help": "Help",
+        "github": "GitHub"
     },
     "header": {
         "change_language": "Change language",

@@ -4,7 +4,8 @@
         "recommendations": "সুপারিশ",
         "news": "খবর",
         "loans": "ঋণ",
-        "help": "সাহায্য"
+        "help": "সাহায্য",
+        "github": "গিটহাব"
     },
     "header": {
         "change_language": "ভাষা পরিবর্তন করুন",
