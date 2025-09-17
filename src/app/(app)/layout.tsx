@@ -10,8 +10,8 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
     <ChatProvider>
       <SidebarProvider>
         <div className="min-h-screen">
-          <div className="fixed inset-0 bg-background-image opacity-10" />
           <div className="parallax-container">
+            <div className="parallax-background" />
             <AppSidebar />
             <SidebarInset>
               <div className="parallax-content">

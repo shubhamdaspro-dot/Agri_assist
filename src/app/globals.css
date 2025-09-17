@@ -77,18 +77,32 @@
   body {
     @apply bg-background text-foreground font-body;
   }
-  .background-image {
+  
+  .parallax-container {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: 1px;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .parallax-content {
+    transform-style: preserve-3d;
+    position: relative;
+    z-index: 1;
+  }
+
+  .parallax-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-image: url('https://images.unsplash.com/photo-1499529112087-3cb3b73cec95?q=80&w=1974&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
-  }
-  .parallax-container {
-      height: 100vh;
-      overflow-x: hidden;
-      overflow-y: auto;
-      perspective: 1px;
-  }
-  .parallax-content {
-      transform-style: preserve-3d;
+    transform: translateZ(-1px) scale(2);
+    z-index: -1;
+    opacity: 0.1;
   }
 }
