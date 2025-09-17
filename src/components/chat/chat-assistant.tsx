@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Input } from '@/components/ui/input';
 import { MessageCircle, Mic, Send, Bot, User, X, Loader2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { answerTextQueryWithVoice } from '@/lib/actions';
+import { answerTextQueryWithVoice, answerVoiceQuery } from '@/lib/actions';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/use-language';
@@ -32,6 +32,8 @@ export default function ChatAssistant() {
   const [voice, setVoice] = useState<VoiceOption>('Algenib');
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -61,8 +63,8 @@ export default function ChatAssistant() {
     }
   };
 
-  const handleSend = async (query?: string) => {
-    const userQuery = query || input;
+  const handleSend = async () => {
+    const userQuery = input;
     if (!userQuery.trim() || isProcessing) return;
 
     const newUserMessage: Message = { id: Date.now(), role: 'user', text: userQuery };
@@ -93,23 +95,76 @@ export default function ChatAssistant() {
     }
 
     setIsProcessing(false);
-    setIsRecording(false);
   };
   
-  const handleMicClick = () => {
-    if(isRecording) {
+   const handleMicClick = async () => {
+    if (isRecording) {
       // Stop recording
+      mediaRecorderRef.current?.stop();
       setIsRecording(false);
       setIsProcessing(true);
-      // Simulate voice processing and send a canned query
-      setTimeout(() => {
-        handleSend(t('chat.canned_query'));
-      }, 1500);
     } else {
       // Start recording
-      setIsRecording(true);
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        mediaRecorderRef.current = new MediaRecorder(stream);
+        audioChunksRef.current = [];
+
+        mediaRecorderRef.current.ondataavailable = (event) => {
+          audioChunksRef.current.push(event.data);
+        };
+
+        mediaRecorderRef.current.onstop = async () => {
+          const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+          const reader = new FileReader();
+          reader.readAsDataURL(audioBlob);
+          reader.onloadend = async () => {
+            const base64Audio = reader.result as string;
+            await handleVoiceSend(base64Audio);
+            // Clean up the stream
+            stream.getTracks().forEach(track => track.stop());
+          };
+        };
+
+        mediaRecorderRef.current.start();
+        setIsRecording(true);
+      } catch (error) {
+        console.error("Microphone access denied:", error);
+        alert("Microphone access is required for voice input. Please enable it in your browser settings.");
+      }
     }
   };
+
+  const handleVoiceSend = async (audioDataUri: string) => {
+    setIsProcessing(true);
+
+    const result = await answerVoiceQuery(audioDataUri, voice);
+    
+    if (result.success && result.textQuery && result.textResponse) {
+      const newUserMessage: Message = { id: Date.now(), role: 'user', text: result.textQuery };
+      const newAssistantMessage: Message = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        text: result.textResponse,
+        audioUri: result.spokenResponseDataUri,
+      };
+      setMessages(prev => [...prev, newUserMessage, newAssistantMessage]);
+      if (result.spokenResponseDataUri) {
+        playAudio(result.spokenResponseDataUri);
+      }
+    } else {
+       const errorMessage: Message = {
+        id: Date.now() + 1,
+        role: 'assistant',
+        text: result.error || t('chat.default_error'),
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    }
+
+    setIsProcessing(false);
+    setIsRecording(false);
+  };
+
 
   return (
     <>
@@ -146,7 +201,7 @@ export default function ChatAssistant() {
                   )}
                 </div>
               ))}
-              {isProcessing && !isRecording && (
+              {(isProcessing || isRecording) && (
                 <div className='flex items-start gap-3 justify-start'>
                     <Avatar className='w-8 h-8'>
                         <AvatarFallback><Bot size={20} /></AvatarFallback>
@@ -182,7 +237,7 @@ export default function ChatAssistant() {
                 <Mic className="h-5 w-5" />
               </Button>
               <Button type="submit" size="icon" disabled={!input.trim() || isProcessing}>
-                {isProcessing ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
+                {isProcessing && !isRecording ? <Loader2 className="h-5 w-5 animate-spin" /> : <Send className="h-5 w-5" />}
               </Button>
             </form>
           </DialogFooter>
