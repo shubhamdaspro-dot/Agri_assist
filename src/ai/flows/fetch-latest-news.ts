@@ -11,7 +11,7 @@ import type { FetchLatestNewsOutput } from '@/lib/types';
 import { FetchLatestNewsOutputSchema } from '@/lib/types';
 
 export async function fetchLatestNews(language: string): Promise<FetchLatestNewsOutput> {
-  const currentDate = new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
+  const currentDate = new Date().toISOString(); // Use ISO string for date and time
   return fetchLatestNewsFlow({ language, currentDate });
 }
 
@@ -20,13 +20,13 @@ const prompt = ai.definePrompt({
   input: {
     schema: z.object({
         language: z.string().describe('The language for the news articles (e.g., en, hi, bn, te, mr).'),
-        currentDate: z.string().describe('The current date to make the news timely.'),
+        currentDate: z.string().describe('The current date and time to make the news timely.'),
     }),
   },
   output: {schema: FetchLatestNewsOutputSchema},
   prompt: `You are an expert agricultural news correspondent. Generate a list of 3 recent and relevant fictional news articles for farmers in India. The news should be in {{language}}.
   
-  Provide realistic headlines, summaries, and full stories. Make sure the news is very recent, as of today's date: {{currentDate}}. Use this date for the articles. Ensure the 'id' for each article is unique (e.g., 'news_1', 'news_2', 'news_3').`,
+  Provide realistic headlines, summaries, and full stories. Make sure the news is very recent, as of today's date and time: {{currentDate}}. Use this date for the articles. Ensure the 'id' for each article is unique (e.g., 'news_1', 'news_2', 'news_3').`,
 });
 
 const fetchLatestNewsFlow = ai.defineFlow(
