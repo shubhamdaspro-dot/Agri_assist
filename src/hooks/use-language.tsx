@@ -22,17 +22,19 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
     const savedLanguage = localStorage.getItem('agriassist_language');
     if (savedLanguage && translations[savedLanguage]) {
       setLanguageState(savedLanguage);
     }
+    setIsMounted(true);
   }, []);
 
   const setLanguage = (lang: string) => {
     if (translations[lang]) {
       setLanguageState(lang);
-      localStorage.setItem('agriassist_language', lang);
+      if (isMounted) {
+        localStorage.setItem('agriassist_language', lang);
+      }
     }
   };
 
@@ -75,7 +77,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     t,
   };
 
-  // Prevent flash of untranslated content
+  // Prevent flash of untranslated content by not rendering children until mounted on the client
   if (!isMounted) {
     return null;
   }
