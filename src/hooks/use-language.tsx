@@ -5,6 +5,7 @@ import hi from '@/locales/hi.json';
 import bn from '@/locales/bn.json';
 import te from '@/locales/te.json';
 import mr from '@/locales/mr.json';
+import { useIsClient } from './use-is-client';
 
 const translations: Record<string, any> = { en, hi, bn, te, mr };
 
@@ -18,18 +19,23 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState('en');
+  const isClient = useIsClient();
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('agriassist_language');
-    if (savedLanguage && translations[savedLanguage]) {
-      setLanguageState(savedLanguage);
+    if (isClient) {
+      const savedLanguage = localStorage.getItem('agriassist_language');
+      if (savedLanguage && translations[savedLanguage]) {
+        setLanguageState(savedLanguage);
+      }
     }
-  }, []);
+  }, [isClient]);
 
   const setLanguage = (lang: string) => {
     if (translations[lang]) {
       setLanguageState(lang);
-      localStorage.setItem('agriassist_language', lang);
+      if (isClient) {
+        localStorage.setItem('agriassist_language', lang);
+      }
     }
   };
 
