@@ -5,7 +5,8 @@
         "news": "समाचार",
         "loans": "ऋण",
         "help": "मदद",
-        "github": "गिटहब"
+        "github": "गिटहब",
+        "ai_assistant": "AI सहायक"
     },
     "header": {
         "change_language": "भाषा बदलें",

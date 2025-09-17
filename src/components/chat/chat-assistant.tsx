@@ -10,6 +10,7 @@ import { answerTextQueryWithVoice } from '@/lib/actions';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/use-language';
+import { useChat } from '@/hooks/use-chat';
 
 type Message = {
   id: number;
@@ -19,7 +20,7 @@ type Message = {
 };
 
 export default function ChatAssistant() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useChat();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);

@@ -5,7 +5,8 @@
         "news": "News",
         "loans": "Loans",
         "help": "Help",
-        "github": "GitHub"
+        "github": "GitHub",
+        "ai_assistant": "AI Assistant"
     },
     "header": {
         "change_language": "Change language",

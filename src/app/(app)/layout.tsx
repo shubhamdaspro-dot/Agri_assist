@@ -3,23 +3,26 @@ import AppSidebar from '@/components/layout/sidebar';
 import Header from '@/components/layout/header';
 import {SidebarInset, SidebarProvider} from '@/components/ui/sidebar';
 import ChatAssistant from '@/components/chat/chat-assistant';
+import { ChatProvider } from '@/hooks/use-chat';
 
 export default function AppLayout({children}: {children: React.ReactNode}) {
   return (
-    <SidebarProvider>
-      <div className="min-h-screen">
-        <div className="fixed inset-0 bg-background-image opacity-10" />
-        <div className="parallax-container">
-          <AppSidebar />
-          <SidebarInset>
-            <div className="parallax-content">
-              <Header />
-              <div className="p-4 sm:p-6 lg:p-8">{children}</div>
-            </div>
-          </SidebarInset>
-          <ChatAssistant />
+    <ChatProvider>
+      <SidebarProvider>
+        <div className="min-h-screen">
+          <div className="fixed inset-0 bg-background-image opacity-10" />
+          <div className="parallax-container">
+            <AppSidebar />
+            <SidebarInset>
+              <div className="parallax-content">
+                <Header />
+                <div className="p-4 sm:p-6 lg:p-8">{children}</div>
+              </div>
+            </SidebarInset>
+            <ChatAssistant />
+          </div>
         </div>
-      </div>
-    </SidebarProvider>
+      </SidebarProvider>
+    </ChatProvider>
   );
 }

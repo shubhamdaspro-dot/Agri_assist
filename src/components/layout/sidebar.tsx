@@ -15,12 +15,12 @@ import {
   Landmark,
   Github,
   CircleHelp,
-  LogOut,
+  MessageCircle,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
-import { Button } from '../ui/button';
+import { useChat } from '@/hooks/use-chat';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -57,6 +57,7 @@ function AgriAssistLogo() {
 export default function AppSidebar() {
   const pathname = usePathname();
   const { t } = useLanguage();
+  const { setIsOpen } = useChat();
 
   return (
     <Sidebar>
@@ -79,6 +80,12 @@ export default function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
+            <SidebarMenuItem>
+                <SidebarMenuButton onClick={() => setIsOpen(true)} tooltip={t('sidebar.ai_assistant')}>
+                    <MessageCircle />
+                    <span>{t('sidebar.ai_assistant')}</span>
+                </SidebarMenuButton>
+            </SidebarMenuItem>
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter>
