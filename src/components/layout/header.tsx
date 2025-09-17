@@ -17,7 +17,7 @@ function getTitleKey(path: string): string {
     return 'sidebar.products';
   }
   const pathName = path.split('/').pop() || 'dashboard';
-   if (pathName === '') return 'sidebar.dashboard';
+   if (pathName === 'app') return 'sidebar.dashboard';
   return `sidebar.${pathName}`;
 }
 
