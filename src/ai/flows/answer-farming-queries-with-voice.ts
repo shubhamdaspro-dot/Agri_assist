@@ -15,17 +15,17 @@ const AnswerFarmingQueriesWithVoiceInputSchema = z.object({
   voiceQueryDataUri: z
     .string()
     .describe(
-      "A voice recording of a farmer's question, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "A voice recording of a farmer's question, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'"
     ),
-  spokenLanguage: z.string().describe('The language of the voice query.'),
 });
 export type AnswerFarmingQueriesWithVoiceInput = z.infer<typeof AnswerFarmingQueriesWithVoiceInputSchema>;
 
 const AnswerFarmingQueriesWithVoiceOutputSchema = z.object({
+  textResponse: z.string().describe('The transcribed text of the AI response.'),
   spokenResponseDataUri: z
     .string()
     .describe(
-      'The AI response as a voice recording, as a data URI that must include a MIME type and use Base64 encoding. Expected format: \'data:<mimetype>;base64,<encoded_data>\'.' 
+      'The AI response as a voice recording, as a data URI that must include a MIME type and use Base64 encoding. Expected format: \'data:<mimetype>;base64,<encoded_data>\'.'
     ),
 });
 export type AnswerFarmingQueriesWithVoiceOutput = z.infer<typeof AnswerFarmingQueriesWithVoiceOutputSchema>;
@@ -45,13 +45,30 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
   async input => {
     // Transcribe the audio query
     const {text: transcribedQuery} = await ai.generate({
-      prompt: input.voiceQueryDataUri,
+      prompt: [
+        {
+          media: {
+            url: input.voiceQueryDataUri,
+          }
+        },
+        {
+          text: 'Transcribe this audio. It is a question about farming.'
+        }
+      ],
     });
+
+    if (!transcribedQuery) {
+        throw new Error('Could not transcribe audio query.');
+    }
 
     //Get the LLM text response
     const {text: textResponse} = await ai.generate({
-      prompt: `You are an expert AI assistant for farmers. Answer the following question in the same language as the farmer. Question: ${transcribedQuery}`,
+      prompt: `You are an expert AI assistant for farmers. Answer the following question in a concise and helpful way. Question: ${transcribedQuery}`,
     });
+
+     if (!textResponse) {
+      throw new Error('Failed to generate text response.');
+    }
 
     // Convert the text response to speech
     const {media} = await ai.generate({
@@ -77,7 +94,7 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
 
     const spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
 
-    return {spokenResponseDataUri};
+    return {textResponse, spokenResponseDataUri};
   }
 );
 
