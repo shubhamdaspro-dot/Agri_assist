@@ -189,13 +189,18 @@ export default function ChatAssistant() {
         </DialogContent>
       </Dialog>
       
-      <Button
-        className="fixed bottom-6 right-6 h-20 w-20 rounded-full shadow-lg bg-primary hover:bg-primary/90 animate-glow animate-float-around z-50"
-        size="icon"
+      <div
+        className="fixed bottom-6 right-6 z-50 animate-float-around"
         onClick={() => setIsOpen(true)}
       >
-        <MessageCircle className="h-10 w-10 text-primary-foreground" />
-      </Button>
+        <div className="absolute inset-0.5 rounded-full border-2 border-primary/50 animate-spin-slow"></div>
+        <Button
+          className="relative h-16 w-16 rounded-full shadow-lg bg-primary hover:bg-primary/90 animate-glow"
+          size="icon"
+        >
+          <MessageCircle className="h-8 w-8 text-primary-foreground" />
+        </Button>
+      </div>
 
       <audio ref={audioRef} className="hidden" />
     </>

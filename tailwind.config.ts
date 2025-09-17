@@ -107,6 +107,7 @@ export default {
         'fade-in-up': 'fade-in-up 0.5s ease-in-out forwards',
         glow: 'glow 3s ease-in-out infinite',
         'float-around': 'float-around 8s ease-in-out infinite',
+        'spin-slow': 'spin 5s linear infinite',
       },
     },
   },
