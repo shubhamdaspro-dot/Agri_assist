@@ -44,6 +44,10 @@ export default function RecommendationsPage() {
     setResults(null);
   };
 
+  if (!isClient) {
+    return <FormSkeleton />;
+  }
+
   return (
     <div className="space-y-8">
       <div>
@@ -53,32 +57,27 @@ export default function RecommendationsPage() {
         </p>
       </div>
 
-      {isClient && locationError && (
+      {locationError && (
         <Alert variant="destructive">
           <MapPin className="h-4 w-4" />
           <AlertTitle>{t('recommendations.location_error_title')}</AlertTitle>
           <AlertDescription>{locationError}</AlertDescription>
         </Alert>
       )}
-
-      {isClient ? (
-        <>
-          {!results && !isLoading && (
-              <RecommendationForm 
-                  setResults={setResults} 
-                  setIsLoading={setIsLoading} 
-                  isLoading={isLoading}
-                  location={location}
-              />
-          )}
-
-          {isLoading && <LoadingSkeleton />}
-
-          {results && <RecommendationResults results={results} onNewRecommendation={handleNewRecommendation} />}
-        </>
-      ) : (
-        <FormSkeleton />
+      
+      {!results && !isLoading && (
+          <RecommendationForm 
+              setResults={setResults} 
+              setIsLoading={setIsLoading} 
+              isLoading={isLoading}
+              location={location}
+          />
       )}
+
+      {isLoading && <LoadingSkeleton />}
+
+      {results && <RecommendationResults results={results} onNewRecommendation={handleNewRecommendation} />}
+
     </div>
   );
 }

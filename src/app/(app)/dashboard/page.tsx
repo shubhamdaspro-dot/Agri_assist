@@ -9,23 +9,27 @@ import { useLanguage } from "@/hooks/use-language";
 import { getLatestNews } from '@/lib/actions';
 import type { NewsArticle } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useIsClient } from '@/hooks/use-is-client';
 
 export default function DashboardPage() {
   const { t, language } = useLanguage();
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const [loadingNews, setLoadingNews] = useState(true);
+  const isClient = useIsClient();
 
   useEffect(() => {
     async function loadNews() {
-      setLoadingNews(true);
-      const result = await getLatestNews(language);
-      if (result.success && result.data) {
-        setLatestNews(result.data.articles.slice(0, 3));
+      if (isClient) {
+        setLoadingNews(true);
+        const result = await getLatestNews(language);
+        if (result.success && result.data) {
+          setLatestNews(result.data.articles.slice(0, 3));
+        }
+        setLoadingNews(false);
       }
-      setLoadingNews(false);
     }
     loadNews();
-  }, [language]);
+  }, [language, isClient]);
 
   return (
     <div className="flex flex-col gap-8">

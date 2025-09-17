@@ -79,7 +79,6 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     t,
   };
 
-  // Prevent flash of untranslated content by not rendering children until mounted on the client
   if (!isClient) {
     return null;
   }
