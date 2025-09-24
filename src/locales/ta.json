@@ -6,7 +6,8 @@
         "loans": "கடன்கள்",
         "help": "உதவி",
         "github": "கிட்ஹப்",
-        "ai_assistant": "AI உதவியாளர்"
+        "ai_assistant": "AI உதவியாளர்",
+        "disease_prevention": "பயிர் நோய்கள்"
     },
     "header": {
         "change_language": "மொழியை மாற்று",
@@ -137,5 +138,29 @@
         "toast_login_success_title": "உள்நுழைவு வெற்றி",
         "toast_login_success_description": "நீங்கள் வெற்றிகரமாக உள்நுழைந்துவிட்டீர்கள்.",
         "toast_invalid_otp_title": "தவறான OTP"
+    },
+    "disease_prevention": {
+        "page_title": "பயிர் நோய் கண்டறிதல் மற்றும் தடுப்பு",
+        "page_subtitle": "பொதுவான நோய்களைப் பற்றி அறியுங்கள் அல்லது நோயறிதலுக்காக ஒரு புகைப்படத்தைப் பதிவேற்றவும்.",
+        "form_title": "ஒரு நோயைக் கண்டறியவும்",
+        "form_subtitle": "பட்டியலிலிருந்து ஒரு நோயைத் தேர்ந்தெடுக்கவும் அல்லது ஒரு புகைப்படத்தைப் பதிவேற்றவும்.",
+        "select_disease_label": "பட்டியலிலிருந்து ஒரு நோயைத் தேர்ந்தெடுக்கவும்",
+        "select_disease_placeholder": "ஒரு பொதுவான நோயைத் தேர்ந்தெடுக்கவும்",
+        "or_divider": "அல்லது",
+        "upload_photo_label": "ஒரு புகைப்படத்தைப் பதிவேற்றவும்",
+        "upload_photo_button": "தாவர புகைப்படத்தைப் பதிவேற்றவும்",
+        "upload_photo_description": "AI நோயறிதலுக்காக பாதிக்கப்பட்ட தாவரப் பகுதியின் படத்தைக் கொடுக்கவும்.",
+        "submit_button": "நோயறிதலைப் பெறுங்கள்",
+        "loading_button": "நோயறிதல்...",
+        "toast_input_required_title": "உள்ளீடு தேவை",
+        "toast_input_required_description": "தயவுசெய்து ஒரு நோயைத் தேர்ந்தெடுக்கவும் அல்லது ஒரு புகைப்படத்தைப் பதிவேற்றவும்.",
+        "toast_error_title": "நோயறிதல் தோல்வியுற்றது",
+        "toast_error_description": "AI ஒரு நோயறிதலை வழங்க முடியவில்லை. தயவுசெய்து மீண்டும் முயற்சிக்கவும்.",
+        "results_not_identified_title": "நோய் அடையாளம் காணப்படவில்லை",
+        "results_prevention_title": "தடுப்பு",
+        "results_treatment_title": "சிகிச்சை",
+        "results_no_info_title": "தகவல் எதுவும் இல்லை",
+        "results_no_info_description": "இந்த நோய்க்கு எந்த தடுப்பு அல்லது சிகிச்சை தகவலும் கிடைக்கவில்லை.",
+        "new_diagnosis_button": "புதிய நோயறிதலைத் தொடங்கு"
     }
 }

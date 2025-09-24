@@ -6,7 +6,8 @@
         "loans": "రుణాలు",
         "help": "సహాయం",
         "github": "గిట్‌హబ్",
-        "ai_assistant": "AI సహాయకుడు"
+        "ai_assistant": "AI సహాయకుడు",
+        "disease_prevention": "పంట వ్యాధులు"
     },
     "header": {
         "change_language": "భాషను మార్చండి",
@@ -137,5 +138,29 @@
         "toast_login_success_title": "లాగిన్ విజయవంతమైంది",
         "toast_login_success_description": "మీరు విజయవంతంగా లాగిన్ అయ్యారు.",
         "toast_invalid_otp_title": "చెల్లని OTP"
+    },
+    "disease_prevention": {
+        "page_title": "పంట వ్యాధి నిర్ధారణ & నివారణ",
+        "page_subtitle": "సాధారణ వ్యాధుల గురించి తెలుసుకోండి లేదా నిర్ధారణ కోసం ఫోటోను అప్‌లోడ్ చేయండి.",
+        "form_title": "వ్యాధిని నిర్ధారించండి",
+        "form_subtitle": "జాబితా నుండి ఒక వ్యాధిని ఎంచుకోండి లేదా ఫోటోను అప్‌లోడ్ చేయండి.",
+        "select_disease_label": "జాబితా నుండి ఒక వ్యాధిని ఎంచుకోండి",
+        "select_disease_placeholder": "ఒక సాధారణ వ్యాధిని ఎంచుకోండి",
+        "or_divider": "లేదా",
+        "upload_photo_label": "ఫోటోను అప్‌లోడ్ చేయండి",
+        "upload_photo_button": "మొక్క ఫోటోను అప్‌లోడ్ చేయండి",
+        "upload_photo_description": "AI నిర్ధారణ కోసం ప్రభావితమైన మొక్క భాగానికి సంబంధించిన చిత్రాన్ని అందించండి.",
+        "submit_button": "నిర్ధారణ పొందండి",
+        "loading_button": "నిర్ధారణ చేస్తోంది...",
+        "toast_input_required_title": "ఇన్‌పుట్ అవసరం",
+        "toast_input_required_description": "దయచేసి ఒక వ్యాధిని ఎంచుకోండి లేదా ఫోటోను అప్‌లోడ్ చేయండి.",
+        "toast_error_title": "నిర్ధారణ విఫలమైంది",
+        "toast_error_description": "AI నిర్ధారణను అందించలేకపోయింది. దయచేసి మళ్లీ ప్రయత్నించండి.",
+        "results_not_identified_title": "వ్యాధి గుర్తించబడలేదు",
+        "results_prevention_title": "నివారణ",
+        "results_treatment_title": "చికిత్స",
+        "results_no_info_title": "సమాచారం కనుగొనబడలేదు",
+        "results_no_info_description": "ఈ వ్యాధికి నివారణ లేదా చికిత్స సమాచారం కనుగొనబడలేదు.",
+        "new_diagnosis_button": "కొత్త నిర్ధారణను ప్రారంభించండి"
     }
 }

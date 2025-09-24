@@ -6,7 +6,8 @@
         "loans": "कर्ज",
         "help": "मदत",
         "github": "गिटहब",
-        "ai_assistant": "एआय सहाय्यक"
+        "ai_assistant": "एआय सहाय्यक",
+        "disease_prevention": "पीक रोग"
     },
     "header": {
         "change_language": "भाषा बदला",
@@ -137,5 +138,29 @@
         "toast_login_success_title": "लॉगिन यशस्वी",
         "toast_login_success_description": "तुम्ही यशस्वीरित्या लॉगिन केले आहे.",
         "toast_invalid_otp_title": "अवैध OTP"
+    },
+    "disease_prevention": {
+        "page_title": "पीक रोग निदान आणि प्रतिबंध",
+        "page_subtitle": "सामान्य रोगांबद्दल जाणून घ्या किंवा निदानासाठी फोटो अपलोड करा.",
+        "form_title": "रोगाचे निदान करा",
+        "form_subtitle": "सूचीमधून एक रोग निवडा किंवा फोटो अपलोड करा.",
+        "select_disease_label": "सूचीमधून एक रोग निवडा",
+        "select_disease_placeholder": "एक सामान्य रोग निवडा",
+        "or_divider": "किंवा",
+        "upload_photo_label": "फोटो अपलोड करा",
+        "upload_photo_button": "वनस्पतीचा फोटो अपलोड करा",
+        "upload_photo_description": "AI निदानासाठी प्रभावित वनस्पती भागाचे चित्र द्या.",
+        "submit_button": "निदान मिळवा",
+        "loading_button": "निदान करत आहे...",
+        "toast_input_required_title": "इनपुट आवश्यक",
+        "toast_input_required_description": "कृपया एक रोग निवडा किंवा फोटो अपलोड करा.",
+        "toast_error_title": "निदान अयशस्वी",
+        "toast_error_description": "AI निदान देऊ शकले नाही. कृपया पुन्हा प्रयत्न करा.",
+        "results_not_identified_title": "रोग ओळखला नाही",
+        "results_prevention_title": "प्रतिबंध",
+        "results_treatment_title": "उपचार",
+        "results_no_info_title": "माहिती आढळली नाही",
+        "results_no_info_description": "या रोगासाठी कोणतीही प्रतिबंध किंवा उपचार माहिती आढळली नाही.",
+        "new_diagnosis_button": "नवीन निदान सुरू करा"
     }
 }

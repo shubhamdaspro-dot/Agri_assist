@@ -16,6 +16,7 @@ import {
   Github,
   CircleHelp,
   MessageCircle,
+  ShieldAlert,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -25,6 +26,7 @@ import { useChat } from '@/hooks/use-chat';
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
   { href: '/recommendations', icon: Leaf, labelKey: 'sidebar.recommendations' },
+  { href: '/disease-prevention', icon: ShieldAlert, labelKey: 'sidebar.disease_prevention' },
   { href: '/news', icon: Newspaper, labelKey: 'sidebar.news' },
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];

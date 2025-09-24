@@ -6,7 +6,8 @@
         "loans": "Loans",
         "help": "Help",
         "github": "GitHub",
-        "ai_assistant": "AI Assistant"
+        "ai_assistant": "AI Assistant",
+        "disease_prevention": "Crop Diseases"
     },
     "header": {
         "change_language": "Change language",
@@ -137,5 +138,29 @@
         "toast_login_success_title": "Login Successful",
         "toast_login_success_description": "You have been successfully logged in.",
         "toast_invalid_otp_title": "Invalid OTP"
+    },
+    "disease_prevention": {
+        "page_title": "Crop Disease Diagnosis & Prevention",
+        "page_subtitle": "Learn about common diseases or upload a photo for a diagnosis.",
+        "form_title": "Diagnose a Disease",
+        "form_subtitle": "Select a disease from the list or upload a photo.",
+        "select_disease_label": "Select a disease from the list",
+        "select_disease_placeholder": "Select a common disease",
+        "or_divider": "OR",
+        "upload_photo_label": "Upload a Photo",
+        "upload_photo_button": "Upload Plant Photo",
+        "upload_photo_description": "Provide a picture of an affected plant part for AI diagnosis.",
+        "submit_button": "Get Diagnosis",
+        "loading_button": "Diagnosing...",
+        "toast_input_required_title": "Input Required",
+        "toast_input_required_description": "Please select a disease or upload a photo.",
+        "toast_error_title": "Diagnosis Failed",
+        "toast_error_description": "The AI could not provide a diagnosis. Please try again.",
+        "results_not_identified_title": "Disease Not Identified",
+        "results_prevention_title": "Prevention",
+        "results_treatment_title": "Treatment",
+        "results_no_info_title": "No Information Found",
+        "results_no_info_description": "No prevention or treatment information could be found for this disease.",
+        "new_diagnosis_button": "Start New Diagnosis"
     }
 }

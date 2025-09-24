@@ -6,7 +6,8 @@
         "loans": "ঋণ",
         "help": "সাহায্য",
         "github": "গিটহাব",
-        "ai_assistant": "এআই সহকারী"
+        "ai_assistant": "এআই সহকারী",
+        "disease_prevention": "ফসলের রোগ"
     },
     "header": {
         "change_language": "ভাষা পরিবর্তন করুন",
@@ -137,5 +138,29 @@
         "toast_login_success_title": "লগইন সফল",
         "toast_login_success_description": "আপনি সফলভাবে লগইন করেছেন।",
         "toast_invalid_otp_title": "অবৈধ ওটিপি"
+    },
+    "disease_prevention": {
+        "page_title": "ফসল রোগ নির্ণয় ও প্রতিরোধ",
+        "page_subtitle": "সাধারণ রোগ সম্পর্কে জানুন বা রোগ নির্ণয়ের জন্য একটি ছবি আপলোড করুন।",
+        "form_title": "রোগ নির্ণয় করুন",
+        "form_subtitle": "তালিকা থেকে একটি রোগ নির্বাচন করুন বা একটি ছবি আপলোড করুন।",
+        "select_disease_label": "তালিকা থেকে একটি রোগ নির্বাচন করুন",
+        "select_disease_placeholder": "একটি সাধারণ রোগ নির্বাচন করুন",
+        "or_divider": "অথবা",
+        "upload_photo_label": "একটি ছবি আপলোড করুন",
+        "upload_photo_button": "উদ্ভিদের ছবি আপলোড করুন",
+        "upload_photo_description": "AI নির্ণয়ের জন্য একটি প্রভাবিত উদ্ভিদের অংশের ছবি প্রদান করুন।",
+        "submit_button": "রোগ নির্ণয় পান",
+        "loading_button": "রোগ নির্ণয় করা হচ্ছে...",
+        "toast_input_required_title": "ইনপুট প্রয়োজন",
+        "toast_input_required_description": "অনুগ্রহ করে একটি রোগ নির্বাচন করুন বা একটি ছবি আপলোড করুন।",
+        "toast_error_title": "রোগ নির্ণয় ব্যর্থ হয়েছে",
+        "toast_error_description": "AI রোগ নির্ণয় প্রদান করতে পারেনি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+        "results_not_identified_title": "রোগ চিহ্নিত করা যায়নি",
+        "results_prevention_title": "প্রতিরোধ",
+        "results_treatment_title": "চিকিৎসা",
+        "results_no_info_title": "কোন তথ্য পাওয়া যায়নি",
+        "results_no_info_description": "এই রোগের জন্য কোন প্রতিরোধ বা চিকিৎসার তথ্য পাওয়া যায়নি।",
+        "new_diagnosis_button": "নতুন রোগ নির্ণয় শুরু করুন"
     }
 }

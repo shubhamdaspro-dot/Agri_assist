@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
 import type { FetchLatestNewsOutput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
+import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 
 export async function getCropRecommendations(
   input: GenerateCropRecommendationsInput
@@ -119,6 +120,18 @@ export async function getLatestNews(
 ): Promise<{ success: boolean; data: FetchLatestNewsOutput | null; error?: string }> {
   try {
     const result = await fetchLatestNews(language);
+    return { success: true, data: result };
+  } catch (e: any) {
+    console.error(e);
+    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+  }
+}
+
+export async function getDiseaseDiagnosis(
+  input: DiagnoseCropDiseaseInput
+): Promise<{ success: boolean; data: DiagnoseCropDiseaseOutput | null; error?: string }> {
+  try {
+    const result = await diagnoseCropDisease(input);
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
