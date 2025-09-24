@@ -103,6 +103,11 @@ export default {
           '0%': { transform: 'translateY(0)', boxShadow: 'var(--tw-shadow)' },
           '100%': { transform: 'translateY(-4px)', boxShadow: 'var(--tw-shadow-lg)' },
         },
+        'gradient-bg': {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        }
       },
       animation: {
         'accordion-down': 'accordion-down 0.3s ease-out',
@@ -113,6 +118,7 @@ export default {
         'float-around': 'float-around 8s ease-in-out infinite',
         'spin-slow': 'spin 5s linear infinite',
         'hover-lift': 'hover-lift 0.3s ease-out forwards',
+        'gradient-bg': 'gradient-bg 20s ease infinite',
       },
     },
   },
