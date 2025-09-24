@@ -81,7 +81,7 @@ export async function answerTextQueryWithVoice(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: 'Achernar' }, // Hardcoded to male voice
+            prebuiltVoiceConfig: { voiceName: 'Algenib' }, 
           },
         },
       },

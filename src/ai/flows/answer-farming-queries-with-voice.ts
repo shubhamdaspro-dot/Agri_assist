@@ -78,7 +78,7 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: {voiceName: 'Achernar'}, // Hardcoded to male voice
+            prebuiltVoiceConfig: {voiceName: 'Algenib'}, // Hardcoded to male voice
           },
         },
       },
