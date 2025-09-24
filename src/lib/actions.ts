@@ -7,6 +7,7 @@ import wav from 'wav';
 import { z } from 'zod';
 import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
 import type { FetchLatestNewsOutput } from './types';
+import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 
 export async function getCropRecommendations(
   input: GenerateCropRecommendationsInput
@@ -61,8 +62,7 @@ async function toWav(
 }
 
 export async function answerTextQueryWithVoice(
-  query: string,
-  voice: 'Algenib' | 'Achernar' = 'Algenib'
+  query: string
 ): Promise<{ success: boolean; textResponse?: string; spokenResponseDataUri?: string; error?: string }> {
   try {
     // 1. Get text response from LLM
@@ -81,7 +81,7 @@ export async function answerTextQueryWithVoice(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: voice },
+            prebuiltVoiceConfig: { voiceName: 'Achernar' }, // Hardcoded to male voice
           },
         },
       },
@@ -103,53 +103,11 @@ export async function answerTextQueryWithVoice(
 }
 
 export async function answerVoiceQuery(
-    voiceQueryDataUri: string,
-    voice: 'Algenib' | 'Achernar' = 'Algenib'
+    voiceQueryDataUri: string
 ): Promise<{ success: boolean; textQuery?: string; textResponse?: string; spokenResponseDataUri?: string; error?: string }> {
     try {
-        // 1. Transcribe the audio query
-        const { text: transcribedQuery } = await ai.generate({
-            prompt: [
-                { media: { url: voiceQueryDataUri } },
-                { text: 'Transcribe this audio. It is a question about farming.' },
-            ],
-        });
-
-        if (!transcribedQuery) {
-            throw new Error('Could not transcribe audio query.');
-        }
-
-        // 2. Get text response from LLM
-        const { text: textResponse } = await ai.generate({
-            prompt: `You are an expert AI assistant for farmers. You are friendly, helpful, and provide concise, accurate answers. Answer the following question: ${transcribedQuery}`,
-        });
-
-        if (!textResponse) {
-            throw new Error('Failed to generate text response.');
-        }
-
-        // 3. Convert text response to speech
-        const { media } = await ai.generate({
-            model: 'googleai/gemini-2.5-flash-preview-tts',
-            config: {
-                responseModalities: ['AUDIO'],
-                speechConfig: {
-                    voiceConfig: {
-                        prebuiltVoiceConfig: { voiceName: voice },
-                    },
-                },
-            },
-            prompt: textResponse,
-        });
-
-        if (!media?.url) {
-            throw new Error('Failed to generate audio response.');
-        }
-
-        const audioBuffer = Buffer.from(media.url.substring(media.url.indexOf(',') + 1), 'base64');
-        const spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
-
-        return { success: true, textQuery: transcribedQuery, textResponse, spokenResponseDataUri };
+        const result = await answerFarmingQueriesWithVoice({ voiceQueryDataUri });
+        return { success: true, ...result };
     } catch (e: any) {
         console.error(e);
         return { success: false, error: e.message || 'An unknown error occurred while processing your request.' };

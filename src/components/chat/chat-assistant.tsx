@@ -21,15 +21,12 @@ type Message = {
   audioUri?: string;
 };
 
-type VoiceOption = 'Algenib' | 'Achernar';
-
 export default function ChatAssistant() {
   const { isOpen, setIsOpen } = useChat();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [voice, setVoice] = useState<VoiceOption>('Algenib');
   const audioRef = useRef<HTMLAudioElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -72,7 +69,7 @@ export default function ChatAssistant() {
     setInput('');
     setIsProcessing(true);
 
-    const result = await answerTextQueryWithVoice(userQuery, voice);
+    const result = await answerTextQueryWithVoice(userQuery);
 
     if (result.success && result.textResponse) {
       const newAssistantMessage: Message = {
@@ -138,7 +135,7 @@ export default function ChatAssistant() {
   const handleVoiceSend = async (audioDataUri: string) => {
     setIsProcessing(true);
 
-    const result = await answerVoiceQuery(audioDataUri, voice);
+    const result = await answerVoiceQuery(audioDataUri);
     
     if (result.success && result.textQuery && result.textResponse) {
       const newUserMessage: Message = { id: Date.now(), role: 'user', text: result.textQuery };
@@ -213,19 +210,7 @@ export default function ChatAssistant() {
               )}
             </div>
           </ScrollArea>
-           <DialogFooter className="p-4 border-t flex-col sm:flex-col sm:space-x-0 gap-4">
-             <div className="grid w-full items-center gap-1.5">
-                <Label htmlFor="voice">{t('chat.voice_label')}</Label>
-                <Select value={voice} onValueChange={(value: VoiceOption) => setVoice(value)}>
-                    <SelectTrigger id="voice" className="w-full">
-                        <SelectValue placeholder={t('chat.voice_placeholder')} />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="Algenib">{t('chat.voice_female')}</SelectItem>
-                        <SelectItem value="Achernar">{t('chat.voice_male')}</SelectItem>
-                    </SelectContent>
-                </Select>
-            </div>
+           <DialogFooter className="p-4 border-t">
             <form onSubmit={(e) => { e.preventDefault(); handleSend(); }} className="flex items-center gap-2 w-full">
               <Input
                 value={input}

@@ -21,6 +21,7 @@ const AnswerFarmingQueriesWithVoiceInputSchema = z.object({
 export type AnswerFarmingQueriesWithVoiceInput = z.infer<typeof AnswerFarmingQueriesWithVoiceInputSchema>;
 
 const AnswerFarmingQueriesWithVoiceOutputSchema = z.object({
+  textQuery: z.string().describe('The transcribed text of the user query.'),
   textResponse: z.string().describe('The transcribed text of the AI response.'),
   spokenResponseDataUri: z
     .string()
@@ -77,7 +78,7 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
         responseModalities: ['AUDIO'],
         speechConfig: {
           voiceConfig: {
-            prebuiltVoiceConfig: {voiceName: 'Algenib'},
+            prebuiltVoiceConfig: {voiceName: 'Achernar'}, // Hardcoded to male voice
           },
         },
       },
@@ -94,7 +95,7 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
 
     const spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
 
-    return {textResponse, spokenResponseDataUri};
+    return {textQuery: transcribedQuery, textResponse, spokenResponseDataUri};
   }
 );
 
