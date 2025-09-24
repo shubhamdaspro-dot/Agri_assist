@@ -99,6 +99,10 @@ export default {
           '75%': { transform: 'translate(5px, -5px)' },
           '100%': { transform: 'translate(0px, 0px)' },
         },
+        'hover-lift': {
+          '0%': { transform: 'translateY(0)', boxShadow: 'var(--tw-shadow)' },
+          '100%': { transform: 'translateY(-4px)', boxShadow: 'var(--tw-shadow-lg)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.3s ease-out',
@@ -108,6 +112,7 @@ export default {
         glow: 'glow 3s ease-in-out infinite',
         'float-around': 'float-around 8s ease-in-out infinite',
         'spin-slow': 'spin 5s linear infinite',
+        'hover-lift': 'hover-lift 0.3s ease-out forwards',
       },
     },
   },
