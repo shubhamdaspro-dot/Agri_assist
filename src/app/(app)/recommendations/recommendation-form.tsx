@@ -17,6 +17,7 @@ import Image from 'next/image';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 const formSchema = z.object({
   weatherData: z.string().min(10, 'Please describe the current weather conditions.'),
@@ -43,6 +44,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+    mode: 'onChange',
     defaultValues: {
       weatherData: '',
       soilType: '',
@@ -51,12 +53,14 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
       marketDemand: '',
     },
   });
+  
+  const { isValid } = form.formState;
 
   useEffect(() => {
     if (location) {
-      form.setValue('geographicRegion', `${location.latitude}, ${location.longitude}`);
+      form.setValue('geographicRegion', `${location.latitude}, ${location.longitude}`, { shouldValidate: true });
       // In a real app, you'd use a weather API. For now, we'll use a placeholder.
-      form.setValue('weatherData', t('recommendations.weather_placeholder', {lat: location.latitude, long: location.longitude}));
+      form.setValue('weatherData', t('recommendations.weather_placeholder', {lat: location.latitude, long: location.longitude}), { shouldValidate: true });
     }
   }, [location, form, t]);
 
@@ -70,7 +74,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
         setIsAnalyzingSoil(true);
         const response = await analyzeSoilFromPhotoAction({ photoDataUri: dataUri });
         if (response.success && response.data) {
-          form.setValue('soilType', response.data.soilType);
+          form.setValue('soilType', response.data.soilType, { shouldValidate: true });
           toast({
             title: t('recommendations.toast_soil_analysis_complete_title'),
             description: t('recommendations.toast_soil_analysis_complete_description', {soilType: response.data.soilType, analysis: response.data.analysis}),
@@ -152,7 +156,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>{t('recommendations.form_soil_type_label')}</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value} disabled={isLoading || isAnalyzingSoil}>
+                    <Select onValueChange={(value) => field.onChange(value)} defaultValue={field.value} value={field.value} disabled={isLoading || isAnalyzingSoil}>
                       <FormControl>
                         <SelectTrigger>
                           <SelectValue placeholder={t('recommendations.form_soil_type_placeholder')} />
@@ -181,7 +185,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
                       variant="destructive"
                       size="icon"
                       className="absolute top-1 right-1 h-7 w-7"
-                      onClick={() => { setSoilPhoto(null); form.setValue('soilType', ''); }}
+                      onClick={() => { setSoilPhoto(null); form.setValue('soilType', '', { shouldValidate: true }); }}
                       disabled={isLoading || isAnalyzingSoil}
                     >
                       <X className="h-4 w-4" />
@@ -243,7 +247,13 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
               />
             </div>
             
-            <Button type="submit" disabled={isLoading || isAnalyzingSoil} className="w-full md:w-auto bg-accent hover:bg-accent/90 text-accent-foreground">
+            <Button 
+              type="submit" 
+              disabled={isLoading || isAnalyzingSoil} 
+              className={cn("w-full md:w-auto bg-accent hover:bg-accent/90 text-accent-foreground", {
+                "animate-glow": isValid && !isLoading && !isAnalyzingSoil
+              })}
+            >
               {(isLoading || isAnalyzingSoil) && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isLoading ? t('recommendations.form_submit_analyzing_button') : isAnalyzingSoil ? t('recommendations.form_submit_analyzing_soil_button') : t('recommendations.form_submit_button')}
             </Button>
