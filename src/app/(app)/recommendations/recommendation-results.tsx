@@ -2,20 +2,26 @@
 import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Smartphone, RefreshCw, MapPin, ArrowRight, Leaf, Share2, Download, MessageSquare } from 'lucide-react';
+import { CheckCircle, Smartphone, RefreshCw, MapPin, ArrowRight, Leaf, Share2, Download, MessageSquare, TrendingUp, Loader2 } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef } from 'react';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 import { toJpeg } from 'html-to-image';
+import type { AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type RecommendationResultsProps = {
   results: GenerateCropRecommendationsOutput;
   onNewRecommendation: () => void;
+  profitabilityAnalysis: AnalyzeCropProfitabilityOutput | null;
+  isAnalyzingProfit: boolean;
 };
 
-export function RecommendationResults({ results, onNewRecommendation }: RecommendationResultsProps) {
+export function RecommendationResults({ results, onNewRecommendation, profitabilityAnalysis, isAnalyzingProfit }: RecommendationResultsProps) {
   const { t } = useLanguage();
   const { toast } = useToast();
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -94,6 +100,15 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
         setIsDownloading(false);
     }
   };
+  
+  const getBadgeVariant = (potential: 'High' | 'Medium' | 'Low') => {
+    switch (potential) {
+      case 'High': return 'default';
+      case 'Medium': return 'secondary';
+      case 'Low': return 'destructive';
+      default: return 'outline';
+    }
+  };
 
   return (
     <div className="mt-8 space-y-8">
@@ -123,6 +138,34 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
                         ))}
                     </div>
                 </div>
+
+                {isAnalyzingProfit && <ProfitAnalysisSkeleton />}
+
+                {profitabilityAnalysis && (
+                  <Card className="bg-background">
+                    <CardHeader>
+                      <CardTitle className="flex items-center gap-2">
+                        <TrendingUp className="h-6 w-6 text-primary" />
+                        {t('recommendations.profitability_title')}
+                      </CardTitle>
+                      <CardDescription>{t('recommendations.profitability_subtitle')}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      {profitabilityAnalysis.profitabilityAnalysis.map((item) => (
+                        <div key={item.cropName} className="p-3 rounded-md border bg-muted/20">
+                          <div className="flex justify-between items-center mb-2">
+                            <h4 className="font-semibold">{item.cropName}</h4>
+                            <Badge variant={getBadgeVariant(item.profitPotential)}>
+                              {item.profitPotential} {t('recommendations.profitability_potential')}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-muted-foreground">{item.analysis}</p>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </Card>
+                )}
+
 
                 <div>
                 <h3 className="font-semibold text-lg">{t('recommendations.results_products')}:</h3>
@@ -202,4 +245,36 @@ export function RecommendationResults({ results, onNewRecommendation }: Recommen
         </CardFooter>
     </div>
   );
+}
+
+function ProfitAnalysisSkeleton() {
+  return (
+    <Card className="bg-background">
+      <CardHeader>
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-6 w-6 rounded-full" />
+          <Skeleton className="h-6 w-48" />
+        </div>
+        <Skeleton className="h-4 w-64 mt-1" />
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="p-3 rounded-md border">
+          <div className="flex justify-between items-center mb-2">
+            <Skeleton className="h-5 w-24" />
+            <Skeleton className="h-6 w-20" />
+          </div>
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4 mt-2" />
+        </div>
+        <div className="p-3 rounded-md border">
+          <div className="flex justify-between items-center mb-2">
+            <Skeleton className="h-5 w-28" />
+            <Skeleton className="h-6 w-20" />
+          </div>
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-2/3 mt-2" />
+        </div>
+      </CardContent>
+    </Card>
+  )
 }

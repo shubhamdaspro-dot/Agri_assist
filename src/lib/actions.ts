@@ -9,6 +9,8 @@ import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
 import type { FetchLatestNewsOutput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
+import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
+
 
 export async function getCropRecommendations(
   input: GenerateCropRecommendationsInput
@@ -136,5 +138,17 @@ export async function getDiseaseDiagnosis(
   } catch (e: any) {
     console.error(e);
     return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+  }
+}
+
+export async function getProfitabilityAnalysis(
+  input: AnalyzeCropProfitabilityInput
+): Promise<{ success: boolean; data: AnalyzeCropProfitabilityOutput | null; error?: string }> {
+  try {
+    const result = await analyzeCropProfitability(input);
+    return { success: true, data: result };
+  } catch (e: any) {
+    console.error(e);
+    return { success: false, data: null, error: e.message || 'An unknown error occurred while analyzing profitability.' };
   }
 }

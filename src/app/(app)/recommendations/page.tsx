@@ -10,16 +10,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { MapPin } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
 import { useIsClient } from '@/hooks/use-is-client';
-
+import { getProfitabilityAnalysis } from '@/lib/actions';
+import type { AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
 
 export default function RecommendationsPage() {
   const [results, setResults] = useState<GenerateCropRecommendationsOutput | null>(null);
+  const [profitabilityAnalysis, setProfitabilityAnalysis] = useState<AnalyzeCropProfitabilityOutput | null>(null);
+  const [isAnalyzingProfit, setIsAnalyzingProfit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const { toast } = useToast();
   const { t } = useLanguage();
   const isClient = useIsClient();
+  const [lastFormValues, setLastFormValues] = useState<any>(null);
 
   useEffect(() => {
     if (isClient && navigator.geolocation) {
@@ -40,8 +44,33 @@ export default function RecommendationsPage() {
     }
   }, [isClient, t]);
 
+  useEffect(() => {
+    if (results && lastFormValues) {
+      const fetchProfitability = async () => {
+        setIsAnalyzingProfit(true);
+        const profitResponse = await getProfitabilityAnalysis({
+          recommendedCrops: results.recommendedCrops,
+          geographicRegion: lastFormValues.geographicRegion,
+          marketDemand: lastFormValues.marketDemand,
+          historicalYields: lastFormValues.historicalYields,
+        });
+        if (profitResponse.success && profitResponse.data) {
+          setProfitabilityAnalysis(profitResponse.data);
+        } else {
+          // You might want to show a toast here, but it could be noisy.
+          // Silently failing for now.
+          console.error("Failed to get profitability analysis:", profitResponse.error);
+        }
+        setIsAnalyzingProfit(false);
+      };
+      fetchProfitability();
+    }
+  }, [results, lastFormValues]);
+
   const handleNewRecommendation = () => {
     setResults(null);
+    setProfitabilityAnalysis(null);
+    setLastFormValues(null);
   };
 
   if (!isClient) {
@@ -71,12 +100,20 @@ export default function RecommendationsPage() {
               setIsLoading={setIsLoading} 
               isLoading={isLoading}
               location={location}
+              setLastFormValues={setLastFormValues}
           />
       )}
 
       {isLoading && <LoadingSkeleton />}
 
-      {results && <RecommendationResults results={results} onNewRecommendation={handleNewRecommendation} />}
+      {results && (
+        <RecommendationResults 
+          results={results} 
+          onNewRecommendation={handleNewRecommendation}
+          profitabilityAnalysis={profitabilityAnalysis}
+          isAnalyzingProfit={isAnalyzingProfit}
+        />
+      )}
 
     </div>
   );

@@ -33,9 +33,10 @@ type RecommendationFormProps = {
   setIsLoading: (isLoading: boolean) => void;
   isLoading: boolean;
   location: { latitude: number; longitude: number } | null;
+  setLastFormValues: (values: any) => void;
 };
 
-export function RecommendationForm({ setResults, setIsLoading, isLoading, location }: RecommendationFormProps) {
+export function RecommendationForm({ setResults, setIsLoading, isLoading, location, setLastFormValues }: RecommendationFormProps) {
   const { toast } = useToast();
   const { t } = useLanguage();
   const [soilPhoto, setSoilPhoto] = useState<string | null>(null);
@@ -95,6 +96,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading, locati
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     setResults(null);
+    setLastFormValues(values); // Save form values for profitability analysis
     const response = await getCropRecommendations({...values, soilPhoto: soilPhoto || undefined});
     if (response.success && response.data) {
       setResults(response.data);
