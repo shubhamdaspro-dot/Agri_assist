@@ -59,7 +59,24 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
   return (
     <ChatProvider>
       <SidebarProvider>
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col relative">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+             <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-[500px] w-[500px] text-primary/10 blur-3xl"
+              >
+                <path d="M11 20A7 7 0 0 1 7 6a7 7 0 0 1 4-2 7 7 0 0 1 4 2 7 7 0 0 1-4 14Z" />
+                <path d="M11 20V14" />
+                <path d="m11 4 3 4" />
+                <path d="m8 8 3-4" />
+              </svg>
+          </div>
           <AppSidebar />
           <SidebarInset>
               <div className="flex flex-col min-h-full">
