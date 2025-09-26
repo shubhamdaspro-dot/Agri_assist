@@ -3,49 +3,49 @@
     {
       "id": "wheat-seeds",
       "description": "High-yield wheat seeds in a sack",
-      "imageUrl": "https://picsum.photos/seed/wheat-seeds/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1663025293688-322e16b6cb66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3aGVhdCUyMHNlZWRzfGVufDB8fHx8MTc1ODg3MjY5Mnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "wheat seeds"
     },
     {
       "id": "fertilizer-bag",
       "description": "A bag of all-purpose NPK fertilizer",
-      "imageUrl": "https://picsum.photos/seed/fertilizer-bag/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1619606560098-68c232abd37b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmZXJ0aWxpemVyJTIwYmFnfGVufDB8fHx8MTc1ODkxODAwM3ww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "fertilizer bag"
     },
     {
       "id": "organic-pesticide",
       "description": "A spray bottle of organic neem-based pesticide",
-      "imageUrl": "https://picsum.photos/seed/organic-pesticide/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1658003919881-7c2db203a563?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwZXN0aWNpZGUlMjBzcHJheXxlbnwwfHx8fDE3NTg4NzkyODh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "pesticide spray"
     },
     {
       "id": "trowel",
       "description": "A stainless steel garden trowel with a wooden handle",
-      "imageUrl": "https://picsum.photos/seed/trowel/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1693394188947-1f17887be716?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxnYXJkZW4lMjB0cm93ZWx8ZW58MHx8fHwxNzU4ODgwNjE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "garden trowel"
     },
     {
       "id": "watering-can",
       "description": "A large metal watering can",
-      "imageUrl": "https://picsum.photos/seed/watering-can/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1598865306419-16d21664493d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8d2F0ZXJpbmclMjBjYW58ZW58MHx8fHwxNzU4ODgwNjE5fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "watering can"
     },
     {
       "id": "gardening-gloves",
       "description": "A pair of durable gardening gloves",
-      "imageUrl": "https://picsum.photos/seed/gardening-gloves/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1758545873753-c68ca6de2938?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z2FyZGVuaW5nJTIwZ2xvdmVzfGVufDB8fHx8MTc1ODkyMDE5OXww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "gardening gloves"
     },
     {
-      "id": "hero",
-      "description": "Lush green farm field at sunrise",
-      "imageUrl": "https://picsum.photos/seed/hero/1200/600",
-      "imageHint": "farm sunrise"
+      "id": "dashboard-hero",
+      "description": "Farmer working in a lush green field",
+      "imageUrl": "https://images.unsplash.com/photo-1505471768190-275e2ad7b3f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmYXJtZXJ8ZW58MHx8fHwxNzU4MTA5NTY1fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "farmer field"
     },
     {
       "id": "mock",
       "description": "A generic product placeholder",
-      "imageUrl": "https://picsum.photos/seed/mock/400/300",
+      "imageUrl": "https://images.unsplash.com/photo-1639945092541-8d7480fe65e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwcm9kdWN0JTIwYm94fGVufDB8fHx8MTc1ODkyMDAxNHww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "product box"
     }
   ]

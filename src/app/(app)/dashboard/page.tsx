@@ -11,6 +11,37 @@ import type { NewsArticle } from '@/lib/types';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useIsClient } from '@/hooks/use-is-client';
 import { useChat } from '@/hooks/use-chat';
+import { getPlaceholderImage } from '@/lib/placeholder-images';
+
+function DashboardSkeleton() {
+  return (
+    <div className="flex flex-col gap-8">
+      <Card className="w-full overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="p-8 md:p-12 flex flex-col justify-center">
+            <Skeleton className="h-10 w-3/4 mb-4" />
+            <Skeleton className="h-6 w-full mb-2" />
+            <Skeleton className="h-6 w-5/6 mb-6" />
+            <Skeleton className="h-12 w-48" />
+          </div>
+          <div className="relative h-64 md:h-full min-h-[250px] bg-muted"></div>
+        </div>
+      </Card>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card><CardHeader className="flex flex-row items-center justify-between pb-2"><Skeleton className="h-5 w-1/3" /><Skeleton className="h-4 w-4" /></CardHeader><CardContent><Skeleton className="h-8 w-1/2 mb-2" /><Skeleton className="h-4 w-3/4" /><div className="flex gap-4 mt-4"><Skeleton className="h-5 w-24" /><Skeleton className="h-5 w-24" /></div></CardContent></Card>
+        <Card><CardHeader className="flex flex-row items-center justify-between pb-2"><Skeleton className="h-5 w-1/3" /><Skeleton className="h-4 w-4" /></CardHeader><CardContent><Skeleton className="h-8 w-1/2 mb-2" /><Skeleton className="h-4 w-3/4" /><div className="mt-4"><Skeleton className="h-5 w-28" /></div></CardContent></Card>
+      </div>
+      <div>
+        <Skeleton className="h-8 w-1/4 mb-4" />
+        <div className="grid gap-4 md:grid-cols-3">
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+          <NewsCardSkeleton />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function DashboardPage() {
   const { t, language } = useLanguage();
@@ -18,15 +49,21 @@ export default function DashboardPage() {
   const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const [loadingNews, setLoadingNews] = useState(true);
   const isClient = useIsClient();
+  const heroImage = getPlaceholderImage('dashboard-hero');
 
   useEffect(() => {
     async function loadNews() {
       setLoadingNews(true);
-      const result = await getLatestNews(language);
-      if (result.success && result.data) {
-        setLatestNews(result.data.articles.slice(0, 3));
+      try {
+        const result = await getLatestNews(language);
+        if (result.success && result.data) {
+          setLatestNews(result.data.articles.slice(0, 3));
+        }
+      } catch (error) {
+        console.error("Failed to load news:", error);
+      } finally {
+        setLoadingNews(false);
       }
-      setLoadingNews(false);
     }
     if (isClient) {
       loadNews();
@@ -34,33 +71,7 @@ export default function DashboardPage() {
   }, [language, isClient]);
 
   if (!isClient) {
-    return (
-      <div className="flex flex-col gap-8">
-        <Card className="w-full overflow-hidden">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <Skeleton className="h-10 w-3/4 mb-4" />
-              <Skeleton className="h-6 w-full mb-2" />
-              <Skeleton className="h-6 w-5/6 mb-6" />
-              <Skeleton className="h-12 w-48" />
-            </div>
-            <div className="relative h-64 md:h-full min-h-[250px] bg-muted"></div>
-          </div>
-        </Card>
-        <div className="grid gap-6 md:grid-cols-2">
-          <Card><CardHeader><Skeleton className="h-5 w-1/2" /></CardHeader><CardContent className="p-6 pt-0"><Skeleton className="h-12 w-full" /></CardContent></Card>
-          <Card><CardHeader><Skeleton className="h-5 w-1/2" /></CardHeader><CardContent className="p-6 pt-0"><Skeleton className="h-12 w-full" /></CardContent></Card>
-        </div>
-        <div>
-          <Skeleton className="h-8 w-1/4 mb-4" />
-          <div className="grid gap-4 md:grid-cols-3">
-            <NewsCardSkeleton />
-            <NewsCardSkeleton />
-            <NewsCardSkeleton />
-          </div>
-        </div>
-      </div>
-    );
+    return <DashboardSkeleton />;
   }
 
   return (
@@ -82,13 +93,15 @@ export default function DashboardPage() {
             </div>
           </div>
           <div className="relative h-64 md:h-full min-h-[250px]">
-            <Image
-              src="https://images.unsplash.com/photo-1505471768190-275e2ad7b3f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxmYXJtZXJ8ZW58MHx8fHwxNzU4MTA5NTY1fDA&ixlib=rb-4.1.0&q=80&w=1080"
-              alt="Farmer working in a lush green field"
-              fill
-              className="object-cover"
-              data-ai-hint="farmer field"
-            />
+             {heroImage && (
+                <Image
+                    src={heroImage.imageUrl}
+                    alt={heroImage.description}
+                    fill
+                    className="object-cover"
+                    data-ai-hint={heroImage.imageHint}
+                />
+             )}
           </div>
         </div>
       </Card>
@@ -177,3 +190,5 @@ function NewsCardSkeleton() {
     </Card>
   )
 }
+
+    
