@@ -40,7 +40,7 @@ function AppFooter() {
               <Link href="#" className="text-muted-foreground hover:text-primary">
                 <Linkedin className="h-6 w-6" />
               </Link>
-              <Link href="https://github.com/firebase/firebase-genkit-samples/tree/main/nextjs-rag-app" target="_blank" className="text-muted-foreground hover:text-primary">
+              <Link href="https://github.com/Firebase-Studio-Apps/Agri_assist" target="_blank" className="text-muted-foreground hover:text-primary">
                 <Github className="h-6 w-6" />
               </Link>
             </div>
