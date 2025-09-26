@@ -72,6 +72,15 @@ const diagnoseCropDiseaseFlow = ai.defineFlow(
       throw new Error('Either a photo or a disease name must be provided.');
     }
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      return {
+        disease: 'Unknown',
+        description: 'The AI could not confidently identify the disease from the provided information. Please try again with a clearer photo or a more specific disease name.',
+        prevention: [],
+        treatment: [],
+        isDiseaseIdentified: false,
+      };
+    }
+    return output;
   }
 );
