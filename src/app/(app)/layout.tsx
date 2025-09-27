@@ -77,6 +77,7 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
                 <path d="m8 8 3-4" />
               </svg>
           </div>
+          <div className="absolute inset-0 bg-background/90 backdrop-blur-sm z-[-1]"></div>
           <AppSidebar />
           <SidebarInset>
               <div className="flex flex-col min-h-full">
