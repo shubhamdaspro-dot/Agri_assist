@@ -12,7 +12,7 @@ import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutpu
 import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
 import { analyzeMarketPrices } from '@/ai/flows/analyze-market-prices';
 import { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
-import { db } from '@/lib/firebase';
+import { db, messaging } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion } from 'firebase/firestore';
 
 function handleServiceError(e: any): string {
@@ -213,6 +213,12 @@ export async function saveFcmToken(uid: string, token: string) {
         const userDoc = await getDoc(userRef);
 
         if (userDoc.exists()) {
+            // Check if tokens field exists and is an array
+            const tokens = userDoc.data().fcmTokens;
+            if (Array.isArray(tokens) && tokens.includes(token)) {
+                // Token already exists, do nothing
+                return { success: true, message: 'Token already exists.' };
+            }
             await updateDoc(userRef, {
                 fcmTokens: arrayUnion(token)
             });
