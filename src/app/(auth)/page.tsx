@@ -16,9 +16,9 @@ export default function AuthRedirectPage() {
 
   if (user) {
     redirect('/dashboard');
-  } else {
-    redirect('/');
-  }
+  } 
 
+  // If not loading and no user, the parent layout will render the login page.
+  // We should not redirect here to avoid loops.
   return null;
 }
