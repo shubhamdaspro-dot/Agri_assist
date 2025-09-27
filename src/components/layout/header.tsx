@@ -101,10 +101,6 @@ export default function Header() {
       </div>
 
       <div className="ml-auto flex items-center gap-2 sm:gap-4">
-        <Button variant="ghost" size="icon">
-          <BarChart2 className="h-5 w-5" />
-          <span className="sr-only">Analytics</span>
-        </Button>
         <Button variant="ghost" size="icon" className="relative" onClick={handleNotificationClick}>
           <Bell className="h-5 w-5" />
           {!hasNotificationPermission && (
