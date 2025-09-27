@@ -2,24 +2,21 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Cloud, Droplets, Leaf, ShieldCheck, Sprout, Tractor, Wind, MapPin, Loader2, AlertCircle } from "lucide-react";
+import { Cloud, Droplets, Leaf, ShieldCheck, Sprout, Tractor, Wind, MapPin, Loader2, AlertCircle, Newspaper } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/hooks/use-language";
 import { useEffect, useState } from "react";
 import { useIsClient } from "@/hooks/use-is-client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { getLatestNews } from "@/lib/actions";
+import type { NewsArticle } from "@/lib/types";
 
 const actionItems = [
   { href: '/recommendations', labelKey: 'dashboard.crop_advice', icon: Sprout, color: 'bg-green-500' },
   { href: '/recommendations', labelKey: 'dashboard.soil_analysis', icon: Leaf, color: 'bg-blue-500' },
   { href: '/news', labelKey: 'dashboard.market_prices', icon: Tractor, color: 'bg-amber-500' },
   { href: '/disease-prevention', labelKey: 'dashboard.disease_check', icon: ShieldCheck, color: 'bg-teal-500' },
-];
-
-const cropStatus = [
-  { name: 'Rice', stage: 'Flowering', days: 45, status: 'Healthy', icon: Sprout },
-  { name: 'Sugarcane', stage: 'Tillering', days: 90, status: 'Healthy', icon: Sprout },
 ];
 
 type WeatherData = {
@@ -30,10 +27,12 @@ type WeatherData = {
 };
 
 export default function DashboardPage() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
   const [isLoadingWeather, setIsLoadingWeather] = useState(true);
+  const [news, setNews] = useState<NewsArticle[]>([]);
+  const [isLoadingNews, setIsLoadingNews] = useState(true);
   const isClient = useIsClient();
 
   useEffect(() => {
@@ -76,6 +75,20 @@ export default function DashboardPage() {
       }
     );
   }, [isClient, t]);
+
+  useEffect(() => {
+    async function loadNews() {
+      setIsLoadingNews(true);
+      const result = await getLatestNews(language);
+      if (result.success && result.data) {
+        // Show only top 2 news on dashboard
+        setNews(result.data.articles.slice(0, 2));
+      }
+      setIsLoadingNews(false);
+    }
+    loadNews();
+  }, [language]);
+
 
   const getWeatherDescription = (code: number) => {
     // Simplified mapping from WMO weather interpretation codes
@@ -144,6 +157,50 @@ export default function DashboardPage() {
     return null;
   }
 
+  const renderNewsContent = () => {
+    if (isLoadingNews) {
+      return (
+        <CardContent className="space-y-4">
+            <div className="flex items-start space-x-4">
+                <Skeleton className="h-10 w-10 mt-1" />
+                <div className="space-y-2 flex-1">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                </div>
+            </div>
+             <div className="flex items-start space-x-4">
+                <Skeleton className="h-10 w-10 mt-1" />
+                <div className="space-y-2 flex-1">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
+                </div>
+            </div>
+        </CardContent>
+      );
+    }
+
+    return (
+        <CardContent className="space-y-4">
+          {news.map(article => (
+            <div key={article.id} className="flex items-start p-3 bg-gray-50 rounded-lg">
+                <div className="p-3 bg-blue-100 rounded-full mr-4">
+                    <Newspaper className="w-6 h-6 text-blue-600" />
+                </div>
+                <div className="flex-grow">
+                    <p className="font-bold text-md leading-tight">{article.headline}</p>
+                    <p className="text-sm text-muted-foreground">{article.date}</p>
+                </div>
+            </div>
+          ))}
+          <Button asChild variant="link" className="w-full">
+            <Link href="/news">
+                {t('dashboard.read_more_news')}
+            </Link>
+          </Button>
+        </CardContent>
+    )
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <Card className="w-full">
@@ -166,25 +223,9 @@ export default function DashboardPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>{t('dashboard.current_crop_status')}</CardTitle>
+          <CardTitle>{t('dashboard.latest_news_title')}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
-          {cropStatus.map(crop => (
-            <div key={crop.name} className="flex items-center p-3 bg-gray-50 rounded-lg">
-                <div className="p-3 bg-green-100 rounded-full mr-4">
-                    <crop.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div className="flex-grow">
-                    <p className="font-bold text-lg">{crop.name}</p>
-                    <p className="text-sm text-muted-foreground">{t('dashboard.growth_stage')}: {crop.stage}</p>
-                </div>
-                <div className="text-right">
-                    <Badge className={crop.status === 'Healthy' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>{crop.status}</Badge>
-                    <p className="text-sm text-muted-foreground mt-1">{crop.days} {t('dashboard.days')}</p>
-                </div>
-            </div>
-          ))}
-        </CardContent>
+        {renderNewsContent()}
       </Card>
     </div>
   );

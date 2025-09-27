@@ -30,7 +30,8 @@
         "card_news_heading": "సమాచారం తెలుసుకోండి",
         "card_news_subheading": "తాజా వ్యవసాయ వార్తలు మరియు విధానాలు.",
         "read_news_button": "వార్తలు చదవండి",
-        "latest_news_title": "తాజా వార్తలు"
+        "latest_news_title": "తాజా వార్తలు",
+        "read_more_news": "మరిన్ని వార్తలు చదవండి"
     },
     "recommendations": {
         "page_title": "AI పంట & ఉత్పత్తి సిఫార్సులు",
@@ -118,26 +119,26 @@
         "voice_male": "పురుషుడు"
     },
     "auth": {
-        "login_title": "లాగిన్",
-        "login_subtitle": "కొనసాగడానికి మీ ఫోన్ నంబర్‌తో లాగిన్ చేయండి.",
+        "login_title": "అగ్రిఅసిస్ట్‌లో సైన్ ఇన్ చేయండి",
+        "login_subtitle": "ఒక-సారి కోడ్ స్వీకరించడానికి మీ ఫోన్ నంబర్‌ను నమోదు చేయండి.",
         "phone_label": "ఫోను నంబరు",
-        "send_otp_button": "OTP పంపండి",
-        "otp_label": "OTP",
-        "verify_otp_button": "OTPని ధృవీకరించండి",
-        "change_number_button": "నంబర్‌ను మార్చండి",
+        "send_otp_button": "కోడ్ పంపండి",
+        "otp_label": "ఒక-సారి కోడ్",
+        "verify_otp_button": "సైన్ ఇన్ చేయండి",
+        "change_number_button": "వేరే నంబర్‌ను ఉపయోగించండి",
         "sign_out_button": "సైన్ అవుట్",
         "toast_phone_required_title": "ఫోన్ నంబర్ అవసరం",
         "toast_phone_required_description": "దయచేసి చెల్లుబాటు అయ్యే ఫోన్ నంబర్‌ను నమోదు చేయండి.",
-        "toast_otp_sent_title": "OTP పంపబడింది",
-        "toast_otp_sent_description": "{phoneNumber}కు ఒక OTP పంపబడింది.",
-        "toast_otp_failed_title": "OTP పంపడంలో విఫలమైంది",
-        "toast_otp_required_title": "OTP అవసరం",
-        "toast_otp_required_description": "దయచేసి మీరు అందుకున్న OTPని నమోదు చేయండి.",
-        "toast_otp_not_sent_title": "OTP పంపబడలేదు",
-        "toast_otp_not_sent_description": "దయచేసి మొదట OTPని అభ్యర్థించండి.",
-        "toast_login_success_title": "లాగిన్ విజయవంతమైంది",
-        "toast_login_success_description": "మీరు విజయవంతంగా లాగిన్ అయ్యారు.",
-        "toast_invalid_otp_title": "చెల్లని OTP"
+        "toast_otp_sent_title": "కోడ్ పంపబడింది",
+        "toast_otp_sent_description": "{phoneNumber}కు ఒక-సారి కోడ్ పంపబడింది.",
+        "toast_otp_failed_title": "కోడ్ పంపడంలో విఫలమైంది",
+        "toast_otp_required_title": "కోడ్ అవసరం",
+        "toast_otp_required_description": "దయచేసి మీరు అందుకున్న కోడ్‌ను నమోదు చేయండి.",
+        "toast_otp_not_sent_title": "కోడ్ పంపబడలేదు",
+        "toast_otp_not_sent_description": "దయచేసి మొదట కోడ్‌ను అభ్యర్థించండి.",
+        "toast_login_success_title": "సైన్ ఇన్ విజయవంతమైంది",
+        "toast_login_success_description": "అగ్రిఅసిస్ట్‌కు స్వాగతం!",
+        "toast_invalid_otp_title": "చెల్లని కోడ్"
     },
     "disease_prevention": {
         "page_title": "పంట వ్యాధి నిర్ధారణ & నివారణ",

@@ -43,7 +43,8 @@
         "card_news_heading": "Stay Informed",
         "card_news_subheading": "Latest agricultural news and policies.",
         "read_news_button": "Read News",
-        "latest_news_title": "Latest News"
+        "latest_news_title": "Latest News",
+        "read_more_news": "Read more news"
     },
     "recommendations": {
         "page_title": "AI Crop & Product Recommendations",
@@ -134,7 +135,7 @@
         "voice_male": "Male"
     },
     "auth": {
-        "login_title": "Sign In to AgriWise",
+        "login_title": "Sign In to AgriAssist",
         "login_subtitle": "Enter your phone number to receive a one-time code.",
         "phone_label": "Phone Number",
         "send_otp_button": "Send Code",
@@ -152,7 +153,7 @@
         "toast_otp_not_sent_title": "Code Not Sent",
         "toast_otp_not_sent_description": "Please request a code first.",
         "toast_login_success_title": "Sign In Successful",
-        "toast_login_success_description": "Welcome to AgriWise!",
+        "toast_login_success_description": "Welcome to AgriAssist!",
         "toast_invalid_otp_title": "Invalid Code"
     },
     "disease_prevention": {

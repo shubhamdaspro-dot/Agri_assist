@@ -30,7 +30,8 @@
         "card_news_heading": "অবগত থাকুন",
         "card_news_subheading": "সর্বশেষ কৃষি সংবাদ এবং নীতি।",
         "read_news_button": "খবর পড়ুন",
-        "latest_news_title": "সর্বশেষ খবর"
+        "latest_news_title": "সর্বশেষ খবর",
+        "read_more_news": "আরও খবর পড়ুন"
     },
     "recommendations": {
         "page_title": "এআই ফসল ও পণ্যের সুপারিশ",
@@ -118,26 +119,26 @@
         "voice_male": "পুরুষ"
     },
     "auth": {
-        "login_title": "লগইন",
-        "login_subtitle": "চালিয়ে যেতে আপনার ফোন নম্বর দিয়ে লগইন করুন।",
+        "login_title": "এগ্রিঅ্যাসিস্টে সাইন ইন করুন",
+        "login_subtitle": "একটি ওয়ান-টাইম কোড পেতে আপনার ফোন নম্বর লিখুন।",
         "phone_label": "ফোন নম্বর",
-        "send_otp_button": "ওটিপি পাঠান",
-        "otp_label": "ওটিপি",
-        "verify_otp_button": "ওটিপি যাচাই করুন",
-        "change_number_button": "নম্বর পরিবর্তন করুন",
+        "send_otp_button": "কোড পাঠান",
+        "otp_label": "ওয়ান-টাইম কোড",
+        "verify_otp_button": "সাইন ইন করুন",
+        "change_number_button": "অন্য নম্বর ব্যবহার করুন",
         "sign_out_button": "সাইন আউট",
-        "toast_phone_required_title": "ফোন নম্বর आवश्यक",
+        "toast_phone_required_title": "ফোন নম্বর প্রয়োজন",
         "toast_phone_required_description": "অনুগ্রহ করে একটি বৈধ ফোন নম্বর লিখুন।",
-        "toast_otp_sent_title": "ওটিপি পাঠানো হয়েছে",
-        "toast_otp_sent_description": "একটি ওটিপি {phoneNumber} নম্বরে পাঠানো হয়েছে।",
-        "toast_otp_failed_title": "ওটিপি পাঠাতে ব্যর্থ",
-        "toast_otp_required_title": "ওটিপি প্রয়োজন",
-        "toast_otp_required_description": "অনুগ্রহ করে প্রাপ্ত ওটিপি লিখুন।",
-        "toast_otp_not_sent_title": "ওটিপি পাঠানো হয়নি",
-        "toast_otp_not_sent_description": "প্রথমে একটি ওটিপি অনুরোধ করুন।",
-        "toast_login_success_title": "লগইন সফল",
-        "toast_login_success_description": "আপনি সফলভাবে লগইন করেছেন।",
-        "toast_invalid_otp_title": "অবৈধ ওটিপি"
+        "toast_otp_sent_title": "কোড পাঠানো হয়েছে",
+        "toast_otp_sent_description": "{phoneNumber} নম্বরে একটি ওয়ান-টাইম কোড পাঠানো হয়েছে।",
+        "toast_otp_failed_title": "কোড পাঠাতে ব্যর্থ",
+        "toast_otp_required_title": "কোড প্রয়োজন",
+        "toast_otp_required_description": "অনুগ্রহ করে প্রাপ্ত কোডটি লিখুন।",
+        "toast_otp_not_sent_title": "কোড পাঠানো হয়নি",
+        "toast_otp_not_sent_description": "প্রথমে একটি কোড অনুরোধ করুন।",
+        "toast_login_success_title": "সাইন ইন সফল",
+        "toast_login_success_description": "এগ্রিঅ্যাসিস্টে স্বাগতম!",
+        "toast_invalid_otp_title": "অবৈধ কোড"
     },
     "disease_prevention": {
         "page_title": "ফসল রোগ নির্ণয় ও প্রতিরোধ",

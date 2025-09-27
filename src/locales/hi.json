@@ -30,7 +30,8 @@
         "card_news_heading": "सूचित रहें",
         "card_news_subheading": "नवीनतम कृषि समाचार और नीतियां।",
         "read_news_button": "समाचार पढ़ें",
-        "latest_news_title": "ताज़ा खबर"
+        "latest_news_title": "ताज़ा खबर",
+        "read_more_news": "और समाचार पढ़ें"
     },
     "recommendations": {
         "page_title": "AI फसल और उत्पाद सिफारिशें",
@@ -121,26 +122,26 @@
         "voice_male": "पुरुष"
     },
     "auth": {
-        "login_title": "लॉग इन करें",
-        "login_subtitle": "जारी रखने के लिए अपने फ़ोन नंबर से लॉग इन करें।",
+        "login_title": "एग्रीअसिस्ट में साइन इन करें",
+        "login_subtitle": "एक बार का कोड प्राप्त करने के लिए अपना फ़ोन नंबर दर्ज करें।",
         "phone_label": "फ़ोन नंबर",
-        "send_otp_button": "ओटीपी भेजें",
-        "otp_label": "ओटीपी",
-        "verify_otp_button": "ओटीपी सत्यापित करें",
-        "change_number_button": "नंबर बदलें",
+        "send_otp_button": "कोड भेजें",
+        "otp_label": "एक बार का कोड",
+        "verify_otp_button": "साइन इन करें",
+        "change_number_button": "एक अलग नंबर का उपयोग करें",
         "sign_out_button": "साइन आउट",
         "toast_phone_required_title": "फ़ोन नंबर आवश्यक है",
         "toast_phone_required_description": "कृपया एक वैध फ़ोन नंबर दर्ज करें।",
-        "toast_otp_sent_title": "ओटीपी भेजा गया",
-        "toast_otp_sent_description": "एक ओटीपी {phoneNumber} पर भेजा गया है।",
-        "toast_otp_failed_title": "ओटीपी भेजने में विफल",
-        "toast_otp_required_title": "ओटीपी आवश्यक है",
-        "toast_otp_required_description": "कृपया प्राप्त ओटीपी दर्ज करें।",
-        "toast_otp_not_sent_title": "ओटीपी नहीं भेजा गया",
-        "toast_otp_not_sent_description": "कृपया पहले एक ओटीपी का अनुरोध करें।",
-        "toast_login_success_title": "लॉगिन सफल",
-        "toast_login_success_description": "आप सफलतापूर्वक लॉग इन हो गए हैं।",
-        "toast_invalid_otp_title": "अमान्य ओटीपी"
+        "toast_otp_sent_title": "कोड भेजा गया",
+        "toast_otp_sent_description": "{phoneNumber} पर एक बार का कोड भेजा गया है।",
+        "toast_otp_failed_title": "कोड भेजने में विफल",
+        "toast_otp_required_title": "कोड आवश्यक है",
+        "toast_otp_required_description": "कृपया प्राप्त कोड दर्ज करें।",
+        "toast_otp_not_sent_title": "कोड नहीं भेजा गया",
+        "toast_otp_not_sent_description": "कृपया पहले एक कोड का अनुरोध करें।",
+        "toast_login_success_title": "साइन इन सफल",
+        "toast_login_success_description": "एग्रीअसिस्ट में आपका स्वागत है!",
+        "toast_invalid_otp_title": "अमान्य कोड"
     },
     "disease_prevention": {
         "page_title": "फसल रोग निदान और रोकथाम",

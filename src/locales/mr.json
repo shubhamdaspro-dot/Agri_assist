@@ -30,7 +30,8 @@
         "card_news_heading": "माहिती मिळवा",
         "card_news_subheading": "नवीनतम कृषी बातम्या आणि धोरणे.",
         "read_news_button": "बातम्या वाचा",
-        "latest_news_title": "ताज्या बातम्या"
+        "latest_news_title": "ताज्या बातम्या",
+        "read_more_news": "अधिक बातम्या वाचा"
     },
     "recommendations": {
         "page_title": "AI पीक आणि उत्पादन शिफारसी",
@@ -118,26 +119,26 @@
         "voice_male": "पुरुष"
     },
     "auth": {
-        "login_title": "लॉगिन",
-        "login_subtitle": "पुढे जाण्यासाठी तुमच्या फोन नंबरने लॉगिन करा.",
+        "login_title": "ऍग्रीअसिस्टमध्ये साइन इन करा",
+        "login_subtitle": "एक-वेळचा कोड प्राप्त करण्यासाठी तुमचा फोन नंबर प्रविष्ट करा.",
         "phone_label": "फोन नंबर",
-        "send_otp_button": "OTP पाठवा",
-        "otp_label": "OTP",
-        "verify_otp_button": "OTP सत्यापित करा",
-        "change_number_button": "नंबर बदला",
+        "send_otp_button": "कोड पाठवा",
+        "otp_label": "एक-वेळचा कोड",
+        "verify_otp_button": "साइन इन करा",
+        "change_number_button": "वेगळा नंबर वापरा",
         "sign_out_button": "साइन आउट",
         "toast_phone_required_title": "फोन नंबर आवश्यक",
         "toast_phone_required_description": "कृपया वैध फोन नंबर प्रविष्ट करा.",
-        "toast_otp_sent_title": "OTP पाठवला",
-        "toast_otp_sent_description": "{phoneNumber} वर OTP पाठवला आहे.",
-        "toast_otp_failed_title": "OTP पाठवण्यात अयशस्वी",
-        "toast_otp_required_title": "OTP आवश्यक",
-        "toast_otp_required_description": "कृपया प्राप्त केलेला OTP प्रविष्ट करा.",
-        "toast_otp_not_sent_title": "OTP पाठवला नाही",
-        "toast_otp_not_sent_description": "कृपया प्रथम OTP ची विनंती करा.",
-        "toast_login_success_title": "लॉगिन यशस्वी",
-        "toast_login_success_description": "तुम्ही यशस्वीरित्या लॉगिन केले आहे.",
-        "toast_invalid_otp_title": "अवैध OTP"
+        "toast_otp_sent_title": "कोड पाठवला",
+        "toast_otp_sent_description": "{phoneNumber} वर एक-वेळचा कोड पाठवला आहे.",
+        "toast_otp_failed_title": "कोड पाठवण्यात अयशस्वी",
+        "toast_otp_required_title": "कोड आवश्यक",
+        "toast_otp_required_description": "कृपया प्राप्त केलेला कोड प्रविष्ट करा.",
+        "toast_otp_not_sent_title": "कोड पाठवला नाही",
+        "toast_otp_not_sent_description": "कृपया प्रथम कोडची विनंती करा.",
+        "toast_login_success_title": "साइन इन यशस्वी",
+        "toast_login_success_description": "ऍग्रीअसिस्टमध्ये आपले स्वागत आहे!",
+        "toast_invalid_otp_title": "अवैध कोड"
     },
     "disease_prevention": {
         "page_title": "पीक रोग निदान आणि प्रतिबंध",

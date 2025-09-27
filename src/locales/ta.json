@@ -30,7 +30,8 @@
         "card_news_heading": "தகவலறிந்து இருங்கள்",
         "card_news_subheading": "சமீபத்திய விவசாய செய்திகள் மற்றும் கொள்கைகள்.",
         "read_news_button": "செய்திகளைப் படிக்கவும்",
-        "latest_news_title": "சமீபத்திய செய்திகள்"
+        "latest_news_title": "சமீபத்திய செய்திகள்",
+        "read_more_news": "மேலும் செய்திகளைப் படிக்கவும்"
     },
     "recommendations": {
         "page_title": "AI பயிர் & தயாரிப்பு பரிந்துரைகள்",
@@ -118,26 +119,26 @@
         "voice_male": "ஆண்"
     },
     "auth": {
-        "login_title": "உள்நுழை",
-        "login_subtitle": "தொடர உங்கள் தொலைபேசி எண்ணுடன் உள்நுழையவும்.",
+        "login_title": "அக்ரிஅசிஸ்டில் உள்நுழைக",
+        "login_subtitle": "ஒரு முறை குறியீட்டைப் பெற உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்.",
         "phone_label": "தொலைபேசி எண்",
-        "send_otp_button": "OTP அனுப்பு",
-        "otp_label": "OTP",
-        "verify_otp_button": "OTP ஐ சரிபார்க்கவும்",
-        "change_number_button": "எண்ணை மாற்று",
+        "send_otp_button": "குறியீட்டை அனுப்பு",
+        "otp_label": "ஒரு முறை குறியீடு",
+        "verify_otp_button": "உள்நுழைக",
+        "change_number_button": "வேறு எண்ணைப் பயன்படுத்தவும்",
         "sign_out_button": "வெளியேறு",
         "toast_phone_required_title": "தொலைபேசி எண் தேவை",
         "toast_phone_required_description": "சரியான தொலைபேசி எண்ணை உள்ளிடவும்.",
-        "toast_otp_sent_title": "OTP அனுப்பப்பட்டது",
-        "toast_otp_sent_description": "{phoneNumber} க்கு OTP அனுப்பப்பட்டது.",
-        "toast_otp_failed_title": "OTP அனுப்ப முடியவில்லை",
-        "toast_otp_required_title": "OTP தேவை",
-        "toast_otp_required_description": "நீங்கள் பெற்ற OTP ஐ உள்ளிடவும்.",
-        "toast_otp_not_sent_title": "OTP அனுப்பப்படவில்லை",
-        "toast_otp_not_sent_description": "முதலில் OTP ஐக் கோரவும்.",
+        "toast_otp_sent_title": "குறியீடு அனுப்பப்பட்டது",
+        "toast_otp_sent_description": "{phoneNumber} க்கு ஒரு முறை குறியீடு அனுப்பப்பட்டது.",
+        "toast_otp_failed_title": "குறியீட்டை அனுப்ப முடியவில்லை",
+        "toast_otp_required_title": "குறியீடு தேவை",
+        "toast_otp_required_description": "நீங்கள் பெற்ற குறியீட்டை உள்ளிடவும்.",
+        "toast_otp_not_sent_title": "குறியீடு அனுப்பப்படவில்லை",
+        "toast_otp_not_sent_description": "முதலில் ஒரு குறியீட்டைக் கோரவும்.",
         "toast_login_success_title": "உள்நுழைவு வெற்றி",
-        "toast_login_success_description": "நீங்கள் வெற்றிகரமாக உள்நுழைந்துவிட்டீர்கள்.",
-        "toast_invalid_otp_title": "தவறான OTP"
+        "toast_login_success_description": "அக்ரிஅसिஸ்டிற்கு வரவேற்கிறோம்!",
+        "toast_invalid_otp_title": "தவறான குறியீடு"
     },
     "disease_prevention": {
         "page_title": "பயிர் நோய் கண்டறிதல் மற்றும் தடுப்பு",
