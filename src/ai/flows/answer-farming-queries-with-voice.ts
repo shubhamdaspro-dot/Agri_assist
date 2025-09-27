@@ -25,6 +25,7 @@ const AnswerFarmingQueriesWithVoiceOutputSchema = z.object({
   textResponse: z.string().describe('The transcribed text of the AI response.'),
   spokenResponseDataUri: z
     .string()
+    .optional()
     .describe(
       'The AI response as a voice recording, as a data URI that must include a MIME type and use Base64 encoding. Expected format: \'data:<mimetype>;base64,<encoded_data>\'.'
     ),
@@ -72,29 +73,36 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
       throw new Error('Failed to generate text response.');
     }
 
-    // Convert the text response to speech
-    const {media} = await ai.generate({
-      model: 'googleai/gemini-2.5-flash-preview-tts',
-      config: {
-        responseModalities: ['AUDIO'],
-        speechConfig: {
-          voiceConfig: {
-            prebuiltVoiceConfig: {voiceName: 'Algenib'}, // Hardcoded to male voice
+    let spokenResponseDataUri: string | undefined;
+    try {
+        // Convert the text response to speech
+        const {media} = await ai.generate({
+          model: 'googleai/gemini-2.5-flash-preview-tts',
+          config: {
+            responseModalities: ['AUDIO'],
+            speechConfig: {
+              voiceConfig: {
+                prebuiltVoiceConfig: {voiceName: 'Algenib'}, // Hardcoded to male voice
+              },
+            },
           },
-        },
-      },
-      prompt: textResponse,
-    });
+          prompt: textResponse,
+        });
 
-    if (!media) {
-      throw new Error('no media returned');
+        if (media?.url) {
+            const audioBuffer = Buffer.from(
+              media.url.substring(media.url.indexOf(',') + 1),
+              'base64'
+            );
+            spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
+        } else {
+            console.warn('TTS service did not return audio media.');
+        }
+    } catch(ttsError: any) {
+        console.error("Text-to-speech generation failed, returning text only. Error:", ttsError.message);
+        // Do not re-throw, we can still return the text response.
     }
-    const audioBuffer = Buffer.from(
-      media.url.substring(media.url.indexOf(',') + 1),
-      'base64'
-    );
 
-    const spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
 
     return {textQuery: transcribedQuery, textResponse, spokenResponseDataUri};
   }
