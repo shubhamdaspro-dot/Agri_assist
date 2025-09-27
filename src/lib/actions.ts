@@ -77,7 +77,7 @@ export async function answerTextQueryWithVoice(
 ): Promise<{ success: boolean; textResponse?: string; spokenResponseDataUri?: string; error?: string }> {
   try {
     // 1. Get text response from LLM
-    const { text: textResponse } = await ai.generate({
+    const {text: textResponse} = await ai.generate({
       system: `You are an expert AI assistant for farmers named AgriAssist. You are friendly, helpful, and provide smooth, precise, and conversational answers. Your goal is to provide accurate, actionable information that is easy to understand.`,
       prompt: `Answer the following question: ${query}`,
     });
