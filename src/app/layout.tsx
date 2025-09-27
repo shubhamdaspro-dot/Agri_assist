@@ -3,10 +3,12 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { LanguageProvider } from '@/hooks/use-language';
 import { AuthProvider } from '@/hooks/use-auth';
+import AddToHomeScreen from '@/components/pwa/add-to-home-screen';
 
 export const metadata: Metadata = {
   title: 'AgriAssist',
   description: 'AI-powered assistance for modern farming.',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -23,12 +25,14 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         />
+        <meta name="theme-color" content="#4CAF50" />
       </head>
       <body className="font-body antialiased">
         <AuthProvider>
           <LanguageProvider>
             {children}
             <Toaster />
+            <AddToHomeScreen />
           </LanguageProvider>
         </AuthProvider>
       </body>
