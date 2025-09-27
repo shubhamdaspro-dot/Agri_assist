@@ -41,19 +41,24 @@ export default function AuthPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
-    // This check is to prevent the verifier from being created multiple times
-    if (!(window as any).recaptchaVerifier) {
-      (window as any).recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        'recaptcha-container',
-        {
-          size: 'invisible',
-          callback: (response: any) => {
-            // reCAPTCHA solved, allow signInWithPhoneNumber.
-          },
+    const initRecaptcha = () => {
+       if (!(window as any).recaptchaVerifier) {
+            (window as any).recaptchaVerifier = new RecaptchaVerifier(
+                auth,
+                'recaptcha-container',
+                {
+                    size: 'invisible',
+                    callback: (response: any) => {
+                        // reCAPTCHA solved, allow signInWithPhoneNumber.
+                    },
+                }
+            );
         }
-      );
-    }
+    };
+    // Delay initialization to ensure the container is in the DOM
+    const timeoutId = setTimeout(initRecaptcha, 100);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const handleSendOtp = async () => {
