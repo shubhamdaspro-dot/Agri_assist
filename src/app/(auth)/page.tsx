@@ -1,119 +1,12 @@
 'use client';
-import {useState, useEffect} from 'react';
-import {useRouter} from 'next/navigation';
-import {
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-  ConfirmationResult,
-} from 'firebase/auth';
-import {auth} from '@/lib/firebase';
-import {useAuth} from '@/hooks/use-auth';
-import {Button} from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {Input} from '@/components/ui/input';
-import {Label} from '@/components/ui/label';
-import {useToast} from '@/hooks/use-toast';
-import {Loader2} from 'lucide-react';
-import {useLanguage} from '@/hooks/use-language';
+import { redirect } from 'next/navigation';
+import { useAuth } from '@/hooks/use-auth';
+import { Loader2 } from 'lucide-react';
 
-export default function AuthPage() {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [otp, setOtp] = useState('');
-  const [confirmationResult, setConfirmationResult] =
-    useState<ConfirmationResult | null>(null);
-  const [loading, setLoading] = useState(false);
-  const {user, loading: authLoading} = useAuth();
-  const router = useRouter();
-  const {toast} = useToast();
-  const {t} = useLanguage();
+export default function AuthRedirectPage() {
+  const { user, loading } = useAuth();
 
-  useEffect(() => {
-    if (!authLoading && user) {
-      router.push('/dashboard');
-    }
-  }, [user, authLoading, router]);
-
-  useEffect(() => {
-    (window as any).recaptchaVerifier = new RecaptchaVerifier(
-      auth,
-      'recaptcha-container',
-      {
-        size: 'invisible',
-        callback: (response: any) => {},
-      }
-    );
-  }, []);
-
-  const handleSendOtp = async () => {
-    if (!phoneNumber) {
-      toast({
-        variant: 'destructive',
-        title: t('auth.toast_phone_required_title'),
-        description: t('auth.toast_phone_required_description'),
-      });
-      return;
-    }
-    setLoading(true);
-    try {
-      const appVerifier = (window as any).recaptchaVerifier;
-      const result = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
-      setConfirmationResult(result);
-      toast({
-        title: t('auth.toast_otp_sent_title'),
-        description: t('auth.toast_otp_sent_description', {phoneNumber}),
-      });
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: t('auth.toast_otp_failed_title'),
-        description: error.message,
-      });
-    }
-    setLoading(false);
-  };
-
-  const handleVerifyOtp = async () => {
-    if (!otp) {
-      toast({
-        variant: 'destructive',
-        title: t('auth.toast_otp_required_title'),
-        description: t('auth.toast_otp_required_description'),
-      });
-      return;
-    }
-    if (!confirmationResult) {
-      toast({
-        variant: 'destructive',
-        title: t('auth.toast_otp_not_sent_title'),
-        description: t('auth.toast_otp_not_sent_description'),
-      });
-      return;
-    }
-    setLoading(true);
-    try {
-      await confirmationResult.confirm(otp);
-      toast({
-        title: t('auth.toast_login_success_title'),
-        description: t('auth.toast_login_success_description'),
-      });
-      router.push('/dashboard');
-    } catch (error: any) {
-      toast({
-        variant: 'destructive',
-        title: t('auth.toast_invalid_otp_title'),
-        description: error.message,
-      });
-    }
-    setLoading(false);
-  };
-
-  if (authLoading || user) {
+  if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <Loader2 className="h-16 w-16 animate-spin text-primary" />
@@ -121,65 +14,11 @@ export default function AuthPage() {
     );
   }
 
-  return (
-    <Card className="mx-auto max-w-sm">
-      <CardHeader>
-        <CardTitle className="text-2xl">{t('auth.login_title')}</CardTitle>
-        <CardDescription>{t('auth.login_subtitle')}</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        {!confirmationResult ? (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="phone">{t('auth.phone_label')}</Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="+919876543210"
-                required
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-            <Button onClick={handleSendOtp} disabled={loading} className="w-full">
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {t('auth.send_otp_button')}
-            </Button>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="otp">{t('auth.otp_label')}</Label>
-              <Input
-                id="otp"
-                type="text"
-                required
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-              />
-            </div>
-            <Button
-              onClick={handleVerifyOtp}
-              disabled={loading}
-              className="w-full"
-            >
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              {t('auth.verify_otp_button')}
-            </Button>
-            <Button
-              variant="link"
-              className="w-full"
-              onClick={() => {
-                setConfirmationResult(null);
-                setOtp('');
-              }}
-            >
-              {t('auth.change_number_button')}
-            </Button>
-          </div>
-        )}
-        <div id="recaptcha-container"></div>
-      </CardContent>
-    </Card>
-  );
+  if (user) {
+    redirect('/dashboard');
+  } else {
+    redirect('/');
+  }
+
+  return null;
 }

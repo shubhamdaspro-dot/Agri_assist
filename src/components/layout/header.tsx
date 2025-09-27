@@ -3,29 +3,42 @@
 import { usePathname } from 'next/navigation';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { Languages } from 'lucide-react';
+import { Languages, LogOut } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
+import { auth } from '@/lib/firebase';
+import { signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/hooks/use-auth';
 
 function getTitleKey(path: string): string {
   if (path.includes('/products/')) {
     return 'sidebar.products';
   }
   const pathName = path.split('/').pop() || 'dashboard';
-   if (path === '/app' || path === '/') return 'sidebar.dashboard';
+   if (path === '/app' || path === '/(app)') return 'sidebar.dashboard';
   return `sidebar.${pathName}`;
 }
 
 export default function Header() {
   const pathname = usePathname();
   const { t, setLanguage } = useLanguage();
+  const { user } = useAuth();
+  const router = useRouter();
   const titleKey = getTitleKey(pathname);
   const title = t(titleKey);
+
+  const handleSignOut = async () => {
+    await signOut(auth);
+    router.push('/');
+  };
+
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:px-6">
@@ -46,6 +59,15 @@ export default function Header() {
             <DropdownMenuItem onClick={() => setLanguage('te')}>{t('header.telugu')}</DropdownMenuItem>
             <DropdownMenuItem onClick={() => setLanguage('mr')}>{t('header.marathi')}</DropdownMenuItem>
             <DropdownMenuItem onClick={() => setLanguage('ta')}>{t('header.tamil')}</DropdownMenuItem>
+            {user && (
+              <>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>{t('auth.sign_out_button')}</span>
+                </DropdownMenuItem>
+              </>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

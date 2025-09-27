@@ -10,6 +10,8 @@ import type { FetchLatestNewsOutput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
+import { db } from '@/lib/firebase';
+import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 
 
 export async function getCropRecommendations(
@@ -150,5 +152,28 @@ export async function getProfitabilityAnalysis(
   } catch (e: any) {
     console.error(e);
     return { success: false, data: null, error: e.message || 'An unknown error occurred while analyzing profitability.' };
+  }
+}
+
+const UserProfileSchema = z.object({
+  uid: z.string(),
+  phoneNumber: z.string(),
+});
+
+export async function createUserProfile(input: z.infer<typeof UserProfileSchema>) {
+  try {
+    const userRef = doc(db, 'users', input.uid);
+    const userDoc = await getDoc(userRef);
+
+    if (!userDoc.exists()) {
+      await setDoc(userRef, {
+        phoneNumber: input.phoneNumber,
+        createdAt: serverTimestamp(),
+      });
+    }
+    return { success: true };
+  } catch (e: any) {
+    console.error('Error creating user profile:', e);
+    return { success: false, error: e.message };
   }
 }
