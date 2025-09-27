@@ -142,70 +142,87 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
-        <Card className="mx-auto max-w-sm w-full">
-        <CardHeader className="text-center">
-            <div className="mx-auto bg-primary p-3 rounded-full w-fit mb-4">
-                <Sprout className="h-8 w-8 text-primary-foreground" />
+    <main className="flex min-h-screen w-full items-center justify-center bg-background">
+      <div className="w-full max-w-md space-y-8 px-4 text-center">
+        <div className="flex justify-center">
+            <Sprout className="h-16 w-16 text-primary" />
+        </div>
+        <h1 className="text-4xl font-bold font-headline">{t('auth.login_title')}</h1>
+        <p className="text-muted-foreground">{t('auth.login_subtitle')}</p>
+
+        {!confirmationResult ? (
+          <form
+            className="space-y-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSendOtp();
+            }}
+          >
+            <div className="relative">
+              <Input
+                id="phone"
+                type="tel"
+                placeholder={t('auth.phone_label')}
+                required
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                className="h-12 text-center"
+              />
             </div>
-            <CardTitle className="text-2xl">{t('auth.login_title')}</CardTitle>
-            <CardDescription>{t('auth.login_subtitle')}</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-            {!confirmationResult ? (
-            <div className="space-y-4">
-                <div className="space-y-2">
-                <Label htmlFor="phone">{t('auth.phone_label')}</Label>
-                <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+91 98765 43210"
-                    required
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-                </div>
-                <Button onClick={handleSendOtp} disabled={loading} className="w-full">
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {t('auth.send_otp_button')}
-                </Button>
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12"
+            >
+              {loading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : null}
+              {t('auth.send_otp_button')}
+            </Button>
+          </form>
+        ) : (
+          <form
+            className="space-y-4"
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleVerifyOtp();
+            }}
+          >
+            <div className="relative">
+              <Input
+                id="otp"
+                type="text"
+                required
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                placeholder={t('auth.otp_label')}
+                className="h-12 text-center"
+              />
             </div>
-            ) : (
-            <div className="space-y-4">
-                <div className="space-y-2">
-                <Label htmlFor="otp">{t('auth.otp_label')}</Label>
-                <Input
-                    id="otp"
-                    type="text"
-                    required
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    placeholder="Enter the 6-digit code"
-                />
-                </div>
-                <Button
-                onClick={handleVerifyOtp}
-                disabled={loading}
-                className="w-full"
-                >
-                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {t('auth.verify_otp_button')}
-                </Button>
-                <Button
-                variant="link"
-                className="w-full"
-                onClick={() => {
-                    setConfirmationResult(null);
-                    setOtp('');
-                }}
-                >
-                {t('auth.change_number_button')}
-                </Button>
-            </div>
-            )}
-            <div id="recaptcha-container"></div>
-        </CardContent>
-        </Card>
-    </div>
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full h-12"
+            >
+              {loading ? (
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              ) : null}
+              {t('auth.verify_otp_button')}
+            </Button>
+            <Button
+              variant="link"
+              type="button"
+              onClick={() => {
+                setConfirmationResult(null);
+                setOtp('');
+              }}
+            >
+              {t('auth.change_number_button')}
+            </Button>
+          </form>
+        )}
+        <div id="recaptcha-container"></div>
+      </div>
+    </main>
   );
 }
