@@ -13,6 +13,12 @@ import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropPro
 import { db } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 
+function handleServiceError(e: any): string {
+    if (e.message && e.message.includes('503')) {
+        return 'The AI service is temporarily unavailable. Please try again in a few moments.';
+    }
+    return e.message || 'An unknown error occurred.';
+}
 
 export async function getCropRecommendations(
   input: GenerateCropRecommendationsInput
@@ -22,7 +28,7 @@ export async function getCropRecommendations(
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
-    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+    return { success: false, data: null, error: handleServiceError(e) };
   }
 }
 
@@ -34,7 +40,7 @@ export async function analyzeSoilFromPhotoAction(
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
-    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+    return { success: false, data: null, error: handleServiceError(e) };
   }
 }
 
@@ -109,7 +115,7 @@ export async function answerTextQueryWithVoice(
     return { success: true, textResponse, spokenResponseDataUri };
   } catch (e: any) {
     console.error(e);
-    return { success: false, error: e.message || 'An unknown error occurred while processing your request.' };
+    return { success: false, error: handleServiceError(e) };
   }
 }
 
@@ -121,7 +127,7 @@ export async function answerVoiceQuery(
         return { success: true, ...result };
     } catch (e: any) {
         console.error(e);
-        return { success: false, error: e.message || 'An unknown error occurred while processing your request.' };
+        return { success: false, error: handleServiceError(e) };
     }
 }
 
@@ -133,7 +139,7 @@ export async function getLatestNews(
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
-    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+    return { success: false, data: null, error: handleServiceError(e) };
   }
 }
 
@@ -145,7 +151,7 @@ export async function getDiseaseDiagnosis(
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
-    return { success: false, data: null, error: e.message || 'An unknown error occurred.' };
+    return { success: false, data: null, error: handleServiceError(e) };
   }
 }
 
@@ -157,7 +163,7 @@ export async function getProfitabilityAnalysis(
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
-    return { success: false, data: null, error: e.message || 'An unknown error occurred while analyzing profitability.' };
+    return { success: false, data: null, error: handleServiceError(e) };
   }
 }
 
