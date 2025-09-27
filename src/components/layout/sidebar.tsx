@@ -102,7 +102,7 @@ export default function AppSidebar() {
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip={t('sidebar.github')}>
-                <Link href="https://github.com/Firebase-Studio-Apps/Agri_assist" target="_blank">
+                <Link href="https://github.com/shubhamdaspro-dot/Agri_assist" target="_blank">
                   <Github />
                   <span>{t('sidebar.github')}</span>
                 </Link>
