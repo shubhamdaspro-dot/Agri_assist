@@ -14,7 +14,7 @@ import type { NewsArticle } from "@/lib/types";
 
 const actionItems = [
   { href: '/recommendations', labelKey: 'dashboard.crop_advice', icon: Sprout, color: 'bg-green-500' },
-  { href: '/recommendations', labelKey: 'dashboard.soil_analysis', icon: Leaf, color: 'bg-blue-500' },
+  { href: '/soil-analysis', labelKey: 'dashboard.soil_analysis', icon: Leaf, color: 'bg-blue-500' },
   { href: '/news', labelKey: 'dashboard.market_prices', icon: Tractor, color: 'bg-amber-500' },
   { href: '/disease-prevention', labelKey: 'dashboard.disease_check', icon: ShieldCheck, color: 'bg-teal-500' },
 ];

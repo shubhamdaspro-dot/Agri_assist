@@ -2,6 +2,7 @@
     "sidebar": {
         "dashboard": "डैशबोर्ड",
         "recommendations": "सिफारिशें",
+        "soil_analysis": "मृदा विश्लेषण",
         "news": "समाचार",
         "loans": "ऋण",
         "help": "मदद",
@@ -166,5 +167,23 @@
         "results_no_info_title": "कोई जानकारी नहीं मिली",
         "results_no_info_description": "इस बीमारी के लिए कोई रोकथाम या उपचार की जानकारी नहीं मिली।",
         "new_diagnosis_button": "नया निदान शुरू करें"
+    },
+    "soil_analysis": {
+        "page_title": "मृदा स्वास्थ्य विश्लेषण",
+        "page_subtitle": "विस्तृत विश्लेषण के लिए अपनी मिट्टी के रासायनिक स्तर दर्ज करें या परीक्षण के लिए एक प्रयोगशाला खोजें।",
+        "form_title": "मृदा डेटा दर्ज करें",
+        "form_subtitle": "अपनी मिट्टी की रासायनिक संरचना प्रदान करें।",
+        "nitrogen_label": "नाइट्रोजन (N)",
+        "nitrogen_placeholder": "उदा., 25 पीपीएम",
+        "phosphorus_label": "फॉस्फोरस (P)",
+        "phosphorus_placeholder": "उदा., 15 पीपीएम",
+        "potassium_label": "पोटेशियम (K)",
+        "potassium_placeholder": "उदा., 150 पीपीएम",
+        "ph_label": "मृदा पीएच",
+        "ph_placeholder": "उदा., 6.8",
+        "get_analysis_button": "मृदा विश्लेषण प्राप्त करें",
+        "unknown_levels_title": "क्या आप अपनी मिट्टी का स्तर नहीं जानते?",
+        "unknown_levels_description": "एक सटीक विश्लेषण के लिए, अपनी मिट्टी का परीक्षण करवाना सबसे अच्छा है। सटीक माप प्राप्त करने के लिए एक स्थानीय मृदा परीक्षण प्रयोगशाला खोजें।",
+        "find_lab_button": "अपने आस-पास एक परीक्षण प्रयोगशाला खोजें"
     }
 }

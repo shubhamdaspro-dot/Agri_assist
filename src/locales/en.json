@@ -2,6 +2,7 @@
     "sidebar": {
         "dashboard": "Dashboard",
         "recommendations": "Crop Advice",
+        "soil_analysis": "Soil Analysis",
         "news": "News",
         "loans": "Loans",
         "help": "Help",
@@ -179,5 +180,23 @@
         "results_no_info_title": "No Information Found",
         "results_no_info_description": "No prevention or treatment information could be found for this disease.",
         "new_diagnosis_button": "Start New Diagnosis"
+    },
+    "soil_analysis": {
+        "page_title": "Soil Health Analysis",
+        "page_subtitle": "Enter your soil's chemical levels for a detailed analysis or find a lab to get tested.",
+        "form_title": "Enter Soil Data",
+        "form_subtitle": "Provide the chemical composition of your soil.",
+        "nitrogen_label": "Nitrogen (N)",
+        "nitrogen_placeholder": "e.g., 25 ppm",
+        "phosphorus_label": "Phosphorus (P)",
+        "phosphorus_placeholder": "e.g., 15 ppm",
+        "potassium_label": "Potassium (K)",
+        "potassium_placeholder": "e.g., 150 ppm",
+        "ph_label": "Soil pH",
+        "ph_placeholder": "e.g., 6.8",
+        "get_analysis_button": "Get Soil Analysis",
+        "unknown_levels_title": "Don't Know Your Soil Levels?",
+        "unknown_levels_description": "For an accurate analysis, it's best to get your soil tested. Find a local soil testing laboratory to get precise measurements.",
+        "find_lab_button": "Find a Testing Lab Near You"
     }
 }

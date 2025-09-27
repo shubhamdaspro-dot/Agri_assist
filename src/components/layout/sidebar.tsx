@@ -18,6 +18,7 @@ import {
   MessageCircle,
   ShieldAlert,
   Sprout,
+  TestTube,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -28,6 +29,7 @@ import { useAuth } from '@/hooks/use-auth';
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
   { href: '/recommendations', icon: Leaf, labelKey: 'sidebar.recommendations' },
+  { href: '/soil-analysis', icon: TestTube, labelKey: 'sidebar.soil_analysis' },
   { href: '/disease-prevention', icon: ShieldAlert, labelKey: 'sidebar.disease_prevention' },
   { href: '/news', icon: Newspaper, labelKey: 'sidebar.news' },
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },

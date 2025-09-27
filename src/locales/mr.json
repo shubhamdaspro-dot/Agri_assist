@@ -2,6 +2,7 @@
     "sidebar": {
         "dashboard": "डॅशबोर्ड",
         "recommendations": "शिफारसी",
+        "soil_analysis": "माती विश्लेषण",
         "news": "बातम्या",
         "loans": "कर्ज",
         "help": "मदत",
@@ -163,5 +164,23 @@
         "results_no_info_title": "माहिती आढळली नाही",
         "results_no_info_description": "या रोगासाठी कोणतीही प्रतिबंध किंवा उपचार माहिती आढळली नाही.",
         "new_diagnosis_button": "नवीन निदान सुरू करा"
+    },
+    "soil_analysis": {
+        "page_title": "माती आरोग्य विश्लेषण",
+        "page_subtitle": "तपशीलवार विश्लेषणासाठी तुमच्या मातीचे रासायनिक स्तर प्रविष्ट करा किंवा चाचणीसाठी प्रयोगशाळा शोधा.",
+        "form_title": "माती डेटा प्रविष्ट करा",
+        "form_subtitle": "तुमच्या मातीची रासायनिक रचना प्रदान करा.",
+        "nitrogen_label": "नायट्रोजन (N)",
+        "nitrogen_placeholder": "उदा., 25 पीपीएम",
+        "phosphorus_label": "फॉस्फरस (P)",
+        "phosphorus_placeholder": "उदा., 15 पीपीएम",
+        "potassium_label": "पोटॅशियम (K)",
+        "potassium_placeholder": "उदा., 150 पीपीएम",
+        "ph_label": "मातीचा पीएच",
+        "ph_placeholder": "उदा., 6.8",
+        "get_analysis_button": "माती विश्लेषण मिळवा",
+        "unknown_levels_title": "तुमच्या मातीची पातळी माहित नाही?",
+        "unknown_levels_description": "अचूक विश्लेषणासाठी, तुमच्या मातीची चाचणी घेणे सर्वोत्तम आहे. अचूक मोजमाप मिळविण्यासाठी स्थानिक माती चाचणी प्रयोगशाळा शोधा.",
+        "find_lab_button": "तुमच्या जवळची चाचणी प्रयोगशाळा शोधा"
     }
 }

@@ -2,6 +2,7 @@
     "sidebar": {
         "dashboard": "డాష్‌బోర్డ్",
         "recommendations": "సిఫార్సులు",
+        "soil_analysis": "నేల విశ్లేషణ",
         "news": "వార్తలు",
         "loans": "రుణాలు",
         "help": "సహాయం",
@@ -163,5 +164,23 @@
         "results_no_info_title": "సమాచారం కనుగొనబడలేదు",
         "results_no_info_description": "ఈ వ్యాధికి నివారణ లేదా చికిత్స సమాచారం కనుగొనబడలేదు.",
         "new_diagnosis_button": "కొత్త నిర్ధారణను ప్రారంభించండి"
+    },
+    "soil_analysis": {
+        "page_title": "నేల ఆరోగ్య విశ్లేషణ",
+        "page_subtitle": "వివరణాత్మక విశ్లేషణ కోసం మీ నేల రసాయన స్థాయిలను నమోదు చేయండి లేదా పరీక్షించడానికి ప్రయోగశాలను కనుగొనండి.",
+        "form_title": "నేల డేటాను నమోదు చేయండి",
+        "form_subtitle": "మీ నేల యొక్క రసాయన కూర్పును అందించండి.",
+        "nitrogen_label": "నత్రజని (N)",
+        "nitrogen_placeholder": "ఉదా., 25 పిపిఎం",
+        "phosphorus_label": "భాస్వరం (P)",
+        "phosphorus_placeholder": "ఉదా., 15 పిపిఎం",
+        "potassium_label": "పొటాషియం (K)",
+        "potassium_placeholder": "ఉదా., 150 పిపిఎం",
+        "ph_label": "నేల pH",
+        "ph_placeholder": "ఉదా., 6.8",
+        "get_analysis_button": "నేల విశ్లేషణ పొందండి",
+        "unknown_levels_title": "మీ నేల స్థాయిలు మీకు తెలియదా?",
+        "unknown_levels_description": "ఖచ్చితమైన విశ్లేషణ కోసం, మీ నేలను పరీక్షించడం ఉత్తమం. ఖచ్చితమైన కొలతలను పొందడానికి స్థానిక నేల పరీక్ష ప్రయోగశాలను కనుగొనండి.",
+        "find_lab_button": "మీకు సమీపంలో ఉన్న పరీక్ష ప్రయోగశాలను కనుగొనండి"
     }
 }

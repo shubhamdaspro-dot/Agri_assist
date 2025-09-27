@@ -2,6 +2,7 @@
     "sidebar": {
         "dashboard": "டாஷ்போர்டு",
         "recommendations": "பரிந்துரைகள்",
+        "soil_analysis": "மண் பகுப்பாய்வு",
         "news": "செய்திகள்",
         "loans": "கடன்கள்",
         "help": "உதவி",
@@ -137,7 +138,7 @@
         "toast_otp_not_sent_title": "குறியீடு அனுப்பப்படவில்லை",
         "toast_otp_not_sent_description": "முதலில் ஒரு குறியீட்டைக் கோரவும்.",
         "toast_login_success_title": "உள்நுழைவு வெற்றி",
-        "toast_login_success_description": "அக்ரிஅसिஸ்டிற்கு வரவேற்கிறோம்!",
+        "toast_login_success_description": "அக்ரிஅசிஸ்டிற்கு வரவேற்கிறோம்!",
         "toast_invalid_otp_title": "தவறான குறியீடு"
     },
     "disease_prevention": {
@@ -163,5 +164,23 @@
         "results_no_info_title": "தகவல் எதுவும் இல்லை",
         "results_no_info_description": "இந்த நோய்க்கு எந்த தடுப்பு அல்லது சிகிச்சை தகவலும் கிடைக்கவில்லை.",
         "new_diagnosis_button": "புதிய நோயறிதலைத் தொடங்கு"
+    },
+    "soil_analysis": {
+        "page_title": "மண் சுகாதார பகுப்பாய்வு",
+        "page_subtitle": "விரிவான பகுப்பாய்விற்கு உங்கள் மண்ணின் இரசாயன அளவுகளை உள்ளிடவும் அல்லது சோதனை செய்ய ஒரு ஆய்வகத்தைக் கண்டறியவும்.",
+        "form_title": "மண் தரவை உள்ளிடவும்",
+        "form_subtitle": "உங்கள் மண்ணின் இரசாயன கலவையை வழங்கவும்.",
+        "nitrogen_label": "நைட்ரஜன் (N)",
+        "nitrogen_placeholder": "எ.கா., 25 பிபிஎம்",
+        "phosphorus_label": "பாஸ்பரஸ் (P)",
+        "phosphorus_placeholder": "எ.கா., 15 பிபிஎம்",
+        "potassium_label": "பொட்டாசியம் (K)",
+        "potassium_placeholder": "எ.கா., 150 பிபிஎம்",
+        "ph_label": "மண் pH",
+        "ph_placeholder": "எ.கா., 6.8",
+        "get_analysis_button": "மண் பகுப்பாய்வைப் பெறுங்கள்",
+        "unknown_levels_title": "உங்கள் மண் அளவுகள் தெரியவில்லையா?",
+        "unknown_levels_description": "துல்லியமான பகுப்பாய்விற்கு, உங்கள் மண்ணைப் பரிசோதிப்பது சிறந்தது. துல்லியமான அளவீடுகளைப் பெற உள்ளூர் மண் பரிசோதனை ஆய்வகத்தைக் கண்டறியவும்.",
+        "find_lab_button": "உங்களுக்கு அருகிலுள்ள ஒரு பரிசோதனை ஆய்வகத்தைக் கண்டறியவும்"
     }
 }

@@ -2,6 +2,7 @@
     "sidebar": {
         "dashboard": "ড্যাশবোর্ড",
         "recommendations": "সুপারিশ",
+        "soil_analysis": "মাটি বিশ্লেষণ",
         "news": "খবর",
         "loans": "ঋণ",
         "help": "সাহায্য",
@@ -163,5 +164,23 @@
         "results_no_info_title": "কোন তথ্য পাওয়া যায়নি",
         "results_no_info_description": "এই রোগের জন্য কোন প্রতিরোধ বা চিকিৎসার তথ্য পাওয়া যায়নি।",
         "new_diagnosis_button": "নতুন রোগ নির্ণয় শুরু করুন"
+    },
+    "soil_analysis": {
+        "page_title": "মাটির স্বাস্থ্য বিশ্লেষণ",
+        "page_subtitle": "বিস্তারিত বিশ্লেষণের জন্য আপনার মাটির রাসায়নিক স্তর লিখুন বা পরীক্ষা করার জন্য একটি পরীক্ষাগার খুঁজুন।",
+        "form_title": "মাটির ডেটা লিখুন",
+        "form_subtitle": "আপনার মাটির রাসায়নিক গঠন প্রদান করুন।",
+        "nitrogen_label": "নাইট্রোজেন (N)",
+        "nitrogen_placeholder": "যেমন, ২৫ পিপিএম",
+        "phosphorus_label": "ফসফরাস (P)",
+        "phosphorus_placeholder": "যেমন, ১৫ পিপিএম",
+        "potassium_label": "পটাসিয়াম (K)",
+        "potassium_placeholder": "যেমন, ১৫০ পিপিএম",
+        "ph_label": "মাটির পিএইচ",
+        "ph_placeholder": "যেমন, ৬.৮",
+        "get_analysis_button": "মাটি বিশ্লেষণ পান",
+        "unknown_levels_title": "আপনার মাটির স্তর জানেন না?",
+        "unknown_levels_description": "সঠিক বিশ্লেষণের জন্য, আপনার মাটি পরীক্ষা করানোই ভাল। সঠিক পরিমাপ পেতে একটি স্থানীয় মাটি পরীক্ষার পরীক্ষাগার খুঁজুন।",
+        "find_lab_button": "আপনার কাছাকাছি একটি পরীক্ষার পরীক্ষাগার খুঁজুন"
     }
 }
