@@ -79,26 +79,32 @@ export async function answerTextQueryWithVoice(
       throw new Error('Failed to generate text response.');
     }
 
-    // 2. Convert text response to speech
-    const { media } = await ai.generate({
-      model: 'googleai/gemini-2.5-flash-preview-tts',
-      config: {
-        responseModalities: ['AUDIO'],
-        speechConfig: {
-          voiceConfig: {
-            prebuiltVoiceConfig: { voiceName: 'Algenib' }, 
+    let spokenResponseDataUri: string | undefined;
+    try {
+        // 2. Convert text response to speech
+        const { media } = await ai.generate({
+          model: 'googleai/gemini-2.5-flash-preview-tts',
+          config: {
+            responseModalities: ['AUDIO'],
+            speechConfig: {
+              voiceConfig: {
+                prebuiltVoiceConfig: { voiceName: 'Algenib' }, 
+              },
+            },
           },
-        },
-      },
-      prompt: textResponse,
-    });
+          prompt: textResponse,
+        });
 
-    if (!media?.url) {
-      throw new Error('Failed to generate audio response.');
+        if (media?.url) {
+            const audioBuffer = Buffer.from(media.url.substring(media.url.indexOf(',') + 1), 'base64');
+            spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
+        } else {
+            console.warn('TTS service did not return audio media.');
+        }
+    } catch(ttsError: any) {
+        console.error("Text-to-speech generation failed, returning text only. Error:", ttsError.message);
+        // Do not re-throw, we can still return the text response.
     }
-
-    const audioBuffer = Buffer.from(media.url.substring(media.url.indexOf(',') + 1), 'base64');
-    const spokenResponseDataUri = 'data:audio/wav;base64,' + (await toWav(audioBuffer));
 
     return { success: true, textResponse, spokenResponseDataUri };
   } catch (e: any) {
