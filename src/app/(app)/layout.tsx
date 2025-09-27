@@ -11,6 +11,7 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
       <SidebarProvider>
         <div className="min-h-screen flex flex-col relative bg-background">
           <div className="absolute inset-0 -z-10 h-full w-full animate-gradient-bg bg-[length:400%_400%] bg-gradient-to-br from-background via-secondary/50 to-background"></div>
+          <div className="absolute inset-0 -z-10 bg-black/30"></div>
           <AppSidebar />
           <SidebarInset>
               <div className="flex flex-col min-h-full">
