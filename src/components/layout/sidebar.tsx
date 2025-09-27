@@ -33,7 +33,7 @@ const navItems = [
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];
 
-function AgriWiseLogo() {
+function AgriAssistLogo() {
   const { user } = useAuth();
 
   return (
@@ -43,9 +43,8 @@ function AgriWiseLogo() {
       </div>
       <div>
         <h1 className="text-xl font-bold text-white transition-opacity group-data-[collapsible=icon]:opacity-0">
-          AgriWise
+          AgriAssist
         </h1>
-        <p className="text-xs text-white/80 transition-opacity group-data-[collapsible=icon]:opacity-0">Karnataka, India</p>
       </div>
     </Link>
   );
@@ -59,7 +58,7 @@ export default function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <AgriWiseLogo />
+        <AgriAssistLogo />
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
