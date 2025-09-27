@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6">
-      <SidebarTrigger className="sm:hidden" />
+      <SidebarTrigger />
       
       <div className="flex-1">
         {/* The title can be uncommented if needed in the future */}

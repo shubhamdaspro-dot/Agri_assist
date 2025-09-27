@@ -57,7 +57,7 @@ const SidebarProvider = React.forwardRef<
 >(
   (
     {
-      defaultOpen = true, 
+      defaultOpen = false, 
       open: openProp,
       onOpenChange: setOpenProp,
       className,
@@ -275,10 +275,16 @@ const SidebarInset = React.forwardRef<
   HTMLDivElement,
   React.ComponentProps<"main">
 >(({ className, ...props }, ref) => {
+  const { isMobile, state } = useSidebar();
   return (
     <main
       ref={ref}
-      className={cn("flex flex-1 flex-col", className)}
+      className={cn(
+          "flex flex-1 flex-col transition-[margin-left] ease-in-out",
+          !isMobile && "group-data-[state=expanded]:ml-[var(--sidebar-width)]",
+          !isMobile && "group-data-[state=collapsed]:ml-[var(--sidebar-width-icon)]",
+          className
+        )}
       {...props}
     />
   )
