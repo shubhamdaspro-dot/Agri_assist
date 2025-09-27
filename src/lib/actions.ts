@@ -114,7 +114,8 @@ export async function answerTextQueryWithVoice(
     }
 
     return { success: true, textResponse, spokenResponseDataUri };
-  } catch (e: any) {
+  } catch (e: any)
+   {
     console.error(e);
     return { success: false, error: handleServiceError(e) };
   }
