@@ -13,11 +13,14 @@ import {
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
-import { auth } from '@/lib/firebase';
+import { auth, messaging, getToken } from '@/lib/firebase';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { useToast } from '@/hooks/use-toast';
+import { saveFcmToken } from '@/lib/actions';
+import { useEffect, useState } from 'react';
 
 function getTitleKey(path: string): string {
   if (path.includes('/products/')) {
@@ -33,11 +36,58 @@ export default function Header() {
   const { t, setLanguage, language } = useLanguage();
   const { user } = useAuth();
   const router = useRouter();
+  const { toast } = useToast();
   const titleKey = getTitleKey(pathname);
+  const [hasNotificationPermission, setHasNotificationPermission] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'Notification' in window) {
+      setHasNotificationPermission(Notification.permission === 'granted');
+    }
+  }, []);
 
   const handleSignOut = async () => {
     await signOut(auth);
     router.push('/');
+  };
+
+  const handleNotificationClick = async () => {
+    if (!('Notification' in window)) {
+        toast({ title: "Error", description: "This browser does not support notifications." });
+        return;
+    }
+
+    if (Notification.permission === 'granted') {
+        toast({ title: "Already Enabled", description: "You have already enabled push notifications." });
+    } else if (Notification.permission !== 'denied') {
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+            setHasNotificationPermission(true);
+            toast({ title: "Success", description: "Push notifications enabled!" });
+            await setupNotifications();
+        } else {
+            toast({ title: "Permission Denied", description: "You have denied notification permissions." });
+        }
+    } else {
+        toast({ title: "Permission Denied", description: "You have previously denied notification permissions. Please enable them in your browser settings." });
+    }
+  };
+
+  const setupNotifications = async () => {
+    if (messaging && user) {
+        try {
+            const currentToken = await getToken(messaging, { vapidKey: 'YOUR_VAPID_KEY' }); // Replace with your VAPID key from Firebase Console
+            if (currentToken) {
+                await saveFcmToken(user.uid, currentToken);
+                console.log('FCM Token saved:', currentToken);
+            } else {
+                console.log('No registration token available. Request permission to generate one.');
+            }
+        } catch (err) {
+            console.error('An error occurred while retrieving token. ', err);
+            toast({ variant: 'destructive', title: "Error", description: "Failed to set up notifications." });
+        }
+    }
   };
 
 
@@ -55,12 +105,14 @@ export default function Header() {
           <BarChart2 className="h-5 w-5" />
           <span className="sr-only">Analytics</span>
         </Button>
-        <Button variant="ghost" size="icon" className="relative">
+        <Button variant="ghost" size="icon" className="relative" onClick={handleNotificationClick}>
           <Bell className="h-5 w-5" />
-          <span className="absolute top-1 right-1 flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-          </span>
+          {!hasNotificationPermission && (
+            <span className="absolute top-1 right-1 flex h-3 w-3">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+          )}
           <span className="sr-only">Notifications</span>
         </Button>
         <DropdownMenu>

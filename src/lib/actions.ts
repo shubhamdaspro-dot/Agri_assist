@@ -10,9 +10,10 @@ import type { FetchLatestNewsOutput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
-import { analyzeMarketPrices, AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/ai/flows/analyze-market-prices';
+import { analyzeMarketPrices } from '@/ai/flows/analyze-market-prices';
+import { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
 import { db } from '@/lib/firebase';
-import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
+import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion } from 'firebase/firestore';
 
 function handleServiceError(e: any): string {
     if (e.message && e.message.includes('503')) {
@@ -204,4 +205,26 @@ export async function createUserProfile(input: z.infer<typeof UserProfileSchema>
     console.error('Error creating user profile:', e);
     return { success: false, error: e.message };
   }
+}
+
+export async function saveFcmToken(uid: string, token: string) {
+    try {
+        const userRef = doc(db, 'users', uid);
+        const userDoc = await getDoc(userRef);
+
+        if (userDoc.exists()) {
+            await updateDoc(userRef, {
+                fcmTokens: arrayUnion(token)
+            });
+        } else {
+             await setDoc(userRef, {
+                fcmTokens: [token],
+                createdAt: serverTimestamp()
+            }, { merge: true });
+        }
+        return { success: true };
+    } catch (e: any) {
+        console.error('Error saving FCM token:', e);
+        return { success: false, error: e.message };
+    }
 }

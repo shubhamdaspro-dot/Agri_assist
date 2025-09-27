@@ -1,6 +1,7 @@
 import {initializeApp, getApp, getApps} from 'firebase/app';
 import {getAuth} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
   projectId: 'studio-1541943016-6eb69',
@@ -15,5 +16,6 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 const auth = getAuth(app);
 const db = getFirestore(app);
+const messaging = (typeof window !== 'undefined') ? getMessaging(app) : null;
 
-export {app, auth, db};
+export {app, auth, db, messaging, getToken, onMessage };
