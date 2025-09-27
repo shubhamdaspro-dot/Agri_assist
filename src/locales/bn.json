@@ -92,7 +92,7 @@
         "toast_download_success_title": "ডাউনলোড শুরু হয়েছে",
         "toast_download_error_title": "ডাউনলোড ব্যর্থ হয়েছে",
         "toast_download_error_description": "ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
-        "new_recommendation_button": "নতুন সুপারিশ شروع করুন"
+        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
     },
     "news": {
         "page_title": "কৃষি খবর ও আপডেট",
@@ -112,14 +112,15 @@
         "description": "সব কৃষি প্রশ্নের জন্য আপনার বন্ধুত্বপূর্ণ এআই সঙ্গী।",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
         "input_placeholder": "আপনার প্রশ্ন টাইপ করুন...",
-        "input_listening": "שুনছি...",
+        "input_listening": "শুনছি...",
         "canned_query": "গরম জলবায়ুতে বালুকাময় মাটির জন্য সেরা ফসল কোনটি?",
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।",
         "voice_label": "এআই ভয়েস",
         "voice_placeholder": "একটি ভয়েস নির্বাচন করুন",
         "voice_female": "মহিলা",
         "voice_male": "পুরুষ",
-        "play_audio": "অডিও চালান"
+        "play_audio": "অডিও চালান",
+        "clear_chat": "চ্যাট সাফ করুন"
     },
     "auth": {
         "login_title": "এগ্রিঅ্যাসিস্টে সাইন ইন করুন",
@@ -176,7 +177,7 @@
         "nitrogen_placeholder": "যেমন, ২৫ পিপিএম",
         "phosphorus_label": "ফসফরাস (P)",
         "phosphorus_placeholder": "যেমন, ১৫ পিপিএম",
-        "potassium_label": "পটাשিয়াম (K)",
+        "potassium_label": "পটাশিয়াম (K)",
         "potassium_placeholder": "যেমন, ১৫০ পিপিএম",
         "ph_label": "মাটির পিএইচ",
         "ph_placeholder": "যেমন, ৬.৮",

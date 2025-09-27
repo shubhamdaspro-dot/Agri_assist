@@ -135,7 +135,8 @@
         "voice_placeholder": "Select a voice",
         "voice_female": "Female",
         "voice_male": "Male",
-        "play_audio": "Play audio"
+        "play_audio": "Play audio",
+        "clear_chat": "Clear Chat"
     },
     "auth": {
         "login_title": "Sign In to AgriAssist",

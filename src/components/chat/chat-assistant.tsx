@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { MessageCircle, Mic, Send, Bot, User, X, Loader2, Volume2 } from 'lucide-react';
+import { MessageCircle, Mic, Send, Bot, User, X, Loader2, Volume2, Trash2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { answerTextQueryWithVoice, answerVoiceQuery } from '@/lib/actions';
 import { Avatar, AvatarFallback } from '../ui/avatar';
@@ -168,9 +168,23 @@ export default function ChatAssistant() {
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[425px] md:max-w-[500px] h-[80vh] sm:h-[70vh] flex flex-col p-0 gap-0">
           <DialogHeader className="p-4 border-b">
-            <DialogTitle className="flex items-center gap-2">
-              <Bot className="text-primary" /> {t('chat.title')}
-            </DialogTitle>
+            <div className="flex justify-between items-center">
+              <DialogTitle className="flex items-center gap-2">
+                <Bot className="text-primary" /> {t('chat.title')}
+              </DialogTitle>
+              {messages.length > 0 && (
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Button variant="ghost" size="icon" onClick={() => setMessages([])}>
+                            <Trash2 className="h-4 w-4" />
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        <p>{t('chat.clear_chat')}</p>
+                    </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
             <DialogDescription>{t('chat.description')}</DialogDescription>
           </DialogHeader>
           <ScrollArea className="flex-1" ref={scrollAreaRef}>
