@@ -64,7 +64,8 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
 
     //Get the LLM text response
     const {text: textResponse} = await ai.generate({
-      prompt: `You are an expert AI assistant for farmers. Answer the following question in a concise and helpful way. Question: ${transcribedQuery}`,
+      system: `You are an expert AI assistant for farmers named AgriAssist. You are friendly, helpful, and provide smooth, precise, and conversational answers. Your goal is to provide accurate, actionable information that is easy to understand.`,
+      prompt: `Answer the following question: ${transcribedQuery}`,
     });
 
      if (!textResponse) {
