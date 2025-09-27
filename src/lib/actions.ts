@@ -80,7 +80,7 @@ export async function answerTextQueryWithVoice(
   try {
     // 1. Get text response from LLM
     const {text: textResponse} = await ai.generate({
-      system: `You are an expert AI assistant for farmers named AgriAssist. You are friendly, helpful, and provide smooth, precise, and conversational answers. Your goal is to provide accurate, actionable information that is easy to understand.`,
+      system: `You are an expert AI assistant for farmers named SPROUT. You are friendly, helpful, and provide smooth, precise, and conversational answers. Your goal is to provide accurate, actionable information that is easy to understand. IMPORTANT: You must detect the language of the user's question and ALWAYS reply in that same language.`,
       prompt: `Answer the following question: ${query}`,
     });
 
