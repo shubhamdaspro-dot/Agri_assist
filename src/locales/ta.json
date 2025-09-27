@@ -118,7 +118,8 @@
         "voice_label": "AI குரல்",
         "voice_placeholder": "ஒரு குரலைத் தேர்ந்தெடுக்கவும்",
         "voice_female": "பெண்",
-        "voice_male": "ஆண்"
+        "voice_male": "ஆண்",
+        "play_audio": "ஆடியோவை இயக்கு"
     },
     "auth": {
         "login_title": "அக்ரிஅசிஸ்டில் உள்நுழைக",

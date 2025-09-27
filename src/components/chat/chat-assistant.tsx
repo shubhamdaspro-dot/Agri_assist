@@ -4,15 +4,15 @@ import { useState, useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { MessageCircle, Mic, Send, Bot, User, X, Loader2 } from 'lucide-react';
+import { MessageCircle, Mic, Send, Bot, User, X, Loader2, Volume2 } from 'lucide-react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { answerTextQueryWithVoice, answerVoiceQuery } from '@/lib/actions';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { cn } from '@/lib/utils';
 import { useLanguage } from '@/hooks/use-language';
 import { useChat } from '@/hooks/use-chat';
-import { Label } from '../ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
+import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+
 
 type Message = {
   id: number;
@@ -79,9 +79,9 @@ export default function ChatAssistant() {
         audioUri: result.spokenResponseDataUri,
       };
       setMessages(prev => [...prev, newAssistantMessage]);
-      if (result.spokenResponseDataUri) {
-        playAudio(result.spokenResponseDataUri);
-      }
+      // if (result.spokenResponseDataUri) {
+      //   playAudio(result.spokenResponseDataUri);
+      // }
     } else {
       const errorMessage: Message = {
         id: Date.now() + 1,
@@ -146,9 +146,9 @@ export default function ChatAssistant() {
         audioUri: result.spokenResponseDataUri,
       };
       setMessages(prev => [...prev, newUserMessage, newAssistantMessage]);
-      if (result.spokenResponseDataUri) {
-        playAudio(result.spokenResponseDataUri);
-      }
+      // if (result.spokenResponseDataUri) {
+      //   playAudio(result.spokenResponseDataUri);
+      // }
     } else {
        const errorMessage: Message = {
         id: Date.now() + 1,
@@ -182,7 +182,7 @@ export default function ChatAssistant() {
                 </div>
               )}
               {messages.map(message => (
-                <div key={message.id} className={cn("flex items-start gap-3", message.role === 'user' ? "justify-end" : "justify-start")}>
+                <div key={message.id} className={cn("flex items-end gap-3", message.role === 'user' ? "justify-end" : "justify-start")}>
                   {message.role === 'assistant' && (
                     <Avatar className='w-8 h-8'>
                         <AvatarFallback><Bot size={20} /></AvatarFallback>
@@ -191,6 +191,23 @@ export default function ChatAssistant() {
                   <div className={cn("rounded-lg px-3 py-2 max-w-[80%]", message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-secondary')}>
                     <p className="text-sm">{message.text}</p>
                   </div>
+                  {message.role === 'assistant' && message.audioUri && (
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="h-7 w-7"
+                          onClick={() => playAudio(message.audioUri!)}
+                        >
+                          <Volume2 className="h-4 w-4" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{t('chat.play_audio')}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
                    {message.role === 'user' && (
                     <Avatar className='w-8 h-8'>
                         <AvatarFallback><User size={20} /></AvatarFallback>

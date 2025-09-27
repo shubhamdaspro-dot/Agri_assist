@@ -134,7 +134,8 @@
         "voice_label": "AI Voice",
         "voice_placeholder": "Select a voice",
         "voice_female": "Female",
-        "voice_male": "Male"
+        "voice_male": "Male",
+        "play_audio": "Play audio"
     },
     "auth": {
         "login_title": "Sign In to AgriAssist",

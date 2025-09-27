@@ -118,7 +118,8 @@
         "voice_label": "AI आवाज",
         "voice_placeholder": "एक आवाज निवडा",
         "voice_female": "स्त्री",
-        "voice_male": "पुरुष"
+        "voice_male": "पुरुष",
+        "play_audio": "ऑडिओ प्ले करा"
     },
     "auth": {
         "login_title": "ऍग्रीअसिस्टमध्ये साइन इन करा",

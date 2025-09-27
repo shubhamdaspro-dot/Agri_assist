@@ -121,7 +121,8 @@
         "voice_label": "AI आवाज़",
         "voice_placeholder": "एक आवाज़ चुनें",
         "voice_female": "महिला",
-        "voice_male": "पुरुष"
+        "voice_male": "पुरुष",
+        "play_audio": "ऑडियो चलाएं"
     },
     "auth": {
         "login_title": "एग्रीअसिस्ट में साइन इन करें",

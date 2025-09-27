@@ -118,7 +118,8 @@
         "voice_label": "AI వాయిస్",
         "voice_placeholder": "ఒక వాయిస్‌ని ఎంచుకోండి",
         "voice_female": "స్త్రీ",
-        "voice_male": "పురుషుడు"
+        "voice_male": "పురుషుడు",
+        "play_audio": "ఆడియోను ప్లే చేయండి"
     },
     "auth": {
         "login_title": "అగ్రిఅసిస్ట్‌లో సైన్ ఇన్ చేయండి",

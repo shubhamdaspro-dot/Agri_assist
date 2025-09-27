@@ -100,7 +100,7 @@
     },
     "loans": {
         "page_title": "কৃষি ঋণ প্রকল্প",
-        "page_subtitle": "কৃষকদের জন্য সরকার-সমর্থিত ঋণ প্রকল্পগুলির তথ্য।",
+        "page_subtitle": "কৃষকদের জন্য সরকার-সমর্থित ঋণ প্রকল্পগুলির তথ্য।",
         "available_schemes": "উপলব্ধ প্রকল্প",
         "eligibility_criteria": "যোগ্যতার মানদণ্ড",
         "required_documents": "প্রয়োজনীয় নথি",
@@ -118,7 +118,8 @@
         "voice_label": "এআই ভয়েস",
         "voice_placeholder": "একটি ভয়েস নির্বাচন করুন",
         "voice_female": "মহিলা",
-        "voice_male": "পুরুষ"
+        "voice_male": "পুরুষ",
+        "play_audio": "অডিও চালান"
     },
     "auth": {
         "login_title": "এগ্রিঅ্যাসিস্টে সাইন ইন করুন",
@@ -175,7 +176,7 @@
         "nitrogen_placeholder": "যেমন, ২৫ পিপিএম",
         "phosphorus_label": "ফসফরাস (P)",
         "phosphorus_placeholder": "যেমন, ১৫ পিপিএম",
-        "potassium_label": "পটাশিয়াম (K)",
+        "potassium_label": "পটাשিয়াম (K)",
         "potassium_placeholder": "যেমন, ১৫০ পিপিএম",
         "ph_label": "মাটির পিএইচ",
         "ph_placeholder": "যেমন, ৬.৮",
