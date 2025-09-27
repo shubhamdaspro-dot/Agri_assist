@@ -92,8 +92,8 @@ export default function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={t('sidebar.help')} variant="outline">
-                <Link href="#">
+              <SidebarMenuButton asChild tooltip={t('sidebar.help')} variant="outline" isActive={pathname === '/help'}>
+                <Link href="/help">
                   <CircleHelp />
                   <span>{t('sidebar.help')}</span>
                 </Link>

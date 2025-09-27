@@ -5,7 +5,7 @@
         "soil_analysis": "Soil Analysis",
         "news": "News",
         "loans": "Loans",
-        "help": "Help",
+        "help": "Help & Support",
         "github": "GitHub",
         "ai_assistant": "AI Assistant",
         "disease_prevention": "Disease Check",
@@ -219,5 +219,24 @@
         "price_trend": "Price Trend",
         "selling_suggestions": "Profitable Selling Locations",
         "new_analysis_button": "Start New Analysis"
+    },
+    "help": {
+        "page_title": "Help & Support",
+        "page_subtitle": "Find answers to your questions about using AgriAssist.",
+        "search_title": "How can we help?",
+        "search_placeholder": "Search for a topic...",
+        "no_results": "No topics found matching your search.",
+        "getting_started_title": "Getting Started",
+        "getting_started_content": "Welcome to AgriAssist! This app helps you make smarter farming decisions. Navigate using the sidebar to access features like Crop Advice, Soil Analysis, and more. Use the AI Assistant button for any specific questions.",
+        "crop_recommendations_title": "Crop Advice",
+        "crop_recommendations_content": "Go to 'Crop Advice' and fill in your farm's details like your location, soil type, and weather. Our AI will analyze this data to recommend the best crops for you to plant, along with product suggestions.",
+        "soil_analysis_title": "Soil Analysis",
+        "soil_analysis_content": "In 'Soil Analysis,' you can input your soil's chemical levels (Nitrogen, Phosphorus, Potassium, pH) to get a detailed health analysis. If you don't know these levels, use the provided link to find a soil testing lab near you.",
+        "disease_prevention_title": "Disease Check",
+        "disease_prevention_content": "Visit 'Disease Check' to diagnose crop diseases. You can either select a common disease from the list or upload a photo of an affected plant part for an AI-powered diagnosis and receive prevention and treatment advice.",
+        "market_analysis_title": "Market Analysis",
+        "market_analysis_content": "Use the 'Market Analysis' feature to get real-time price information for your crops. Enter the crop name and your region to receive current prices, market trends, and suggestions on where to sell for the best profit.",
+        "ai_assistant_title": "AI Assistant",
+        "ai_assistant_content": "Click the chat bubble icon to open the AI Assistant. You can type or use your voice to ask any farming-related question. The assistant provides instant, conversational answers to help you with your daily farming tasks."
     }
 }
