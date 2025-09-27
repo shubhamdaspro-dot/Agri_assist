@@ -92,7 +92,7 @@
         "toast_download_success_title": "ডাউনলোড শুরু হয়েছে",
         "toast_download_error_title": "ডাউনলোড ব্যর্থ হয়েছে",
         "toast_download_error_description": "ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
-        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
+        "new_recommendation_button": "নতুন সুপারিশ شروع করুন"
     },
     "news": {
         "page_title": "কৃষি খবর ও আপডেট",
@@ -108,11 +108,11 @@
         "apply_now_button": "এখন আবেদন করুন"
     },
     "chat": {
-        "title": "এআই কৃষি সহকারী",
+        "title": "SPROUT",
         "description": "সব কৃষি প্রশ্নের জন্য আপনার বন্ধুত্বপূর্ণ এআই সঙ্গী।",
         "welcome_message": "চাষাবাদ সম্পর্কে আমাকে কিছু জিজ্ঞাসা করুন!",
         "input_placeholder": "আপনার প্রশ্ন টাইপ করুন...",
-        "input_listening": "শুনছি...",
+        "input_listening": "שুনছি...",
         "canned_query": "গরম জলবায়ুতে বালুকাময় মাটির জন্য সেরা ফসল কোনটি?",
         "default_error": "দুঃখিত, আমি এটি প্রক্রিয়া করতে পারিনি।",
         "voice_label": "এআই ভয়েস",
