@@ -17,11 +17,13 @@ import {
   CircleHelp,
   MessageCircle,
   ShieldAlert,
+  Sprout,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
 import { useChat } from '@/hooks/use-chat';
+import { useAuth } from '@/hooks/use-auth';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -31,27 +33,20 @@ const navItems = [
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];
 
-function AgriAssistLogo() {
+function AgriWiseLogo() {
+  const { user } = useAuth();
+
   return (
-    <Link href="/dashboard" className="flex items-center gap-2 px-2">
-       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-8 w-8 text-primary"
-      >
-        <path d="M11 20A7 7 0 0 1 7 6a7 7 0 0 1 4-2 7 7 0 0 1 4 2 7 7 0 0 1-4 14Z" />
-        <path d="M11 20V14" />
-        <path d="m11 4 3 4" />
-        <path d="m8 8 3-4" />
-      </svg>
-      <h1 className="text-2xl font-bold text-primary transition-opacity group-data-[collapsible=icon]:opacity-0">
-        AgriAssist
-      </h1>
+    <Link href="/dashboard" className="flex items-center gap-3 px-2">
+      <div className="p-2 bg-white/20 rounded-lg">
+        <Sprout className="h-7 w-7 text-white" />
+      </div>
+      <div>
+        <h1 className="text-xl font-bold text-white transition-opacity group-data-[collapsible=icon]:opacity-0">
+          AgriWise
+        </h1>
+        <p className="text-xs text-white/80 transition-opacity group-data-[collapsible=icon]:opacity-0">Karnataka, India</p>
+      </div>
     </Link>
   );
 }
@@ -64,7 +59,7 @@ export default function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <AgriAssistLogo />
+        <AgriWiseLogo />
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>
@@ -74,6 +69,7 @@ export default function AppSidebar() {
                 asChild
                 isActive={pathname.startsWith(item.href)}
                 tooltip={t(item.labelKey)}
+                variant="outline"
               >
                 <Link href={item.href}>
                   <item.icon />
@@ -83,7 +79,7 @@ export default function AppSidebar() {
             </SidebarMenuItem>
           ))}
             <SidebarMenuItem>
-                <SidebarMenuButton onClick={() => setIsOpen(true)} tooltip={t('sidebar.ai_assistant')}>
+                <SidebarMenuButton onClick={() => setIsOpen(true)} tooltip={t('sidebar.ai_assistant')} variant="outline">
                     <MessageCircle />
                     <span>{t('sidebar.ai_assistant')}</span>
                 </SidebarMenuButton>
@@ -93,7 +89,7 @@ export default function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={t('sidebar.help')}>
+              <SidebarMenuButton asChild tooltip={t('sidebar.help')} variant="outline">
                 <Link href="#">
                   <CircleHelp />
                   <span>{t('sidebar.help')}</span>
@@ -101,7 +97,7 @@ export default function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={t('sidebar.github')}>
+              <SidebarMenuButton asChild tooltip={t('sidebar.github')} variant="outline">
                 <Link href="https://github.com/shubhamdaspro-dot/Agri_assist" target="_blank">
                   <Github />
                   <span>{t('sidebar.github')}</span>

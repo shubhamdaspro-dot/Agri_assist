@@ -1,13 +1,13 @@
 {
     "sidebar": {
         "dashboard": "Dashboard",
-        "recommendations": "Recommendations",
+        "recommendations": "Crop Advice",
         "news": "News",
         "loans": "Loans",
         "help": "Help",
         "github": "GitHub",
         "ai_assistant": "AI Assistant",
-        "disease_prevention": "Crop Diseases"
+        "disease_prevention": "Disease Check"
     },
     "header": {
         "change_language": "Change language",
@@ -19,6 +19,19 @@
         "tamil": "தமிழ் (Tamil)"
     },
     "dashboard": {
+        "todays_weather": "Today's Weather",
+        "partly_cloudy": "Partly Cloudy",
+        "moderate_humidity": "Moderate Humidity",
+        "humidity": "Humidity",
+        "rainfall": "Rainfall",
+        "weather_-condition": "Excellent weather conditions for most crop growth.",
+        "crop_advice": "Crop Advice",
+        "soil_analysis": "Soil Analysis",
+        "market_prices": "Market Prices",
+        "disease_check": "Disease Check",
+        "current_crop_status": "Current Crop Status",
+        "growth_stage": "Growth Stage",
+        "days": "days",
         "welcome_title": "Welcome to AgriAssist!",
         "welcome_subtitle": "Your AI-powered partner for modern farming. Get crop recommendations and stay updated with the latest agricultural news.",
         "get_recommendation_button": "Get Recommendation",
@@ -121,26 +134,26 @@
         "voice_male": "Male"
     },
     "auth": {
-        "login_title": "Login",
-        "login_subtitle": "Login with your phone number to continue.",
+        "login_title": "Sign In to AgriWise",
+        "login_subtitle": "Enter your phone number to receive a one-time code.",
         "phone_label": "Phone Number",
-        "send_otp_button": "Send OTP",
-        "otp_label": "OTP",
-        "verify_otp_button": "Verify OTP",
-        "change_number_button": "Change Number",
+        "send_otp_button": "Send Code",
+        "otp_label": "One-Time Code",
+        "verify_otp_button": "Sign In",
+        "change_number_button": "Use a different number",
         "sign_out_button": "Sign Out",
         "toast_phone_required_title": "Phone Number Required",
         "toast_phone_required_description": "Please enter a valid phone number.",
-        "toast_otp_sent_title": "OTP Sent",
-        "toast_otp_sent_description": "An OTP has been sent to {phoneNumber}.",
-        "toast_otp_failed_title": "Failed to Send OTP",
-        "toast_otp_required_title": "OTP Required",
-        "toast_otp_required_description": "Please enter the OTP you received.",
-        "toast_otp_not_sent_title": "OTP Not Sent",
-        "toast_otp_not_sent_description": "Please request an OTP first.",
-        "toast_login_success_title": "Login Successful",
-        "toast_login_success_description": "You have been successfully logged in.",
-        "toast_invalid_otp_title": "Invalid OTP"
+        "toast_otp_sent_title": "Code Sent",
+        "toast_otp_sent_description": "A one-time code has been sent to {phoneNumber}.",
+        "toast_otp_failed_title": "Failed to Send Code",
+        "toast_otp_required_title": "Code Required",
+        "toast_otp_required_description": "Please enter the code you received.",
+        "toast_otp_not_sent_title": "Code Not Sent",
+        "toast_otp_not_sent_description": "Please request a code first.",
+        "toast_login_success_title": "Sign In Successful",
+        "toast_login_success_description": "Welcome to AgriWise!",
+        "toast_invalid_otp_title": "Invalid Code"
     },
     "disease_prevention": {
         "page_title": "Crop Disease Diagnosis & Prevention",

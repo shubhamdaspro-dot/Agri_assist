@@ -19,7 +19,7 @@ import {
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {useToast} from '@/hooks/use-toast';
-import {Loader2} from 'lucide-react';
+import {Loader2, Sprout} from 'lucide-react';
 import {useLanguage} from '@/hooks/use-language';
 import { createUserProfile } from '@/lib/actions';
 
@@ -111,7 +111,6 @@ export default function AuthPage() {
       const userCredential = await confirmationResult.confirm(otp);
       const user = userCredential.user;
 
-      // Create a user profile in Firestore if it's a new user
       if (user) {
         await createUserProfile({
           uid: user.uid,
@@ -143,9 +142,12 @@ export default function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <Card className="mx-auto max-w-sm">
-        <CardHeader>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-gray-900 p-4">
+        <Card className="mx-auto max-w-sm w-full">
+        <CardHeader className="text-center">
+            <div className="mx-auto bg-primary p-3 rounded-full w-fit mb-4">
+                <Sprout className="h-8 w-8 text-primary-foreground" />
+            </div>
             <CardTitle className="text-2xl">{t('auth.login_title')}</CardTitle>
             <CardDescription>{t('auth.login_subtitle')}</CardDescription>
         </CardHeader>
@@ -157,7 +159,7 @@ export default function AuthPage() {
                 <Input
                     id="phone"
                     type="tel"
-                    placeholder="+919876543210"
+                    placeholder="+91 98765 43210"
                     required
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)}
@@ -178,6 +180,7 @@ export default function AuthPage() {
                     required
                     value={otp}
                     onChange={(e) => setOtp(e.target.value)}
+                    placeholder="Enter the 6-digit code"
                 />
                 </div>
                 <Button
