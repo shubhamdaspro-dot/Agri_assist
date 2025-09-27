@@ -8,7 +8,8 @@
         "help": "সাহায্য",
         "github": "গিটহাব",
         "ai_assistant": "এআই সহকারী",
-        "disease_prevention": "ফসলের রোগ"
+        "disease_prevention": "ফসলের রোগ",
+        "market_analysis": "বাজার বিশ্লেষণ"
     },
     "header": {
         "change_language": "ভাষা পরিবর্তন করুন",
@@ -182,5 +183,25 @@
         "unknown_levels_title": "আপনার মাটির স্তর জানেন না?",
         "unknown_levels_description": "সঠিক বিশ্লেষণের জন্য, আপনার মাটি পরীক্ষা করানোই ভাল। সঠিক পরিমাপ পেতে একটি স্থানীয় মাটি পরীক্ষার পরীক্ষাগার খুঁজুন।",
         "find_lab_button": "আপনার কাছাকাছি একটি পরীক্ষার পরীক্ষাগার খুঁজুন"
+    },
+    "market_analysis": {
+        "page_title": "ফসল বাজার বিশ্লেষণ",
+        "page_subtitle": "আপনার ফসলের জন্য রিয়েল-টাইম বাজার মূল্য এবং বিক্রির পরামর্শ পান।",
+        "form_title": "ফসল বাজার বিশ্লেষণ করুন",
+        "form_subtitle": "সর্বশেষ বাজার অন্তর্দৃষ্টি পেতে একটি ফসল লিখুন।",
+        "crop_name_label": "ফসলের নাম",
+        "crop_name_placeholder": "যেমন, গম, টমেটো, তুলা",
+        "region_label": "আপনার অঞ্চল",
+        "region_placeholder": "যেমন, পাঞ্জাব, ভারত",
+        "region_description": "আপনার অবস্থান আমাদের স্থানীয় বিশ্লেষণ প্রদান করতে সাহায্য করে।",
+        "submit_button": "বাজার বিশ্লেষণ পান",
+        "loading_button": "বিশ্লেষণ করা হচ্ছে...",
+        "toast_error_title": "বিশ্লেষণ ব্যর্থ",
+        "toast_error_description": "AI বাজার বিশ্লেষণ প্রদান করতে পারেনি। অনুগ্রহ করে আবার চেষ্টা করুন।",
+        "results_title": "{cropName}-এর জন্য বাজার বিশ্লেষণ",
+        "current_price": "বর্তমান মূল্য",
+        "price_trend": "মূল্যের প্রবণতা",
+        "selling_suggestions": "লাভজনক বিক্রির স্থান",
+        "new_analysis_button": "নতুন বিশ্লেষণ শুরু করুন"
     }
 }

@@ -19,6 +19,7 @@ import {
   ShieldAlert,
   Sprout,
   TestTube,
+  BarChart2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -31,6 +32,7 @@ const navItems = [
   { href: '/recommendations', icon: Leaf, labelKey: 'sidebar.recommendations' },
   { href: '/soil-analysis', icon: TestTube, labelKey: 'sidebar.soil_analysis' },
   { href: '/disease-prevention', icon: ShieldAlert, labelKey: 'sidebar.disease_prevention' },
+  { href: '/market-analysis', icon: BarChart2, labelKey: 'sidebar.market_analysis' },
   { href: '/news', icon: Newspaper, labelKey: 'sidebar.news' },
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];

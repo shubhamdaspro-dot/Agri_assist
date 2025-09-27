@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Cloud, Droplets, Leaf, ShieldCheck, Sprout, Tractor, Wind, MapPin, Loader2, AlertCircle, Newspaper } from "lucide-react";
+import { Cloud, Droplets, Leaf, ShieldCheck, Sprout, Wind, Loader2, AlertCircle, Newspaper, BarChart2 } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/hooks/use-language";
 import { useEffect, useState } from "react";
@@ -11,11 +11,12 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getLatestNews } from "@/lib/actions";
 import type { NewsArticle } from "@/lib/types";
+import { TestTube } from "lucide-react";
 
 const actionItems = [
   { href: '/recommendations', labelKey: 'dashboard.crop_advice', icon: Sprout, color: 'bg-green-500' },
-  { href: '/soil-analysis', labelKey: 'dashboard.soil_analysis', icon: Leaf, color: 'bg-blue-500' },
-  { href: '/news', labelKey: 'dashboard.market_prices', icon: Tractor, color: 'bg-amber-500' },
+  { href: '/soil-analysis', labelKey: 'dashboard.soil_analysis', icon: TestTube, color: 'bg-blue-500' },
+  { href: '/market-analysis', labelKey: 'dashboard.market_prices', icon: BarChart2, color: 'bg-amber-500' },
   { href: '/disease-prevention', labelKey: 'dashboard.disease_check', icon: ShieldCheck, color: 'bg-teal-500' },
 ];
 

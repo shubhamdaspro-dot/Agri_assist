@@ -8,7 +8,8 @@
         "help": "मदत",
         "github": "गिटहब",
         "ai_assistant": "एआय सहाय्यक",
-        "disease_prevention": "पीक रोग"
+        "disease_prevention": "पीक रोग",
+        "market_analysis": "बाजार विश्लेषण"
     },
     "header": {
         "change_language": "भाषा बदला",
@@ -182,5 +183,25 @@
         "unknown_levels_title": "तुमच्या मातीची पातळी माहित नाही?",
         "unknown_levels_description": "अचूक विश्लेषणासाठी, तुमच्या मातीची चाचणी घेणे सर्वोत्तम आहे. अचूक मोजमाप मिळविण्यासाठी स्थानिक माती चाचणी प्रयोगशाळा शोधा.",
         "find_lab_button": "तुमच्या जवळची चाचणी प्रयोगशाळा शोधा"
+    },
+    "market_analysis": {
+        "page_title": "पीक बाजार विश्लेषण",
+        "page_subtitle": "आपल्या पिकांसाठी रिअल-टाइम बाजारभाव आणि विक्री सल्ला मिळवा.",
+        "form_title": "पीक बाजाराचे विश्लेषण करा",
+        "form_subtitle": "नवीनतम बाजार अंतर्दृष्टी मिळविण्यासाठी पीक प्रविष्ट करा.",
+        "crop_name_label": "पिकाचे नाव",
+        "crop_name_placeholder": "उदा., गहू, टोमॅटो, कापूस",
+        "region_label": "आपला प्रदेश",
+        "region_placeholder": "उदा., पंजाब, भारत",
+        "region_description": "आपले स्थान आम्हाला स्थानिक विश्लेषण प्रदान करण्यास मदत करते.",
+        "submit_button": "बाजार विश्लेषण मिळवा",
+        "loading_button": "विश्लेषण करत आहे...",
+        "toast_error_title": "विश्लेषण अयशस्वी",
+        "toast_error_description": "AI बाजार विश्लेषण प्रदान करू शकले नाही. कृपया पुन्हा प्रयत्न करा.",
+        "results_title": "{cropName} साठी बाजार विश्लेषण",
+        "current_price": "सध्याची किंमत",
+        "price_trend": "किंमत ट्रेंड",
+        "selling_suggestions": "फायदेशीर विक्रीची ठिकाणे",
+        "new_analysis_button": "नवीन विश्लेषण सुरू करा"
     }
 }

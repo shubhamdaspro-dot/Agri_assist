@@ -10,6 +10,7 @@ import type { FetchLatestNewsOutput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
+import { analyzeMarketPrices, AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/ai/flows/analyze-market-prices';
 import { db } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp } from 'firebase/firestore';
 
@@ -168,6 +169,19 @@ export async function getProfitabilityAnalysis(
     return { success: false, data: null, error: handleServiceError(e) };
   }
 }
+
+export async function getMarketAnalysis(
+  input: AnalyzeMarketPricesInput
+): Promise<{ success: boolean; data: AnalyzeMarketPricesOutput | null; error?: string }> {
+  try {
+    const result = await analyzeMarketPrices(input);
+    return { success: true, data: result };
+  } catch (e: any) {
+    console.error(e);
+    return { success: false, data: null, error: handleServiceError(e) };
+  }
+}
+
 
 const UserProfileSchema = z.object({
   uid: z.string(),

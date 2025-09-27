@@ -8,7 +8,8 @@
         "help": "Help",
         "github": "GitHub",
         "ai_assistant": "AI Assistant",
-        "disease_prevention": "Disease Check"
+        "disease_prevention": "Disease Check",
+        "market_analysis": "Market Analysis"
     },
     "header": {
         "change_language": "Change language",
@@ -28,7 +29,7 @@
         "weather_-condition": "Excellent weather conditions for most crop growth.",
         "crop_advice": "Crop Advice",
         "soil_analysis": "Soil Analysis",
-        "market_prices": "Market Prices",
+        "market_prices": "Market Analysis",
         "disease_check": "Disease Check",
         "current_crop_status": "Current Crop Status",
         "growth_stage": "Growth Stage",
@@ -198,5 +199,25 @@
         "unknown_levels_title": "Don't Know Your Soil Levels?",
         "unknown_levels_description": "For an accurate analysis, it's best to get your soil tested. Find a local soil testing laboratory to get precise measurements.",
         "find_lab_button": "Find a Testing Lab Near You"
+    },
+    "market_analysis": {
+        "page_title": "Crop Market Analysis",
+        "page_subtitle": "Get real-time market prices and selling advice for your crops.",
+        "form_title": "Analyze Crop Market",
+        "form_subtitle": "Enter a crop to get the latest market insights.",
+        "crop_name_label": "Crop Name",
+        "crop_name_placeholder": "e.g., Wheat, Tomato, Cotton",
+        "region_label": "Your Region",
+        "region_placeholder": "e.g., Punjab, India",
+        "region_description": "Your location helps us provide a localized analysis.",
+        "submit_button": "Get Market Analysis",
+        "loading_button": "Analyzing...",
+        "toast_error_title": "Analysis Failed",
+        "toast_error_description": "The AI could not provide a market analysis. Please try again.",
+        "results_title": "Market Analysis for {cropName}",
+        "current_price": "Current Price",
+        "price_trend": "Price Trend",
+        "selling_suggestions": "Profitable Selling Locations",
+        "new_analysis_button": "Start New Analysis"
     }
 }

@@ -8,7 +8,8 @@
         "help": "मदद",
         "github": "गिटहब",
         "ai_assistant": "AI सहायक",
-        "disease_prevention": "फसल रोग"
+        "disease_prevention": "फसल रोग",
+        "market_analysis": "बाजार विश्लेषण"
     },
     "header": {
         "change_language": "भाषा बदलें",
@@ -185,5 +186,25 @@
         "unknown_levels_title": "क्या आप अपनी मिट्टी का स्तर नहीं जानते?",
         "unknown_levels_description": "एक सटीक विश्लेषण के लिए, अपनी मिट्टी का परीक्षण करवाना सबसे अच्छा है। सटीक माप प्राप्त करने के लिए एक स्थानीय मृदा परीक्षण प्रयोगशाला खोजें।",
         "find_lab_button": "अपने आस-पास एक परीक्षण प्रयोगशाला खोजें"
+    },
+    "market_analysis": {
+        "page_title": "फसल बाजार विश्लेषण",
+        "page_subtitle": "अपनी फसलों के लिए वास्तविक समय बाजार मूल्य और बिक्री सलाह प्राप्त करें।",
+        "form_title": "फसल बाजार का विश्लेषण करें",
+        "form_subtitle": "नवीनतम बाजार अंतर्दृष्टि प्राप्त करने के लिए एक फसल दर्ज करें।",
+        "crop_name_label": "फसल का नाम",
+        "crop_name_placeholder": "जैसे, गेहूं, टमाटर, कपास",
+        "region_label": "आपका क्षेत्र",
+        "region_placeholder": "जैसे, पंजाब, भारत",
+        "region_description": "आपका स्थान हमें स्थानीय विश्लेषण प्रदान करने में मदद करता है।",
+        "submit_button": "बाजार विश्लेषण प्राप्त करें",
+        "loading_button": "विश्लेषण हो रहा है...",
+        "toast_error_title": "विश्लेषण विफल",
+        "toast_error_description": "AI बाजार विश्लेषण प्रदान करने में विफल रहा। कृपया पुन: प्रयास करें।",
+        "results_title": "{cropName} के लिए बाजार विश्लेषण",
+        "current_price": "वर्तमान मूल्य",
+        "price_trend": "मूल्य प्रवृत्ति",
+        "selling_suggestions": "लाभदायक बिक्री स्थान",
+        "new_analysis_button": "नया विश्लेषण शुरू करें"
     }
 }
