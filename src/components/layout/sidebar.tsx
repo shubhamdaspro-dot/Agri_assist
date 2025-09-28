@@ -19,6 +19,7 @@ import {
   ShieldAlert,
   TestTube,
   BarChart2,
+  Flower2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -40,8 +41,8 @@ const navItems = [
 function AgriAssistLogo() {
   return (
     <Link href="/dashboard" className="flex items-center gap-3 px-2">
-      <div className="p-1 bg-white/20 rounded-lg">
-        <Image src="/logo.png" alt="AgriAssist Logo" width={36} height={36} />
+      <div className="p-1 bg-white/20 rounded-lg flex items-center justify-center w-10 h-10">
+        <Flower2 className="w-8 h-8 text-white" />
       </div>
       <div>
         <h1 className="text-xl font-bold text-white transition-opacity group-data-[collapsible=icon]:opacity-0">

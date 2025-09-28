@@ -11,7 +11,7 @@ import {useAuth} from '@/hooks/use-auth';
 import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {useToast} from '@/hooks/use-toast';
-import {Loader2} from 'lucide-react';
+import {Loader2, Flower2} from 'lucide-react';
 import {useLanguage} from '@/hooks/use-language';
 import { createUserProfile } from '@/lib/actions';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -147,7 +147,7 @@ export default function Home() {
        <div id="recaptcha-container" ref={recaptchaContainerRef}></div>
       <div className="w-full max-w-md space-y-8 px-4 text-center">
         <div className="flex justify-center">
-            <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
+            <Flower2 className="w-20 h-20 text-primary" />
         </div>
         <h1 className="text-4xl font-bold font-headline">{t('auth.login_title')}</h1>
         <p className="text-muted-foreground">{t('auth.login_subtitle')}</p>
