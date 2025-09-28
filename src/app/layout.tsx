@@ -25,7 +25,8 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         />
-        <meta name="theme-color" content="#4CAF50" />
+        <meta name="theme-color" content="#ffffff" />
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body className="font-body antialiased">
         <AuthProvider>
