@@ -71,20 +71,11 @@ export default function Home() {
       });
     } catch (error: any) {
       console.error(error);
-       if (error.code === 'auth/captcha-check-failed') {
-        toast({
-          variant: 'destructive',
-          title: 'Authentication Error',
-          description: "Could not verify the app's authenticity. Please try logging in from your device's web browser instead of the installed app.",
-          duration: 9000,
-        });
-      } else {
-        toast({
-            variant: 'destructive',
-            title: t('auth.toast_otp_failed_title'),
-            description: error.message,
-        });
-      }
+      toast({
+        variant: 'destructive',
+        title: t('auth.toast_otp_failed_title'),
+        description: error.message,
+      });
     }
     setLoading(false);
   };
