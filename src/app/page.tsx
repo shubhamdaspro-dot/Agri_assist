@@ -1,5 +1,5 @@
 'use client';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import {useRouter} from 'next/navigation';
 import {
   RecaptchaVerifier,
@@ -33,6 +33,7 @@ export default function AuthPage() {
   const router = useRouter();
   const {toast} = useToast();
   const {t} = useLanguage();
+  const recaptchaContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!authLoading && user) {
@@ -41,24 +42,18 @@ export default function AuthPage() {
   }, [user, authLoading, router]);
 
   useEffect(() => {
-    const initRecaptcha = () => {
-       if (!(window as any).recaptchaVerifier) {
-            (window as any).recaptchaVerifier = new RecaptchaVerifier(
-                auth,
-                'recaptcha-container',
-                {
-                    size: 'invisible',
-                    callback: (response: any) => {
-                        // reCAPTCHA solved, allow signInWithPhoneNumber.
-                    },
-                }
-            );
+    if (recaptchaContainerRef.current && !(window as any).recaptchaVerifier) {
+      (window as any).recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        recaptchaContainerRef.current,
+        {
+          size: 'invisible',
+          callback: (response: any) => {
+            // reCAPTCHA solved, allow signInWithPhoneNumber.
+          },
         }
-    };
-    // Delay initialization to ensure the container is in the DOM
-    const timeoutId = setTimeout(initRecaptcha, 100);
-
-    return () => clearTimeout(timeoutId);
+      );
+    }
   }, []);
 
   const handleSendOtp = async () => {
@@ -221,7 +216,7 @@ export default function AuthPage() {
             </Button>
           </form>
         )}
-        <div id="recaptcha-container"></div>
+        <div ref={recaptchaContainerRef}></div>
       </div>
     </main>
   );
