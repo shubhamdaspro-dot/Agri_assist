@@ -73,8 +73,8 @@ export default function ProfileSetupPage() {
       });
 
       if (result.success) {
-        toast({ title: 'Profile Updated!', description: 'Welcome to AgriAssist.' });
-        router.push('/dashboard');
+        toast({ title: 'Profile Updated!', description: 'Next, let\'s set up your permissions.' });
+        router.push('/permissions');
       } else {
         throw new Error(result.error || 'Failed to update profile.');
       }
