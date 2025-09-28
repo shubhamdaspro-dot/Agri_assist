@@ -22,19 +22,25 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
                     <div className="container mx-auto py-6 px-4 sm:px-6">
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div>
-                                <h4 className="font-semibold text-foreground/80 mb-2">Company</h4>
+                                <h4 className="font-semibold text-foreground/80 mb-2">AgriAssist</h4>
                                 <ul className="space-y-1">
-                                    <li><Link href="#" className="hover:text-foreground">About Us</Link></li>
-                                    <li><Link href="#" className="hover:text-foreground">Features</Link></li>
-                                    <li><Link href="#" className="hover:text-foreground">Contact</Link></li>
+                                    <li><Link href="/dashboard" className="hover:text-foreground">Dashboard</Link></li>
+                                    <li><Link href="/recommendations" className="hover:text-foreground">Crop Advice</Link></li>
                                 </ul>
                             </div>
                             <div>
                                 <h4 className="font-semibold text-foreground/80 mb-2">Resources</h4>
                                 <ul className="space-y-1">
                                     <li><Link href="/help" className="hover:text-foreground">Help Center</Link></li>
-                                    <li><Link href="/news" className="hover:text-foreground">Blog</Link></li>
+                                    <li><Link href="/news" className="hover:text-foreground">News</Link></li>
                                     <li><Link href="/loans" className="hover:text-foreground">Loan Schemes</Link></li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 className="font-semibold text-foreground/80 mb-2">Legal</h4>
+                                <ul className="space-y-1">
+                                    <li><Link href="#" className="hover:text-foreground">Privacy Policy</Link></li>
+                                    <li><Link href="#" className="hover:text-foreground">Terms of Service</Link></li>
                                 </ul>
                             </div>
                         </div>

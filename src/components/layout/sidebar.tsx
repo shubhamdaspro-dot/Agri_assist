@@ -17,9 +17,9 @@ import {
   CircleHelp,
   MessageCircle,
   ShieldAlert,
-  Sprout,
   TestTube,
   BarChart2,
+  Flower2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -43,7 +43,7 @@ function AgriAssistLogo() {
   return (
     <Link href="/dashboard" className="flex items-center gap-3 px-2">
       <div className="p-2 bg-white/20 rounded-lg">
-        <Sprout className="h-7 w-7 text-white" />
+        <Flower2 className="h-7 w-7 text-white" />
       </div>
       <div>
         <h1 className="text-xl font-bold text-white transition-opacity group-data-[collapsible=icon]:opacity-0">
