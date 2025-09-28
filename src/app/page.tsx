@@ -14,10 +14,20 @@ import {useToast} from '@/hooks/use-toast';
 import {Loader2, Sprout} from 'lucide-react';
 import {useLanguage} from '@/hooks/use-language';
 import { createUserProfile } from '@/lib/actions';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+
+const countryCodes = [
+  { value: '+91', label: 'IN (+91)' },
+  { value: '+1', label: 'US (+1)' },
+  { value: '+44', label: 'UK (+44)' },
+  { value: '+61', label: 'AU (+61)' },
+  { value: '+81', label: 'JP (+81)' },
+];
 
 export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [countryCode, setCountryCode] = useState('+91');
   const [otp, setOtp] = useState('');
   const [confirmationResult, setConfirmationResult] =
     useState<ConfirmationResult | null>(null);
@@ -35,6 +45,7 @@ export default function Home() {
   }, [user, authLoading, router]);
 
   const handleSendOtp = async () => {
+    const fullPhoneNumber = countryCode + phoneNumber;
     if (!phoneNumber) {
       toast({
         variant: 'destructive',
@@ -52,11 +63,11 @@ export default function Home() {
         });
       (window as any).recaptchaVerifier = verifier;
 
-      const result = await signInWithPhoneNumber(auth, phoneNumber, verifier);
+      const result = await signInWithPhoneNumber(auth, fullPhoneNumber, verifier);
       setConfirmationResult(result);
       toast({
         title: t('auth.toast_otp_sent_title'),
-        description: t('auth.toast_otp_sent_description', {phoneNumber}),
+        description: t('auth.toast_otp_sent_description', {phoneNumber: fullPhoneNumber}),
       });
     } catch (error: any) {
       console.error(error);
@@ -140,7 +151,19 @@ export default function Home() {
               handleSendOtp();
             }}
           >
-            <div className="relative">
+            <div className="flex gap-2">
+               <Select value={countryCode} onValueChange={setCountryCode}>
+                <SelectTrigger className="w-[120px] h-12">
+                  <SelectValue placeholder="Code" />
+                </SelectTrigger>
+                <SelectContent>
+                  {countryCodes.map((code) => (
+                    <SelectItem key={code.value} value={code.value}>
+                      {code.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
               <Input
                 id="phone"
                 type="tel"
@@ -148,7 +171,7 @@ export default function Home() {
                 required
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
-                className="h-12 text-center"
+                className="h-12 text-left"
               />
             </div>
             <Button
