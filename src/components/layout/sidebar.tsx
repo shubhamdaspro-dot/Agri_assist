@@ -19,13 +19,13 @@ import {
   ShieldAlert,
   TestTube,
   BarChart2,
-  Flower2,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
 import { useChat } from '@/hooks/use-chat';
 import { useAuth } from '@/hooks/use-auth';
+import Image from 'next/image';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -38,12 +38,10 @@ const navItems = [
 ];
 
 function AgriAssistLogo() {
-  const { user } = useAuth();
-
   return (
     <Link href="/dashboard" className="flex items-center gap-3 px-2">
-      <div className="p-2 bg-white/20 rounded-lg">
-        <Flower2 className="h-7 w-7 text-white" />
+      <div className="p-1 bg-white/20 rounded-lg">
+        <Image src="/logo.png" alt="AgriAssist Logo" width={36} height={36} />
       </div>
       <div>
         <h1 className="text-xl font-bold text-white transition-opacity group-data-[collapsible=icon]:opacity-0">
