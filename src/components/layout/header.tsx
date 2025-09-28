@@ -14,13 +14,15 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
 import { auth, messaging, getToken } from '@/lib/firebase';
-import { signOut } from 'firebase/auth';
+import { signOut, updateProfile } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useToast } from '@/hooks/use-toast';
-import { saveFcmToken } from '@/lib/actions';
+import { saveFcmToken, createUserProfile } from '@/lib/actions';
 import { useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 function getTitleKey(path: string): string {
   if (path.includes('/products/')) {
@@ -39,12 +41,24 @@ export default function Header() {
   const { toast } = useToast();
   const titleKey = getTitleKey(pathname);
   const [hasNotificationPermission, setHasNotificationPermission] = useState(false);
+  const [userProfile, setUserProfile] = useState<{ displayName?: string; photoURL?: string } | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'Notification' in window) {
       setHasNotificationPermission(Notification.permission === 'granted');
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      const unsub = onSnapshot(doc(db, "users", user.uid), (doc) => {
+        if (doc.exists()) {
+          setUserProfile(doc.data());
+        }
+      });
+      return () => unsub();
+    }
+  }, [user]);
 
   const handleSignOut = async () => {
     await signOut(auth);
@@ -115,14 +129,14 @@ export default function Header() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                <Avatar className="h-9 w-9">
-                <AvatarImage src={user?.photoURL || undefined} alt="User avatar" />
-                <AvatarFallback>{user?.displayName?.charAt(0) || 'F'}</AvatarFallback>
+                <AvatarImage src={userProfile?.photoURL || undefined} alt="User avatar" />
+                <AvatarFallback>{userProfile?.displayName?.charAt(0) || 'F'}</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className='w-56'>
             <DropdownMenuLabel>
-              <p className="font-semibold">{user?.displayName || 'Farmer'}</p>
+              <p className="font-semibold">{userProfile?.displayName || 'Farmer'}</p>
               <p className="text-xs text-muted-foreground font-normal">{user?.phoneNumber}</p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

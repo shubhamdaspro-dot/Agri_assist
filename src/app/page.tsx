@@ -103,17 +103,25 @@ export default function Home() {
       const user = userCredential.user;
 
       if (user) {
-        await createUserProfile({
+        const profileResult = await createUserProfile({
           uid: user.uid,
           phoneNumber: user.phoneNumber!,
         });
-      }
 
-      toast({
-        title: t('auth.toast_login_success_title'),
-        description: t('auth.toast_login_success_description'),
-      });
-      router.push('/dashboard');
+        if (profileResult.success && profileResult.isNewUser) {
+           toast({
+            title: t('auth.toast_login_success_title'),
+            description: "Please set up your profile.",
+          });
+          router.push('/profile-setup');
+        } else {
+           toast({
+            title: t('auth.toast_login_success_title'),
+            description: t('auth.toast_login_success_description'),
+          });
+          router.push('/dashboard');
+        }
+      }
     } catch (error: any) {
       toast({
         variant: 'destructive',

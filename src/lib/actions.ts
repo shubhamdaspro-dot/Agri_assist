@@ -189,7 +189,9 @@ const UserProfileSchema = z.object({
   phoneNumber: z.string(),
 });
 
-export async function createUserProfile(input: z.infer<typeof UserProfileSchema>) {
+export async function createUserProfile(
+  input: z.infer<typeof UserProfileSchema>
+): Promise<{ success: boolean; isNewUser?: boolean; error?: string }> {
   try {
     const userRef = doc(db, 'users', input.uid);
     const userDoc = await getDoc(userRef);
@@ -199,10 +201,13 @@ export async function createUserProfile(input: z.infer<typeof UserProfileSchema>
         phoneNumber: input.phoneNumber,
         createdAt: serverTimestamp(),
       });
+      return { success: true, isNewUser: true };
     }
-    return { success: true };
+     // Check if displayName is missing, indicating incomplete profile
+    const isNewUser = !userDoc.data()?.displayName;
+    return { success: true, isNewUser };
   } catch (e: any) {
-    console.error('Error creating user profile:', e);
+    console.error('Error creating/checking user profile:', e);
     return { success: false, error: e.message };
   }
 }
@@ -231,6 +236,27 @@ export async function saveFcmToken(uid: string, token: string) {
         return { success: true };
     } catch (e: any) {
         console.error('Error saving FCM token:', e);
+        return { success: false, error: e.message };
+    }
+}
+
+const UpdateUserProfileSchema = z.object({
+  uid: z.string(),
+  displayName: z.string().min(2, 'Name must be at least 2 characters.'),
+  photoURL: z.string().url().optional(),
+});
+
+export async function updateUserProfile(input: z.infer<typeof UpdateUserProfileSchema>) {
+    try {
+        const userRef = doc(db, 'users', input.uid);
+        await updateDoc(userRef, {
+            displayName: input.displayName,
+            ...(input.photoURL && { photoURL: input.photoURL }),
+            profileCompleted: true,
+        });
+        return { success: true };
+    } catch (e: any) {
+        console.error('Error updating user profile:', e);
         return { success: false, error: e.message };
     }
 }
