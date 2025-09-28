@@ -148,7 +148,7 @@ export function RecommendationResults({ results, onNewRecommendation, profitabil
                         <TrendingUp className="h-6 w-6 text-primary" />
                         {t('recommendations.profitability_title')}
                       </CardTitle>
-                      <CardDescription>{t('recommendations.profitability_subtitle')}</CardDescription>
+                      <CardDescription>{t('recommendations.profitability_subtitle')}</CardHeader>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {profitabilityAnalysis.profitabilityAnalysis.map((item) => (
