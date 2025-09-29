@@ -11,6 +11,9 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
   DropdownMenuLabel,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
 import { auth, messaging, getToken } from '@/lib/firebase';
@@ -148,22 +151,20 @@ export default function Header() {
                     <span>{t('sidebar.profile')}</span>
                 </Link>
             </DropdownMenuItem>
-             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                        <Languages className="mr-2 h-4 w-4" />
-                        <span>{t('header.change_language')}</span>
-                    </DropdownMenuItem>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                    <DropdownMenuItem onClick={() => setLanguage('en')} active={language === 'en'}>{t('header.english')}</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('hi')} active={language === 'hi'}>{t('header.hindi')}</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('bn')} active={language === 'bn'}>{t('header.bengali')}</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('te')} active={language === 'te'}>{t('header.telugu')}</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('mr')} active={language === 'mr'}>{t('header.marathi')}</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => setLanguage('ta')} active={language === 'ta'}>{t('header.tamil')}</DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
+             <DropdownMenuSub>
+                <DropdownMenuSubTrigger>
+                    <Languages className="mr-2 h-4 w-4" />
+                    <span>{t('header.change_language')}</span>
+                </DropdownMenuSubTrigger>
+                <DropdownMenuSubContent>
+                    <DropdownMenuItem onClick={() => setLanguage('en')} >{t('header.english')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('hi')} >{t('header.hindi')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('bn')} >{t('header.bengali')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('te')} >{t('header.telugu')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('mr')} >{t('header.marathi')}</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => setLanguage('ta')} >{t('header.tamil')}</DropdownMenuItem>
+                </DropdownMenuSubContent>
+            </DropdownMenuSub>
             {user && (
               <>
                 <DropdownMenuSeparator />
