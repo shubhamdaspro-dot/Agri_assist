@@ -15,7 +15,6 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { Input } from '@/components/ui/input';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 type RecommendationFormProps = {
   setResults: (results: SimplifiedRecommendation | null) => void;
@@ -24,15 +23,13 @@ type RecommendationFormProps = {
 };
 
 const soilTypes = [
-    { id: 'Dark and Crumbly', labelKey: 'recommendations.soil_dark', image: 'https://picsum.photos/seed/soil-dark/400/300' },
-    { id: 'Red and Sticky', labelKey: 'recommendations.soil_red', image: 'https://picsum.photos/seed/soil-red/400/300' },
-    { id: 'Light and Sandy', labelKey: 'recommendations.soil_light', image: 'https://picsum.photos/seed/soil-light/400/300' },
-    { id: 'Black and Clayey', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black/400/300' },
-    { id: 'Brown and Silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
-    { id: 'Alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial/400/300' },
-    { id: 'Laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite/400/300' },
-    { id: 'Peaty', labelKey: 'recommendations.soil_peaty', image: 'https://picsum.photos/seed/soil-peaty/400/300' },
-    { id: 'Chalky', labelKey: 'recommendations.soil_chalky', image: 'https://picsum.photos/seed/soil-chalky/400/300' },
+    { id: 'Dark and Crumbly', labelKey: 'recommendations.soil_dark' },
+    { id: 'Red and Sticky', labelKey: 'recommendations.soil_red' },
+    { id: 'Light and Sandy', labelKey: 'recommendations.soil_light' },
+    { id: 'Black and Clayey', labelKey: 'recommendations.soil_black' },
+    { id: 'Brown and Silty', labelKey: 'recommendations.soil_silty' },
+    { id: 'Alluvial', labelKey: 'recommendations.soil_alluvial' },
+    { id: 'Laterite', labelKey: 'recommendations.soil_laterite' },
 ];
 
 const waterSources = [
@@ -238,30 +235,18 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <Carousel
-                    opts={{
-                        align: "start",
-                        loop: true,
-                    }}
-                    className="w-full"
-                    >
-                    <CarouselContent>
-                        {soilTypes.map((soil) => (
-                        <CarouselItem key={soil.id} className="basis-1/2 md:basis-1/3">
-                            <button onClick={() => handleSoilSelection(soil.id)}
-                                className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary w-full",
-                                    selectedSoil === soil.id ? "border-primary transform scale-105" : "border-transparent"
-                                )}
-                            >
-                                <Image src={soil.image} alt={t(soil.labelKey)} width={200} height={150} className="rounded-md w-full aspect-[4/3] object-cover" />
-                                <p className="font-semibold mt-2">{t(soil.labelKey)}</p>
-                            </button>
-                        </CarouselItem>
-                        ))}
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                </Carousel>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    {soilTypes.map((soil) => (
+                        <Button
+                            key={soil.id}
+                            variant={selectedSoil === soil.id ? 'default' : 'outline'}
+                            onClick={() => handleSoilSelection(soil.id)}
+                            className="h-auto py-4"
+                        >
+                            {t(soil.labelKey)}
+                        </Button>
+                    ))}
+                </div>
                 
                 <div className="flex items-center gap-4">
                     <hr className="flex-grow border-t" />
