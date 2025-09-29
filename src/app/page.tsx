@@ -54,8 +54,9 @@ export default function Home() {
                         console.warn("Firestore client offline, retrying profile check...");
                         setTimeout(() => checkProfile(retryCount + 1), 2000);
                     } else {
-                        console.error("Failed to check profile, defaulting to dashboard:", res.error);
-                        router.push('/dashboard'); // Fallback to dashboard on persistent error
+                        console.error("Failed to check profile, defaulting to profile setup:", res.error);
+                        // Default to profile setup for new users even if check fails, to be safe.
+                        router.push('/profile-setup');
                     }
                 }
             } catch (error) {
