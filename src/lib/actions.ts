@@ -23,11 +23,18 @@ function handleServiceError(e: any): string {
     return e.message || 'An unknown error occurred.';
 }
 
+const GetCropRecommendationsSchema = z.object({
+  geographicRegion: z.string(),
+  soilType: z.string(),
+  weatherData: z.string(),
+});
+
 export async function getCropRecommendations(
-  input: GenerateCropRecommendationsInput
+  input: z.infer<typeof GetCropRecommendationsSchema>
 ): Promise<{ success: boolean; data: GenerateCropRecommendationsOutput | null; error?: string }> {
   try {
-    const result = await generateCropRecommendations(input);
+    const validatedInput = GetCropRecommendationsSchema.parse(input);
+    const result = await generateCropRecommendations(validatedInput);
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
