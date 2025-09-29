@@ -80,6 +80,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     const aiResult = await getCropRecommendations({
       geographicRegion: `${location.latitude}, ${location.longitude}`,
       soilType: selectedSoil,
+      waterSource: selectedWater,
       weatherData: weatherString,
     });
     
@@ -144,12 +145,15 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
             </CardHeader>
             <CardContent className="space-y-4">
                 {location && (
-                    <div className="p-4 rounded-lg bg-muted flex items-center gap-4">
-                        <MapPin className="h-6 w-6 text-primary" />
-                        <div>
-                            <p className="font-semibold">Lat: {location.latitude.toFixed(4)}, Long: {location.longitude.toFixed(4)}</p>
-                            <p className="text-sm text-muted-foreground">Location detected</p>
-                        </div>
+                    <div className="rounded-lg overflow-hidden border">
+                        <iframe
+                            width="100%"
+                            height="250"
+                            loading="lazy"
+                            allowFullScreen
+                            src={`https://www.openstreetmap.org/export/embed.html?bbox=${location.longitude-0.01}%2C${location.latitude-0.01}%2C${location.longitude+0.01}%2C${location.latitude+0.01}&layer=mapnik&marker=${location.latitude}%2C${location.longitude}`}
+                        >
+                        </iframe>
                     </div>
                 )}
                 {locationError && (
@@ -205,7 +209,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                         </Button>
                     ))}
                 </div>
-                <Button onClick={handleGetRecommendation} disabled={!selectedWater} className="w-full">
+                <Button onClick={handleGetRecommendation} disabled={!selectedWater || isLoading} className="w-full">
+                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
                     Get My Recommendation
                 </Button>
             </CardContent>
