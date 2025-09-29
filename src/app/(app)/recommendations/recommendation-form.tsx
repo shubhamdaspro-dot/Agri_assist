@@ -85,11 +85,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
         reader.readAsDataURL(file);
     }
   };
-  
-  const handleSoilSelection = (soilId: string) => {
-      setSelectedSoil(soilId);
-      setUploadedSoilPhoto(null);
-  }
 
  const handleGetRecommendation = async () => {
     if (!location || (!selectedSoil && !uploadedSoilPhoto) || !selectedWater || !user) {
@@ -235,7 +230,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <Select onValueChange={handleSoilSelection} value={selectedSoil || ''}>
+                <Select onValueChange={setSelectedSoil} value={selectedSoil || ''}>
                     <SelectTrigger>
                         <SelectValue placeholder={t('recommendations.form_soil_type_placeholder')} />
                     </SelectTrigger>
