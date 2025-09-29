@@ -91,7 +91,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
   const handleSoilSelection = (soilId: string) => {
       setSelectedSoil(soilId);
       setUploadedSoilPhoto(null);
-      setStep(3);
   }
 
  const handleGetRecommendation = async () => {
@@ -248,7 +247,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                     <CarouselContent>
                         {soilTypes.map((soil) => (
                         <CarouselItem key={soil.id} className="basis-1/2 md:basis-1/3">
-                            <button key={soil.id} onClick={() => handleSoilSelection(soil.id)}
+                            <button onClick={() => handleSoilSelection(soil.id)}
                                 className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary w-full",
                                     selectedSoil === soil.id ? "border-primary transform scale-105" : "border-transparent"
                                 )}
@@ -263,6 +262,13 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                     <CarouselNext />
                 </Carousel>
                 
+                {(selectedSoil && !uploadedSoilPhoto) && (
+                    <Button onClick={() => setStep(3)} className="w-full">
+                       <Check className="mr-2 h-4 w-4" />
+                       Confirm Selection & Continue
+                    </Button>
+                )}
+
                 <div className="flex items-center gap-4">
                     <hr className="flex-grow border-t" />
                     <span className="text-muted-foreground text-sm">{t('disease_prevention.or_divider')}</span>
