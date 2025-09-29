@@ -6,7 +6,7 @@ import { ai } from '@/ai/genkit';
 import wav from 'wav';
 import { z } from 'zod';
 import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
-import type { FetchLatestNewsOutput, SimplifiedRecommendation } from './types';
+import type { FetchLatestNewsOutput, SimplifiedRecommendation, FarmingGuide, GenerateFarmingGuideInput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
@@ -14,7 +14,7 @@ import { analyzeMarketPrices } from '@/ai/flows/analyze-market-prices';
 import { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
 import { db, messaging } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion, addDoc, collection, getDocs, query, where, orderBy } from 'firebase/firestore';
-import { generateFarmingGuide, GenerateFarmingGuideInput, FarmingGuide } from '@/ai/flows/generate-farming-guide';
+import { generateFarmingGuide } from '@/ai/flows/generate-farming-guide';
 
 function handleServiceError(e: any): string {
     if (e.message && e.message.includes('503')) {

@@ -3,31 +3,10 @@
  * @fileOverview A Genkit flow for generating a step-by-step farming guide for a specific crop.
  *
  * - generateFarmingGuide - A function that takes a crop name and language and returns a detailed guide.
- * - GenerateFarmingGuideInput - The input type for the generateFarmingGuide function.
- * - FarmingGuide - The output type (the guide itself).
  */
 
 import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
-
-export const GenerateFarmingGuideInputSchema = z.object({
-    cropName: z.string().describe("The name of the crop for which to generate a guide."),
-    language: z.string().describe("The language in which the guide should be written (e.g., 'en', 'hi').")
-});
-export type GenerateFarmingGuideInput = z.infer<typeof GenerateFarmingGuideInputSchema>;
-
-
-export const FarmingGuideSchema = z.object({
-    cropName: z.string(),
-    introduction: z.string().describe("A brief introduction to growing this crop."),
-    soilPreparation: z.array(z.string()).describe("Steps for preparing the soil."),
-    sowing: z.array(z.string()).describe("Instructions for sowing seeds."),
-    fertilizers: z.array(z.string()).describe("Guidance on fertilizer application."),
-    irrigation: z.array(z.string()).describe("Instructions on watering the crop."),
-    weedControl: z.array(z.string()).describe("Methods for controlling weeds."),
-    harvesting: z.array(z.string()).describe("Guidance on when and how to harvest."),
-});
-export type FarmingGuide = z.infer<typeof FarmingGuideSchema>;
+import { GenerateFarmingGuideInputSchema, FarmingGuideSchema, type GenerateFarmingGuideInput, type FarmingGuide } from '@/lib/types';
 
 
 export async function generateFarmingGuide(input: GenerateFarmingGuideInput): Promise<FarmingGuide> {

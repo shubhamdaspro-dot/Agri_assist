@@ -85,3 +85,24 @@ export const SimplifiedRecommendationSchema = z.object({
   ),
 });
 export type SimplifiedRecommendation = z.infer<typeof SimplifiedRecommendationSchema>;
+
+
+// Farming Guide Types
+export const GenerateFarmingGuideInputSchema = z.object({
+    cropName: z.string().describe("The name of the crop for which to generate a guide."),
+    language: z.string().describe("The language in which the guide should be written (e.g., 'en', 'hi').")
+});
+export type GenerateFarmingGuideInput = z.infer<typeof GenerateFarmingGuideInputSchema>;
+
+
+export const FarmingGuideSchema = z.object({
+    cropName: z.string(),
+    introduction: z.string().describe("A brief introduction to growing this crop."),
+    soilPreparation: z.array(z.string()).describe("Steps for preparing the soil."),
+    sowing: z.array(z.string()).describe("Instructions for sowing seeds."),
+    fertilizers: z.array(z.string()).describe("Guidance on fertilizer application."),
+    irrigation: z.array(z.string()).describe("Instructions on watering the crop."),
+    weedControl: z.array(z.string()).describe("Methods for controlling weeds."),
+    harvesting: z.array(z.string()).describe("Guidance on when and how to harvest."),
+});
+export type FarmingGuide = z.infer<typeof FarmingGuideSchema>;
