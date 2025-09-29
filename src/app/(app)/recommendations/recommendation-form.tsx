@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, MapPin, Check, X, Upload, Sprout } from 'lucide-react';
+import { Loader2, MapPin, Check, X, Upload, Sprout, TestTube2, Camera } from 'lucide-react';
 import { saveRecommendation, getCropRecommendations, analyzeSoilFromPhotoAction } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
@@ -15,6 +15,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { waterSources } from '@/lib/data';
+import Link from 'next/link';
 
 type RecommendationFormProps = {
   setResults: (results: SimplifiedRecommendation | null) => void;
@@ -44,8 +45,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
   const [locationError, setLocationError] = useState<string | null>(null);
   
   const [selectedSoil, setSelectedSoil] = useState<string | null>(null);
-  const [uploadedSoilPhoto, setUploadedSoilPhoto] = useState<string | null>(null);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [selectedWater, setSelectedWater] = useState<string | null>(null);
   
@@ -67,21 +66,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     }
   }, [isClient, t, step]);
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const dataUri = reader.result as string;
-            setUploadedSoilPhoto(dataUri);
-            setSelectedSoil(null); // Clear preset soil selection
-        };
-        reader.readAsDataURL(file);
-    }
-  };
 
  const handleGetRecommendation = async () => {
-    if (!location || (!selectedSoil && !uploadedSoilPhoto) || !selectedWater || !user) {
+    if (!location || !selectedSoil || !selectedWater || !user) {
       toast({ variant: 'destructive', title: "Missing Information", description: "Please complete all steps." });
       return;
     }
@@ -89,33 +76,14 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     setIsLoading(true);
     setStep(4);
 
-    let soilTypeForApi = selectedSoil;
-
     try {
-        if (uploadedSoilPhoto && !selectedSoil) {
-            const soilAnalysisResult = await analyzeSoilFromPhotoAction({ photoDataUri: uploadedSoilPhoto });
-            if (soilAnalysisResult.success && soilAnalysisResult.data) {
-                soilTypeForApi = soilAnalysisResult.data.soilType;
-                toast({
-                  title: t('recommendations.toast_soil_analysis_complete_title'),
-                  description: t('recommendations.toast_soil_analysis_complete_description', { soilType: soilAnalysisResult.data.soilType, analysis: soilAnalysisResult.data.analysis }),
-                });
-            } else {
-                throw new Error(soilAnalysisResult.error || t('recommendations.toast_soil_analysis_failed_description'));
-            }
-        }
-        
-        if (!soilTypeForApi) {
-            throw new Error("Could not determine soil type.");
-        }
-    
         const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,precipitation,weather_code`);
         const weatherData = await weatherResponse.json();
         const weatherString = `Current weather: ${weatherData.current.temperature_2m}°C, ${weatherData.current.precipitation}mm precipitation.`;
     
         const aiResult = await getCropRecommendations({
           geographicRegion: `${location.latitude}, ${location.longitude}`,
-          soilType: soilTypeForApi,
+          soilType: selectedSoil,
           waterSource: selectedWater,
           weatherData: weatherString,
         });
@@ -129,7 +97,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
         const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'createdAt'> = {
           userId: user.uid,
           location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
-          soilType: soilTypeForApi,
+          soilType: selectedSoil,
           waterSource: selectedWater,
           topRecommendation: {
             cropName: topRec.name,
@@ -212,7 +180,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <Select onValueChange={(value) => { setSelectedSoil(value); setUploadedSoilPhoto(null); }} value={selectedSoil || ''}>
+                <Select onValueChange={(value) => { setSelectedSoil(value); }} value={selectedSoil || ''}>
                     <SelectTrigger>
                         <SelectValue placeholder={t('recommendations.form_soil_type_placeholder')} />
                     </SelectTrigger>
@@ -228,31 +196,20 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                     <span className="text-muted-foreground text-sm">{t('disease_prevention.or_divider')}</span>
                     <hr className="flex-grow border-t" />
                 </div>
-                
-                {uploadedSoilPhoto ? (
-                    <div className="space-y-2 text-center">
-                        <Image src={uploadedSoilPhoto} alt="Uploaded soil" width={200} height={150} className="rounded-md object-cover mx-auto" />
-                         <Button variant="link" size="sm" onClick={() => setUploadedSoilPhoto(null)}>
-                            <X className="mr-2 h-4 w-4" /> Remove photo
-                        </Button>
-                    </div>
-                ) : (
-                    <div className="text-center">
-                        <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()}>
-                          <Upload className="mr-2 h-4 w-4" />
-                          {t('recommendations.form_soil_photo_upload_button')}
-                        </Button>
-                        <Input
-                          ref={fileInputRef}
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={handleFileChange}
-                        />
-                    </div>
-                )}
 
-                 <Button onClick={() => setStep(3)} disabled={!selectedSoil && !uploadedSoilPhoto} className="w-full">
+                <Alert>
+                    <TestTube2 className="h-4 w-4" />
+                    <AlertTitle>{t('soil_analysis.unknown_levels_title')}</AlertTitle>
+                    <AlertDescription>
+                        {t('soil_analysis.unknown_levels_description')}
+                    </AlertDescription>
+                    <Button asChild variant="link" className="p-0 h-auto mt-2">
+                        <Link href="/soil-analysis">{t('soil_analysis.use_photo_analysis')}</Link>
+                    </Button>
+                </Alert>
+                
+
+                 <Button onClick={() => setStep(3)} disabled={!selectedSoil} className="w-full">
                     Next
                 </Button>
 
