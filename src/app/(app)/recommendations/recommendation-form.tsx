@@ -116,9 +116,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
         const aiResult = await getCropRecommendations({
           geographicRegion: `${location.latitude}, ${location.longitude}`,
           soilType: soilTypeForApi,
+          waterSource: selectedWater,
           weatherData: weatherString,
-          marketDemand: undefined,
-          historicalYields: undefined
         });
         
         if (!aiResult.success || !aiResult.data) {
