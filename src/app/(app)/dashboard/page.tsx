@@ -123,15 +123,18 @@ export default function DashboardPage() {
   };
 
   const getWeatherIcon = (description: WeatherCondition | undefined) => {
+    const isDarkBg = description === 'Rain' || description === 'Rain showers' || description === 'Thunderstorm';
+    const iconColor = isDarkBg ? 'text-white' : 'text-primary';
+
     switch (description) {
-      case 'Clear sky': return <Sun className="w-16 h-16 text-yellow-300" />;
-      case 'Partly cloudy': return <CloudSun className="w-16 h-16 text-white" />;
-      case 'Cloudy': return <Cloud className="w-16 h-16 text-gray-300" />;
-      case 'Fog': return <CloudFog className="w-16 h-16 text-gray-400" />;
+      case 'Clear sky': return <Sun className="w-16 h-16 text-yellow-400" />;
+      case 'Partly cloudy': return <CloudSun className="w-16 h-16 text-gray-500" />;
+      case 'Cloudy': return <Cloud className="w-16 h-16 text-gray-400" />;
+      case 'Fog': return <CloudFog className="w-16 h-16 text-gray-500" />;
       case 'Rain':
       case 'Rain showers': return <CloudRain className="w-16 h-16 text-blue-300" />;
       case 'Thunderstorm': return <CloudLightning className="w-16 h-16 text-yellow-300" />;
-      default: return <Cloud className="w-16 h-16" />;
+      default: return <Cloud className="w-16 h-16 text-gray-400" />;
     }
   }
 
@@ -158,8 +161,13 @@ export default function DashboardPage() {
     }
 
     if (weather) {
+       const isDarkBg = weather.description === 'Rain' || weather.description === 'Rain showers' || weather.description === 'Thunderstorm';
       return (
-         <CardContent className={cn("p-6 relative overflow-hidden rounded-b-lg text-white", getWeatherBackground(weather.description))}>
+         <CardContent className={cn(
+             "p-6 relative overflow-hidden rounded-b-lg",
+             getWeatherBackground(weather.description),
+             isDarkBg ? 'text-white' : 'text-gray-800'
+         )}>
            <div className="z-10 relative">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               <div className="flex flex-col items-center md:items-start text-center md:text-left">
@@ -170,19 +178,19 @@ export default function DashboardPage() {
                 <p className="text-lg">{weather.description}</p>
               </div>
               <div className="space-y-3">
-                <div className="flex justify-between items-center text-sm font-medium bg-black/20 p-2 rounded-md">
+                <div className={cn("flex justify-between items-center text-sm font-medium p-2 rounded-md", isDarkBg ? 'bg-black/20' : 'bg-black/10')}>
                   <span className="flex items-center"><Droplets className="w-4 h-4 mr-2" />{t('dashboard.humidity')}</span>
                   <span>{weather.humidity}%</span>
                 </div>
-                <div className="flex justify-between items-center text-sm font-medium bg-black/20 p-2 rounded-md">
+                <div className={cn("flex justify-between items-center text-sm font-medium p-2 rounded-md", isDarkBg ? 'bg-black/20' : 'bg-black/10')}>
                   <span className="flex items-center"><Wind className="w-4 h-4 mr-2" />{t('dashboard.rainfall')}</span>
                   <span>{weather.rainfall}mm</span>
                 </div>
               </div>
             </div>
-            <Card className="mt-4 bg-white/20 border-white/30 backdrop-blur-sm">
+            <Card className={cn("mt-4 border", isDarkBg ? 'bg-white/20 border-white/30' : 'bg-black/5 border-black/10')}>
                 <CardContent className="p-3">
-                    <p className="text-sm text-white font-medium">{t('dashboard.weather_-condition')}</p>
+                    <p className={cn("text-sm font-medium", isDarkBg ? 'text-white' : 'text-gray-800')}>{t('dashboard.weather_-condition')}</p>
                 </CardContent>
             </Card>
           </div>
