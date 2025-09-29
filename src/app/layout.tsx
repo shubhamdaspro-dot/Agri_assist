@@ -3,12 +3,10 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 import { LanguageProvider } from '@/hooks/use-language';
 import { AuthProvider } from '@/hooks/use-auth';
-import AddToHomeScreen from '@/components/pwa/add-to-home-screen';
 
 export const metadata: Metadata = {
   title: 'AgriAssist',
   description: 'AI-powered assistance for modern farming.',
-  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -33,7 +31,6 @@ export default function RootLayout({
           <LanguageProvider>
             {children}
             <Toaster />
-            <AddToHomeScreen />
           </LanguageProvider>
         </AuthProvider>
       </body>
