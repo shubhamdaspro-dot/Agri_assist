@@ -40,33 +40,23 @@ export default function Home() {
 
   useEffect(() => {
     if (!authLoading && user) {
-        const checkProfile = async (retryCount = 0) => {
+        const checkProfile = async () => {
             try {
                 const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
-                if (res.success) {
-                    if (res.profileComplete) {
-                        router.push('/dashboard');
-                    } else {
-                        router.push('/profile-setup');
-                    }
+                if (res.profileComplete) {
+                    router.push('/dashboard');
                 } else {
-                    if (res.error?.includes('offline') && retryCount < 1) {
-                        console.warn("Firestore client offline, retrying profile check...");
-                        setTimeout(() => checkProfile(retryCount + 1), 2000);
-                    } else {
-                        console.error("Failed to check profile, defaulting to profile setup:", res.error);
-                        // Default to profile setup for new users even if check fails, to be safe.
-                        router.push('/profile-setup');
-                    }
+                    router.push('/profile-setup');
                 }
             } catch (error) {
                 console.error("Exception when checking profile:", error);
-                router.push('/dashboard'); // Fallback to dashboard on exception
+                // Fallback to dashboard on exception to avoid getting stuck
+                router.push('/dashboard');
             }
         };
         checkProfile();
     }
-}, [user, authLoading, router]);
+  }, [user, authLoading, router]);
 
   const handleSendOtp = async () => {
     const fullPhoneNumber = countryCode + phoneNumber;
