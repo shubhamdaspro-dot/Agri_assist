@@ -61,8 +61,6 @@ Weather Data: {{{weatherData}}}
 Soil Type: {{{soilType}}}
 Water Source: {{{waterSource}}}
 Geographic Region: {{{geographicRegion}}}
-{{#if historicalYields}}Historical Yields (if available): {{{historicalYields}}}{{/if}}
-{{#if marketDemand}}Market Demand (if available): {{{marketDemand}}}{{/if}}
 
 Based on this information, provide your detailed recommendations.`,
 });
