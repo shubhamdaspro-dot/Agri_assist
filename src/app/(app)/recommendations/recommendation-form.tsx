@@ -250,7 +250,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                         <CarouselItem key={soil.id} className="basis-1/2 md:basis-1/3">
                             <button key={soil.id} onClick={() => handleSoilSelection(soil.id)}
                                 className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary w-full",
-                                    selectedSoil === soil.id ? "border-primary" : "border-transparent"
+                                    selectedSoil === soil.id ? "border-primary transform scale-105" : "border-transparent"
                                 )}
                             >
                                 <Image src={soil.image} alt={t(soil.labelKey)} width={200} height={150} className="rounded-md w-full aspect-[4/3] object-cover" />
