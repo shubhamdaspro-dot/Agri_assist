@@ -126,7 +126,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
         
         const topRec = aiResult.data.recommendedCrops[0];
     
-        const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'userId' | 'createdAt'> = {
+        const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'createdAt'> = {
+          userId: user.uid,
           location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
           soilType: soilTypeForApi,
           waterSource: selectedWater,
@@ -146,10 +147,10 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
           })),
         };
     
-        const saveResult = await saveRecommendation({ ...recommendationData, userId: user.uid });
+        const saveResult = await saveRecommendation(recommendationData);
     
         if (saveResult.success && saveResult.id) {
-          setResults({ ...recommendationData, id: saveResult.id, userId: user.uid, createdAt: new Date() });
+          setResults({ ...recommendationData, id: saveResult.id, createdAt: new Date() });
         } else {
           throw new Error(saveResult.error || 'Failed to save recommendation.');
         }
