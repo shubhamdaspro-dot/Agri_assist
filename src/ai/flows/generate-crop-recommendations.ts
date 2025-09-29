@@ -31,7 +31,7 @@ const GenerateCropRecommendationsOutputSchema = z.object({
   nearestStores: z.array(z.object({
     name: z.string().describe('The name of the store.'),
     address: z.string().describe('The full, searchable address of the store.'),
-  })).describe('A list of 2-3 fictional but realistic local stores with full, searchable addresses where the recommended products can be purchased.'),
+  })).describe('A list of 2-3 fictional but realistic local stores with full, searchable addresses where the recommended products can be purchased based on the geographic region.'),
 });
 export type GenerateCropRecommendationsOutput = z.infer<typeof GenerateCropRecommendationsOutputSchema>;
 
@@ -45,7 +45,7 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateCropRecommendationsOutputSchema},
   prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation. Generate a list of 3-5 suitable crops to plant, with a specific rationale for each. Also, provide a general list of products needed for these crops, a general rationale covering the crop types, and a list of 2-3 fictional but realistic local stores with full, searchable addresses where the products can be purchased based on the geographic region.
   
-The soil type will be one of the following: "Dark and Crumbly", "Red and Sticky", "Light and Sandy", "Black and Clayey", "Brown and Silty", "Alluvial", "Laterite", or a type identified from a photo.
+The soil type will be one of the following: "Dark and Crumbly", "Red and Sticky", "Light and Sandy", "Black and Clayey", "Brown and Silty", "Alluvial", "Laterite", "Peaty", "Chalky", or a type identified from a photo.
 
 Weather Data: {{{weatherData}}}
 Soil Type: {{{soilType}}}
