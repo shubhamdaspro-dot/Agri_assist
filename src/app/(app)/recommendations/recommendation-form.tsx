@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, MapPin, Check, X, Droplets, Mountain, Wind, Sprout } from 'lucide-react';
-import { saveRecommendation, getCropRecommendations } from '@/lib/actions';
+import { Loader2, MapPin, Check, X, Droplets, Mountain, Wind, Sprout, Upload } from 'lucide-react';
+import { saveRecommendation, getCropRecommendations, analyzeSoilFromPhotoAction } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
@@ -14,6 +14,7 @@ import type { SimplifiedRecommendation } from '@/lib/types';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
+import { Input } from '@/components/ui/input';
 
 type RecommendationFormProps = {
   setResults: (results: SimplifiedRecommendation | null) => void;
@@ -46,6 +47,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
   const [locationError, setLocationError] = useState<string | null>(null);
   
   const [selectedSoil, setSelectedSoil] = useState<string | null>(null);
+  const [uploadedSoilPhoto, setUploadedSoilPhoto] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const [selectedWater, setSelectedWater] = useState<string | null>(null);
   
   useEffect(() => {
@@ -66,8 +70,27 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     }
   }, [isClient, t, step]);
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            const dataUri = reader.result as string;
+            setUploadedSoilPhoto(dataUri);
+            setSelectedSoil(null); // Clear preset soil selection
+        };
+        reader.readAsDataURL(file);
+    }
+  };
+  
+  const handleSoilSelection = (soilId: string) => {
+      setSelectedSoil(soilId);
+      setUploadedSoilPhoto(null);
+      setStep(3);
+  }
+
  const handleGetRecommendation = async () => {
-    if (!location || !selectedSoil || !selectedWater || !user) {
+    if (!location || (!selectedSoil && !uploadedSoilPhoto) || !selectedWater || !user) {
       toast({ variant: 'destructive', title: "Missing Information", description: "Please complete all steps." });
       return;
     }
@@ -75,13 +98,42 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     setIsLoading(true);
     setStep(4);
 
+    let soilTypeForApi = selectedSoil;
+
+    if (uploadedSoilPhoto) {
+        const soilAnalysisResult = await analyzeSoilFromPhotoAction({ photoDataUri: uploadedSoilPhoto });
+        if (soilAnalysisResult.success && soilAnalysisResult.data) {
+            soilTypeForApi = soilAnalysisResult.data.soilType;
+            toast({
+              title: t('recommendations.toast_soil_analysis_complete_title'),
+              description: t('recommendations.toast_soil_analysis_complete_description', { soilType: soilAnalysisResult.data.soilType, analysis: soilAnalysisResult.data.analysis }),
+            });
+        } else {
+            toast({
+                variant: 'destructive',
+                title: t('recommendations.toast_soil_analysis_failed_title'),
+                description: soilAnalysisResult.error || t('recommendations.toast_soil_analysis_failed_description'),
+            });
+            setIsLoading(false);
+            setStep(2); // Go back to soil step on error
+            return;
+        }
+    }
+    
+    if (!soilTypeForApi) {
+        toast({ variant: 'destructive', title: "Soil type missing", description: "Could not determine soil type." });
+        setIsLoading(false);
+        setStep(2);
+        return;
+    }
+
     const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,precipitation,weather_code`);
     const weatherData = await weatherResponse.json();
     const weatherString = `Current weather: ${weatherData.current.temperature_2m}°C, ${weatherData.current.precipitation}mm precipitation.`;
 
     const aiResult = await getCropRecommendations({
       geographicRegion: `${location.latitude}, ${location.longitude}`,
-      soilType: selectedSoil,
+      soilType: soilTypeForApi,
       waterSource: selectedWater,
       weatherData: weatherString,
     });
@@ -101,12 +153,12 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
 
     const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'userId' | 'createdAt'> = {
       location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
-      soilType: selectedSoil,
+      soilType: soilTypeForApi,
       waterSource: selectedWater,
       topRecommendation: {
         cropName: topRec.name,
         cropNameLocal: topRec.name, // The AI should provide this in the future
-        imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase()}/600/400`,
+        imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase().replace(' ', '-')}/600/400`,
         imageHint: `${topRec.name.toLowerCase()} field`,
         profit: "High", // Placeholder
         waterNeeded: "Medium", // Placeholder
@@ -179,17 +231,49 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardTitle>{t('recommendations.step_2_title')}</CardTitle>
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {soilTypes.map(soil => (
-                    <button key={soil.id} onClick={() => { setSelectedSoil(soil.id); setStep(3); }}
-                        className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary",
-                            selectedSoil === soil.id ? "border-primary" : "border-transparent"
-                        )}
-                    >
-                        <Image src={soil.image} alt={t(soil.labelKey)} width={200} height={150} className="rounded-md w-full aspect-[4/3] object-cover" />
-                        <p className="font-semibold mt-2">{t(soil.labelKey)}</p>
-                    </button>
-                ))}
+            <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {soilTypes.map(soil => (
+                        <button key={soil.id} onClick={() => handleSoilSelection(soil.id)}
+                            className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary",
+                                selectedSoil === soil.id ? "border-primary" : "border-transparent"
+                            )}
+                        >
+                            <Image src={soil.image} alt={t(soil.labelKey)} width={200} height={150} className="rounded-md w-full aspect-[4/3] object-cover" />
+                            <p className="font-semibold mt-2">{t(soil.labelKey)}</p>
+                        </button>
+                    ))}
+                </div>
+                
+                <div className="flex items-center gap-4">
+                    <hr className="flex-grow border-t" />
+                    <span className="text-muted-foreground text-sm">{t('disease_prevention.or_divider')}</span>
+                    <hr className="flex-grow border-t" />
+                </div>
+                
+                {uploadedSoilPhoto ? (
+                    <div className="space-y-4">
+                        <Image src={uploadedSoilPhoto} alt="Uploaded soil" width={200} height={150} className="rounded-md object-cover mx-auto" />
+                        <Button onClick={() => setStep(3)} className="w-full">
+                           <Check className="mr-2 h-4 w-4" />
+                           {t('recommendations.confirm_photo_button')}
+                        </Button>
+                    </div>
+                ) : (
+                    <div className="text-center">
+                        <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()}>
+                          <Upload className="mr-2 h-4 w-4" />
+                          {t('recommendations.form_soil_photo_upload_button')}
+                        </Button>
+                        <Input
+                          ref={fileInputRef}
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={handleFileChange}
+                        />
+                    </div>
+                )}
             </CardContent>
         </>
       )}

@@ -78,7 +78,13 @@
         "profit_low": "कम",
         "water_high": "उच्च",
         "water_medium": "मध्यम",
-        "water_low": "कम"
+        "water_low": "कम",
+        "form_soil_photo_upload_button": "मिट्टी का फोटो अपलोड करें",
+        "toast_soil_analysis_complete_title": "मिट्टी का विश्लेषण पूरा हुआ",
+        "toast_soil_analysis_complete_description": "{soilType} के रूप में पहचाना गया। {analysis}",
+        "toast_soil_analysis_failed_title": "मिट्टी का विश्लेषण विफल",
+        "toast_soil_analysis_failed_description": "मिट्टी की तस्वीर का विश्लेषण नहीं किया जा सका। कृपया प्रीसेट में से किसी एक को आजमाएं।",
+        "confirm_photo_button": "फोटो की पुष्टि करें और जारी रखें"
     },
     "news": {
         "page_title": "कृषि समाचार और अपडेट",

@@ -1,6 +1,6 @@
 'use server';
 
-import { generateCropRecommendations, GenerateCropRecommendationsInput, GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
+import { generateCropRecommendations, GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
 import { analyzeSoilFromPhoto, AnalyzeSoilFromPhotoInput, AnalyzeSoilFromPhotoOutput } from '@/ai/flows/analyze-soil-from-photo';
 import { ai } from '@/ai/genkit';
 import wav from 'wav';
@@ -26,6 +26,7 @@ function handleServiceError(e: any): string {
 const GetCropRecommendationsSchema = z.object({
   geographicRegion: z.string(),
   soilType: z.string(),
+  waterSource: z.string(),
   weatherData: z.string(),
 });
 

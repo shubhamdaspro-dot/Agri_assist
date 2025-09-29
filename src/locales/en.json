@@ -91,7 +91,13 @@
         "profit_low": "Low",
         "water_high": "High",
         "water_medium": "Medium",
-        "water_low": "Low"
+        "water_low": "Low",
+        "form_soil_photo_upload_button": "Upload Soil Photo",
+        "toast_soil_analysis_complete_title": "Soil Analysis Complete",
+        "toast_soil_analysis_complete_description": "Identified as {soilType}. {analysis}",
+        "toast_soil_analysis_failed_title": "Soil Analysis Failed",
+        "toast_soil_analysis_failed_description": "Could not analyze the soil photo. Please try one of the presets.",
+        "confirm_photo_button": "Confirm Photo & Continue"
     },
     "news": {
         "page_title": "Agricultural News & Updates",
