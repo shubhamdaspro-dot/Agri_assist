@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, MapPin, Check, X, Droplets, Mountain, Wind, Sprout, Upload } from 'lucide-react';
+import { Loader2, MapPin, Check, X, Upload, Sprout } from 'lucide-react';
 import { saveRecommendation, getCropRecommendations, analyzeSoilFromPhotoAction } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
@@ -12,10 +12,10 @@ import { useLanguage } from '@/hooks/use-language';
 import { useIsClient } from '@/hooks/use-is-client';
 import type { SimplifiedRecommendation } from '@/lib/types';
 import Image from 'next/image';
-import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { waterSources } from '@/lib/data';
 
 type RecommendationFormProps = {
   setResults: (results: SimplifiedRecommendation | null) => void;
@@ -33,15 +33,10 @@ const soilTypes = [
     { id: 'Laterite', labelKey: 'recommendations.soil_laterite' },
 ];
 
-const waterSources = [
-    { id: 'Rain Only', labelKey: 'recommendations.water_rain', icon: Droplets },
-    { id: 'Canal / River', labelKey: 'recommendations.water_canal', icon: Mountain },
-    { id: 'Borewell / Tubewell', labelKey: 'recommendations.water_borewell', icon: Wind },
-];
 
 export function RecommendationForm({ setResults, setIsLoading, isLoading }: RecommendationFormProps) {
   const { toast } = useToast();
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { user } = useAuth();
   const isClient = useIsClient();
 
@@ -97,92 +92,78 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
 
     let soilTypeForApi = selectedSoil;
 
-    if (uploadedSoilPhoto) {
-        const soilAnalysisResult = await analyzeSoilFromPhotoAction({ photoDataUri: uploadedSoilPhoto });
-        if (soilAnalysisResult.success && soilAnalysisResult.data) {
-            soilTypeForApi = soilAnalysisResult.data.soilType;
-            toast({
-              title: t('recommendations.toast_soil_analysis_complete_title'),
-              description: t('recommendations.toast_soil_analysis_complete_description', { soilType: soilAnalysisResult.data.soilType, analysis: soilAnalysisResult.data.analysis }),
-            });
-        } else {
-            toast({
-                variant: 'destructive',
-                title: t('recommendations.toast_soil_analysis_failed_title'),
-                description: soilAnalysisResult.error || t('recommendations.toast_soil_analysis_failed_description'),
-            });
-            setIsLoading(false);
-            setStep(2); // Go back to soil step on error
-            return;
+    try {
+        if (uploadedSoilPhoto) {
+            const soilAnalysisResult = await analyzeSoilFromPhotoAction({ photoDataUri: uploadedSoilPhoto });
+            if (soilAnalysisResult.success && soilAnalysisResult.data) {
+                soilTypeForApi = soilAnalysisResult.data.soilType;
+                toast({
+                  title: t('recommendations.toast_soil_analysis_complete_title'),
+                  description: t('recommendations.toast_soil_analysis_complete_description', { soilType: soilAnalysisResult.data.soilType, analysis: soilAnalysisResult.data.analysis }),
+                });
+            } else {
+                throw new Error(soilAnalysisResult.error || t('recommendations.toast_soil_analysis_failed_description'));
+            }
         }
-    }
+        
+        if (!soilTypeForApi) {
+            throw new Error("Could not determine soil type.");
+        }
     
-    if (!soilTypeForApi) {
-        toast({ variant: 'destructive', title: "Soil type missing", description: "Could not determine soil type." });
-        setIsLoading(false);
-        setStep(2);
-        return;
-    }
-
-    const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,precipitation,weather_code`);
-    const weatherData = await weatherResponse.json();
-    const weatherString = `Current weather: ${weatherData.current.temperature_2m}°C, ${weatherData.current.precipitation}mm precipitation.`;
-
-    const aiResult = await getCropRecommendations({
-      geographicRegion: `${location.latitude}, ${location.longitude}`,
-      soilType: soilTypeForApi,
-      weatherData: weatherString,
-      historicalYields: '',
-      marketDemand: '',
-    });
+        const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,precipitation,weather_code`);
+        const weatherData = await weatherResponse.json();
+        const weatherString = `Current weather: ${weatherData.current.temperature_2m}°C, ${weatherData.current.precipitation}mm precipitation.`;
     
-    if (!aiResult.success || !aiResult.data) {
+        const aiResult = await getCropRecommendations({
+          geographicRegion: `${location.latitude}, ${location.longitude}`,
+          soilType: soilTypeForApi,
+          weatherData: weatherString,
+        });
+        
+        if (!aiResult.success || !aiResult.data) {
+            throw new Error(aiResult.error || t('recommendations.toast_error_description'));
+        }
+        
+        const topRec = aiResult.data.recommendedCrops[0];
+    
+        const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'userId' | 'createdAt'> = {
+          location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
+          soilType: soilTypeForApi,
+          waterSource: selectedWater,
+          topRecommendation: {
+            cropName: topRec.name,
+            cropNameLocal: topRec.name,
+            imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}/600/400`,
+            imageHint: `${topRec.name.toLowerCase()} field`,
+            profit: "High", 
+            waterNeeded: topRec.waterRequirement, 
+            timeToHarvest: `${topRec.sowingSeason} - ${topRec.harvestingSeason}`,
+            rationale: topRec.rationale,
+          },
+          secondaryOptions: aiResult.data.recommendedCrops.slice(1, 3).map(c => ({
+              cropName: c.name,
+              cropNameLocal: c.name
+          })),
+        };
+    
+        const saveResult = await saveRecommendation({ ...recommendationData, userId: user.uid });
+    
+        if (saveResult.success && saveResult.id) {
+          setResults({ ...recommendationData, id: saveResult.id, userId: user.uid, createdAt: new Date() });
+        } else {
+          throw new Error(saveResult.error || 'Failed to save recommendation.');
+        }
+
+    } catch (error: any) {
         toast({
             variant: 'destructive',
             title: t('recommendations.toast_error_title'),
-            description: aiResult.error || t('recommendations.toast_error_description'),
+            description: error.message,
         });
-        setIsLoading(false);
         setStep(3); // Go back to the last step on error
-        return;
+    } finally {
+        setIsLoading(false);
     }
-    
-    const topRec = aiResult.data.recommendedCrops[0];
-
-    const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'userId' | 'createdAt'> = {
-      location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
-      soilType: soilTypeForApi,
-      waterSource: selectedWater,
-      topRecommendation: {
-        cropName: topRec.name,
-        cropNameLocal: topRec.name, // The AI should provide this in the future
-        imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase().replace(' ', '-')}/600/400`,
-        imageHint: `${topRec.name.toLowerCase()} field`,
-        profit: "High", // Placeholder
-        waterNeeded: "Medium", // Placeholder
-        timeToHarvest: "90-120 days", // Placeholder
-        rationale: topRec.rationale,
-      },
-      secondaryOptions: aiResult.data.recommendedCrops.slice(1, 3).map(c => ({
-          cropName: c.name,
-          cropNameLocal: c.name
-      })),
-    };
-
-    const saveResult = await saveRecommendation({ ...recommendationData, userId: user.uid });
-
-    if (saveResult.success && saveResult.id) {
-      setResults({ ...recommendationData, id: saveResult.id, userId: user.uid, createdAt: new Date() });
-    } else {
-      toast({
-        variant: 'destructive',
-        title: t('recommendations.toast_error_title'),
-        description: saveResult.error || t('recommendations.toast_error_description'),
-      });
-      setStep(3);
-    }
-
-    setIsLoading(false);
   };
   
   if (!isClient) return <Card><CardContent><Loader2 className="mx-auto my-12 h-8 w-8 animate-spin text-primary"/></CardContent></Card>
@@ -230,7 +211,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <Select onValueChange={setSelectedSoil} value={selectedSoil || ''}>
+                <Select onValueChange={(value) => { setSelectedSoil(value); setUploadedSoilPhoto(null); }} value={selectedSoil || ''}>
                     <SelectTrigger>
                         <SelectValue placeholder={t('recommendations.form_soil_type_placeholder')} />
                     </SelectTrigger>

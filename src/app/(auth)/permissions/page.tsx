@@ -50,7 +50,7 @@ export default function PermissionsPage() {
     try {
         const permission = await Notification.requestPermission();
         if (permission === 'granted') {
-            const currentToken = await getToken(messaging, { vapidKey: 'YOUR_VAPID_KEY_HERE' }); // Replace with your VAPID key
+            const currentToken = await getToken(messaging, { vapidKey: 'BCmGVf-pL4S9lQ_u_xP-BiJjbe4LIlS8Jw4j22C5i0V-fHkmy3h9oYk8yTqA5F1X5NwsDoUDj6b1sXgJNoS4t1w' });
             if (currentToken) {
                 await saveFcmToken(user.uid, currentToken);
                 setNotificationsState('granted');

@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '@/hooks/use-language';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
-import { Loader2, Upload, X, ShieldAlert, Leaf, CheckCircle, AlertCircle } from 'lucide-react';
+import { Loader2, Upload, X, ShieldAlert, Leaf, CheckCircle, AlertCircle, Camera } from 'lucide-react';
 import { getDiseaseDiagnosis } from '@/lib/actions';
 import type { DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 import Image from 'next/image';
@@ -33,8 +33,46 @@ export default function DiseasePreventionPage() {
     const [selectedDisease, setSelectedDisease] = useState<string>('');
     const [uploadedPhoto, setUploadedPhoto] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [results, setResults] = useState<DiagnoseCropDiseaseOutput | null>(null);
+    const [isCameraOpen, setIsCameraOpen] = useState(false);
+    const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        if (isCameraOpen) {
+            const getCameraPermission = async () => {
+              try {
+                const stream = await navigator.mediaDevices.getUserMedia({video: true});
+                setHasCameraPermission(true);
+        
+                if (videoRef.current) {
+                  videoRef.current.srcObject = stream;
+                }
+              } catch (error) {
+                console.error('Error accessing camera:', error);
+                setHasCameraPermission(false);
+                setIsCameraOpen(false);
+                toast({
+                  variant: 'destructive',
+                  title: 'Camera Access Denied',
+                  description: 'Please enable camera permissions in your browser settings.',
+                });
+              }
+            };
+        
+            getCameraPermission();
+
+            // Cleanup function
+            return () => {
+                if (videoRef.current && videoRef.current.srcObject) {
+                    (videoRef.current.srcObject as MediaStream).getTracks().forEach(track => track.stop());
+                }
+            }
+        }
+    }, [isCameraOpen, toast]);
+
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
@@ -48,6 +86,20 @@ export default function DiseasePreventionPage() {
             reader.readAsDataURL(file);
         }
     };
+
+    const handleCapture = () => {
+        if (videoRef.current && canvasRef.current) {
+            const context = canvasRef.current.getContext('2d');
+            if (context) {
+                canvasRef.current.width = videoRef.current.videoWidth;
+                canvasRef.current.height = videoRef.current.videoHeight;
+                context.drawImage(videoRef.current, 0, 0, videoRef.current.videoWidth, videoRef.current.videoHeight);
+                const dataUri = canvasRef.current.toDataURL('image/jpeg');
+                setUploadedPhoto(dataUri);
+                setIsCameraOpen(false);
+            }
+        }
+    }
 
     const handleGetDiagnosis = async () => {
         if (!selectedDisease && !uploadedPhoto) {
@@ -87,6 +139,36 @@ export default function DiseasePreventionPage() {
         setSelectedDisease('');
         setUploadedPhoto(null);
     };
+
+    if (isCameraOpen) {
+        return (
+            <div className="space-y-4">
+                 <h1 className="text-3xl font-bold font-headline">Take a Photo</h1>
+                <p className="text-muted-foreground">
+                    Center the affected plant part in the frame.
+                </p>
+                <video ref={videoRef} className="w-full aspect-video rounded-md bg-secondary" autoPlay muted playsInline />
+                {hasCameraPermission === false && (
+                    <Alert variant="destructive">
+                      <AlertTitle>Camera Access Required</AlertTitle>
+                      <AlertDescription>
+                        Please allow camera access to use this feature. You may need to change permissions in your browser settings.
+                      </AlertDescription>
+                    </Alert>
+                )}
+                 <canvas ref={canvasRef} className="hidden"></canvas>
+                 <div className="flex gap-4">
+                    <Button onClick={handleCapture} disabled={hasCameraPermission !== true} className="w-full">
+                        <Camera className="mr-2 h-4 w-4" />
+                        Capture Photo
+                    </Button>
+                    <Button onClick={() => setIsCameraOpen(false)} variant="outline" className="w-full">
+                        Cancel
+                    </Button>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="space-y-8">
@@ -142,10 +224,16 @@ export default function DiseasePreventionPage() {
                                 </Button>
                               </div>
                             ) : (
-                              <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()} disabled={isLoading}>
-                                <Upload className="mr-2 h-4 w-4" />
-                                {t('disease_prevention.upload_photo_button')}
-                              </Button>
+                              <div className='flex gap-2'>
+                                <Button type="button" variant="outline" onClick={() => fileInputRef.current?.click()} disabled={isLoading}>
+                                    <Upload className="mr-2 h-4 w-4" />
+                                    {t('disease_prevention.upload_photo_button')}
+                                </Button>
+                                 <Button type="button" variant="outline" onClick={() => setIsCameraOpen(true)} disabled={isLoading}>
+                                    <Camera className="mr-2 h-4 w-4" />
+                                    Take Photo
+                                </Button>
+                              </div>
                             )}
                             <Input
                               ref={fileInputRef}

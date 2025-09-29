@@ -1,17 +1,17 @@
 'use server';
 
-import { generateCropRecommendations, GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
-import { analyzeSoilFromPhoto, AnalyzeSoilFromPhotoInput, AnalyzeSoilFromPhotoOutput } from '@/ai/flows/analyze-soil-from-photo';
+import { generateCropRecommendations, type GenerateCropRecommendationsInput, type GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
+import { analyzeSoilFromPhoto, type AnalyzeSoilFromPhotoInput, type AnalyzeSoilFromPhotoOutput } from '@/ai/flows/analyze-soil-from-photo';
 import { ai } from '@/ai/genkit';
 import wav from 'wav';
 import { z } from 'zod';
 import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
 import type { FetchLatestNewsOutput, SimplifiedRecommendation, FarmingGuide, GenerateFarmingGuideInput } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
-import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
-import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
+import { diagnoseCropDisease, type DiagnoseCropDiseaseInput, type DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
+import { analyzeCropProfitability, type AnalyzeCropProfitabilityInput, type AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
 import { analyzeMarketPrices } from '@/ai/flows/analyze-market-prices';
-import { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
+import type { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
 import { db, messaging } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion, addDoc, collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 import { generateFarmingGuide } from '@/ai/flows/generate-farming-guide';
@@ -23,20 +23,11 @@ function handleServiceError(e: any): string {
     return e.message || 'An unknown error occurred.';
 }
 
-const GetCropRecommendationsSchema = z.object({
-  geographicRegion: z.string(),
-  soilType: z.string(),
-  weatherData: z.string(),
-  historicalYields: z.string().optional(),
-  marketDemand: z.string().optional(),
-});
-
 export async function getCropRecommendations(
-  input: z.infer<typeof GetCropRecommendationsSchema>
+  input: GenerateCropRecommendationsInput
 ): Promise<{ success: boolean; data: GenerateCropRecommendationsOutput | null; error?: string }> {
   try {
-    const validatedInput = GetCropRecommendationsSchema.parse(input);
-    const result = await generateCropRecommendations(validatedInput);
+    const result = await generateCropRecommendations(input);
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
@@ -257,7 +248,7 @@ const UpdateUserProfileSchema = z.object({
   uid: z.string(),
   displayName: z.string().min(2, 'Name must be at least 2 characters.'),
   age: z.number().min(1, 'Age must be a positive number.'),
-  photoURL: z.string().url().optional(),
+  photoURL: z.string().url().optional().nullable(),
 });
 
 export async function updateUserProfile(input: z.infer<typeof UpdateUserProfileSchema>) {

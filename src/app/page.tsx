@@ -16,7 +16,7 @@ import {useLanguage} from '@/hooks/use-language';
 import { createUserProfile } from '@/lib/actions';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Image from 'next/image';
-
+import { languages } from '@/lib/i18n';
 
 const countryCodes = [
   { value: '+91', label: 'IN (+91)' },
@@ -36,7 +36,7 @@ export default function Home() {
   const {user, loading: authLoading} = useAuth();
   const router = useRouter();
   const {toast} = useToast();
-  const {t} = useLanguage();
+  const {t, language, setLanguage} = useLanguage();
   const recaptchaContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -160,8 +160,24 @@ export default function Home() {
         <div className="flex justify-center">
             <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
         </div>
-        <h1 className="text-4xl font-bold font-headline">{t('auth.login_title')}</h1>
-        <p className="text-muted-foreground">{t('auth.login_subtitle')}</p>
+        <h1 className="text-4xl font-bold font-headline">{t('welcome.title')}</h1>
+        <p className="text-muted-foreground">{t('welcome.subtitle')}</p>
+        
+        <div className="space-y-2 text-left">
+            <label htmlFor="language-select">{t('welcome.language_select_label')}</label>
+            <Select value={language} onValueChange={setLanguage}>
+              <SelectTrigger id="language-select" className="w-full">
+                <SelectValue placeholder="Select Language" />
+              </SelectTrigger>
+              <SelectContent>
+                {languages.map((lang) => (
+                  <SelectItem key={lang.code} value={lang.code}>
+                    {lang.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+        </div>
 
         {!confirmationResult ? (
           <form

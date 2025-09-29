@@ -1,18 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useAuth } from '@/hooks/use-auth';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, User } from 'lucide-react';
+import { Loader2, User, Camera } from 'lucide-react';
 import { updateUserProfile } from '@/lib/actions';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
+import { storage } from '@/lib/firebase';
 
 const profileFormSchema = z.object({
   displayName: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -24,6 +27,8 @@ export default function ProfileSetupPage() {
   const router = useRouter();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
+  const [avatar, setAvatar] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const form = useForm<z.infer<typeof profileFormSchema>>({
     resolver: zodResolver(profileFormSchema),
@@ -33,6 +38,17 @@ export default function ProfileSetupPage() {
     },
   });
 
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAvatar(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const onSubmit = async (values: z.infer<typeof profileFormSchema>) => {
     if (!user) {
       toast({ variant: 'destructive', title: 'Error', description: 'You are not logged in.' });
@@ -40,17 +56,25 @@ export default function ProfileSetupPage() {
     }
 
     setLoading(true);
+    let photoURL: string | undefined = undefined;
 
     try {
+       if (avatar) {
+            const storageRef = ref(storage, `avatars/${user.uid}`);
+            await uploadString(storageRef, avatar, 'data_url');
+            photoURL = await getDownloadURL(storageRef);
+       }
+
       const result = await updateUserProfile({
         uid: user.uid,
         displayName: values.displayName,
         age: values.age,
+        photoURL: photoURL,
       });
 
       if (result.success) {
         toast({ title: 'Profile Updated!', description: "Let's get started." });
-        router.push('/welcome');
+        router.push('/permissions');
       } else {
         throw new Error(result.error || 'Failed to update profile.');
       }
@@ -84,6 +108,31 @@ export default function ProfileSetupPage() {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+               <div className="flex justify-center">
+                    <div className="relative">
+                        <Avatar className="h-24 w-24">
+                            <AvatarImage src={avatar || undefined} alt="User Avatar" />
+                            <AvatarFallback>
+                                <User className="h-12 w-12" />
+                            </AvatarFallback>
+                        </Avatar>
+                        <Button
+                            type="button"
+                            size="icon"
+                            className="absolute bottom-0 right-0 rounded-full h-8 w-8"
+                            onClick={() => fileInputRef.current?.click()}
+                        >
+                            <Camera className="h-4 w-4" />
+                        </Button>
+                        <Input
+                            type="file"
+                            ref={fileInputRef}
+                            className="hidden"
+                            accept="image/*"
+                            onChange={handleAvatarChange}
+                        />
+                    </div>
+                </div>
               <FormField
                 control={form.control}
                 name="displayName"

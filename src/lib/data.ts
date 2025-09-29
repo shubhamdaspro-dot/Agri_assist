@@ -1,5 +1,6 @@
 import type { Product, LoanScheme } from './types';
 import { PlaceHolderImages } from './placeholder-images';
+import { Droplets, Mountain, Wind } from 'lucide-react';
 
 const getPlaceholderImage = (id: string) => {
     return PlaceHolderImages.find(img => img.id === id)?.imageUrl || 'https://placehold.co/400x300';
@@ -159,4 +160,10 @@ export const loans_hi: LoanScheme[] = [
         process: ['राज्य नोडल एजेंसियों या राष्ट्रीय पोर्टल के माध्यम से आवेदन करें।', 'आवेदन सत्यापित किया जाता है, और अनुमोदन पर, सब्सिडी विक्रेता को वितरित की जाती है।'],
         link: 'https://pmkusum.mnre.gov.in/'
     }
+];
+
+export const waterSources = [
+    { id: 'Rain Only', labelKey: 'recommendations.water_rain', icon: Droplets },
+    { id: 'Canal / River', labelKey: 'recommendations.water_canal', icon: Mountain },
+    { id: 'Borewell / Tubewell', labelKey: 'recommendations.water_borewell', icon: Wind },
 ];
