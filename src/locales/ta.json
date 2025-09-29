@@ -43,7 +43,6 @@
         "location_error_title": "இடப் பிழை",
         "location_error_manual": "இருப்பிடத்தை அணுக முடியவில்லை. உங்கள் விவரங்களை கைமுறையாக உள்ளிடவும்.",
         "location_error_unsupported": "இந்த உலாவி புவிஇருப்பிடத்தை ஆதரிக்கவில்லை.",
-        "weather_placeholder": "{lat}, {long} இல் தற்போதைய வானிலை. வெப்பநிலை: 28°C, ஈரப்பதம்: 70%, உடனடி மழை முன்னறிவிப்பு இல்லை.",
         "toast_soil_analysis_complete_title": "மண் பகுப்பாய்வு முடிந்தது",
         "toast_soil_analysis_complete_description": "{soilType} என அடையாளம் காணப்பட்டது. {analysis}",
         "toast_soil_analysis_failed_title": "மண் பகுப்பாய்வு தோல்வியுற்றது",
@@ -144,7 +143,7 @@
         "toast_otp_not_sent_title": "குறியீடு அனுப்பப்படவில்லை",
         "toast_otp_not_sent_description": "முதலில் ஒரு குறியீட்டைக் கோரவும்.",
         "toast_login_success_title": "உள்நுழைவு வெற்றி",
-        "toast_login_success_description": "அக்ரிஅசிஸ்டிற்கு வரவேற்கிறோம்!",
+        "toast_login_success_description": "அக்ரிஅసిஸ்டிற்கு வரவேற்கிறோம்!",
         "toast_invalid_otp_title": "தவறான குறியீடு"
     },
     "disease_prevention": {

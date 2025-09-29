@@ -134,7 +134,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     const aiResult = await getCropRecommendations({
       geographicRegion: `${location.latitude}, ${location.longitude}`,
       soilType: soilTypeForApi,
-      waterSource: selectedWater,
       weatherData: weatherString,
     });
     

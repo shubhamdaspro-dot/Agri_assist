@@ -43,7 +43,6 @@
         "location_error_title": "స్థాన దోషం",
         "location_error_manual": "స్థానాన్ని యాక్సెస్ చేయలేకపోయాము. దయచేసి మీ వివరాలను మాన్యువల్‌గా నమోదు చేయండి.",
         "location_error_unsupported": "ఈ బ్రౌజర్ జియోలొకేషన్‌కు మద్దతు ఇవ్వదు.",
-        "weather_placeholder": "{lat}, {long} వద్ద ప్రస్తుత వాతావరణం. ఉష్ణోగ్రత: 28°C, తేమ: 70%, తక్షణ వర్ష సూచన లేదు.",
         "toast_soil_analysis_complete_title": "నేల విశ్లేషణ పూర్తయింది",
         "toast_soil_analysis_complete_description": "{soilType}గా గుర్తించబడింది. {analysis}",
         "toast_soil_analysis_failed_title": "నేల విశ్లేషణ విఫలమైంది",

@@ -43,7 +43,6 @@
         "location_error_title": "स्थान त्रुटी",
         "location_error_manual": "स्थानावर प्रवेश करू शकलो नाही. कृपया तुमचे तपशील मॅन्युअली प्रविष्ट करा.",
         "location_error_unsupported": "हा ब्राउझर जिओलोकेशनला समर्थन देत नाही.",
-        "weather_placeholder": "{lat}, {long} येथे वर्तमान हवामान. तापमान: 28°C, आर्द्रता: 70%, त्वरित पावसाचा अंदाज नाही.",
         "toast_soil_analysis_complete_title": "माती विश्लेषण पूर्ण झाले",
         "toast_soil_analysis_complete_description": "{soilType} म्हणून ओळखले. {analysis}",
         "toast_soil_analysis_failed_title": "माती विश्लेषण अयशस्वी झाले",

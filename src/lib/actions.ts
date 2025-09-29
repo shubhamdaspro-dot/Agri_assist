@@ -26,7 +26,6 @@ function handleServiceError(e: any): string {
 const GetCropRecommendationsSchema = z.object({
   geographicRegion: z.string(),
   soilType: z.string(),
-  waterSource: z.string(),
   weatherData: z.string(),
 });
 
@@ -35,7 +34,11 @@ export async function getCropRecommendations(
 ): Promise<{ success: boolean; data: GenerateCropRecommendationsOutput | null; error?: string }> {
   try {
     const validatedInput = GetCropRecommendationsSchema.parse(input);
-    const result = await generateCropRecommendations(validatedInput);
+    const result = await generateCropRecommendations({
+        ...validatedInput,
+        historicalYields: '',
+        marketDemand: '',
+    });
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);

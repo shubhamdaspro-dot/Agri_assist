@@ -43,7 +43,6 @@
         "location_error_title": "অবস্থান ত্রুটি",
         "location_error_manual": "অবস্থান অ্যাক্সেস করা যায়নি। অনুগ্রহ করে আপনার বিবরণ ম্যানুয়ালি লিখুন।",
         "location_error_unsupported": "এই ব্রাউজারটি জিওলোকেশন সমর্থন করে না।",
-        "weather_placeholder": "{lat}, {long}-এ বর্তমান আবহাওয়া। তাপমাত্রা: ২৮°C, আর্দ্রতা: ৭০%, অবিলম্বে বৃষ্টির পূর্বাভাস নেই।",
         "toast_soil_analysis_complete_title": "মাটি বিশ্লেষণ সম্পন্ন",
         "toast_soil_analysis_complete_description": "{soilType} হিসাবে চিহ্নিত। {analysis}",
         "toast_soil_analysis_failed_title": "মাটি বিশ্লেষণ ব্যর্থ হয়েছে",
