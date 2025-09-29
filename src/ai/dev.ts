@@ -9,4 +9,4 @@ import '@/ai/flows/analyze-soil-from-photo.ts';
 import '@/ai/flows/diagnose-crop-disease.ts';
 import '@/ai/flows/analyze-crop-profitability.ts';
 import '@/ai/flows/analyze-market-prices.ts';
-
+import '@/ai/flows/generate-farming-guide.ts';

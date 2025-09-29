@@ -7,47 +7,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Skeleton } from '@/components/ui/skeleton';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, CheckCircle, Leaf } from 'lucide-react';
-import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
-
-type FarmingGuide = {
-  cropName: string;
-  introduction: string;
-  soilPreparation: string[];
-  sowing: string[];
-  fertilizers: string[];
-  irrigation: string[];
-  weedControl: string[];
-  harvesting: string[];
-};
-
-const FarmingGuideSchema = z.object({
-    cropName: z.string(),
-    introduction: z.string().describe("A brief introduction to growing this crop."),
-    soilPreparation: z.array(z.string()).describe("Steps for preparing the soil."),
-    sowing: z.array(z.string()).describe("Instructions for sowing seeds."),
-    fertilizers: z.array(z.string()).describe("Guidance on fertilizer application."),
-    irrigation: z.array(z.string()).describe("Instructions on watering the crop."),
-    weedControl: z.array(z.string()).describe("Methods for controlling weeds."),
-    harvesting: z.array(z.string()).describe("Guidance on when and how to harvest."),
-});
-
-const generateFarmingGuideFlow = ai.defineFlow(
-  {
-    name: 'generateFarmingGuideFlow',
-    inputSchema: z.object({ cropName: z.string(), language: z.string() }),
-    outputSchema: FarmingGuideSchema,
-  },
-  async ({ cropName, language }) => {
-    const prompt = `Generate a detailed, step-by-step farming guide for ${cropName}. The guide should be easy for a beginner farmer to understand. Provide practical, actionable steps for each stage of cultivation. The response must be in the ${language} language.`;
-    const { output } = await ai.generate({
-        prompt,
-        model: 'googleai/gemini-2.5-flash',
-        output: { schema: FarmingGuideSchema },
-    });
-    return output!;
-  }
-);
+import { getFarmingGuide } from '@/lib/actions';
+import type { FarmingGuide } from '@/ai/flows/generate-farming-guide';
 
 
 export default function FarmingGuidePage() {
@@ -65,11 +26,15 @@ export default function FarmingGuidePage() {
         setLoading(true);
         setError(null);
         try {
-          const result = await generateFarmingGuideFlow({ cropName: decodeURIComponent(cropName), language });
-          setGuide(result);
-        } catch (e) {
+          const result = await getFarmingGuide({ cropName: decodeURIComponent(cropName), language });
+          if (result.success && result.data) {
+            setGuide(result.data);
+          } else {
+             throw new Error(result.error || "Failed to load the farming guide.");
+          }
+        } catch (e: any) {
           console.error(e);
-          setError("Failed to load the farming guide. Please try again later.");
+          setError(e.message || "Failed to load the farming guide. Please try again later.");
         } finally {
           setLoading(false);
         }

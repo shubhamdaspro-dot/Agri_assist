@@ -14,6 +14,7 @@ import { analyzeMarketPrices } from '@/ai/flows/analyze-market-prices';
 import { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
 import { db, messaging } from '@/lib/firebase';
 import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion, addDoc, collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { generateFarmingGuide, GenerateFarmingGuideInput, FarmingGuide } from '@/ai/flows/generate-farming-guide';
 
 function handleServiceError(e: any): string {
     if (e.message && e.message.includes('503')) {
@@ -294,4 +295,16 @@ export async function getMyRecommendations(userId: string): Promise<{ success: b
         console.error('Error fetching recommendations:', e);
         return { success: false, error: e.message };
     }
+}
+
+export async function getFarmingGuide(
+  input: GenerateFarmingGuideInput
+): Promise<{ success: boolean; data: FarmingGuide | null; error?: string }> {
+  try {
+    const result = await generateFarmingGuide(input);
+    return { success: true, data: result };
+  } catch (e: any) {
+    console.error(e);
+    return { success: false, data: null, error: handleServiceError(e) };
+  }
 }
