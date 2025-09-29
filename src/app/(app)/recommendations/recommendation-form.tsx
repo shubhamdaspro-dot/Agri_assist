@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Loader2, MapPin, Check, X, Droplets, Mountain, Wind, Sprout } from 'lucide-react';
-import { saveRecommendation } from '@/lib/actions';
+import { saveRecommendation, getCropRecommendations } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
@@ -64,53 +64,69 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     }
   }, [isClient, t, step]);
 
-  const handleGetRecommendation = async () => {
+ const handleGetRecommendation = async () => {
     if (!location || !selectedSoil || !selectedWater || !user) {
-        toast({ variant: 'destructive', title: "Missing Information", description: "Please complete all steps."});
-        return;
+      toast({ variant: 'destructive', title: "Missing Information", description: "Please complete all steps." });
+      return;
     }
-    
+
     setIsLoading(true);
-    setStep(4); // Move to processing step
+    setStep(4);
 
-    // This is a mock implementation. In a real scenario, you'd call a more complex AI flow.
-    // The AI would take location, soil, water, language and return a structured recommendation.
+    const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,precipitation,weather_code`);
+    const weatherData = await weatherResponse.json();
+    const weatherString = `Current weather: ${weatherData.current.temperature_2m}°C, ${weatherData.current.precipitation}mm precipitation.`;
+
+    const aiResult = await getCropRecommendations({
+      geographicRegion: `${location.latitude}, ${location.longitude}`,
+      soilType: selectedSoil,
+      weatherData: weatherString,
+    });
     
-    // MOCK AI RESPONSE
-    const MOCK_RESPONSE: Omit<SimplifiedRecommendation, 'id'|'userId'|'createdAt'> = {
-        location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
-        soilType: selectedSoil,
-        waterSource: selectedWater,
-        topRecommendation: {
-            cropName: "Soybean",
-            cropNameLocal: "सोयाबीन",
-            imageUrl: "/images/soybean.jpg",
-            imageHint: "soybean field",
-            profit: "High",
-            waterNeeded: "Medium",
-            timeToHarvest: "90-100 days",
-            rationale: "Your soil is perfect for soybean, and the market price is good.",
-        },
-        secondaryOptions: [
-            { cropName: "Cotton", cropNameLocal: "कपास" },
-            { cropName: "Maize", cropNameLocal: "मक्का" },
-        ],
-    };
-
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    const result = await saveRecommendation({ ...MOCK_RESPONSE, userId: user.uid });
-
-    if (result.success && result.id) {
-        setResults({ ...MOCK_RESPONSE, id: result.id, userId: user.uid, createdAt: new Date() });
-    } else {
+    if (!aiResult.success || !aiResult.data) {
         toast({
             variant: 'destructive',
             title: t('recommendations.toast_error_title'),
-            description: result.error || t('recommendations.toast_error_description'),
+            description: aiResult.error || t('recommendations.toast_error_description'),
         });
+        setIsLoading(false);
         setStep(3); // Go back to the last step on error
+        return;
+    }
+    
+    const topRec = aiResult.data.recommendedCrops[0];
+
+    const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'userId' | 'createdAt'> = {
+      location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
+      soilType: selectedSoil,
+      waterSource: selectedWater,
+      topRecommendation: {
+        cropName: topRec.name,
+        cropNameLocal: topRec.name, // The AI should provide this in the future
+        imageUrl: `/images/soybean.jpg`, // Placeholder
+        imageHint: `${topRec.name.toLowerCase()} field`,
+        profit: "High", // Placeholder
+        waterNeeded: "Medium", // Placeholder
+        timeToHarvest: "90-120 days", // Placeholder
+        rationale: topRec.rationale,
+      },
+      secondaryOptions: aiResult.data.recommendedCrops.slice(1, 3).map(c => ({
+          cropName: c.name,
+          cropNameLocal: c.name
+      })),
+    };
+
+    const saveResult = await saveRecommendation({ ...recommendationData, userId: user.uid });
+
+    if (saveResult.success && saveResult.id) {
+      setResults({ ...recommendationData, id: saveResult.id, userId: user.uid, createdAt: new Date() });
+    } else {
+      toast({
+        variant: 'destructive',
+        title: t('recommendations.toast_error_title'),
+        description: saveResult.error || t('recommendations.toast_error_description'),
+      });
+      setStep(3);
     }
 
     setIsLoading(false);
