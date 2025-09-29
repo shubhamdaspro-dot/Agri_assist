@@ -23,19 +23,19 @@ type RecommendationFormProps = {
 };
 
 const soilTypes = [
-    { id: 'dark-crumbly', labelKey: 'recommendations.soil_dark', image: 'https://picsum.photos/seed/soil-dark/400/300' },
-    { id: 'red-sticky', labelKey: 'recommendations.soil_red', image: 'https://picsum.photos/seed/soil-red/400/300' },
-    { id: 'light-sandy', labelKey: 'recommendations.soil_light', image: 'https://picsum.photos/seed/soil-light/400/300' },
-    { id: 'black-clay', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black/400/300' },
-    { id: 'brown-silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
-    { id: 'alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial/400/300' },
-    { id: 'laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite/400/300' },
+    { id: 'Dark and Crumbly', labelKey: 'recommendations.soil_dark', image: 'https://picsum.photos/seed/soil-dark/400/300' },
+    { id: 'Red and Sticky', labelKey: 'recommendations.soil_red', image: 'https://picsum.photos/seed/soil-red/400/300' },
+    { id: 'Light and Sandy', labelKey: 'recommendations.soil_light', image: 'https://picsum.photos/seed/soil-light/400/300' },
+    { id: 'Black and Clayey', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black/400/300' },
+    { id: 'Brown and Silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
+    { id: 'Alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial/400/300' },
+    { id: 'Laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite/400/300' },
 ];
 
 const waterSources = [
-    { id: 'rain', labelKey: 'recommendations.water_rain', icon: Droplets },
-    { id: 'canal', labelKey: 'recommendations.water_canal', icon: Mountain },
-    { id: 'borewell', labelKey: 'recommendations.water_borewell', icon: Wind },
+    { id: 'Rain Only', labelKey: 'recommendations.water_rain', icon: Droplets },
+    { id: 'Canal / River', labelKey: 'recommendations.water_canal', icon: Mountain },
+    { id: 'Borewell / Tubewell', labelKey: 'recommendations.water_borewell', icon: Wind },
 ];
 
 export function RecommendationForm({ setResults, setIsLoading, isLoading }: RecommendationFormProps) {
@@ -137,6 +137,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
       geographicRegion: `${location.latitude}, ${location.longitude}`,
       soilType: soilTypeForApi,
       weatherData: weatherString,
+      historicalYields: '',
+      marketDemand: '',
     });
     
     if (!aiResult.success || !aiResult.data) {

@@ -27,6 +27,8 @@ const GetCropRecommendationsSchema = z.object({
   geographicRegion: z.string(),
   soilType: z.string(),
   weatherData: z.string(),
+  historicalYields: z.string().optional(),
+  marketDemand: z.string().optional(),
 });
 
 export async function getCropRecommendations(
@@ -34,11 +36,7 @@ export async function getCropRecommendations(
 ): Promise<{ success: boolean; data: GenerateCropRecommendationsOutput | null; error?: string }> {
   try {
     const validatedInput = GetCropRecommendationsSchema.parse(input);
-    const result = await generateCropRecommendations({
-        ...validatedInput,
-        historicalYields: '',
-        marketDemand: '',
-    });
+    const result = await generateCropRecommendations(validatedInput);
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
