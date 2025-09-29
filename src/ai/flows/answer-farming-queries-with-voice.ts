@@ -46,12 +46,12 @@ const answerFarmingQueriesWithVoiceFlow = ai.defineFlow(
   },
   async input => {
     // Transcribe the audio query
-    const {text: transcribedQuery} = await ai.transcribe({
+    const {text: transcribedQuery} = await ai.generate({
       model: 'googleai/gemini-1.5-flash-transcribe',
-      media: {
-        url: input.voiceQueryDataUri,
-      },
-      context: 'Transcribe this audio. It is a question about farming.',
+      prompt: [
+        {media: {url: input.voiceQueryDataUri}},
+        {text: 'Transcribe this audio. It is a question about farming.'},
+      ],
     });
 
     if (!transcribedQuery) {
