@@ -103,8 +103,7 @@
     animation-duration: 20s;
   }
   .weather-rainy {
-    background: linear-gradient(to bottom, #4c5c70, #8895a6);
-    background-image: repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.2) 3px);
+    background: repeating-linear-gradient(45deg, transparent, transparent 1px, rgba(255, 255, 255, 0.2) 1px, rgba(255, 255, 255, 0.2) 3px), linear-gradient(to bottom, #4c5c70, #8895a6);
     animation: rain 0.5s linear infinite;
   }
    .weather-stormy {
