@@ -15,6 +15,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 type RecommendationFormProps = {
   setResults: (results: SimplifiedRecommendation | null) => void;
@@ -88,7 +89,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
   const handleSoilSelection = (soilId: string) => {
       setSelectedSoil(soilId);
       setUploadedSoilPhoto(null);
-      setStep(3);
   }
 
  const handleGetRecommendation = async () => {
@@ -235,18 +235,16 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    {soilTypes.map((soil) => (
-                        <Button
-                            key={soil.id}
-                            variant={selectedSoil === soil.id ? 'default' : 'outline'}
-                            onClick={() => handleSoilSelection(soil.id)}
-                            className="h-auto py-4"
-                        >
-                            {t(soil.labelKey)}
-                        </Button>
-                    ))}
-                </div>
+                <Select onValueChange={handleSoilSelection} value={selectedSoil || ''}>
+                    <SelectTrigger>
+                        <SelectValue placeholder={t('recommendations.form_soil_type_placeholder')} />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {soilTypes.map(soil => (
+                            <SelectItem key={soil.id} value={soil.id}>{t(soil.labelKey)}</SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
                 
                 <div className="flex items-center gap-4">
                     <hr className="flex-grow border-t" />
@@ -255,11 +253,10 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 </div>
                 
                 {uploadedSoilPhoto ? (
-                    <div className="space-y-4">
+                    <div className="space-y-2 text-center">
                         <Image src={uploadedSoilPhoto} alt="Uploaded soil" width={200} height={150} className="rounded-md object-cover mx-auto" />
-                        <Button onClick={() => setStep(3)} className="w-full">
-                           <Check className="mr-2 h-4 w-4" />
-                           {t('recommendations.confirm_photo_button')}
+                         <Button variant="link" size="sm" onClick={() => setUploadedSoilPhoto(null)}>
+                            <X className="mr-2 h-4 w-4" /> Remove photo
                         </Button>
                     </div>
                 ) : (
@@ -277,6 +274,11 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                         />
                     </div>
                 )}
+
+                 <Button onClick={() => setStep(3)} disabled={!selectedSoil && !uploadedSoilPhoto} className="w-full">
+                    Next
+                </Button>
+
             </CardContent>
         </>
       )}
