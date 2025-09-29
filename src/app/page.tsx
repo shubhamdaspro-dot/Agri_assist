@@ -15,7 +15,6 @@ import {Loader2, Flower2} from 'lucide-react';
 import {useLanguage} from '@/hooks/use-language';
 import { createUserProfile } from '@/lib/actions';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Image from 'next/image';
 import { languages } from '@/lib/i18n';
 
 const countryCodes = [
@@ -139,8 +138,9 @@ export default function Home() {
   if (authLoading || user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <div className="animate-pulse">
-            <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
+        <div className="animate-pulse flex flex-col items-center gap-2">
+            <Flower2 className="h-16 w-16 text-primary" />
+            <p className="text-muted-foreground">Loading...</p>
         </div>
       </div>
     );
@@ -152,7 +152,7 @@ export default function Home() {
        <div id="recaptcha-container" ref={recaptchaContainerRef}></div>
       <div className="w-full max-w-md space-y-8 px-4 text-center">
         <div className="flex justify-center">
-            <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
+            <Flower2 className="h-20 w-20 text-primary" />
         </div>
         <h1 className="text-4xl font-bold font-headline">{t('welcome.title')}</h1>
         <p className="text-muted-foreground">{t('welcome.subtitle')}</p>

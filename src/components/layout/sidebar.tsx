@@ -26,7 +26,21 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
 import { useChat } from '@/hooks/use-chat';
-import Image from 'next/image';
+
+function AgriAssistLogo() {
+  return (
+    <Link href="/dashboard" className="flex items-center gap-3 px-2">
+      <div className="flex items-center justify-center w-10 h-10">
+         <Flower2 className="h-10 w-10 text-primary" />
+      </div>
+      <div>
+        <h1 className="text-xl font-bold text-sidebar-foreground transition-opacity group-data-[collapsible=icon]:opacity-0">
+          AgriAssist
+        </h1>
+      </div>
+    </Link>
+  );
+}
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
@@ -39,20 +53,6 @@ const navItems = [
   { href: '/loans', icon: Landmark, labelKey: 'sidebar.loans' },
 ];
 
-function AgriAssistLogo() {
-  return (
-    <Link href="/dashboard" className="flex items-center gap-3 px-2">
-      <div className="flex items-center justify-center w-10 h-10">
-         <Image src="/logo.png" alt="AgriAssist Logo" width={40} height={40} />
-      </div>
-      <div>
-        <h1 className="text-xl font-bold text-sidebar-foreground transition-opacity group-data-[collapsible=icon]:opacity-0">
-          AgriAssist
-        </h1>
-      </div>
-    </Link>
-  );
-}
 
 export default function AppSidebar() {
   const pathname = usePathname();
