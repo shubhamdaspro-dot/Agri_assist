@@ -41,28 +41,33 @@ export default function Home() {
 
   useEffect(() => {
     if (!authLoading && user) {
-      const checkProfile = async () => {
-        try {
-            const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
-            if (res.success) {
-                if (res.profileComplete) {
-                    router.push('/dashboard');
+        const checkProfile = async (retryCount = 0) => {
+            try {
+                const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
+                if (res.success) {
+                    if (res.profileComplete) {
+                        router.push('/dashboard');
+                    } else {
+                        router.push('/profile-setup');
+                    }
                 } else {
-                    router.push('/profile-setup');
+                    // Retry logic for "offline" error
+                    if (res.error?.includes('offline') && retryCount < 1) {
+                        console.warn("Firestore client offline, retrying profile check...");
+                        setTimeout(() => checkProfile(retryCount + 1), 2000);
+                    } else {
+                        console.error("Failed to check profile, defaulting to dashboard:", res.error);
+                        router.push('/dashboard');
+                    }
                 }
-            } else {
-                // If checking profile fails, default to dashboard but log error
-                console.error("Failed to check profile, defaulting to dashboard:", res.error);
+            } catch (error) {
+                console.error("Exception when checking profile:", error);
                 router.push('/dashboard');
             }
-        } catch (error) {
-            console.error("Exception when checking profile:", error);
-            router.push('/dashboard');
-        }
-      };
-      checkProfile();
+        };
+        checkProfile();
     }
-  }, [user, authLoading, router]);
+}, [user, authLoading, router]);
 
   const handleSendOtp = async () => {
     const fullPhoneNumber = countryCode + phoneNumber;
