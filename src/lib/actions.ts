@@ -6,14 +6,14 @@ import { ai } from '@/ai/genkit';
 import wav from 'wav';
 import { z } from 'zod';
 import { fetchLatestNews } from '@/ai/flows/fetch-latest-news';
-import type { FetchLatestNewsOutput } from './types';
+import type { FetchLatestNewsOutput, SimplifiedRecommendation } from './types';
 import { answerFarmingQueriesWithVoice } from '@/ai/flows/answer-farming-queries-with-voice';
 import { diagnoseCropDisease, DiagnoseCropDiseaseInput, DiagnoseCropDiseaseOutput } from '@/ai/flows/diagnose-crop-disease';
 import { analyzeCropProfitability, AnalyzeCropProfitabilityInput, AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
 import { analyzeMarketPrices } from '@/ai/flows/analyze-market-prices';
 import { AnalyzeMarketPricesInput, AnalyzeMarketPricesOutput } from '@/lib/types';
 import { db, messaging } from '@/lib/firebase';
-import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion } from 'firebase/firestore';
+import { doc, setDoc, getDoc, serverTimestamp, updateDoc, arrayUnion, addDoc, collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 
 function handleServiceError(e: any): string {
     if (e.message && e.message.includes('503')) {
@@ -243,6 +243,7 @@ export async function saveFcmToken(uid: string, token: string) {
 const UpdateUserProfileSchema = z.object({
   uid: z.string(),
   displayName: z.string().min(2, 'Name must be at least 2 characters.'),
+  age: z.number().min(1, 'Age must be a positive number.'),
   photoURL: z.string().url().optional(),
 });
 
@@ -251,12 +252,46 @@ export async function updateUserProfile(input: z.infer<typeof UpdateUserProfileS
         const userRef = doc(db, 'users', input.uid);
         await updateDoc(userRef, {
             displayName: input.displayName,
+            age: input.age,
             ...(input.photoURL && { photoURL: input.photoURL }),
             profileCompleted: true,
-        });
+        }, { merge: true });
         return { success: true };
     } catch (e: any) {
         console.error('Error updating user profile:', e);
+        return { success: false, error: e.message };
+    }
+}
+
+
+export async function saveRecommendation(recommendation: Omit<SimplifiedRecommendation, 'id' | 'createdAt'>): Promise<{ success: boolean; id?: string; error?: string }> {
+    try {
+        const docRef = await addDoc(collection(db, 'recommendations'), {
+            ...recommendation,
+            createdAt: serverTimestamp(),
+        });
+        return { success: true, id: docRef.id };
+    } catch (e: any) {
+        console.error('Error saving recommendation:', e);
+        return { success: false, error: e.message };
+    }
+}
+
+export async function getMyRecommendations(userId: string): Promise<{ success: boolean; data?: SimplifiedRecommendation[]; error?: string }> {
+    try {
+        const q = query(
+            collection(db, 'recommendations'),
+            where('userId', '==', userId),
+            orderBy('createdAt', 'desc')
+        );
+        const querySnapshot = await getDocs(q);
+        const recommendations = querySnapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data(),
+        })) as SimplifiedRecommendation[];
+        return { success: true, data: recommendations };
+    } catch (e: any) {
+        console.error('Error fetching recommendations:', e);
         return { success: false, error: e.message };
     }
 }

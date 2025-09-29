@@ -136,7 +136,9 @@ export default function Home() {
   if (authLoading || user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+        <div className="animate-pulse">
+            <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
+        </div>
       </div>
     );
   }
@@ -147,7 +149,7 @@ export default function Home() {
        <div id="recaptcha-container" ref={recaptchaContainerRef}></div>
       <div className="w-full max-w-md space-y-8 px-4 text-center">
         <div className="flex justify-center">
-            <Flower2 className="w-20 h-20 text-primary" />
+            <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
         </div>
         <h1 className="text-4xl font-bold font-headline">{t('auth.login_title')}</h1>
         <p className="text-muted-foreground">{t('auth.login_subtitle')}</p>

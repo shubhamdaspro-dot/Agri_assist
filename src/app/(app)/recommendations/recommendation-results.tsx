@@ -1,280 +1,95 @@
 'use client';
-import type { GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Smartphone, RefreshCw, MapPin, ArrowRight, Leaf, Share2, Download, MessageSquare, TrendingUp, Loader2 } from 'lucide-react';
+import { RefreshCw, ArrowRight, TrendingUp, Droplets, CalendarDays } from 'lucide-react';
 import { useLanguage } from '@/hooks/use-language';
-import { useToast } from '@/hooks/use-toast';
-import { useState, useRef } from 'react';
-import { Input } from '@/components/ui/input';
-import Link from 'next/link';
-import { toJpeg } from 'html-to-image';
-import type { AnalyzeCropProfitabilityOutput } from '@/ai/flows/analyze-crop-profitability';
+import Image from 'next/image';
+import type { SimplifiedRecommendation } from '@/lib/types';
 import { Badge } from '@/components/ui/badge';
-import { cn } from '@/lib/utils';
-import { Skeleton } from '@/components/ui/skeleton';
+import Link from 'next/link';
 
 type RecommendationResultsProps = {
-  results: GenerateCropRecommendationsOutput;
+  results: SimplifiedRecommendation;
   onNewRecommendation: () => void;
-  profitabilityAnalysis: AnalyzeCropProfitabilityOutput | null;
-  isAnalyzingProfit: boolean;
 };
 
-export function RecommendationResults({ results, onNewRecommendation, profitabilityAnalysis, isAnalyzingProfit }: RecommendationResultsProps) {
+export function RecommendationResults({ results, onNewRecommendation }: RecommendationResultsProps) {
   const { t } = useLanguage();
-  const { toast } = useToast();
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [isSent, setIsSent] = useState(false);
-  const resultCardRef = useRef<HTMLDivElement>(null);
-  const [isDownloading, setIsDownloading] = useState(false);
 
-
-  const recommendedProductsList = results.recommendedProducts.split(',').map(p => p.trim());
-  const cropsText = results.recommendedCrops.map(c => c.name).join(', ');
-
-  const shareMessage = t('recommendations.share_message', {
-    crop: cropsText,
-    products: results.recommendedProducts,
-    rationale: results.rationale
-  });
-
-  const handleShareSMS = () => {
-    if (!phoneNumber) {
-        toast({
-            variant: 'destructive',
-            title: t('recommendations.toast_phone_missing_title'),
-            description: t('recommendations.toast_phone_missing_description'),
-        });
-        return;
-    }
-
-    const encodedMessage = encodeURIComponent(shareMessage);
-    let url = `sms:${phoneNumber}?body=${encodedMessage}`;
-    
-    window.open(url, '_blank');
-    setIsSent(true);
-    toast({
-        title: t('recommendations.toast_sharing_title'),
-        description: t('recommendations.toast_sharing_description', { platform: 'SMS' })
-    });
+  const getBadgeVariant = (level: 'High' | 'Medium' | 'Low') => {
+    if (level === 'High') return 'success';
+    if (level === 'Medium') return 'warning';
+    return 'destructive';
   }
 
-  const handleShareWhatsApp = () => {
-    const encodedMessage = encodeURIComponent(shareMessage);
-    const url = `https://wa.me/?text=${encodedMessage}`;
-    window.open(url, '_blank');
-     toast({
-        title: t('recommendations.toast_sharing_title'),
-        description: t('recommendations.toast_sharing_description', { platform: 'WhatsApp' })
-    });
-  }
-
-  const handleDownloadImage = async () => {
-    if (!resultCardRef.current) {
-        toast({
-            variant: 'destructive',
-            title: t('recommendations.toast_download_error_title'),
-            description: t('recommendations.toast_download_error_description'),
-        });
-        return;
-    }
-    setIsDownloading(true);
-    try {
-        const dataUrl = await toJpeg(resultCardRef.current, { quality: 0.95, backgroundColor: '#ffffff' });
-        const link = document.createElement('a');
-        link.download = 'agriassist-recommendation.jpg';
-        link.href = dataUrl;
-        link.click();
-        toast({
-            title: t('recommendations.toast_download_success_title'),
-        });
-    } catch(err) {
-        console.error(err);
-        toast({
-            variant: 'destructive',
-            title: t('recommendations.toast_download_error_title'),
-            description: t('recommendations.toast_download_error_description'),
-        });
-    } finally {
-        setIsDownloading(false);
-    }
-  };
-  
-  const getBadgeVariant = (potential: 'High' | 'Medium' | 'Low') => {
-    switch (potential) {
-      case 'High': return 'default';
-      case 'Medium': return 'secondary';
-      case 'Low': return 'destructive';
-      default: return 'outline';
-    }
-  };
+  const { topRecommendation, secondaryOptions } = results;
 
   return (
-    <div className="mt-8 space-y-8">
-        <Card className="bg-secondary/50" ref={resultCardRef}>
-            <CardHeader className="flex-row items-center justify-between">
-                <div>
-                    <CardTitle className="flex items-center gap-2 text-2xl">
-                    <CheckCircle className="h-8 w-8 text-accent" />
-                    {t('recommendations.results_title')}
-                    </CardTitle>
-                    <CardDescription>{t('recommendations.results_subtitle')}</CardDescription>
-                </div>
+    <div className="space-y-6">
+        <Card className="overflow-hidden">
+            <CardHeader>
+                <CardTitle>{t('recommendations.top_recommendation')}</CardTitle>
+                <CardDescription>{t('recommendations.results_subtitle')}</CardDescription>
             </CardHeader>
-             <CardContent className="space-y-6">
-                <div>
-                    <h3 className="font-semibold text-lg">{t('recommendations.results_crop')}:</h3>
-                    <div className="grid gap-4 mt-2 sm:grid-cols-2 lg:grid-cols-3">
-                        {results.recommendedCrops.map((crop, index) => (
-                            <Card key={index} className="bg-background">
-                                <CardHeader>
-                                    <CardTitle className="flex items-center gap-2"><Leaf className="h-5 w-5 text-primary"/>{crop.name}</CardTitle>
-                                </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">{crop.rationale}</p>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
+            <CardContent className="space-y-6">
+                <div className="relative w-full h-48 rounded-lg overflow-hidden">
+                    <Image src={topRecommendation.imageUrl} alt={topRecommendation.cropName} layout="fill" objectFit="cover" data-ai-hint={topRecommendation.imageHint} />
+                </div>
+                
+                <div className="text-center">
+                    <h2 className="text-3xl font-bold font-headline">{topRecommendation.cropName} ({topRecommendation.cropNameLocal})</h2>
                 </div>
 
-                {isAnalyzingProfit && <ProfitAnalysisSkeleton />}
-
-                {profitabilityAnalysis && (
-                  <Card className="bg-background">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        <TrendingUp className="h-6 w-6 text-primary" />
-                        {t('recommendations.profitability_title')}
-                      </CardTitle>
-                      <CardDescription>{t('recommendations.profitability_subtitle')}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      {profitabilityAnalysis.profitabilityAnalysis.map((item) => (
-                        <div key={item.cropName} className="p-3 rounded-md border bg-muted/20">
-                          <div className="flex justify-between items-center mb-2">
-                            <h4 className="font-semibold">{item.cropName}</h4>
-                            <Badge variant={getBadgeVariant(item.profitPotential)}>
-                              {item.profitPotential} {t('recommendations.profitability_potential')}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-muted-foreground">{item.analysis}</p>
-                        </div>
-                      ))}
-                    </CardContent>
-                  </Card>
-                )}
-
-
-                <div>
-                <h3 className="font-semibold text-lg">{t('recommendations.results_products')}:</h3>
-                <ul className="space-y-2 mt-2">
-                    {recommendedProductsList.map((product, index) => (
-                    <li key={index} className="flex items-center justify-between p-2 rounded-md bg-background">
-                        <span>{product}</span>
-                    </li>
-                    ))}
-                </ul>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                    <Card className="bg-muted/50 p-4">
+                        <TrendingUp className="h-7 w-7 text-primary mx-auto mb-2"/>
+                        <p className="text-sm text-muted-foreground">{t('recommendations.profit_label')}</p>
+                        <p className="font-bold text-lg">{t(`recommendations.profit_${topRecommendation.profit.toLowerCase()}`)}</p>
+                    </Card>
+                     <Card className="bg-muted/50 p-4">
+                        <Droplets className="h-7 w-7 text-primary mx-auto mb-2"/>
+                        <p className="text-sm text-muted-foreground">{t('recommendations.water_label')}</p>
+                        <p className="font-bold text-lg">{t(`recommendations.water_${topRecommendation.waterNeeded.toLowerCase()}`)}</p>
+                    </Card>
+                     <Card className="bg-muted/50 p-4">
+                        <CalendarDays className="h-7 w-7 text-primary mx-auto mb-2"/>
+                        <p className="text-sm text-muted-foreground">{t('recommendations.harvest_label')}</p>
+                        <p className="font-bold text-lg">{topRecommendation.timeToHarvest}</p>
+                    </Card>
                 </div>
+                
                 <div>
-                <h3 className="font-semibold text-lg flex items-center gap-2">
-                    <MapPin className="h-5 w-5" />
-                    {t('recommendations.results_stores')}:
-                </h3>
-                <ul className="space-y-2 mt-2">
-                    {results.nearestStores.map((store, index) => (
-                    <li key={index} className="flex items-center justify-between p-3 rounded-md bg-background hover:bg-muted/50 transition-colors">
-                        <div>
-                            <p className="font-medium">{store.name}</p>
-                            <p className="text-sm text-muted-foreground">{store.address}</p>
-                        </div>
-                        <Button asChild variant="ghost" size="icon">
-                            <Link href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(store.address)}`} target="_blank">
-                                <ArrowRight className="h-5 w-5" />
-                            </Link>
-                        </Button>
-                    </li>
-                    ))}
-                </ul>
+                    <h3 className="font-semibold">{t('recommendations.rationale_label')}:</h3>
+                    <p className="text-muted-foreground mt-1">{topRecommendation.rationale}</p>
                 </div>
             </CardContent>
         </Card>
+        
         <Card>
             <CardHeader>
-                 <CardTitle className="flex items-center gap-2">
-                    <Share2 className="h-6 w-6" />
-                    {t('recommendations.share_title')}
-                    </CardTitle>
+                <CardTitle>{t('recommendations.secondary_options_label')}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-                 <div>
-                    <h3 className="font-semibold">{t('recommendations.share_subtitle_sms')}</h3>
-                    <div className="flex gap-2 mt-2">
-                        <Input 
-                        type="tel"
-                        placeholder={t('auth.phone_label')}
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        className="max-w-xs"
-                        disabled={isSent}
-                        />
-                        <Button onClick={handleShareSMS} title={t('recommendations.share_sms_button_title')} disabled={isSent}>
-                            <Smartphone className="h-5 w-5" />
-                            <span>{t('recommendations.share_sms_button')}</span>
-                        </Button>
+            <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {secondaryOptions.map(option => (
+                    <div key={option.cropName} className="p-4 bg-muted/50 rounded-lg">
+                        <p className="font-semibold text-lg">{option.cropName} ({option.cropNameLocal})</p>
                     </div>
-                </div>
-                 <div className='flex items-center gap-4'>
-                    <Button onClick={handleShareWhatsApp} variant="outline">
-                        <MessageSquare className="h-5 w-5" />
-                        {t('recommendations.share_whatsapp_button')}
-                    </Button>
-                    <Button onClick={handleDownloadImage} variant="outline" disabled={isDownloading}>
-                        <Download className="h-5 w-5" />
-                        {isDownloading ? t('recommendations.downloading_button') : t('recommendations.download_jpg_button')}
-                    </Button>
-                </div>
+                ))}
             </CardContent>
         </Card>
-        <CardFooter>
-            <Button onClick={onNewRecommendation} className="w-full bg-accent hover:bg-accent/90 text-accent-foreground">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <Button onClick={onNewRecommendation} variant="outline">
                 <RefreshCw className="mr-2 h-4 w-4" />
-                {t('recommendations.new_recommendation_button')}
+                {t('recommendations.start_over_button')}
             </Button>
-        </CardFooter>
+            <Button asChild>
+                <Link href={`/farming-guide/${topRecommendation.cropName}`}>
+                    {t('recommendations.next_step_button')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+            </Button>
+        </div>
     </div>
   );
-}
-
-function ProfitAnalysisSkeleton() {
-  return (
-    <Card className="bg-background">
-      <CardHeader>
-        <div className="flex items-center gap-2">
-          <Skeleton className="h-6 w-6 rounded-full" />
-          <Skeleton className="h-6 w-48" />
-        </div>
-        <Skeleton className="h-4 w-64 mt-1" />
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="p-3 rounded-md border">
-          <div className="flex justify-between items-center mb-2">
-            <Skeleton className="h-5 w-24" />
-            <Skeleton className="h-6 w-20" />
-          </div>
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-3/4 mt-2" />
-        </div>
-        <div className="p-3 rounded-md border">
-          <div className="flex justify-between items-center mb-2">
-            <Skeleton className="h-5 w-28" />
-            <Skeleton className="h-6 w-20" />
-          </div>
-          <Skeleton className="h-4 w-full" />
-          <Skeleton className="h-4 w-2/3 mt-2" />
-        </div>
-      </CardContent>
-    </Card>
-  )
 }

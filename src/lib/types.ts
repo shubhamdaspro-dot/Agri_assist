@@ -57,3 +57,31 @@ export const AnalyzeMarketPricesOutputSchema = z.object({
     .describe('A list of 2-3 suggested locations or vendors to sell the crop for higher profit.'),
 });
 export type AnalyzeMarketPricesOutput = z.infer<typeof AnalyzeMarketPricesOutputSchema>;
+
+
+// New types for simplified recommendation flow
+export const SimplifiedRecommendationSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  createdAt: z.any(), // Firestore serverTimestamp
+  location: z.string(),
+  soilType: z.string(),
+  waterSource: z.string(),
+  topRecommendation: z.object({
+    cropName: z.string(),
+    cropNameLocal: z.string(),
+    imageUrl: z.string(),
+    imageHint: z.string(),
+    profit: z.enum(['High', 'Medium', 'Low']),
+    waterNeeded: z.enum(['High', 'Medium', 'Low']),
+    timeToHarvest: z.string(),
+    rationale: z.string(),
+  }),
+  secondaryOptions: z.array(
+    z.object({
+      cropName: z.string(),
+      cropNameLocal: z.string(),
+    })
+  ),
+});
+export type SimplifiedRecommendation = z.infer<typeof SimplifiedRecommendationSchema>;

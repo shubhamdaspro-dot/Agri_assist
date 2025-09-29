@@ -20,17 +20,18 @@ import {
   TestTube,
   BarChart2,
   Flower2,
+  BookMarked,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useLanguage } from '@/hooks/use-language';
 import { useChat } from '@/hooks/use-chat';
-import { useAuth } from '@/hooks/use-auth';
 import Image from 'next/image';
 
 const navItems = [
   { href: '/dashboard', icon: LayoutDashboard, labelKey: 'sidebar.dashboard' },
   { href: '/recommendations', icon: Leaf, labelKey: 'sidebar.recommendations' },
+  { href: '/my-recommendations', icon: BookMarked, labelKey: 'sidebar.my_recommendations' },
   { href: '/soil-analysis', icon: TestTube, labelKey: 'sidebar.soil_analysis' },
   { href: '/disease-prevention', icon: ShieldAlert, labelKey: 'sidebar.disease_prevention' },
   { href: '/market-analysis', icon: BarChart2, labelKey: 'sidebar.market_analysis' },
@@ -41,11 +42,11 @@ const navItems = [
 function AgriAssistLogo() {
   return (
     <Link href="/dashboard" className="flex items-center gap-3 px-2">
-      <div className="p-1 bg-white/20 rounded-lg flex items-center justify-center w-10 h-10">
-        <Flower2 className="w-8 h-8 text-white" />
+      <div className="flex items-center justify-center w-10 h-10">
+         <Image src="/logo.png" alt="AgriAssist Logo" width={40} height={40} />
       </div>
       <div>
-        <h1 className="text-xl font-bold text-white transition-opacity group-data-[collapsible=icon]:opacity-0">
+        <h1 className="text-xl font-bold text-sidebar-foreground transition-opacity group-data-[collapsible=icon]:opacity-0">
           AgriAssist
         </h1>
       </div>
@@ -71,7 +72,6 @@ export default function AppSidebar() {
                 asChild
                 isActive={pathname.startsWith(item.href)}
                 tooltip={t(item.labelKey)}
-                variant="outline"
               >
                 <Link href={item.href}>
                   <item.icon />
@@ -81,7 +81,7 @@ export default function AppSidebar() {
             </SidebarMenuItem>
           ))}
             <SidebarMenuItem>
-                <SidebarMenuButton onClick={() => setIsOpen(true)} tooltip={t('sidebar.ai_assistant')} variant="outline">
+                <SidebarMenuButton onClick={() => setIsOpen(true)} tooltip={t('sidebar.ai_assistant')}>
                     <MessageCircle />
                     <span>{t('sidebar.ai_assistant')}</span>
                 </SidebarMenuButton>
@@ -91,7 +91,7 @@ export default function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={t('sidebar.help')} variant="outline" isActive={pathname === '/help'}>
+              <SidebarMenuButton asChild tooltip={t('sidebar.help')} isActive={pathname === '/help'}>
                 <Link href="/help">
                   <CircleHelp />
                   <span>{t('sidebar.help')}</span>
@@ -99,7 +99,7 @@ export default function AppSidebar() {
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={t('sidebar.github')} variant="outline">
+              <SidebarMenuButton asChild tooltip={t('sidebar.github')}>
                 <Link href="https://github.com/shubhamdaspro-dot/Agri_assist" target="_blank">
                   <Github />
                   <span>{t('sidebar.github')}</span>

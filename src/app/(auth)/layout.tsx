@@ -2,7 +2,8 @@
 import {useEffect} from 'react';
 import {useRouter} from 'next/navigation';
 import {useAuth} from '@/hooks/use-auth';
-import {Loader2} from 'lucide-react';
+import { Flower2 } from 'lucide-react';
+import Image from 'next/image';
 
 export default function AuthLayout({children}: {children: React.ReactNode}) {
   const {user, loading: authLoading} = useAuth();
@@ -17,7 +18,9 @@ export default function AuthLayout({children}: {children: React.ReactNode}) {
   if (authLoading || user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
-        <Loader2 className="h-16 w-16 animate-spin text-primary" />
+        <div className="animate-pulse">
+            <Image src="/logo.png" alt="AgriAssist Logo" width={80} height={80} />
+        </div>
       </div>
     );
   }

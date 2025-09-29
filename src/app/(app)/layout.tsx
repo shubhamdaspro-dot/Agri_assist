@@ -10,50 +10,23 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
   return (
     <ChatProvider>
       <SidebarProvider>
-        <div className="relative min-h-screen w-full">
-            <div className="absolute inset-0 -z-10 h-full w-full animate-gradient-bg bg-[length:400%_400%] bg-gradient-to-br from-background via-secondary/50 to-background"></div>
-            <div className="flex min-h-screen">
-                <AppSidebar />
-                <SidebarInset>
-                    <div className="flex flex-col min-h-full">
-                        <Header />
-                        <main className="p-4 sm:p-6 flex-grow">{children}</main>
-                        <footer className="border-t border-border/50 text-foreground/60 mt-auto">
-                            <div className="container mx-auto py-6 px-4 sm:px-6">
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                                    <div>
-                                        <h4 className="font-semibold text-foreground/80 mb-2">AgriAssist</h4>
-                                        <ul className="space-y-1">
-                                            <li><Link href="/dashboard" className="hover:text-foreground">Dashboard</Link></li>
-                                            <li><Link href="/recommendations" className="hover:text-foreground">Crop Advice</Link></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold text-foreground/80 mb-2">Resources</h4>
-                                        <ul className="space-y-1">
-                                            <li><Link href="/help" className="hover:text-foreground">Help Center</Link></li>
-                                            <li><Link href="/news" className="hover:text-foreground">News</Link></li>
-                                            <li><Link href="/loans" className="hover:text-foreground">Loan Schemes</Link></li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4 className="font-semibold text-foreground/80 mb-2">Legal</h4>
-                                        <ul className="space-y-1">
-                                            <li><Link href="#" className="hover:text-foreground">Privacy Policy</Link></li>
-                                            <li><Link href="#" className="hover:text-foreground">Terms of Service</Link></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="mt-6 pt-4 border-t border-border/50 text-center text-xs">
-                                    <p>&copy; {new Date().getFullYear()} AgriAssist. All rights reserved.</p>
-                                </div>
-                            </div>
-                        </footer>
-                    </div>
-                </SidebarInset>
-            </div>
-            <ChatAssistant />
+        <div className="flex min-h-screen">
+          <AppSidebar />
+          <div className="flex flex-col w-full">
+            <Header />
+            <main className="flex-grow overflow-y-auto p-4 sm:p-6 lg:p-8">
+              <div className="mx-auto max-w-4xl w-full">
+                {children}
+              </div>
+            </main>
+             <footer className="border-t mt-auto text-sm text-muted-foreground p-4">
+                <div className="mx-auto max-w-4xl w-full text-center">
+                    <p>&copy; {new Date().getFullYear()} AgriAssist. All rights reserved. | <Link href="/help" className="hover:text-primary">Help & Support</Link></p>
+                </div>
+            </footer>
+          </div>
         </div>
+        <ChatAssistant />
       </SidebarProvider>
     </ChatProvider>
   );
