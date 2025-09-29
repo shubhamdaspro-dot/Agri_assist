@@ -51,20 +51,68 @@ const prompt = ai.definePrompt({
   name: 'generateCropRecommendationsPrompt',
   input: {schema: GenerateCropRecommendationsInputSchema},
   output: {schema: GenerateCropRecommendationsOutputSchema},
-  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation. Generate a list of the 3 most suitable crops. For each crop, provide a specific rationale, the ideal sowing and harvesting seasons for the region, and its water requirement (High, Medium, or Low).
+  prompt: `You are an expert agricultural advisor. Your task is to provide a detailed and structured crop recommendation based on the user's input. The response must be a valid JSON object that strictly conforms to the provided output schema.
 
-Also, provide a structured list of recommended products, including specific names/types of pesticides, fertilizers, and manures. Finally, provide a general rationale for the overall crop selection and a list of 2-3 fictional but realistic local stores with full, searchable addresses where these products can be purchased.
-  
-Your recommendations MUST be based on the provided Soil Type.
-
-Weather Data: {{{weatherData}}}
-Soil Type: {{{soilType}}}
+User's Data:
+- Geographic Region: {{{geographicRegion}}}
+- Soil Type: {{{soilType}}}
+- Weather Data: {{{weatherData}}}
 {{#if waterSource}}
-Water Source: {{{waterSource}}}
+- Water Source: {{{waterSource}}}
 {{/if}}
-Geographic Region: {{{geographicRegion}}}
 
-Based on this information, provide your detailed recommendations.`,
+Based on this information, you must:
+1.  Recommend the 3 most suitable crops.
+2.  For each crop, provide a rationale, sowing season, harvesting season, and water requirement ('High', 'Medium', or 'Low').
+3.  Suggest specific pesticides, fertilizers, and manures for these crops.
+4.  Provide a general rationale explaining why this group of crops is suitable.
+5.  List 2-3 fictional but realistic local stores with full, searchable addresses where the farmer can buy these products. The stores should be plausible for the given geographic region.
+
+Your final output must be ONLY the JSON object, without any surrounding text or markdown.
+
+Example of a perfect response format:
+{
+  "recommendedCrops": [
+    {
+      "name": "Cotton",
+      "rationale": "Well-suited for the black clayey soil and hot climate of this region.",
+      "sowingSeason": "May-June",
+      "harvestingSeason": "October-December",
+      "waterRequirement": "Medium"
+    },
+    {
+      "name": "Soybean",
+      "rationale": "Tolerant of the soil type and has good market demand.",
+      "sowingSeason": "June-July",
+      "harvestingSeason": "October-November",
+      "waterRequirement": "Medium"
+    },
+    {
+      "name": "Pigeon Pea (Tur)",
+      "rationale": "A hardy crop that improves soil fertility and requires less water.",
+      "sowingSeason": "June-July",
+      "harvestingSeason": "December-January",
+      "waterRequirement": "Low"
+    }
+  ],
+  "recommendedProducts": {
+    "pesticides": ["Acetamiprid", "Imidacloprid"],
+    "fertilizers": ["Urea", "DAP", "MOP"],
+    "manures": ["Farm Yard Manure", "Vermicompost"]
+  },
+  "rationale": "This selection of crops is ideal for the provided soil and weather conditions, balancing water usage and maximizing potential profitability based on regional strengths.",
+  "nearestStores": [
+    {
+      "name": "Gupta Agro Chemicals",
+      "address": "12, Main Market, Wardha, Maharashtra, 442001, India"
+    },
+    {
+      "name": "Maharashtra Farmers Cooperative",
+      "address": "Plot 45, MIDC Industrial Area, Nagpur Road, Wardha, Maharashtra, 442001, India"
+    }
+  ]
+}
+`,
 });
 
 const generateCropRecommendationsFlow = ai.defineFlow(
@@ -75,6 +123,9 @@ const generateCropRecommendationsFlow = ai.defineFlow(
   },
   async input => {
     const {output} = await prompt(input);
-    return output!;
+    if (!output) {
+      throw new Error("The AI model returned an empty response. Please try again.");
+    }
+    return output;
   }
 );
