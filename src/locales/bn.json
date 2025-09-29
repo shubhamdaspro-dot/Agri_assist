@@ -94,6 +94,8 @@
         "new_recommendation_button": "নতুন সুপারিশ শুরু করুন",
         "soil_black": "কালো এবং কাদামাটি",
         "soil_silty": "বাদামী এবং পলিযুক্ত",
+        "soil_alluvial": "পলল",
+        "soil_laterite": "ল্যাটেরাইট",
         "confirm_photo_button": "ছবি নিশ্চিত করুন এবং চালিয়ে যান"
     },
     "news": {
@@ -142,7 +144,7 @@
         "toast_otp_required_description": "অনুগ্রহ করে প্রাপ্ত কোডটি লিখুন।",
         "toast_otp_not_sent_title": "কোড পাঠানো হয়নি",
         "toast_otp_not_sent_description": "প্রথমে একটি কোড অনুরোধ করুন।",
-        "toast_login_success_title": "সাইন ইন সফল",
+        "toast_login_success_title": "সাইন ইন सफल",
         "toast_login_success_description": "এগ্রিঅ্যাসিস্টে স্বাগতম!",
         "toast_invalid_otp_title": "অবৈধ কোড"
     },
@@ -196,7 +198,7 @@
         "crop_name_label": "ফসলের নাম",
         "crop_name_placeholder": "যেমন, গম, টমেটো, তুলা",
         "region_label": "আপনার অঞ্চল",
-        "region_placeholder": "যেমন, পাঞ্জাব, ভারত",
+        "region_placeholder": "যেমন, পাঞ্জাব, भारत",
         "region_description": "আপনার অবস্থান আমাদের স্থানীয় বিশ্লেষণ প্রদান করতে সাহায্য করে।",
         "submit_button": "বাজার বিশ্লেষণ পান",
         "loading_button": "বিশ্লেষণ করা হচ্ছে...",

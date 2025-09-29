@@ -94,6 +94,8 @@
         "new_recommendation_button": "புதிய பரிந்துரையைத் தொடங்கு",
         "soil_black": "கருப்பு மற்றும் களிமண்",
         "soil_silty": "பழுப்பு மற்றும் வண்டல்",
+        "soil_alluvial": "வண்டல்",
+        "soil_laterite": "லேட்டரைட்",
         "confirm_photo_button": "புகைப்படத்தை உறுதிசெய்து தொடரவும்"
     },
     "news": {
@@ -143,7 +145,7 @@
         "toast_otp_not_sent_title": "குறியீடு அனுப்பப்படவில்லை",
         "toast_otp_not_sent_description": "முதலில் ஒரு குறியீட்டைக் கோரவும்.",
         "toast_login_success_title": "உள்நுழைவு வெற்றி",
-        "toast_login_success_description": "அக்ரிஅసిஸ்டிற்கு வரவேற்கிறோம்!",
+        "toast_login_success_description": "அக்ரிஅசிஸ்டிற்கு வரவேற்கிறோம்!",
         "toast_invalid_otp_title": "தவறான குறியீடு"
     },
     "disease_prevention": {

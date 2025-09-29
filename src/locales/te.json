@@ -94,6 +94,8 @@
         "new_recommendation_button": "కొత్త సిఫార్సును ప్రారంభించండి",
         "soil_black": "నలుపు & బంకమట్టి",
         "soil_silty": "గోధుమ & ఒండ్రు",
+        "soil_alluvial": "ఒండ్రు",
+        "soil_laterite": "లాటరైట్",
         "confirm_photo_button": "ఫోటోను నిర్ధారించి కొనసాగించండి"
     },
     "news": {

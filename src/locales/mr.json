@@ -94,6 +94,8 @@
         "new_recommendation_button": "नवीन शिफारस सुरू करा",
         "soil_black": "काळा आणि चिकणमाती",
         "soil_silty": "तपकिरी आणि गाळयुक्त",
+        "soil_alluvial": "गाळाची",
+        "soil_laterite": "लॅटराइट",
         "confirm_photo_button": "फोटोची पुष्टी करा आणि पुढे जा"
     },
     "news": {

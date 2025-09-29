@@ -28,6 +28,8 @@ const soilTypes = [
     { id: 'light-sandy', labelKey: 'recommendations.soil_light', image: 'https://picsum.photos/seed/soil-light/400/300' },
     { id: 'black-clay', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black/400/300' },
     { id: 'brown-silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
+    { id: 'alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial/400/300' },
+    { id: 'laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite/400/300' },
 ];
 
 const waterSources = [
