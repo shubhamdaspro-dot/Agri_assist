@@ -58,6 +58,8 @@
         "soil_silty": "भूरी और गादयुक्त",
         "soil_alluvial": "जलोढ़",
         "soil_laterite": "लैटेराइट",
+        "soil_peaty": "पीट",
+        "soil_chalky": "चूनेदार",
         "step_3_title": "आप अपने खेत के लिए पानी कैसे प्राप्त करते हैं?",
         "step_3_subtitle": "अपने पानी का प्राथमिक स्रोत चुनें।",
         "water_rain": "केवल बारिश",

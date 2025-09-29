@@ -15,6 +15,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/hooks/use-auth';
 import { Input } from '@/components/ui/input';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 type RecommendationFormProps = {
   setResults: (results: SimplifiedRecommendation | null) => void;
@@ -30,6 +31,8 @@ const soilTypes = [
     { id: 'Brown and Silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
     { id: 'Alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial/400/300' },
     { id: 'Laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite/400/300' },
+    { id: 'Peaty', labelKey: 'recommendations.soil_peaty', image: 'https://picsum.photos/seed/soil-peaty/400/300' },
+    { id: 'Chalky', labelKey: 'recommendations.soil_chalky', image: 'https://picsum.photos/seed/soil-chalky/400/300' },
 ];
 
 const waterSources = [
@@ -235,18 +238,30 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {soilTypes.map(soil => (
-                        <button key={soil.id} onClick={() => handleSoilSelection(soil.id)}
-                            className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary",
-                                selectedSoil === soil.id ? "border-primary" : "border-transparent"
-                            )}
-                        >
-                            <Image src={soil.image} alt={t(soil.labelKey)} width={200} height={150} className="rounded-md w-full aspect-[4/3] object-cover" />
-                            <p className="font-semibold mt-2">{t(soil.labelKey)}</p>
-                        </button>
-                    ))}
-                </div>
+                <Carousel
+                    opts={{
+                        align: "start",
+                        loop: true,
+                    }}
+                    className="w-full"
+                    >
+                    <CarouselContent>
+                        {soilTypes.map((soil) => (
+                        <CarouselItem key={soil.id} className="basis-1/2 md:basis-1/3">
+                            <button key={soil.id} onClick={() => handleSoilSelection(soil.id)}
+                                className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary w-full",
+                                    selectedSoil === soil.id ? "border-primary" : "border-transparent"
+                                )}
+                            >
+                                <Image src={soil.image} alt={t(soil.labelKey)} width={200} height={150} className="rounded-md w-full aspect-[4/3] object-cover" />
+                                <p className="font-semibold mt-2">{t(soil.labelKey)}</p>
+                            </button>
+                        </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious />
+                    <CarouselNext />
+                </Carousel>
                 
                 <div className="flex items-center gap-4">
                     <hr className="flex-grow border-t" />

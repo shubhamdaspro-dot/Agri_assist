@@ -96,6 +96,8 @@
         "soil_silty": "বাদামী এবং পলিযুক্ত",
         "soil_alluvial": "পলল",
         "soil_laterite": "ল্যাটেরাইট",
+        "soil_peaty": "পিট",
+        "soil_chalky": "চুনযুক্ত",
         "confirm_photo_button": "ছবি নিশ্চিত করুন এবং চালিয়ে যান"
     },
     "news": {
@@ -180,7 +182,7 @@
         "nitrogen_label": "নাইট্রোজেন (N)",
         "nitrogen_placeholder": "যেমন, ২৫ পিপিএম",
         "phosphorus_label": "ফসফরাস (P)",
-        "phosphorus_placeholder": "যেমন, ১৫ পিপিএম",
+        "phosphorus_placeholder": "जैसे, १५ पीपीएम",
         "potassium_label": "পটাশিয়াম (K)",
         "potassium_placeholder": "যেমন, ১৫০ পিপিএম",
         "ph_label": "মাটির পিএইচ",
@@ -208,7 +210,7 @@
         "current_price": "বর্তমান মূল্য",
         "price_trend": "মূল্যের প্রবণতা",
         "selling_suggestions": "লাভজনক বিক্রির স্থান",
-        "new_analysis_button": "নতুন বিশ্লেষণ শুরু করুন"
+        "new_analysis_button": "নতুন বিশ্লেষণ شروع করুন"
     },
      "help": {
         "page_title": "সাহায্য ও সমর্থন",

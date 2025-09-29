@@ -96,6 +96,8 @@
         "soil_silty": "గోధుమ & ఒండ్రు",
         "soil_alluvial": "ఒండ్రు",
         "soil_laterite": "లాటరైట్",
+        "soil_peaty": "పీట్",
+        "soil_chalky": "సుద్ద",
         "confirm_photo_button": "ఫోటోను నిర్ధారించి కొనసాగించండి"
     },
     "news": {

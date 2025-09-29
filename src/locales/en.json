@@ -71,6 +71,8 @@
         "soil_silty": "Brown & Silty",
         "soil_alluvial": "Alluvial",
         "soil_laterite": "Laterite",
+        "soil_peaty": "Peaty",
+        "soil_chalky": "Chalky",
         "step_3_title": "How do you get water for your farm?",
         "step_3_subtitle": "Select your primary source of water.",
         "water_rain": "Rain Only",

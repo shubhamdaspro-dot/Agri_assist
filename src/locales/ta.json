@@ -96,6 +96,8 @@
         "soil_silty": "பழுப்பு மற்றும் வண்டல்",
         "soil_alluvial": "வண்டல்",
         "soil_laterite": "லேட்டரைட்",
+        "soil_peaty": "கரிமண்",
+        "soil_chalky": "சுண்ணாம்பு",
         "confirm_photo_button": "புகைப்படத்தை உறுதிசெய்து தொடரவும்"
     },
     "news": {
