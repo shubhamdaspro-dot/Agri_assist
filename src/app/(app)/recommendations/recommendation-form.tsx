@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Loader2, MapPin, Check, X, Upload, Sprout } from 'lucide-react';
@@ -93,7 +92,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
     let soilTypeForApi = selectedSoil;
 
     try {
-        if (uploadedSoilPhoto) {
+        if (uploadedSoilPhoto && !selectedSoil) {
             const soilAnalysisResult = await analyzeSoilFromPhotoAction({ photoDataUri: uploadedSoilPhoto });
             if (soilAnalysisResult.success && soilAnalysisResult.data) {
                 soilTypeForApi = soilAnalysisResult.data.soilType;
@@ -133,11 +132,11 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
           waterSource: selectedWater,
           topRecommendation: {
             cropName: topRec.name,
-            cropNameLocal: topRec.name,
+            cropNameLocal: topRec.name, // Assuming same for now
             imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}/600/400`,
             imageHint: `${topRec.name.toLowerCase()} field`,
-            profit: "High", 
-            waterNeeded: topRec.waterRequirement, 
+            profit: "High", // Placeholder
+            waterNeeded: topRec.waterRequirement,
             timeToHarvest: `${topRec.sowingSeason} - ${topRec.harvestingSeason}`,
             rationale: topRec.rationale,
           },
