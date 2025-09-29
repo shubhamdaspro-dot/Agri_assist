@@ -207,6 +207,7 @@ export async function createUserProfile(
     }
     
     const profileData = userDoc.data();
+    // If 'profileCompleted' field doesn't exist, treat it as incomplete.
     const profileComplete = profileData?.profileCompleted === true;
     
     return { success: true, profileComplete };
@@ -214,7 +215,7 @@ export async function createUserProfile(
     console.error('Error creating/checking user profile:', e);
     // If the client is offline, assume the profile is not complete to force setup.
     if ((e.message as string).includes('offline')) {
-        return { success: false, error: e.message, profileComplete: false };
+        return { success: true, profileComplete: false, error: e.message };
     }
     // For other errors, we might assume the profile is complete to avoid blocking the user.
     return { success: false, error: e.message, profileComplete: true };

@@ -59,8 +59,8 @@ The soil type will be one of the following: "Dark and Crumbly", "Red and Sticky"
 Weather Data: {{{weatherData}}}
 Soil Type: {{{soilType}}}
 Geographic Region: {{{geographicRegion}}}
-Historical Yields (if available): {{{historicalYields}}}
-Market Demand (if available): {{{marketDemand}}}
+{{#if historicalYields}}Historical Yields (if available): {{{historicalYields}}}{{/if}}
+{{#if marketDemand}}Market Demand (if available): {{{marketDemand}}}{{/if}}
 
 Based on this information, provide your detailed recommendations.`,
 });

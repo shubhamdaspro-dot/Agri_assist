@@ -117,6 +117,8 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
           geographicRegion: `${location.latitude}, ${location.longitude}`,
           soilType: soilTypeForApi,
           weatherData: weatherString,
+          marketDemand: undefined,
+          historicalYields: undefined
         });
         
         if (!aiResult.success || !aiResult.data) {
