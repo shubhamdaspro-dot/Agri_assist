@@ -13,7 +13,7 @@ import {z} from 'genkit';
 const GenerateCropRecommendationsInputSchema = z.object({
   weatherData: z.string().describe('Real-time and forecasted weather data (temperature, rainfall, humidity).'),
   soilType: z.string().describe('Soil type based on geographic location.'),
-  waterSource: z.string().describe('The primary source of water for the farm (e.g., Rain Only, Canal / River, Borewell / Tubewell).'),
+  waterSource: z.string().optional().describe('The primary source of water for the farm (e.g., Rain Only, Canal / River, Borewell / Tubewell).'),
   geographicRegion: z.string().describe('Location-based data to understand regional farming practices.'),
   historicalYields: z.string().optional().describe('Historical crop yields in the area.'),
   marketDemand: z.string().optional().describe('Market demand data for different crops.'),
@@ -55,11 +55,13 @@ const prompt = ai.definePrompt({
 
 Also, provide a structured list of recommended products, including specific names/types of pesticides, fertilizers, and manures. Finally, provide a general rationale for the overall crop selection and a list of 2-3 fictional but realistic local stores with full, searchable addresses where these products can be purchased.
   
-Your recommendations MUST be based on the provided Water Source and Soil Type.
+Your recommendations MUST be based on the provided Soil Type.
 
 Weather Data: {{{weatherData}}}
 Soil Type: {{{soilType}}}
+{{#if waterSource}}
 Water Source: {{{waterSource}}}
+{{/if}}
 Geographic Region: {{{geographicRegion}}}
 
 Based on this information, provide your detailed recommendations.`,

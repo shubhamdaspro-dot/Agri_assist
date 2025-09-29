@@ -3,18 +3,15 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Loader2, MapPin, Check, X, Upload, Sprout, TestTube2, Camera } from 'lucide-react';
-import { saveRecommendation, getCropRecommendations, analyzeSoilFromPhotoAction } from '@/lib/actions';
+import { Loader2, MapPin, Check, Sprout, TestTube2 } from 'lucide-react';
+import { saveRecommendation, getCropRecommendations } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
 import { useIsClient } from '@/hooks/use-is-client';
 import type { SimplifiedRecommendation } from '@/lib/types';
-import Image from 'next/image';
 import { useAuth } from '@/hooks/use-auth';
-import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { waterSources } from '@/lib/data';
 import Link from 'next/link';
 
 type RecommendationFormProps = {
@@ -45,8 +42,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
   const [locationError, setLocationError] = useState<string | null>(null);
   
   const [selectedSoil, setSelectedSoil] = useState<string | null>(null);
-
-  const [selectedWater, setSelectedWater] = useState<string | null>(null);
   
   useEffect(() => {
     if (isClient && step === 1) {
@@ -68,13 +63,13 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
 
 
  const handleGetRecommendation = async () => {
-    if (!location || !selectedSoil || !selectedWater || !user) {
+    if (!location || !selectedSoil || !user) {
       toast({ variant: 'destructive', title: "Missing Information", description: "Please complete all steps." });
       return;
     }
 
     setIsLoading(true);
-    setStep(4);
+    setStep(3); // Change to processing step
 
     try {
         const weatherResponse = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,precipitation,weather_code`);
@@ -84,7 +79,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
         const aiResult = await getCropRecommendations({
           geographicRegion: `${location.latitude}, ${location.longitude}`,
           soilType: selectedSoil,
-          waterSource: selectedWater,
           weatherData: weatherString,
         });
         
@@ -98,7 +92,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
           userId: user.uid,
           location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
           soilType: selectedSoil,
-          waterSource: selectedWater,
+          waterSource: "Not Specified", // Default value
           topRecommendation: {
             cropName: topRec.name,
             cropNameLocal: topRec.name, // Assuming same for now
@@ -129,7 +123,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
             title: t('recommendations.toast_error_title'),
             description: error.message,
         });
-        setStep(3); // Go back to the last step on error
+        setStep(2); // Go back to the soil step on error
     } finally {
         setIsLoading(false);
     }
@@ -208,9 +202,9 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                     </Button>
                 </Alert>
                 
-
-                 <Button onClick={() => setStep(3)} disabled={!selectedSoil} className="w-full">
-                    Next
+                 <Button onClick={handleGetRecommendation} disabled={!selectedSoil || isLoading} className="w-full">
+                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                    Get My Recommendation
                 </Button>
 
             </CardContent>
@@ -218,31 +212,6 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
       )}
 
       {step === 3 && (
-         <>
-            <CardHeader>
-                <CardTitle>{t('recommendations.step_3_title')}</CardTitle>
-                <CardDescription>{t('recommendations.step_3_subtitle')}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {waterSources.map(water => (
-                        <Button key={water.id} variant={selectedWater === water.id ? 'default' : 'outline'} size="lg" className="h-24 flex-col gap-2 text-base"
-                            onClick={() => setSelectedWater(water.id)}
-                        >
-                            <water.icon className="h-8 w-8" />
-                            <span>{t(water.labelKey)}</span>
-                        </Button>
-                    ))}
-                </div>
-                <Button onClick={handleGetRecommendation} disabled={!selectedWater || isLoading} className="w-full">
-                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
-                    Get My Recommendation
-                </Button>
-            </CardContent>
-        </>
-      )}
-      
-      {step === 4 && (
         <CardContent className="flex flex-col items-center justify-center text-center p-8 min-h-[400px]">
             <Sprout className="h-16 w-16 text-primary animate-plant-grow mb-4" />
             <h2 className="text-2xl font-bold font-headline">{t('recommendations.processing_title')}</h2>
