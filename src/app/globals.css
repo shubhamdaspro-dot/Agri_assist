@@ -63,11 +63,15 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
   .font-headline {
     font-family: 'PT Sans', sans-serif;
     font-weight: 700;
   }
 }
+
 
 @layer components {
   .animate-plant-grow {
