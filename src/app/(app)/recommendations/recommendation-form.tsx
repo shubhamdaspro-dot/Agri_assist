@@ -23,13 +23,13 @@ type RecommendationFormProps = {
 };
 
 const soilTypes = [
-    { id: 'Dark and Crumbly', labelKey: 'recommendations.soil_dark', image: 'https://picsum.photos/seed/soil-dark/400/300' },
-    { id: 'Red and Sticky', labelKey: 'recommendations.soil_red', image: 'https://picsum.photos/seed/soil-red/400/300' },
-    { id: 'Light and Sandy', labelKey: 'recommendations.soil_light', image: 'https://picsum.photos/seed/soil-light/400/300' },
-    { id: 'Black and Clayey', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black/400/300' },
-    { id: 'Brown and Silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
-    { id: 'Alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial/400/300' },
-    { id: 'Laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite/400/300' },
+    { id: 'Dark and Crumbly', labelKey: 'recommendations.soil_dark', image: 'https://picsum.photos/seed/soil-dark-1/400/300' },
+    { id: 'Red and Sticky', labelKey: 'recommendations.soil_red', image: 'https://picsum.photos/seed/soil-red-1/400/300' },
+    { id: 'Light and Sandy', labelKey: 'recommendations.soil-light-1/400/300' },
+    { id: 'Black and Clayey', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black-1/400/300' },
+    { id: 'Brown and Silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty-1/400/300' },
+    { id: 'Alluvial', labelKey: 'recommendations.soil_alluvial', image: 'https://picsum.photos/seed/soil-alluvial-1/400/300' },
+    { id: 'Laterite', labelKey: 'recommendations.soil_laterite', image: 'https://picsum.photos/seed/soil-laterite-1/400/300' },
 ];
 
 const waterSources = [
