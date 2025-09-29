@@ -247,19 +247,26 @@ export async function saveFcmToken(uid: string, token: string) {
 const UpdateUserProfileSchema = z.object({
   uid: z.string(),
   displayName: z.string().min(2, 'Name must be at least 2 characters.'),
-  age: z.number().min(1, 'Age must be a positive number.'),
+  age: z.number().min(1, 'Age must be a positive number.').optional(),
   photoURL: z.string().url().optional().nullable(),
 });
 
 export async function updateUserProfile(input: z.infer<typeof UpdateUserProfileSchema>) {
     try {
         const userRef = doc(db, 'users', input.uid);
-        await updateDoc(userRef, {
+        
+        const dataToUpdate: Record<string, any> = {
             displayName: input.displayName,
-            age: input.age,
-            ...(input.photoURL && { photoURL: input.photoURL }),
+            photoURL: input.photoURL || null,
             profileCompleted: true,
-        });
+        };
+
+        if(input.age) {
+            dataToUpdate.age = input.age;
+        }
+
+        await updateDoc(userRef, dataToUpdate);
+
         return { success: true };
     } catch (e: any) {
         console.error('Error updating user profile:', e);

@@ -21,6 +21,7 @@ import {
   BarChart2,
   Flower2,
   BookMarked,
+  User,
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -90,6 +91,14 @@ export default function AppSidebar() {
       </SidebarContent>
       <SidebarFooter>
         <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild tooltip={t('sidebar.profile')} isActive={pathname === '/profile'}>
+                <Link href="/profile">
+                  <User />
+                  <span>{t('sidebar.profile')}</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild tooltip={t('sidebar.help')} isActive={pathname === '/help'}>
                 <Link href="/help">

@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Button } from '@/components/ui/button';
-import { Languages, LogOut, Bell, BarChart2 } from 'lucide-react';
+import { Languages, LogOut, Bell, User } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,15 +14,16 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useLanguage } from '@/hooks/use-language';
 import { auth, messaging, getToken } from '@/lib/firebase';
-import { signOut, updateProfile } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { useToast } from '@/hooks/use-toast';
-import { saveFcmToken, createUserProfile } from '@/lib/actions';
+import { saveFcmToken } from '@/lib/actions';
 import { useEffect, useState } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import Link from 'next/link';
 
 function getTitleKey(path: string): string {
   if (path.includes('/products/')) {
@@ -141,6 +142,12 @@ export default function Header() {
               <p className="text-xs text-muted-foreground font-normal">{user?.phoneNumber}</p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuItem asChild>
+                <Link href="/profile">
+                    <User className="mr-2 h-4 w-4" />
+                    <span>{t('sidebar.profile')}</span>
+                </Link>
+            </DropdownMenuItem>
              <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <DropdownMenuItem onSelect={(e) => e.preventDefault()}>

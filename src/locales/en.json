@@ -11,7 +11,8 @@
         "disease_prevention": "Disease Check",
         "market_analysis": "Market Analysis",
         "my_recommendations": "My Recommendations",
-        "farming_guide": "Farming Guide"
+        "farming_guide": "Farming Guide",
+        "profile": "Profile"
     },
     "header": {
         "change_language": "Change language",
@@ -247,5 +248,18 @@
         "get_first_recommendation_button": "Get Crop Advice",
         "recommendation_date": "Recommended on",
         "inputs_title": "Your Inputs"
+    },
+    "profile": {
+        "page_title": "Edit Your Profile",
+        "page_subtitle": "Update your name and profile picture.",
+        "form_name_label": "Full Name",
+        "form_name_placeholder": "e.g., Ramesh Kumar",
+        "form_avatar_label": "Profile Picture",
+        "form_submit_button": "Save Changes",
+        "form_loading_button": "Saving...",
+        "toast_success_title": "Profile Updated",
+        "toast_success_description": "Your changes have been saved successfully.",
+        "toast_error_title": "Update Failed",
+        "toast_error_description": "Could not save your changes. Please try again."
     }
 }

@@ -11,7 +11,8 @@
         "disease_prevention": "रोग जांच",
         "market_analysis": "बाजार विश्लेषण",
         "my_recommendations": "मेरी सिफारिशें",
-        "farming_guide": "खेती गाइड"
+        "farming_guide": "खेती गाइड",
+        "profile": "प्रोफ़ाइल"
     },
     "header": {
         "change_language": "भाषा बदलें",
@@ -234,5 +235,18 @@
         "get_first_recommendation_button": "फसल सलाह प्राप्त करें",
         "recommendation_date": "सिफारिश की तारीख",
         "inputs_title": "आपके इनपुट"
+    },
+    "profile": {
+        "page_title": "अपनी प्रोफ़ाइल संपादित करें",
+        "page_subtitle": "अपना नाम और प्रोफ़ाइल चित्र अपडेट करें।",
+        "form_name_label": "पूरा नाम",
+        "form_name_placeholder": "उदा., रमेश कुमार",
+        "form_avatar_label": "प्रोफ़ाइल चित्र",
+        "form_submit_button": "बदलाव सहेजें",
+        "form_loading_button": "सहेज रहा है...",
+        "toast_success_title": "प्रोफ़ाइल अपडेट किया गया",
+        "toast_success_description": "आपके बदलाव सफलतापूर्वक सहेजे गए हैं।",
+        "toast_error_title": "अपडेट विफल",
+        "toast_error_description": "आपके बदलाव सहेजे नहीं जा सके। कृपया पुन: प्रयास करें।"
     }
 }
