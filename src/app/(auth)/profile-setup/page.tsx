@@ -16,7 +16,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 
 const profileFormSchema = z.object({
   displayName: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  age: z.coerce.number().min(1, { message: 'Please enter a valid age.' }),
+  age: z.coerce.number().min(1, { message: 'Please enter a valid age.' }).max(120),
 });
 
 export default function ProfileSetupPage() {
@@ -49,7 +49,7 @@ export default function ProfileSetupPage() {
       });
 
       if (result.success) {
-        toast({ title: 'Profile Updated!', description: 'Let\'s get started.' });
+        toast({ title: 'Profile Updated!', description: "Let's get started." });
         router.push('/welcome');
       } else {
         throw new Error(result.error || 'Failed to update profile.');
@@ -104,7 +104,7 @@ export default function ProfileSetupPage() {
                   <FormItem>
                     <FormLabel>Age</FormLabel>
                     <FormControl>
-                      <Input type="number" placeholder="e.g., 45" {...field} />
+                      <Input type="number" placeholder="e.g., 45" {...field} onChange={e => field.onChange(e.target.value === '' ? undefined : +e.target.value)} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>

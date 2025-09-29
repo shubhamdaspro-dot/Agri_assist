@@ -36,10 +36,15 @@ export default function PermissionsPage() {
   };
 
   const handleNotificationsRequest = async () => {
-    if (!('Notification' in window) || !messaging || !user) {
-      toast({ title: "Error", description: "This browser does not support notifications." });
+    if (!('Notification' in window) || !user) {
+      toast({ title: "Error", description: "This browser does not support notifications or you are not logged in." });
       setNotificationsState('denied');
       return;
+    }
+     if (!messaging) {
+        toast({ title: "Error", description: "Messaging not initialized." });
+        setNotificationsState('denied');
+        return;
     }
 
     try {

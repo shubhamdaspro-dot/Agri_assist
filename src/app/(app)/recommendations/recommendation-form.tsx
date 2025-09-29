@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Loader2, MapPin, Check, X, Droplets, Mountain, Wind, Sprout } from 'lucide-react';
-import { getCropRecommendations, saveRecommendation } from '@/lib/actions';
+import { saveRecommendation } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
@@ -181,7 +181,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
             <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {waterSources.map(water => (
-                        <Button key={water.id} variant="outline" size="lg" className="h-24 flex-col gap-2 text-base"
+                        <Button key={water.id} variant={selectedWater === water.id ? 'default' : 'outline'} size="lg" className="h-24 flex-col gap-2 text-base"
                             onClick={() => setSelectedWater(water.id)}
                         >
                             <water.icon className="h-8 w-8" />

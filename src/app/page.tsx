@@ -41,7 +41,16 @@ export default function Home() {
 
   useEffect(() => {
     if (!authLoading && user) {
-      router.push('/dashboard');
+      // Redirect based on profile completion status after checking with DB
+      const checkProfile = async () => {
+        const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
+        if (res.success && !res.profileComplete) {
+          router.push('/profile-setup');
+        } else {
+          router.push('/dashboard');
+        }
+      };
+      checkProfile();
     }
   }, [user, authLoading, router]);
 
@@ -109,7 +118,7 @@ export default function Home() {
           phoneNumber: user.phoneNumber!,
         });
 
-        if (profileResult.success && profileResult.isNewUser) {
+        if (profileResult.success && !profileResult.profileComplete) {
            toast({
             title: t('auth.toast_login_success_title'),
             description: "Please set up your profile.",

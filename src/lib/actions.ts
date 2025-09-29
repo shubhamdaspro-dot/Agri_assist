@@ -192,7 +192,7 @@ const UserProfileSchema = z.object({
 
 export async function createUserProfile(
   input: z.infer<typeof UserProfileSchema>
-): Promise<{ success: boolean; isNewUser?: boolean; error?: string }> {
+): Promise<{ success: boolean; profileComplete: boolean; error?: string }> {
   try {
     const userRef = doc(db, 'users', input.uid);
     const userDoc = await getDoc(userRef);
@@ -201,15 +201,18 @@ export async function createUserProfile(
       await setDoc(userRef, {
         phoneNumber: input.phoneNumber,
         createdAt: serverTimestamp(),
+        profileCompleted: false,
       });
-      return { success: true, isNewUser: true };
+      return { success: true, profileComplete: false };
     }
-     // Check if displayName is missing, indicating incomplete profile
-    const isNewUser = !userDoc.data()?.displayName;
-    return { success: true, isNewUser };
+    
+    const profileData = userDoc.data();
+    const profileComplete = profileData?.profileCompleted === true;
+    
+    return { success: true, profileComplete };
   } catch (e: any) {
     console.error('Error creating/checking user profile:', e);
-    return { success: false, error: e.message };
+    return { success: false, error: e.message, profileComplete: false };
   }
 }
 
@@ -256,7 +259,7 @@ export async function updateUserProfile(input: z.infer<typeof UpdateUserProfileS
             age: input.age,
             ...(input.photoURL && { photoURL: input.photoURL }),
             profileCompleted: true,
-        }, { merge: true });
+        });
         return { success: true };
     } catch (e: any) {
         console.error('Error updating user profile:', e);
