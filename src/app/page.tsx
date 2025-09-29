@@ -41,13 +41,23 @@ export default function Home() {
 
   useEffect(() => {
     if (!authLoading && user) {
-      // Redirect based on profile completion status after checking with DB
       const checkProfile = async () => {
-        const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
-        if (res.success && !res.profileComplete) {
-          router.push('/profile-setup');
-        } else {
-          router.push('/dashboard');
+        try {
+            const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
+            if (res.success) {
+                if (res.profileComplete) {
+                    router.push('/dashboard');
+                } else {
+                    router.push('/profile-setup');
+                }
+            } else {
+                // If checking profile fails, default to dashboard but log error
+                console.error("Failed to check profile, defaulting to dashboard:", res.error);
+                router.push('/dashboard');
+            }
+        } catch (error) {
+            console.error("Exception when checking profile:", error);
+            router.push('/dashboard');
         }
       };
       checkProfile();
@@ -109,29 +119,8 @@ export default function Home() {
     }
     setLoading(true);
     try {
-      const userCredential = await confirmationResult.confirm(otp);
-      const user = userCredential.user;
-
-      if (user) {
-        const profileResult = await createUserProfile({
-          uid: user.uid,
-          phoneNumber: user.phoneNumber!,
-        });
-
-        if (profileResult.success && !profileResult.profileComplete) {
-           toast({
-            title: t('auth.toast_login_success_title'),
-            description: "Please set up your profile.",
-          });
-          router.push('/profile-setup');
-        } else {
-           toast({
-            title: t('auth.toast_login_success_title'),
-            description: t('auth.toast_login_success_description'),
-          });
-          router.push('/dashboard');
-        }
-      }
+      await confirmationResult.confirm(otp);
+      // The useEffect hook will handle redirection
     } catch (error: any) {
       toast({
         variant: 'destructive',
