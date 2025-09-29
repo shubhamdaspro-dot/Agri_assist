@@ -106,3 +106,24 @@ export const FarmingGuideSchema = z.object({
     harvesting: z.array(z.string()).describe("Guidance on when and how to harvest."),
 });
 export type FarmingGuide = z.infer<typeof FarmingGuideSchema>;
+
+// Disease Diagnosis Types
+export const DiagnoseCropDiseaseInputSchema = z.object({
+  photoDataUri: z
+    .string()
+    .optional()
+    .describe(
+      "A photo of an affected plant part, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+    ),
+  diseaseName: z.string().optional().describe('The name of the suspected crop disease.'),
+});
+export type DiagnoseCropDiseaseInput = z.infer<typeof DiagnoseCropDiseaseInputSchema>;
+
+export const DiagnoseCropDiseaseOutputSchema = z.object({
+  disease: z.string().describe('The identified name of the disease.'),
+  description: z.string().describe('A detailed description of the disease, including its symptoms.'),
+  prevention: z.array(z.string()).describe('A list of actionable steps to prevent the disease.'),
+  treatment: z.array(z.string()).describe('A list of actionable steps to treat the disease.'),
+  isDiseaseIdentified: z.boolean().describe('Whether a disease was confidently identified.'),
+});
+export type DiagnoseCropDiseaseOutput = z.infer<typeof DiagnoseCropDiseaseOutputSchema>;

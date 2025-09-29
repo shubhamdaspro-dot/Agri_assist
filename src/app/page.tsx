@@ -43,10 +43,16 @@ export default function Home() {
         const checkProfile = async () => {
             try {
                 const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
-                if (res.profileComplete) {
-                    router.push('/dashboard');
+                 if (res.success) {
+                    if (res.profileComplete) {
+                        router.push('/dashboard');
+                    } else {
+                        router.push('/profile-setup');
+                    }
                 } else {
-                    router.push('/profile-setup');
+                    // If checking profile fails, default to dashboard but log error
+                    console.error("Failed to check profile, defaulting to dashboard:", res.error);
+                    router.push('/dashboard');
                 }
             } catch (error) {
                 console.error("Exception when checking profile:", error);

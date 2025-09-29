@@ -11,13 +11,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { getLatestNews } from "@/lib/actions";
 import type { NewsArticle } from "@/lib/types";
-import { TestTube } from "lucide-react";
+import { TestTube2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 
 const actionItems = [
   { href: '/recommendations', labelKey: 'dashboard.crop_advice', icon: Sprout, color: 'bg-green-500' },
-  { href: '/soil-analysis', labelKey: 'dashboard.soil_analysis', icon: TestTube, color: 'bg-blue-500' },
+  { href: '/soil-analysis', labelKey: 'dashboard.soil_analysis', icon: TestTube2, color: 'bg-blue-500' },
   { href: '/market-analysis', labelKey: 'dashboard.market_prices', icon: BarChart2, color: 'bg-amber-500' },
   { href: '/disease-prevention', labelKey: 'dashboard.disease_check', icon: ShieldCheck, color: 'bg-teal-500' },
 ];
