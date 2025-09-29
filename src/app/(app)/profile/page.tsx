@@ -43,22 +43,35 @@ export default function ProfilePage() {
   });
   
   useEffect(() => {
-    if (user) {
-      const fetchUserData = async () => {
+    const fetchUserData = async () => {
+      if (user) {
         setPageLoading(true);
-        const userDocRef = doc(db, 'users', user.uid);
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-          const userData = userDoc.data();
-          form.setValue('displayName', userData.displayName || '');
-          setAvatar(userData.photoURL || null);
+        try {
+            const userDocRef = doc(db, 'users', user.uid);
+            const userDoc = await getDoc(userDocRef);
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              form.setValue('displayName', userData.displayName || user.displayName || '');
+              setAvatar(userData.photoURL || user.photoURL || null);
+            } else {
+                // User document doesn't exist, use auth data as fallback
+                form.setValue('displayName', user.displayName || '');
+                setAvatar(user.photoURL || null);
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            // In case of error, still try to use auth data
+            form.setValue('displayName', user.displayName || '');
+            setAvatar(user.photoURL || null);
+        } finally {
+            setPageLoading(false);
         }
-        setPageLoading(false);
-      };
-      fetchUserData();
-    } else if (!authLoading) {
-      router.push('/');
-    }
+      } else if (!authLoading) {
+        router.push('/');
+      }
+    };
+    
+    fetchUserData();
   }, [user, authLoading, router, form]);
 
 
