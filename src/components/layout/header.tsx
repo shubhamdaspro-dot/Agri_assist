@@ -90,7 +90,8 @@ export default function Header() {
   const setupNotifications = async () => {
     if (messaging && user) {
         try {
-            const currentToken = await getToken(messaging, { vapidKey: 'YOUR_VAPID_KEY' }); // Replace with your VAPID key from Firebase Console
+            // VAPID key from Firebase Console > Project Settings > Cloud Messaging > Web Push certificates
+            const currentToken = await getToken(messaging, { vapidKey: 'BCmGVf-pL4S9lQ_u_xP-BiJjbe4LIlS8Jw4j22C5i0V-fHkmy3h9oYk8yTqA5F1X5NwsDoUDj6b1sXgJNoS4t1w' });
             if (currentToken) {
                 await saveFcmToken(user.uid, currentToken);
                 console.log('FCM Token saved:', currentToken);
