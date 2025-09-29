@@ -22,11 +22,18 @@ export type GenerateCropRecommendationsInput = z.infer<typeof GenerateCropRecomm
 const RecommendedCropSchema = z.object({
     name: z.string().describe('The name of a suitable crop to plant.'),
     rationale: z.string().describe('Explanation of why this crop is recommended.'),
+    sowingSeason: z.string().describe("The ideal sowing season for the crop in this region (e.g., 'June-July')."),
+    harvestingSeason: z.string().describe("The typical harvesting season for the crop (e.g., 'October-November')."),
+    waterRequirement: z.enum(['High', 'Medium', 'Low']).describe("The crop's water requirement."),
 });
 
 const GenerateCropRecommendationsOutputSchema = z.object({
-  recommendedCrops: z.array(RecommendedCropSchema).describe('A list of the 3-5 most suitable crops to plant.'),
-  recommendedProducts: z.string().describe('A general list of pesticides, manures, and fertilizers needed to cultivate the recommended crops successfully.'),
+  recommendedCrops: z.array(RecommendedCropSchema).describe('A list of the 3 most suitable crops to plant with detailed cultivation information.'),
+  recommendedProducts: z.object({
+      pesticides: z.array(z.string()).describe('A list of specific pesticide names or types suitable for the recommended crops.'),
+      fertilizers: z.array(z.string()).describe('A list of specific fertilizer names or types (e.g., "Urea", "DAP").'),
+      manures: z.array(z.string()).describe('A list of recommended organic manures (e.g., "Cow Dung Manure", "Vermicompost").'),
+  }).describe('A structured list of products needed to cultivate the recommended crops successfully.'),
   rationale: z.string().describe('A general rationale for why these types of crops are recommended for the given conditions.'),
   nearestStores: z.array(z.object({
     name: z.string().describe('The name of the store.'),
@@ -43,9 +50,11 @@ const prompt = ai.definePrompt({
   name: 'generateCropRecommendationsPrompt',
   input: {schema: GenerateCropRecommendationsInputSchema},
   output: {schema: GenerateCropRecommendationsOutputSchema},
-  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation. Generate a list of 3-5 suitable crops to plant, with a specific rationale for each. Also, provide a general list of products needed for these crops, a general rationale covering the crop types, and a list of 2-3 fictional but realistic local stores with full, searchable addresses where the products can be purchased based on the geographic region.
+  prompt: `You are an expert agricultural advisor. Analyze the following data and provide a clear, actionable recommendation. Generate a list of the 3 most suitable crops. For each crop, provide a specific rationale, the ideal sowing and harvesting seasons for the region, and its water requirement (High, Medium, or Low).
+
+Also, provide a structured list of recommended products, including specific names/types of pesticides, fertilizers, and manures. Finally, provide a general rationale for the overall crop selection and a list of 2-3 fictional but realistic local stores with full, searchable addresses where these products can be purchased.
   
-The soil type will be one of the following: "Dark and Crumbly", "Red and Sticky", "Light and Sandy", "Black and Clayey", "Brown and Silty", "Alluvial", "Laterite", or a type identified from a photo.
+The soil type will be one of the following: "Dark and Crumbly", "Red and Sticky", "Light and Sandy", "Black and Clayey", "Brown and Silty", "Alluvial", or "Laterite".
 
 Weather Data: {{{weatherData}}}
 Soil Type: {{{soilType}}}
@@ -53,7 +62,7 @@ Geographic Region: {{{geographicRegion}}}
 Historical Yields (if available): {{{historicalYields}}}
 Market Demand (if available): {{{marketDemand}}}
 
-Based on this information, provide your recommendations.`,
+Based on this information, provide your detailed recommendations.`,
 });
 
 const generateCropRecommendationsFlow = ai.defineFlow(
