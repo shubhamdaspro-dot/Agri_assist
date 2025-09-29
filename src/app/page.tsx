@@ -50,18 +50,17 @@ export default function Home() {
                         router.push('/profile-setup');
                     }
                 } else {
-                    // Retry logic for "offline" error
                     if (res.error?.includes('offline') && retryCount < 1) {
                         console.warn("Firestore client offline, retrying profile check...");
                         setTimeout(() => checkProfile(retryCount + 1), 2000);
                     } else {
                         console.error("Failed to check profile, defaulting to dashboard:", res.error);
-                        router.push('/dashboard');
+                        router.push('/dashboard'); // Fallback to dashboard on persistent error
                     }
                 }
             } catch (error) {
                 console.error("Exception when checking profile:", error);
-                router.push('/dashboard');
+                router.push('/dashboard'); // Fallback to dashboard on exception
             }
         };
         checkProfile();
