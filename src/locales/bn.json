@@ -92,7 +92,9 @@
         "toast_download_success_title": "ডাউনলোড শুরু হয়েছে",
         "toast_download_error_title": "ডাউনলোড ব্যর্থ হয়েছে",
         "toast_download_error_description": "ছবি তৈরি করা যায়নি। অনুগ্রহ করে আবার চেষ্টা করুন।",
-        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন"
+        "new_recommendation_button": "নতুন সুপারিশ শুরু করুন",
+        "soil_black": "কালো এবং কাদামাটি",
+        "soil_silty": "বাদামী এবং পলিযুক্ত"
     },
     "news": {
         "page_title": "কৃষি খবর ও আপডেট",
@@ -100,7 +102,7 @@
     },
     "loans": {
         "page_title": "কৃষি ঋণ প্রকল্প",
-        "page_subtitle": "কৃষকদের জন্য সরকার-সমর্থित ঋণ প্রকল্পগুলির তথ্য।",
+        "page_subtitle": "কৃষকদের জন্য সরকার-সমর্থিত ঋণ প্রকল্পগুলির তথ্য।",
         "available_schemes": "উপলব্ধ প্রকল্প",
         "eligibility_criteria": "যোগ্যতার মানদণ্ড",
         "required_documents": "প্রয়োজনীয় নথি",

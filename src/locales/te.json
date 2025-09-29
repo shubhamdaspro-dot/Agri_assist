@@ -92,7 +92,9 @@
         "toast_download_success_title": "డౌన్‌లోడ్ ప్రారంభించబడింది",
         "toast_download_error_title": "డౌన్‌లోడ్ విఫలమైంది",
         "toast_download_error_description": "చిత్రాన్ని రూపొందించలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
-        "new_recommendation_button": "కొత్త సిఫార్సును ప్రారంభించండి"
+        "new_recommendation_button": "కొత్త సిఫార్సును ప్రారంభించండి",
+        "soil_black": "నలుపు & బంకమట్టి",
+        "soil_silty": "గోధుమ & ఒండ్రు"
     },
     "news": {
         "page_title": "వ్యవసాయ వార్తలు & నవీకరణలు",

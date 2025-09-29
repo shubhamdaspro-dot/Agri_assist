@@ -22,9 +22,11 @@ type RecommendationFormProps = {
 };
 
 const soilTypes = [
-    { id: 'dark-crumbly', labelKey: 'recommendations.soil_dark', image: '/images/soil-dark.jpg' },
-    { id: 'red-sticky', labelKey: 'recommendations.soil_red', image: '/images/soil-red.jpg' },
-    { id: 'light-sandy', labelKey: 'recommendations.soil_light', image: '/images/soil-light.jpg' },
+    { id: 'dark-crumbly', labelKey: 'recommendations.soil_dark', image: 'https://picsum.photos/seed/soil-dark/400/300' },
+    { id: 'red-sticky', labelKey: 'recommendations.soil_red', image: 'https://picsum.photos/seed/soil-red/400/300' },
+    { id: 'light-sandy', labelKey: 'recommendations.soil_light', image: 'https://picsum.photos/seed/soil-light/400/300' },
+    { id: 'black-clay', labelKey: 'recommendations.soil_black', image: 'https://picsum.photos/seed/soil-black/400/300' },
+    { id: 'brown-silty', labelKey: 'recommendations.soil_silty', image: 'https://picsum.photos/seed/soil-silty/400/300' },
 ];
 
 const waterSources = [
@@ -104,7 +106,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
       topRecommendation: {
         cropName: topRec.name,
         cropNameLocal: topRec.name, // The AI should provide this in the future
-        imageUrl: `/images/soybean.jpg`, // Placeholder
+        imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase()}/600/400`,
         imageHint: `${topRec.name.toLowerCase()} field`,
         profit: "High", // Placeholder
         waterNeeded: "Medium", // Placeholder
@@ -177,7 +179,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
                 <CardTitle>{t('recommendations.step_2_title')}</CardTitle>
                 <CardDescription>{t('recommendations.step_2_subtitle')}</CardDescription>
             </CardHeader>
-            <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <CardContent className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {soilTypes.map(soil => (
                     <button key={soil.id} onClick={() => { setSelectedSoil(soil.id); setStep(3); }}
                         className={cn("border-2 rounded-lg p-2 text-center transition-all hover:border-primary",

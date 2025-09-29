@@ -92,7 +92,9 @@
         "toast_download_success_title": "डाउनलोड सुरू झाले",
         "toast_download_error_title": "डाउनलोड अयशस्वी",
         "toast_download_error_description": "प्रतिमा तयार करता आली नाही. कृपया पुन्हा प्रयत्न करा.",
-        "new_recommendation_button": "नवीन शिफारस सुरू करा"
+        "new_recommendation_button": "नवीन शिफारस सुरू करा",
+        "soil_black": "काळा आणि चिकणमाती",
+        "soil_silty": "तपकिरी आणि गाळयुक्त"
     },
     "news": {
         "page_title": "कृषी बातम्या आणि अद्यतने",
