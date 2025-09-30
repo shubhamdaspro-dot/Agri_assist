@@ -10,9 +10,5 @@ This project was built with Firebase Studio.
 - **Language**: [TypeScript](https://www.typescriptlang.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [ShadCN UI](https://ui.shadcn.com/)
-- **AI/Generative AI**: [Genkit (by Firebase)](https://firebase.google.com/docs/genkit), [Google Gemini](https://deepmind.google/technologies/gemini/)
-- **Backend & Auth**: [Firebase](https://firebase.google.com/) (Authentication, Firestore)
-
-## Upcoming Stack
-
-- **stack.js** will be integrated for enhanced state management and backend orchestration.
+- **AI/Generative AI**: [Genkit (by Firebase)](https://firebase.google.com/docs/genkit), [Google Gemini](https://deepmind.google.com/technologies/gemini/)
+- **Backend & Auth**: [Firebase](https://firebase.google.com/) (Authentication, Firestore, Storage)
