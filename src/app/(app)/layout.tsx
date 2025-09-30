@@ -6,6 +6,7 @@ import ChatAssistant from '@/components/chat/chat-assistant';
 import { ChatProvider } from '@/hooks/use-chat';
 import Link from 'next/link';
 import Farming3DBackground from '@/components/layout/farming-3d-background';
+import InstallPrompt from '@/components/pwa/install-prompt';
 
 export default function AppLayout({children}: {children: React.ReactNode}) {
   return (
@@ -30,6 +31,7 @@ export default function AppLayout({children}: {children: React.ReactNode}) {
               </div>
             </div>
             <ChatAssistant />
+            <InstallPrompt />
         </div>
       </SidebarProvider>
     </ChatProvider>

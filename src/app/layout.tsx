@@ -7,6 +7,7 @@ import { AuthProvider } from '@/hooks/use-auth';
 export const metadata: Metadata = {
   title: 'AgriAssist',
   description: 'AI-powered assistance for modern farming.',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
@@ -23,7 +24,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#FBBF24" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
       <body className="font-body antialiased">
