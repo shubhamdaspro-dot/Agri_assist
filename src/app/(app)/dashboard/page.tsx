@@ -202,11 +202,7 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-            <Card className={cn("mt-4 border", isDarkBg ? 'bg-white/20 border-white/30' : 'bg-black/5 border-black/10')}>
-                <CardContent className="p-3">
-                    <p className={cn("text-sm font-medium", isDarkBg ? 'text-white' : 'text-gray-800')}>{t('dashboard.weather_-condition')}</p>
-                </CardContent>
-            </Card>
+            <p className={cn("text-sm font-medium text-center mt-4 p-3 rounded-md", isDarkBg ? 'bg-white/20 border-white/30 text-white' : 'bg-black/5 border-black/10 text-gray-800')}>{t('dashboard.weather_-condition')}</p>
           </div>
         </CardContent>
       )
@@ -296,5 +292,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-    
