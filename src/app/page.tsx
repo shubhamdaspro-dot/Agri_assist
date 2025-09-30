@@ -1,3 +1,4 @@
+
 'use client';
 import {useState, useEffect, useRef} from 'react';
 import {useRouter} from 'next/navigation';
@@ -5,6 +6,7 @@ import {
   RecaptchaVerifier,
   signInWithPhoneNumber,
   ConfirmationResult,
+  signInAnonymously,
 } from 'firebase/auth';
 import {auth} from '@/lib/firebase';
 import {useAuth} from '@/hooks/use-auth';
@@ -44,7 +46,7 @@ export default function Home() {
             try {
                 const res = await createUserProfile({ uid: user.uid, phoneNumber: user.phoneNumber! });
                  if (res.success) {
-                    if (res.profileComplete) {
+                    if (res.profileComplete || user.isAnonymous) {
                         router.push('/dashboard');
                     } else {
                         router.push('/profile-setup');
@@ -131,6 +133,26 @@ export default function Home() {
     setLoading(false);
   };
 
+  const handleGuestSignIn = async () => {
+    setLoading(true);
+    try {
+        await signInAnonymously(auth);
+        toast({
+            title: "Signed in as Guest",
+            description: "Welcome! You can now explore the app.",
+        });
+        // The useEffect hook will handle redirection.
+    } catch (error: any) {
+        console.error("Guest sign-in failed:", error);
+        toast({
+            variant: "destructive",
+            title: "Guest Sign-in Failed",
+            description: error.message,
+        });
+    }
+    setLoading(false);
+  };
+
   if (authLoading || user) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
@@ -170,47 +192,70 @@ export default function Home() {
         </div>
 
         {!confirmationResult ? (
-          <form
-            className="space-y-4"
-            onSubmit={(e) => {
-              e.preventDefault();
-              handleSendOtp();
-            }}
-          >
-            <div className="flex gap-2">
-               <Select value={countryCode} onValueChange={setCountryCode}>
-                <SelectTrigger className="w-[120px] h-12">
-                  <SelectValue placeholder="Code" />
-                </SelectTrigger>
-                <SelectContent>
-                  {countryCodes.map((code) => (
-                    <SelectItem key={code.value} value={code.value}>
-                      {code.label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder={t('auth.phone_label')}
-                required
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                className="h-12 text-left"
-              />
+          <div className="space-y-4">
+            <form
+                className="space-y-4"
+                onSubmit={(e) => {
+                e.preventDefault();
+                handleSendOtp();
+                }}
+            >
+                <div className="flex gap-2">
+                <Select value={countryCode} onValueChange={setCountryCode}>
+                    <SelectTrigger className="w-[120px] h-12">
+                    <SelectValue placeholder="Code" />
+                    </SelectTrigger>
+                    <SelectContent>
+                    {countryCodes.map((code) => (
+                        <SelectItem key={code.value} value={code.value}>
+                        {code.label}
+                        </SelectItem>
+                    ))}
+                    </SelectContent>
+                </Select>
+                <Input
+                    id="phone"
+                    type="tel"
+                    placeholder={t('auth.phone_label')}
+                    required
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className="h-12 text-left"
+                />
+                </div>
+                <Button
+                type="submit"
+                disabled={loading}
+                className="w-full h-12"
+                >
+                {loading && !confirmationResult ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                ) : null}
+                {t('auth.send_otp_button')}
+                </Button>
+            </form>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  Or
+                </span>
+              </div>
             </div>
             <Button
-              type="submit"
+              variant="outline"
+              onClick={handleGuestSignIn}
               disabled={loading}
               className="w-full h-12"
             >
-              {loading ? (
+              {loading && confirmationResult ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : null}
-              {t('auth.send_otp_button')}
+              Sign in as Guest
             </Button>
-          </form>
+          </div>
         ) : (
           <form
             className="space-y-4"

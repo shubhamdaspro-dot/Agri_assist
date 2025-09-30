@@ -1,3 +1,4 @@
+
 'use server';
 
 import { generateCropRecommendations, type GenerateCropRecommendationsInput, type GenerateCropRecommendationsOutput } from '@/ai/flows/generate-crop-recommendations';
@@ -140,7 +141,8 @@ export async function getLatestNews(
   language: string
 ): Promise<{ success: boolean; data: FetchLatestNewsOutput | null; error?: string }> {
   try {
-    const result = await fetchLatestNews(language);
+    const currentDate = new Date().toISOString(); // Use ISO string for date and time
+    const result = await fetchLatestNews({ language, currentDate });
     return { success: true, data: result };
   } catch (e: any) {
     console.error(e);
@@ -187,7 +189,7 @@ export async function getMarketAnalysis(
 
 const UserProfileSchema = z.object({
   uid: z.string(),
-  phoneNumber: z.string(),
+  phoneNumber: z.string().optional().nullable(),
 });
 
 export async function createUserProfile(
@@ -199,7 +201,7 @@ export async function createUserProfile(
 
     if (!userDoc.exists()) {
       await setDoc(userRef, {
-        phoneNumber: input.phoneNumber,
+        phoneNumber: input.phoneNumber || null,
         createdAt: serverTimestamp(),
         profileCompleted: false,
       });

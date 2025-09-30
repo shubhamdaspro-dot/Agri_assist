@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview Fetches the latest agricultural news.
@@ -10,18 +11,20 @@ import {z} from 'genkit';
 import type { FetchLatestNewsOutput } from '@/lib/types';
 import { FetchLatestNewsOutputSchema } from '@/lib/types';
 
-export async function fetchLatestNews(language: string): Promise<FetchLatestNewsOutput> {
-  const currentDate = new Date().toISOString(); // Use ISO string for date and time
-  return fetchLatestNewsFlow({ language, currentDate });
+
+const FetchLatestNewsInputSchema = z.object({
+    language: z.string().describe('The language for the news articles (e.g., en, hi, bn, te, mr).'),
+    currentDate: z.string().describe('The current date and time to make the news timely.'),
+});
+
+export async function fetchLatestNews(input: z.infer<typeof FetchLatestNewsInputSchema>): Promise<FetchLatestNewsOutput> {
+  return fetchLatestNewsFlow(input);
 }
 
 const prompt = ai.definePrompt({
   name: 'fetchLatestNewsPrompt',
   input: {
-    schema: z.object({
-        language: z.string().describe('The language for the news articles (e.g., en, hi, bn, te, mr).'),
-        currentDate: z.string().describe('The current date and time to make the news timely.'),
-    }),
+    schema: FetchLatestNewsInputSchema,
   },
   output: {schema: FetchLatestNewsOutputSchema},
   prompt: `You are an expert agricultural news correspondent. Generate a list of 3 recent and relevant fictional news articles for farmers in India. The news should be in {{language}}.
@@ -32,10 +35,7 @@ const prompt = ai.definePrompt({
 const fetchLatestNewsFlow = ai.defineFlow(
   {
     name: 'fetchLatestNewsFlow',
-    inputSchema: z.object({
-        language: z.string(),
-        currentDate: z.string(),
-    }),
+    inputSchema: FetchLatestNewsInputSchema,
     outputSchema: FetchLatestNewsOutputSchema,
   },
   async input => {
