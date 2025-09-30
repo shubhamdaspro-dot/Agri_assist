@@ -289,15 +289,10 @@ export async function saveRecommendation(recommendation: Omit<SimplifiedRecommen
             ...recommendation,
             createdAt: serverTimestamp(),
         });
-        // With persistence enabled, we can be reasonably sure this will succeed eventually.
-        // We can return a temporary client-side ID for immediate UI updates.
         return { success: true, id: docRef.id };
     } catch (e: any) {
         console.error('Error saving recommendation:', e);
-        // Even if it fails, with persistence it might just be a temporary issue.
-        // We can still return success and a client-generated ID to not block the UI.
-        // The UI won't be able to sync this one later, but it's better than crashing.
-        return { success: true, id: `temp-${Date.now()}`, error: e.message };
+        return { success: false, error: e.message };
     }
 }
 
