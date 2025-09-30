@@ -74,7 +74,7 @@ export default function ProfileSetupPage() {
 
       if (result.success) {
         toast({ title: 'Profile Updated!', description: "Let's get started." });
-        router.push('/permissions');
+        router.push('/dashboard');
       } else {
         throw new Error(result.error || 'Failed to update profile.');
       }

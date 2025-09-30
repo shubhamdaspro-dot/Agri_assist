@@ -86,7 +86,7 @@ export default function DashboardPage() {
         fetchWeatherData(position.coords.latitude, position.coords.longitude);
       },
       (error) => {
-        setLocationError('Please enable location services in your browser to see local weather conditions.');
+        setLocationError(t('recommendations.location_error_manual'));
         setIsLoadingWeather(false);
         console.error(`Geolocation error: ${error.message}`);
       }
