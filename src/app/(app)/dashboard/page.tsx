@@ -1,8 +1,9 @@
+
 'use client';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Cloud, Droplets, Leaf, ShieldCheck, Sprout, Wind, Loader2, AlertCircle, Newspaper, BarChart2, Sun, CloudRain, CloudSun, CloudFog, CloudLightning } from "lucide-react";
+import { Cloud, Droplets, Leaf, ShieldCheck, Sprout, Wind, Loader2, AlertCircle, Newspaper, BarChart2, Sun, CloudRain, CloudSun, CloudFog, CloudLightning, MapPin } from "lucide-react";
 import Link from "next/link";
 import { useLanguage } from "@/hooks/use-language";
 import { useEffect, useState } from "react";
@@ -35,6 +36,7 @@ export default function DashboardPage() {
   const { t, language } = useLanguage();
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [locationError, setLocationError] = useState<string | null>(null);
+  const [locationName, setLocationName] = useState<string | null>(null);
   const [isLoadingWeather, setIsLoadingWeather] = useState(true);
   const [news, setNews] = useState<NewsArticle[]>([]);
   const [isLoadingNews, setIsLoadingNews] = useState(true);
@@ -43,25 +45,37 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!isClient) return;
 
-    const fetchWeather = async (latitude: number, longitude: number) => {
+    const fetchWeatherData = async (latitude: number, longitude: number) => {
       setIsLoadingWeather(true);
       setLocationError(null);
       try {
-        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code`);
-        const data = await response.json();
+        // Fetch weather and location name in parallel
+        const [weatherResponse, locationResponse] = await Promise.all([
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code`),
+            fetch(`https://api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}`)
+        ]);
         
-        if (data.error) {
-            throw new Error(data.reason);
+        const weatherData = await weatherResponse.json();
+        const locationData = await locationResponse.json();
+
+        if (weatherData.error) {
+            throw new Error(`Weather API: ${weatherData.reason}`);
+        }
+        if (locationData.error) {
+            throw new Error(`Location API: ${locationData.reason}`);
         }
 
         setWeather({
-          temp: Math.round(data.current.temperature_2m),
-          description: getWeatherDescription(data.current.weather_code),
-          humidity: data.current.relative_humidity_2m,
-          rainfall: data.current.precipitation,
+          temp: Math.round(weatherData.current.temperature_2m),
+          description: getWeatherDescription(weatherData.current.weather_code),
+          humidity: weatherData.current.relative_humidity_2m,
+          rainfall: weatherData.current.precipitation,
         });
+
+        setLocationName(`${locationData.name}, ${locationData.country_code}`);
+
       } catch (error: any) {
-        setLocationError(`Failed to fetch weather: ${error.message}`);
+        setLocationError(`Failed to fetch weather data: ${error.message}`);
       } finally {
         setIsLoadingWeather(false);
       }
@@ -69,7 +83,7 @@ export default function DashboardPage() {
 
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        fetchWeather(position.coords.latitude, position.coords.longitude);
+        fetchWeatherData(position.coords.latitude, position.coords.longitude);
       },
       (error) => {
         setLocationError(t('recommendations.location_error_manual'));
@@ -249,7 +263,15 @@ export default function DashboardPage() {
     <div className="flex flex-col gap-6">
       <Card className="w-full overflow-hidden">
         <CardHeader>
-          <CardTitle>{t('dashboard.todays_weather')}</CardTitle>
+          <div className="flex justify-between items-center">
+            <CardTitle>{t('dashboard.todays_weather')}</CardTitle>
+            {locationName && (
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <MapPin className="h-4 w-4" />
+                    <span>{locationName}</span>
+                </div>
+            )}
+            </div>
         </CardHeader>
         {renderWeatherContent()}
       </Card>
@@ -274,3 +296,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+    
