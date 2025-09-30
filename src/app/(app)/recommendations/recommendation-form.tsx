@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Loader2, MapPin, Check, Sprout, TestTube2 } from 'lucide-react';
-import { saveRecommendation, getCropRecommendations } from '@/lib/actions';
+import { getCropRecommendations } from '@/lib/actions';
 import { useToast } from '@/hooks/use-toast';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { useLanguage } from '@/hooks/use-language';
@@ -88,14 +88,16 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
         
         const topRec = aiResult.data.recommendedCrops[0];
     
-        const recommendationData: Omit<SimplifiedRecommendation, 'id' | 'createdAt'> = {
+        const recommendationData: SimplifiedRecommendation = {
+          id: new Date().toISOString(),
+          createdAt: new Date(),
           userId: user.uid,
           location: `${location.latitude.toFixed(2)}, ${location.longitude.toFixed(2)}`,
           soilType: selectedSoil,
-          waterSource: "Not Specified", // Default value
+          waterSource: "Not Specified",
           topRecommendation: {
             cropName: topRec.name,
-            cropNameLocal: topRec.name, // Assuming same for now
+            cropNameLocal: topRec.name,
             imageUrl: `https://picsum.photos/seed/${topRec.name.toLowerCase().replace(/[^a-z0-9]/g, '-')}/600/400`,
             imageHint: `${topRec.name.toLowerCase()} field`,
             profit: "High", // Placeholder
@@ -109,13 +111,7 @@ export function RecommendationForm({ setResults, setIsLoading, isLoading }: Reco
           })),
         };
     
-        const saveResult = await saveRecommendation(recommendationData);
-    
-        if (saveResult.success && saveResult.id) {
-          setResults({ ...recommendationData, id: saveResult.id, createdAt: new Date() });
-        } else {
-          throw new Error(saveResult.error || 'Failed to save recommendation.');
-        }
+        setResults(recommendationData);
 
     } catch (error: any) {
         toast({

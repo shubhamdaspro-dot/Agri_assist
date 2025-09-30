@@ -283,38 +283,6 @@ export async function updateUserProfile(input: z.infer<typeof UpdateUserProfileS
 }
 
 
-export async function saveRecommendation(recommendation: Omit<SimplifiedRecommendation, 'id' | 'createdAt'>): Promise<{ success: boolean; id?: string; error?: string }> {
-    try {
-        const docRef = await addDoc(collection(db, 'recommendations'), {
-            ...recommendation,
-            createdAt: serverTimestamp(),
-        });
-        return { success: true, id: docRef.id };
-    } catch (e: any) {
-        console.error('Error saving recommendation:', e);
-        return { success: false, error: e.message };
-    }
-}
-
-export async function getMyRecommendations(userId: string): Promise<{ success: boolean; data?: SimplifiedRecommendation[]; error?: string }> {
-    try {
-        const q = query(
-            collection(db, 'recommendations'),
-            where('userId', '==', userId),
-            orderBy('createdAt', 'desc')
-        );
-        const querySnapshot = await getDocs(q);
-        const recommendations = querySnapshot.docs.map(doc => ({
-            id: doc.id,
-            ...doc.data(),
-        })) as SimplifiedRecommendation[];
-        return { success: true, data: recommendations };
-    } catch (e: any) {
-        console.error('Error fetching recommendations:', e);
-        return { success: false, error: e.message };
-    }
-}
-
 export async function getFarmingGuide(
   input: GenerateFarmingGuideInput
 ): Promise<{ success: boolean; data: FarmingGuide | null; error?: string }> {
