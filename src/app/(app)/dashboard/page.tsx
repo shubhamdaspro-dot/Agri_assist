@@ -52,7 +52,7 @@ export default function DashboardPage() {
         // Fetch weather and location name in parallel
         const [weatherResponse, locationResponse] = await Promise.all([
             fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,precipitation,weather_code`),
-            fetch(`https://api.open-meteo.com/v1/reverse?latitude=${latitude}&longitude=${longitude}`)
+            fetch(`https://geocode.maps.co/reverse?lat=${latitude}&lon=${longitude}`)
         ]);
         
         const weatherData = await weatherResponse.json();
@@ -62,7 +62,7 @@ export default function DashboardPage() {
             throw new Error(`Weather API: ${weatherData.reason}`);
         }
         if (locationData.error) {
-            throw new Error(`Location API: ${locationData.reason}`);
+            throw new Error(`Location API: ${locationData.error}`);
         }
 
         setWeather({
@@ -72,7 +72,7 @@ export default function DashboardPage() {
           rainfall: weatherData.current.precipitation,
         });
 
-        setLocationName(`${locationData.name}, ${locationData.country_code}`);
+        setLocationName(`${locationData.address.city}, ${locationData.address.country_code}`);
 
       } catch (error: any) {
         setLocationError(`Failed to fetch weather data: ${error.message}`);
