@@ -86,7 +86,7 @@ export default function DashboardPage() {
         fetchWeatherData(position.coords.latitude, position.coords.longitude);
       },
       (error) => {
-        setLocationError(t('recommendations.location_error_manual'));
+        setLocationError('Please enable location services in your browser to see local weather conditions.');
         setIsLoadingWeather(false);
         console.error(`Geolocation error: ${error.message}`);
       }
@@ -168,7 +168,7 @@ export default function DashboardPage() {
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Location Access Denied</AlertTitle>
               <AlertDescription>
-                Please enable location services in your browser to see local weather conditions.
+                {locationError}
               </AlertDescription>
             </Alert>
         )
